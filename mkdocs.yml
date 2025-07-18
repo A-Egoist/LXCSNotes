@@ -1,31 +1,62 @@
 site_name: LXCSNotes
+site_description: 计算机科学与技术学习笔记
+site_author: Amonologue
+copyright: Copyright &copy; 2025 LXCSNotes | 使用 <a href='https://squidfunk.github.io/mkdocs-material/' target='_blank'>Material for MkDocs</a>
+
+repo_url: https://github.com/A-Egoist/LXCSNotes/tree/main
+# site_url: https://your-domain.com  # 可选
+repo_url: https://github.com/yourname/lxcsnotes  # 可选
+
+# 主题配置
 theme:
   name: material
-  # custom_dir: overrides
   features:
-    - content.code.annotate     # 代码行号标注
-    - content.code.copy        # 代码复制按钮
-    - navigation.tabs          # 标签式导航
+    - navigation.tabs
+    - navigation.top
+    - search.highlight
+    - content.code.annotate
+  palette:
+    primary: indigo
+    accent: blue
 
-# 扩展配置
+# 扩展配置 (关键部分)
 markdown_extensions:
-  - pymdownx.highlight:        # 代码高亮
+  - pymdownx.highlight:         # 代码高亮
       anchor_linenums: true
       line_spans: __span
+      pygments_style: material
       use_pygments: true
-      pygments_lang_class: true
-  - pymdownx.superfences       # 增强代码块
-  - pymdownx.arithmatex:       # LaTeX 支持
-      generic: true            # 使用 MathJax
-  - admonition                 # 提示框
-  - toc:                       # 目录
+  - pymdownx.inlinehilite       # 行内代码高亮
+  - pymdownx.superfences        # 代码块嵌套
+  - pymdownx.arithmatex:        # LaTeX 支持
+      generic: true
+  - pymdownx.tasklist:          # 任务列表 (Typora 兼容)
+      custom_checkbox: true
+  - pymdownx.emoji:             # 表情符号
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - admonition                  # 彩色提示框
+  - toc:                        # 目录
       permalink: true
+  - attr_list                   # 属性列表
+  - md_in_html                  # HTML 中嵌入 Markdown
 
 # 数学公式渲染 (MathJax)
 extra_javascript:
-  - extra.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
-# 自定义样式
-extra_css:
-  - css/extra.css
+# 插件
+plugins:
+  - search
+  - git-revision-date
+
+# 导航
+nav:
+  - Home: index.md
+  - Algorithms: algorithms.md
+  - Systems: systems.md
+  # 添加更多笔记...
+
+# 自定义目录
+docs_dir: 'docs'
