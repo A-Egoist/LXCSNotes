@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {{ super() }}
+  
+  <script>
+    // 添加语言标签
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.highlight').forEach(function(block) {
+        // 获取语言类 (如 language-python)
+        const langClass = Array.from(block.classList).find(cls => cls.startsWith('language-'));
+        
+        if (langClass) {
+          // 提取语言名称 (如 python)
+          const lang = langClass.split('-')[1];
+          
+          // 创建标签元素
+          const langTag = document.createElement('div');
+          langTag.className = 'lang-tag';
+          langTag.textContent = lang.toUpperCase();
+          
+          // 插入到代码块顶部
+          block.insertBefore(langTag, block.firstChild);
+        }
+      });
+    });
+  </script>
+{% endblock %}

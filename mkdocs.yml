@@ -1,0 +1,31 @@
+site_name: LXCSNotes
+theme:
+  name: material
+  # custom_dir: overrides
+  features:
+    - content.code.annotate     # 代码行号标注
+    - content.code.copy        # 代码复制按钮
+    - navigation.tabs          # 标签式导航
+
+# 扩展配置
+markdown_extensions:
+  - pymdownx.highlight:        # 代码高亮
+      anchor_linenums: true
+      line_spans: __span
+      use_pygments: true
+      pygments_lang_class: true
+  - pymdownx.superfences       # 增强代码块
+  - pymdownx.arithmatex:       # LaTeX 支持
+      generic: true            # 使用 MathJax
+  - admonition                 # 提示框
+  - toc:                       # 目录
+      permalink: true
+
+# 数学公式渲染 (MathJax)
+extra_javascript:
+  - extra.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+# 自定义样式
+extra_css:
+  - css/extra.css

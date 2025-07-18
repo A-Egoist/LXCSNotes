@@ -1,0 +1,27 @@
+/* 语言标签样式 */
+.lang-tag {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  background: rgba(97, 97, 97, 0.5);
+  color: white;
+  padding: 0.2em 0.6em;
+  font-size: 0.75em;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+  z-index: 10;
+  pointer-events: none;
+  backdrop-filter: blur(2px);
+}
+
+/* 确保代码块有相对定位 */
+.highlight {
+  position: relative;
+  padding-top: 1.5em !important;
+}
+
+/* 调整行号位置 */
+.linenos {
+  padding-top: 1.5em !important;
+}
