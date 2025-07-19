@@ -1,0 +1,4003 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="计算机科学与技术学习笔记">
+      
+      
+        <meta name="author" content="Amonologue">
+      
+      
+      
+        <link rel="prev" href="../QR%20Code%20Super%20Resolution-002/">
+      
+      
+        <link rel="next" href="../SQL%20Sever%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%9B%BE%E5%BD%A2%E5%8C%96%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>SQL学习笔记 - LXCSNotes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sql" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="LXCSNotes" class="md-header__button md-logo" aria-label="LXCSNotes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            LXCSNotes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SQL学习笔记
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  欢迎使用 LXCSNotes
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Anaconda%20Command/" class="md-tabs__link">
+          
+  
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../CPP/" class="md-tabs__link">
+          
+  
+  
+  CPP
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Linux/" class="md-tabs__link">
+          
+  
+  
+  Linux
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Projects/C%2B%2B%20%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="md-tabs__link">
+          
+  
+  
+  Projects
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Python/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Trick/PyTorch%20to%28device%29/" class="md-tabs__link">
+          
+  
+  
+  Trick
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../algorithm/LeetCode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="md-tabs__link">
+          
+  
+  
+  Algorithm
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="LXCSNotes" class="md-nav__button md-logo" aria-label="LXCSNotes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    LXCSNotes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    欢迎使用 LXCSNotes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Blog
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Blog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Anaconda%20Command/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Anaconda Command
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BPR%20Loss%20vs.%20Contrastive%20Learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BPR Loss vs. Contrastive Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUDA%20%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CUDA 内存模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUDA%20%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CUDA 执行模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUDA%20%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CUDA编程入门
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUDA%20%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CUDA 编程模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GitHub%20Workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GitHub Workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LaTeX%20Note/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LaTeX Note
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Linux%20Foundation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linux Foundation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Numpy%20%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Numpy库常用方法总结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PyTorch%20%E4%B8%AD%20tensor.view%28%29%20%E5%92%8C%20tensor.reshape%28%29%20%E7%9A%84%E5%8C%BA%E5%88%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch 中 tensor.view() 和 tensor.reshape() 的区别
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PyTorch%20%E5%BC%A0%E9%87%8F%E5%92%8C%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch 张量和模型的保存与加载
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%20%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python 命名规范
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%20%E5%9B%BA%E5%AE%9A%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%A7%8D%E5%AD%90/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python 固定随机数种子
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%20%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python 数据可视化
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%20%E8%AF%8D%E4%BA%91%E5%AE%9E%E6%88%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python词云实战
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../QR%20Code%20Super%20Resolution-002/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QR Code Super Resolution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    SQL学习笔记
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    SQL学习笔记
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sql_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL概述
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL数据定义
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SQL数据定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      创建数据库
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      修改数据库
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      删除数据库
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      创建基本表
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="创建基本表">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      列级约束条件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      表级约束条件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      实例
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      修改基本表
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      删除基本表
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL数据操纵
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SQL数据操纵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据查询
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数据查询">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      简单查询
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      改变列标题
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where" class="md-nav__link">
+    <span class="md-ellipsis">
+      WHERE用于查询满足条件的元组
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      字符串匹配
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      涉及空值的查询
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      多重条件查询
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#order-by" class="md-nav__link">
+    <span class="md-ellipsis">
+      ORDER BY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#top" class="md-nav__link">
+    <span class="md-ellipsis">
+      TOP限制结果集
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      聚集函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-by" class="md-nav__link">
+    <span class="md-ellipsis">
+      GROUP BY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      其他
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据更改
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL数据控制
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20Sever%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%9B%BE%E5%BD%A2%E5%8C%96%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SQL Sever Management Studio基础
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Smale%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%AF%86%202023%20%E7%AC%AC%E4%B8%80%E8%AE%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smale 机器学习常识 2023 第一讲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Smale%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%AF%86%202023%20%E7%AC%AC%E4%B8%89%E8%AE%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smale 机器学习常识 2023 第三讲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Smale%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%AF%86%202023%20%E7%AC%AC%E4%BA%8C%E8%AE%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smale 机器学习常识 2023 第二讲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Smale%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%AF%86%202023%20%E7%AC%AC%E4%BA%94%E8%AE%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smale 机器学习常识 2023 第五讲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Smale%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%AF%86%202023%20%E7%AC%AC%E5%85%AD%E8%AE%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smale 机器学习常识 2023 第六讲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Smale%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%AF%86%202023%20%E7%AC%AC%E5%9B%9B%E8%AE%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smale 机器学习常识 2023 第四讲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TeX%20Live%20%2B%20CTeX%20%2B%20Visual%20Studio%20Code%20%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TeX Live + CTeX + Visual Studio Code 配置
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Transformer%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transformer 学习笔记
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Ubuntu%20%E4%B8%AD%E8%A7%A3%E5%8E%8B%E6%96%87%E4%BB%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ubuntu 中解压文件
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jupyter%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jupyter快捷键
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model.zero_grad%28%29%20and%20optimizer.zero_grad%28%29%20in%20PyTorch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    model.zero grad() and optimizer.zero grad() in PyTorch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Wget
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E4%BA%8C%E7%BB%B4%E7%A0%81%E8%B6%85%E5%88%86%E6%95%88%E6%9E%9C%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    二维码超分效果评价指标
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94CSS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    前端基础——CSS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94HTML/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    前端基础——HTML
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94JS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    前端基础——JS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%8D%9A%E5%AE%A2%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    博客入门教程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%8D%9A%E5%AE%A2%E7%9B%AE%E5%BD%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    博客目录
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    图神经网络
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9F%BA%E4%BA%8E%20CUDA%20%E7%9A%84%E5%BC%82%E6%9E%84%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基于 CUDA 的异构并行计算
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%A6%82%E4%BD%95%E8%AF%BB%E6%96%87%E7%8C%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    如何读文献
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    实用机器学习
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%B9%B6%E8%A1%8C%E5%A4%84%E7%90%86%E5%8F%8A%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    并行处理及分布式系统
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%84%9F%E7%9F%A5%E6%9C%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    感知机模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    数字逻辑复习提纲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    正则表达式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    注意力机制
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    深度学习中的数学基础
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E9%9B%85%E6%80%9D%E5%A4%87%E8%80%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    雅思备考
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    CPP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            CPP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CPP 学习笔记
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/CMake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CMake
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/CPP%20Note/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    C++ 笔记
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/Linux%2C%20C%2C%20and%20C%2B%2B%20ChatGPT%20guidance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linux, C, and C++ ChatGPT guidance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/STL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    STL
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    内存管理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E5%B8%B8%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    常用的设计模式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E5%B9%B6%E8%A1%8C%E7%BC%96%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    并行编程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    构造函数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    析构函数与生命周期
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    泛型编程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E7%BC%96%E8%AF%91%E5%92%8C%E9%93%BE%E6%8E%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    编译和链接
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Linux
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Linux
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linux基础课
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/1.%20%E5%B8%B8%E7%94%A8%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linux 常用命令整理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/2.%20tmux%E5%92%8Cvim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. tmux和vim
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/4%20ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ssh
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/5%20git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    git
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/6%20thrift/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    thrift
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/8%20docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8 docker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E9%85%8D%E7%BD%AE%20Ubuntu%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    从零开始配置 Ubuntu 开发环境
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Projects
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/C%2B%2B%20%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    C++ 项目实战
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/webbench%20%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    webbench 压力测试
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/%E4%B8%80%E3%80%81%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AE%9E%E7%8E%B0%20C%2B%2B%20TinyWebServer%20%E5%85%A8%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    一、从零开始实现C++ TinyWebServer 全过程记录
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%B9%A0%E5%92%8C%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%AF%B4%E6%98%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    个人简历中实习和项目的说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%20MySQL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MySQL 基础
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_6" id="__nav_5_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    WebServer
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_6">
+            <span class="md-nav__icon md-icon"></span>
+            WebServer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/WebServer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    WebServer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Python
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python/%E6%B0%94%E5%8A%A8%E7%A0%94%E7%A9%B6%E6%99%BA%E8%83%BD%E5%8C%96%E5%B9%B3%E5%8F%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    气动科研智能云平台解决方案
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Trick
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Trick
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/PyTorch%20to%28device%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch to(device)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/PyTorch%20%E4%BD%BF%E7%94%A8%20TensorBoard%20%E5%8F%AF%E8%A7%86%E5%8C%96%E8%AE%AD%E7%BB%83%E7%BB%93%E6%9E%9C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch 使用 TensorBoard 可视化训练结果
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/Tricks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tricks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/Ubuntu%2022.04%20%E5%BC%80%E6%9C%BA%E5%8F%91%E9%80%81%20IP%20%E5%88%B0%E6%8C%87%E5%AE%9A%E9%82%AE%E7%AE%B1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ubuntu 22.04 开机发送 IP 到指定邮箱
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/macOS%20Visual%20Studio%20Code%20%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    macOS Visual Studio Code 快捷键
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E4%B8%B4%E7%95%8C%E5%9B%BE%28Critical%20Difference%20Diagrams%2C%20CD%20Diagrams%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    临界图(Critical Difference Diagrams, CD Diagrams)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%BB%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%82%BC%E4%B8%B9%E7%82%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    从零开始组建个人炼丹炉
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E4%BD%BF%E7%94%A8%20yapf%20%E6%A0%BC%E5%BC%8F%E5%8C%96%20python%20%E4%BB%A3%E7%A0%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    使用 yapf 格式化 python 代码
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E5%9C%A8%20Visual%20Studio%20Code%20%E9%85%8D%E7%BD%AE%20Python%20%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    在 Visual Studio Code 配置 Python 远程开发环境
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E6%9C%AC%E7%A7%91%E6%AF%95%E8%AE%BE%E6%8A%80%E5%B7%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    本科毕设技巧
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%20trick/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    模型训练中的常用 trick
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%AB%98%E6%95%88%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C%E5%92%8C%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    深度学习高效进行实验和代码管理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Algorithm
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Algorithm
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithm/LeetCode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LeetCode 刷题笔记
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    动态规划
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithm/%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%9B%BE%E8%AE%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    搜索与图论
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sql_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL概述
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL数据定义
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SQL数据定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      创建数据库
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      修改数据库
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      删除数据库
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      创建基本表
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="创建基本表">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      列级约束条件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      表级约束条件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      实例
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      修改基本表
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      删除基本表
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL数据操纵
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SQL数据操纵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据查询
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数据查询">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      简单查询
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      改变列标题
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where" class="md-nav__link">
+    <span class="md-ellipsis">
+      WHERE用于查询满足条件的元组
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      字符串匹配
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      涉及空值的查询
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      多重条件查询
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#order-by" class="md-nav__link">
+    <span class="md-ellipsis">
+      ORDER BY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#top" class="md-nav__link">
+    <span class="md-ellipsis">
+      TOP限制结果集
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      聚集函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-by" class="md-nav__link">
+    <span class="md-ellipsis">
+      GROUP BY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      其他
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据更改
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL数据控制
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="sql">SQL学习笔记<a class="headerlink" href="#sql" title="Permanent link">&para;</a></h1>
+<h2 id="sql_1">SQL概述<a class="headerlink" href="#sql_1" title="Permanent link">&para;</a></h2>
+<p>SQL按其功能可以分为三大部分：
+<font color=green size=5 >数据定义</font>功能、<font color=green size=5 >数据操纵</font>功能和<font color=green size=5 >数据控制</font>功能
+DDL、DML、DCL</p>
+<table>
+<thead>
+<tr>
+<th>SQL功能</th>
+<th>命令动词</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据定义</td>
+<td>CREATE、ALTER、DROP</td>
+</tr>
+<tr>
+<td>数据操纵</td>
+<td>SELECT、INSERT、UPDATE、DELETE</td>
+</tr>
+<tr>
+<td>数据控制</td>
+<td>GRANT、REVOKE</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sql_2">SQL数据定义<a class="headerlink" href="#sql_2" title="Permanent link">&para;</a></h2>
+<p>在SQL Server中，我们点击“新建查询”，在弹出的窗口中键入sql语言
+<a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347217.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347217.png" /></a></p>
+<h4 id="_1">创建数据库<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
+<p>基本格式：
+<a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347137.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347137.png" /></a>
+样例：</p>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">Demo</span>
+<span class="k">ON</span>
+<span class="p">(</span><span class="n">NAME</span><span class="o">=</span><span class="n">Demo_data</span><span class="p">,</span><span class="c1">--主文件名称</span>
+<span class="n">FILENAME</span><span class="o">=</span><span class="s1">&#39;D:\Test\Demo_data.mdf&#39;</span><span class="p">,</span><span class="c1">--主文件的绝对路径</span>
+<span class="k">SIZE</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="c1">--主文件的大小</span>
+<span class="n">MAXSIZE</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="c1">--最大值</span>
+<span class="n">FILEGROWTH</span><span class="o">=</span><span class="mi">1</span><span class="c1">--数值型增长方式 </span>
+<span class="c1">--FILEGROWTH=10%--百分比增长</span>
+<span class="p">)</span>
+<span class="n">LOG</span><span class="w"> </span><span class="k">ON</span>
+<span class="p">(</span><span class="n">NAME</span><span class="o">=</span><span class="n">Demo_log</span><span class="p">,</span><span class="c1">--日志文件名称</span>
+<span class="n">FILENAME</span><span class="o">=</span><span class="s1">&#39;D:\Test\Demo_log.ldf&#39;</span><span class="p">,</span><span class="c1">--日志文件的绝对路径</span>
+<span class="k">SIZE</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="c1">--日志文件的大小</span>
+<span class="n">MAXSIZE</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="c1">--最大值</span>
+<span class="n">FILEGROWTH</span><span class="o">=</span><span class="mi">1</span><span class="c1">--数值型增长方式 </span>
+<span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+效果：
+<a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347307.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347307.png" /></a>
+<a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347701.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347701.png" /></a></p>
+<h4 id="_2">修改数据库<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<p>修改数据库名：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">Demo</span>
+<span class="k">MODIFY</span><span class="w"> </span><span class="n">NAME</span><span class="o">=</span><span class="n">New_Demo</span>
+</code></pre></div></td></tr></table></div>
+<a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347089.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347089.png" /></a>
+修改文件名：</p>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">New_Demo</span><span class="w"> </span><span class="k">MODIFY</span><span class="w"> </span><span class="n">FILE</span><span class="p">(</span><span class="n">NAME</span><span class="o">=</span><span class="n">Demo_data</span><span class="p">,</span><span class="n">NEWNAME</span><span class="o">=</span><span class="n">Demo</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347750.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347750.png" /></a></p>
+<p>添加新文件：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">New_Demo</span>
+<span class="k">ADD</span><span class="w"> </span><span class="n">FILE</span>
+<span class="p">(</span><span class="n">NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Demo_ndf</span><span class="p">,</span>
+<span class="n">FILENAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;D:\Test\Demo_ndf.ndf&#39;</span><span class="p">,</span>
+<span class="k">SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="n">MB</span><span class="p">,</span>
+<span class="n">MAXSIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="n">MB</span><span class="p">,</span>
+<span class="n">FILEGROWTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="n">MB</span>
+<span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347984.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347984.png" /></a>
+添加日志文件</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">New_Demo</span>
+<span class="k">ADD</span><span class="w"> </span><span class="n">LOG</span><span class="w"> </span><span class="n">FILE</span>
+<span class="p">(</span><span class="n">NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Demo_new_log</span><span class="p">,</span>
+<span class="n">FILENAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;D:\Test\Demo_new_log.ldf&#39;</span><span class="p">,</span>
+<span class="k">SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="n">MB</span><span class="p">,</span>
+<span class="n">MAXSIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="n">MB</span><span class="p">,</span>
+<span class="n">FILEGROWTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="n">MB</span>
+<span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_3">删除数据库<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="err">数据库</span><span class="mi">1</span><span class="p">[,</span><span class="err">数据库</span><span class="mi">2</span><span class="err">，数据库</span><span class="mi">3</span><span class="p">]</span><span class="c1">--可以同时删除多个数据库</span>
+<span class="c1">--但是用sql语句删除数据库的时候不会有确认信息，所以请小心使用</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_4">创建基本表<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<p>定义基本表的一般格式：
+<a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347204.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347204.png" /></a>
+<font color=red size=6>warning</font>
+在SQL Server 建立新建查询的时候注意手动选择数据库
+<a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347558.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347558.png" /></a>
+样例：
+<a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347090.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347090.png" /></a>
+根据上图所示内容，我们可以创建一个Student表：</p>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Student</span>
+<span class="p">(</span>
+<span class="n">Sno</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span>
+<span class="n">Sname</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+<span class="n">Ssex</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+<span class="n">Sage</span><span class="w"> </span><span class="n">tinyint</span><span class="p">,</span>
+<span class="n">Sdept</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347254.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347254.png" /></a>
+在上面的例子中，我们创建表格的时候没有确立约束条件。
+一个表的约束条件分为两类：<font color=blue size=5>列级约束条件</font>和<font color=blue size=5>表级约束条件</font>。</p>
+<h5 id="_5">列级约束条件<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h5>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347699.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347699.png" /></a>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">Sname</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="c1">--取值非空</span>
+<span class="n">Sage</span><span class="w"> </span><span class="n">tinyint</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">18</span><span class="c1">--默认值约束</span>
+<span class="n">Sno</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="c1">--限制列取值不重复</span>
+<span class="n">Sdept</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">CHECK</span><span class="p">(</span><span class="n">Sdept</span><span class="o">=</span><span class="s1">&#39;CS&#39;</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">Sdept</span><span class="o">=</span><span class="s1">&#39;IS&#39;</span><span class="p">)</span><span class="c1">--限制列的取值范围</span>
+<span class="n">Sno</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="c1">--指定本列为主码</span>
+<span class="n">Sdept</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">Sdept</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">SC</span><span class="p">(</span><span class="n">Sdept</span><span class="p">)</span><span class="c1">--外码约束</span>
+</code></pre></div></td></tr></table></div></p>
+<h5 id="_6">表级约束条件<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h5>
+<p>UNIQUE表级约束：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">UNIQUE</span><span class="p">(</span><span class="n">Sno</span><span class="p">,</span><span class="n">Sname</span><span class="p">)</span><span class="c1">--表示(Sno,Sname)这样的组合不允许重复</span>
+<span class="c1">--但是在Sno或Sname的列中可以重复</span>
+</code></pre></div></td></tr></table></div>
+PRIMARY表级约束：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">Sno</span><span class="p">)</span><span class="c1">--和在Sno进行列定义相同</span>
+<span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">Sno</span><span class="p">,</span><span class="n">Sname</span><span class="p">)</span><span class="c1">--以(Sno,Sname)这样的组合作为表的主码</span>
+</code></pre></div></td></tr></table></div></p>
+<h5 id="_7">实例<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h5>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347336.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347336.png" /></a>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Student</span>
+<span class="p">(</span>
+<span class="n">Sno</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="n">Sname</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="n">Ssex</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">CHECK</span><span class="p">(</span><span class="n">Ssex</span><span class="o">=</span><span class="s1">&#39;男&#39;</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">Ssex</span><span class="o">=</span><span class="s1">&#39;女&#39;</span><span class="p">),</span>
+<span class="n">Sage</span><span class="w"> </span><span class="n">tinyint</span><span class="w"> </span><span class="k">CHECK</span><span class="p">(</span><span class="n">Sage</span><span class="o">&gt;=</span><span class="mi">15</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">Sage</span><span class="o">&lt;=</span><span class="mi">45</span><span class="p">),</span>
+<span class="n">Sdept</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;计算机系&#39;</span>
+<span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347812.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347812.png" /></a></p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347040.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347040.png" /></a>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Course</span>
+<span class="p">(</span>
+<span class="n">Cno</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+<span class="n">Cname</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="n">Ccredit</span><span class="w"> </span><span class="n">tinyint</span><span class="w"> </span><span class="k">CHECK</span><span class="p">(</span><span class="n">Ccredit</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">),</span>
+<span class="n">Semester</span><span class="w"> </span><span class="n">tinyint</span><span class="w"> </span><span class="k">CHECK</span><span class="p">(</span><span class="n">Semester</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">),</span>
+<span class="k">Period</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">CHECK</span><span class="p">(</span><span class="k">Period</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">),</span>
+<span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">Cno</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347760.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347760.png" /></a></p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347504.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347504.png" /></a>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">SC</span>
+<span class="p">(</span>
+<span class="n">Sno</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="n">Cno</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="n">Grade</span><span class="w"> </span><span class="n">tinyint</span><span class="p">,</span>
+<span class="k">CHECK</span><span class="p">(</span><span class="n">Grade</span><span class="o">&gt;=</span><span class="mi">0</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">Grade</span><span class="w"> </span><span class="o">&lt;=</span><span class="mi">100</span><span class="p">),</span>
+<span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">Sno</span><span class="p">,</span><span class="n">Cno</span><span class="p">),</span>
+<span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">Sno</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Student</span><span class="p">(</span><span class="n">Sno</span><span class="p">),</span>
+<span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">Cno</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Course</span><span class="p">(</span><span class="n">Cno</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347750.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347750.png" /></a></p>
+<h4 id="_8">修改基本表<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<p>在定义完表之后，我们还可能需要修改表的结构，修改表的方法如下：
+<a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347221.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347221.png" /></a></p>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">--在SC表中添加XKLB列--添加新列</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">SC</span>
+<span class="k">ADD</span><span class="w"> </span><span class="n">XKLB</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="c1">--将XKLB的类型改为char(6)--修改列定义</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">SC</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">XKLB</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="c1">--删除Course表的Period列--删除列</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Course</span>
+<span class="k">DROP</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="k">Period</span>
+</code></pre></div></td></tr></table></div>
+约束添加：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">--添加主码约束</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">SC</span>
+<span class="k">ADD</span><span class="w"> </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">PK_SC</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">Sno</span><span class="p">)</span><span class="c1">--ADD CONSTRAINT 约束名 PRIMARY KEY(列名)</span>
+<span class="k">ADD</span><span class="w"> </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">PK_SC</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">Sno</span><span class="p">,</span><span class="n">Cno</span><span class="p">)</span><span class="c1">--表级约束</span>
+
+<span class="c1">--添加唯一性约束</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Course</span>
+<span class="k">ADD</span><span class="w"> </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">UK_C</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">(</span><span class="n">Cno</span><span class="p">)</span><span class="c1">--ADD CONSTRAINT 约束名 UNIQUE(列名[,列名1,列名2···])</span>
+
+<span class="c1">--添加外键约束</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">SC</span>
+<span class="k">ADD</span><span class="w"> </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">FK_SC</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">Sno</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Student</span><span class="p">(</span><span class="n">Sno</span><span class="p">)</span><span class="c1">--ADD CONSTRAINT 约束名FOREIGN KEY(列名) REFERENCES 引用表名(列名)</span>
+
+<span class="c1">--添加默认值约束</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">SC</span>
+<span class="k">ADD</span><span class="w"> </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">DF_SC</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="n">Grade</span><span class="c1">--ADD CONSTRAINT 约束名 DEFAULT 默认值 FOR 列名</span>
+
+<span class="c1">--添加检查约束</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Student</span>
+<span class="k">ADD</span><span class="w"> </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">CK_S</span><span class="w"> </span><span class="k">CHECK</span><span class="p">(</span><span class="n">Sage</span><span class="o">&gt;</span><span class="mi">15</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">Sage</span><span class="o">&lt;</span><span class="mi">45</span><span class="p">)</span><span class="c1">--ADD CONSTRAINT 约束名 CHECK(约束表达式)</span>
+</code></pre></div></td></tr></table></div></p>
+<h4 id="_9">删除基本表<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="err">表</span><span class="mi">1</span><span class="p">[,</span><span class="err">表</span><span class="mi">2</span><span class="p">,</span><span class="err">表</span><span class="mi">3</span><span class="p">]</span>
+<span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Student</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="sql_3">SQL数据操纵<a class="headerlink" href="#sql_3" title="Permanent link">&para;</a></h2>
+<h4 id="_10">数据查询<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<p>查询语句是数据库使用中最基本和最重要的语句之一，其功能是从数据中检索满足条件的数据。
+数据来源可以是一张表、多张表或者视图。
+查询结果是关系。
+语句格式：
+<a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347408.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062347408.png" /></a></p>
+<h5 id="_11">简单查询<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h5>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">--查询指定列</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">Sno</span><span class="p">,</span><span class="n">Sname</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span>
+<span class="c1">--查询所有列</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span>
+<span class="c1">--查询经过计算的列</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">Sname</span><span class="p">,</span><span class="mi">2020</span><span class="o">-</span><span class="n">Sage</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span><span class="c1">--第二列列名为空</span>
+</code></pre></div></td></tr></table></div>
+<h5 id="_12">改变列标题<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h5>
+<p>①：<code>列名 | 表达式 [AS] 列别名</code>
+②：<code>列别名 = 列名 | 表达式</code>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">Sname</span><span class="w"> </span><span class="err">姓名</span><span class="p">,</span><span class="mi">2020</span><span class="o">-</span><span class="n">Sage</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="err">出身年份</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span>
+</code></pre></div></td></tr></table></div>
+ ##### 选择表中若干行
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">Sno</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SC</span>
+<span class="c1">--等价于</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="n">Sno</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SC</span>
+<span class="c1">--在SELECT中缺省则为ALL</span>
+<span class="c1">--DISTINCT关键字可以去重</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">Sno</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SC</span>
+</code></pre></div></td></tr></table></div></p>
+<h5 id="where"><code>WHERE</code>用于查询满足条件的元组<a class="headerlink" href="#where" title="Permanent link">&para;</a></h5>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062348540.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062348540.png" /></a>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">--比较</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">Sname</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Sdept</span><span class="o">=</span><span class="s1">&#39;IS&#39;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">Sname</span><span class="p">,</span><span class="n">Sage</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Sage</span><span class="o">&lt;</span><span class="mi">20</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">Sname</span><span class="p">,</span><span class="n">Sage</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="n">Sage</span><span class="o">&gt;=</span><span class="mi">20</span>
+<span class="c1">--范围</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">Sname</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Sage</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="mi">23</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">Sname</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Sage</span><span class="o">&gt;=</span><span class="mi">20</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">Sage</span><span class="o">&lt;=</span><span class="mi">23</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">Sname</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Sage</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="mi">23</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">Sname</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Sage</span><span class="o">&lt;</span><span class="mi">20</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">Sage</span><span class="o">&gt;</span><span class="mi">23</span>
+<span class="c1">--集合</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">Sname</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Sdept</span><span class="w"> </span><span class="k">IN</span><span class="p">(</span><span class="s1">&#39;IS&#39;</span><span class="p">,</span><span class="s1">&#39;MA&#39;</span><span class="p">,</span><span class="s1">&#39;CS&#39;</span><span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">Sname</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Sdept</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">IN</span><span class="p">(</span><span class="s1">&#39;IS&#39;</span><span class="p">,</span><span class="s1">&#39;MA&#39;</span><span class="p">,</span><span class="s1">&#39;CS&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div></p>
+<h5 id="_13">字符串匹配<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h5>
+<p>在字符匹配中有四种通配符：
+<code>_</code>：匹配任意一个字符
+<code>%</code>：匹配0个或多个字符
+<code>[]</code>：匹配<code>[]</code>中的任意一个字符
+<code>[^]</code>：不匹配<code>[]</code>中的任意一个字符
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Sno</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;200215121&#39;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Sname</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;王%&#39;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Sname</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;[张刘李]%&#39;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Sno</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%[^235]&#39;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Sno</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%[235]&#39;</span>
+</code></pre></div></td></tr></table></div></p>
+<h5 id="_14">涉及空值的查询<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h5>
+<p>空值(<code>NULL</code>)在数据库中有特殊的含义，代表不确定的值
+判断某个值是否为<code>NULL</code>，只能用专门的判断<code>NULL</code>值的子句来完成<code>IS NULL</code>、<code>IS NOT NULL</code>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">Sno</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SC</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Grade</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">Sno</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SC</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Grade</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+</code></pre></div></td></tr></table></div></p>
+<h5 id="_15">多重条件查询<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h5>
+<p>运用<code>AND</code>和<code>OR</code>俩简介查询多个查询条件
+其中<code>AND</code>的优先级高于<code>OR</code>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">Sname</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Sdept</span><span class="o">=</span><span class="s1">&#39;IS&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">Sage</span><span class="o">&lt;</span><span class="mi">20</span>
+</code></pre></div></td></tr></table></div></p>
+<h5 id="order-by"><code>ORDER BY</code><a class="headerlink" href="#order-by" title="Permanent link">&para;</a></h5>
+<p><code>ORDER BY &lt;列名&gt; [ASC | DESC][,&lt;列名&gt;···]</code>
+可以按一个或多个属性列排序
+<code>ASC</code>：升序、<code>DESC</code>降序、缺省值为升序
+当排序列含空值时：
+<code>ASC</code>：排序列为空值的元组最先显示
+<code>DESC</code>：排序列为空值的元组最后显示
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">Sno</span><span class="p">,</span><span class="n">Grade</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SC</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Cno</span><span class="o">=</span><span class="s1">&#39;3&#39;</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">Grade</span><span class="w"> </span><span class="k">DESC</span>
+</code></pre></div></td></tr></table></div></p>
+<h5 id="top">TOP限制结果集<a class="headerlink" href="#top" title="Permanent link">&para;</a></h5>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">TOP</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="n">Sname</span><span class="p">,</span><span class="n">Sage</span><span class="p">,</span><span class="n">Sdept</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">Sage</span><span class="w"> </span><span class="k">DESC</span>
+</code></pre></div></td></tr></table></div>
+<h5 id="_16">聚集函数<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h5>
+<p>聚集函数也称为集合函数或聚合函数、计算函数，其作用是对一组值进行计算并返回一个单值。SQL提供的聚合函数有：
+<code>COUNT(*)</code>：统计表中元组个数
+<code>COUNT(&lt;列名&gt;)</code>：统计本列列值个数
+<code>SUM(&lt;列名&gt;)</code>：计算列值综合
+<code>AVG(&lt;列名&gt;)</code>：计算列值平均值
+<code>MAX(&lt;列名&gt;)</code>：求列值最大值
+<code>MIN(&lt;列名&gt;)</code>：求列值最小值
+除<code>COUNT(*)</code>外，其他函数在计算过程中均忽略<code>NULL</code>值
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="err">总人数</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Student</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">Sno</span><span class="p">)</span><span class="w"> </span><span class="err">选课人数</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SC</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">SUM</span><span class="p">(</span><span class="n">Grade</span><span class="p">)</span><span class="w"> </span><span class="err">总成绩</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SC</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Sno</span><span class="o">=</span><span class="s1">&#39;95122&#39;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">Grade</span><span class="p">)</span><span class="w"> </span><span class="err">平均成绩</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SC</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Cno</span><span class="o">=</span><span class="s1">&#39;C01&#39;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">MAX</span><span class="p">(</span><span class="n">Grade</span><span class="p">)</span><span class="w"> </span><span class="err">最高分</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SC</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Cno</span><span class="o">=</span><span class="s1">&#39;C01&#39;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">MIN</span><span class="p">(</span><span class="n">Grade</span><span class="p">)</span><span class="w"> </span><span class="err">最低分</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SC</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Cno</span><span class="o">=</span><span class="s1">&#39;C01&#39;</span>
+</code></pre></div></td></tr></table></div>
+<font color=red>聚合函数不能出现在WHERE子句中</font></p>
+<h5 id="group-by"><code>GROUP BY</code><a class="headerlink" href="#group-by" title="Permanent link">&para;</a></h5>
+<p><code>GROUP BY</code>可将计算控制在组一级，分组的目的是细化计算函数的作用对象
+分组语句位置在<code>WHERE</code>子句的后边，一般形式为：
+<code>GROUP BY &lt;分组依据列&gt;</code>
+<code>[HAVING &lt;组过滤条件&gt;]</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">Cno</span><span class="w"> </span><span class="err">课程号</span><span class="p">,</span><span class="k">COUNT</span><span class="p">(</span><span class="n">Sno</span><span class="p">)</span><span class="w"> </span><span class="err">选课人数</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SC</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">Cno</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">Sno</span><span class="w"> </span><span class="err">学号</span><span class="p">,</span><span class="k">COUNT</span><span class="p">(</span><span class="n">Cno</span><span class="p">)</span><span class="w"> </span><span class="err">选课门数</span><span class="p">,</span><span class="k">AVG</span><span class="p">(</span><span class="n">Grade</span><span class="p">)</span><span class="w"> </span><span class="err">平均成绩</span><span class="w"> </span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">SC</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">Sno</span>
+</code></pre></div></td></tr></table></div>
+<p><font size=6 color=blue>暂时只学到了这里，之后再更新o(╥﹏╥)o</font></p>
+<h5 id="_17">其他<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h5>
+<h4 id="_18">数据更改<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h4>
+<h2 id="sql_4">SQL数据控制<a class="headerlink" href="#sql_4" title="Permanent link">&para;</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 LXCSNotes | 使用 <a href='https://squidfunk.github.io/mkdocs-material/' target='_blank'>Material for MkDocs</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

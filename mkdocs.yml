@@ -1,26 +1,14 @@
 site_name: LXCSNotes
 site_description: 计算机科学与技术学习笔记
 site_author: Amonologue
+# site_favicon: favicon.ico
 copyright: Copyright &copy; 2025 LXCSNotes | 使用 <a href='https://squidfunk.github.io/mkdocs-material/' target='_blank'>Material for MkDocs</a>
 
-repo_url: https://github.com/A-Egoist/LXCSNotes/tree/main
+# repo_url: https://github.com/A-Egoist/LXCSNotes/tree/main
 # site_url: https://your-domain.com  # 可选
-repo_url: https://github.com/yourname/lxcsnotes  # 可选
 
 theme:
   name: material
-  palette:
-  - media: "(prefers-color-scheme: light)"
-    scheme: default
-    primary: teal         # 主色（顶部）
-    accent: pink          # 强调色（按钮、高亮）
-  - media: "(prefers-color-scheme: dark)"
-    scheme: slate
-    primary: teal
-    accent: lime
-  font:
-    text: Roboto
-    code: JetBrains Mono
   language: zh
   features:
     - navigation.tabs
@@ -54,7 +42,9 @@ markdown_extensions:
   - attr_list  # 用于在 Markdown 中加 HTML 属性（如 class）
 
 plugins:
+  - search
   - glightbox
+  - mermaid2
 
 extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
