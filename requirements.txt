@@ -1,0 +1,10 @@
+mkdocs
+mkdocs-print-site-plugin
+mkdocs-macros-plugin
+python-markdown-math
+mkdocs-material
+pymdown-extensions
+mkdocs-material[math]
+mkdocs-glightbox
+mkdocs-print-site-plugin
+mkdocs-awesome-pages-plugin

@@ -2,7 +2,7 @@ site_name: LXCSNotes
 site_description: 计算机科学与技术学习笔记
 site_author: Amonologue
 # site_favicon: favicon.ico
-copyright: Copyright &copy; 2025 LXCSNotes | 使用 <a href='https://squidfunk.github.io/mkdocs-material/' target='_blank'>Material for MkDocs</a>
+copyright: Copyright &copy; 2025 LXCSNotes
 
 repo_url: https://github.com/A-Egoist/LXCSNotes/tree/main
 # site_url: https://your-domain.com  # 可选
@@ -46,7 +46,7 @@ markdown_extensions:
 plugins:
   - search
   - glightbox
-  - mermaid2
+  - awesome-pages
 
 extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
