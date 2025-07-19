@@ -1,19 +1,3 @@
----
-title: Numpy库常用方法总结
-img: 'https://cdn.jsdelivr.net/gh/A-Egoist/cdn/pic/1 (69).png'
-top: false
-cover: false
-coverImg: 'https://cdn.jsdelivr.net/gh/A-Egoist/cdn/pic/1 (69).png'
-categories:
-  - 深度学习
-  - TensorFlow
-tags:
-  - Numpy
-  - 笔记
-abbrlink:
-date: 2020-3-4 20:18:47
----
-
 ## Numpy库入门
 
 ### 简介

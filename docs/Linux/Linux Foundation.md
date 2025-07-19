@@ -1,5 +1,6 @@
-## Linux 基础
-### 关机和重启
+# Linux 基础
+
+## 关机和重启
 1. 关机
 
     ```bash
@@ -12,7 +13,7 @@
     sudo shutdown -r now
     ```
 
-### 常用文件管理及系统命令
+## 常用文件管理及系统命令
 
 
 
@@ -97,14 +98,108 @@ passwd username
           *   用鼠标选中文本, 被选中的文本会被自动复制到 tmux 的剪贴板.
           *   按下 `Ctrl + b` 后松开手指, 然后按 `]`, 会将剪贴板中的内容粘贴到光标处.
 
-### 参考资料
 
-[tmux常用命令](https://www.cnblogs.com/lizhang4/p/7325086.html)
 
 ## vim
 
 
-## 解压文件
-![[Ubuntu 中解压文件]]
+
 ## wget
-![[wget]]
+GNU Wget (简称: wget) 是一个用于下载的软件
+
+1.   安装
+
+     ```bash
+     sudo apt install wget
+     ```
+
+2.   使用
+
+     *   下载单个文件
+
+         ```bash
+         wget url
+         ```
+
+     *   下载文件并以不同的文件名保存
+
+         ```bash
+         wget -o filename url
+         ```
+
+     *   限定下载速度
+
+         ```bash
+         wget -limit-rate=1024k url
+         ```
+
+     *   断续下载
+
+         ```bash
+         wget -c url
+         ```
+
+     *   后台下载
+
+         ```bash
+         wget -b url
+         ```
+
+     *   下载多个文件
+
+         首先将需要下载的多个 url 保存到 url_list 中, 然后再使用如下命令
+
+         ```bash
+         wget -i url_list.txt
+         ```
+
+
+
+
+## 解压文件
+
+1.   安装解压软件
+
+     ```bash
+     sudo apt install unzip
+     ```
+
+2.   解压文件
+
+     *   将文件解压到当前目录
+
+         ```bash
+         unzip filename.zip
+         ```
+
+     *   将文件解压到指定目录
+
+         ```bash
+         unzip filename.zip -d save_path
+         ```
+
+     *   解压文件, 同时不覆盖已经存在的文件
+
+         ```bash
+         unzip filename.zip -n
+         ```
+
+     *   解压文件, 覆盖已经存在的文件
+
+         ```bash
+         unzip filename.zip -o
+         ```
+
+3.   查看压缩包中的文件
+
+     ```bash
+     unzip filename.zip -l
+     ```
+
+
+
+## 参考资料
+
+【1】[tmux常用命令](https://www.cnblogs.com/lizhang4/p/7325086.html)
+
+【2】[ubuntu下如何解压zip文件（超详细）](https://www.cnblogs.com/cy0628/p/13903990.html)

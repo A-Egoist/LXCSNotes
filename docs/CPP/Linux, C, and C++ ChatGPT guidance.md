@@ -1,3 +1,5 @@
+# Linux, C, and C++ ChatGPT guidance
+
 为了在明年的秋招中脱颖而出，你可以采取以下步骤来提升你的 Linux C/C++ 技能：
 
 1. **深入理解基础知识**：
@@ -163,3 +165,7 @@
 macOS 可以很好地替代 Ubuntu 进行 Linux C/C++ 的学习和开发，特别是对于一般的系统编程、跨平台开发和不依赖于特定 Linux 内核功能的任务。然而，如果你计划深入学习 Linux 内核、开发与内核交互的应用程序，或者需要使用特定的 Linux 工具和服务，在 Ubuntu 上学习会更有利。
 
 最终选择取决于你的学习和开发目标。如果你只是为了提高在秋招中的竞争力，并且开发工作主要是跨平台的或不涉及内核开发，macOS 足够强大且便利。如果你的目标是完全精通 Linux 及其内核，建议同时保持对 Ubuntu 的使用。
+
+
+
+![Linux+C+CPP Guidance](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202507192036236.png)

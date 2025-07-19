@@ -40,4 +40,4 @@ https://www.acwing.com/file_system/file/content/whole/index/content/3030391/
 
 https://www.acwing.com/file_system/file/content/whole/index/content/3074146/
 
-![](./img/acwing lesson server framework.png)
+![](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202507191928478.png)

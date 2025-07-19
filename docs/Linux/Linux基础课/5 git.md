@@ -1,6 +1,6 @@
 # 5 git
 
-### github 工作流
+## github 工作流
 
 ```bash
 # 复制 remote 仓库到本地
@@ -19,6 +19,8 @@ git push origin my-feature
 
 若在准备提交 `pull request` 的时候，发现 remote 的 main 分支存在新的提交，需要解决冲突：
 
+>   若此时发现在 github 上的内容已经发生改变 (main 分支中增加了一个 update)，则不能直接提交 Pull Requests (PR)，而应该测试一下我们新提交的内容(new_branch 分支中的新增内容)在 github 上新增 update 的基础上还能否继续使用。
+
 ```bash
 # 同步 remote(main) 的最新代码到 local(main)
 git checkout main
@@ -29,7 +31,7 @@ git checkout my-feature
 git rebase main
 # 手动解决冲突文件
 
-# 将解决冲突后的文件提交到 remote
+# 将解决冲突后的文件提交到 remote, 加上 -f 是因为我们在 push 之前已经 rebase 了
 git push -f origin my-feature
 ```
 
@@ -68,7 +70,7 @@ graph TD
     H --> I[删除功能分支]
 ```
 
-
+## git常用命令
 
 **全局设置**
 
@@ -145,3 +147,14 @@ graph TD
 `git stash drop`: 删除栈顶存储的修改
 `git stash pop`: 将栈顶存储的修改恢复到当前分支，同时删除栈顶元素
 `git stash list`: 查看栈中所有元素
+
+
+
+## 参考资料
+
+* [十分钟学会正确的github工作流，和开源作者们使用同一套流程](https://www.bilibili.com/video/BV19e4y1q7JJ/)
+
+* [GitHub 流](https://docs.github.com/zh/get-started/quickstart/github-flow)
+
+* [一文弄懂 Gitflow、Github flow、Gitlab flow 的工作流](https://cloud.tencent.com/developer/article/1646937)
+* [PyCharm中使用Git/GitHub详细步骤（图文详解）](https://blog.csdn.net/Q0717168/article/details/108719275)

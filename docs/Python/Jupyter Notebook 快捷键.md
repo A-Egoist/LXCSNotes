@@ -1,4 +1,4 @@
-## 1. Jupyter Notebook 快捷键
+## Jupyter Notebook 快捷键
 
 Jupyter Notebook 有两种模式，一种是命令行模式(Command Mode, 蓝色单元格)，一种是编辑模式(Edit Mode, 绿色单元格)
 

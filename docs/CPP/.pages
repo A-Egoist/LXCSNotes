@@ -1,3 +1,4 @@
-# docs/CPP/.pages
-title: C++笔记
+title: CPP
 collapse: true
+arrange:
+  - Linux, C, and C++ ChatGPT guidance.md

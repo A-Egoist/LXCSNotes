@@ -1,4 +1,4 @@
-# MySQL 基础
+# MySQL
 
 ## 安装和配置 MySQL
 
