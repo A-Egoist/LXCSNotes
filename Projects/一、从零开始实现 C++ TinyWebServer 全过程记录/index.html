@@ -1,0 +1,4849 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="计算机科学与技术学习笔记">
+      
+      
+        <meta name="author" content="Amonologue">
+      
+      
+      
+        <link rel="prev" href="../webbench%20%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/">
+      
+      
+        <link rel="next" href="../%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%B9%A0%E5%92%8C%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%AF%B4%E6%98%8E/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>一、从零开始实现C++ TinyWebServer 全过程记录 - LXCSNotes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#c-tinywebserver" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="LXCSNotes" class="md-header__button md-logo" aria-label="LXCSNotes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            LXCSNotes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              一、从零开始实现C++ TinyWebServer 全过程记录
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yourname/lxcsnotes" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  欢迎使用 LXCSNotes
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Blog/Anaconda%20Command/" class="md-tabs__link">
+          
+  
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../CPP/" class="md-tabs__link">
+          
+  
+  
+  CPP
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Linux/" class="md-tabs__link">
+          
+  
+  
+  Linux
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../C%2B%2B%20%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="md-tabs__link">
+          
+  
+  
+  Projects
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Python/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Trick/PyTorch%20to%28device%29/" class="md-tabs__link">
+          
+  
+  
+  Trick
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../algorithm/LeetCode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="md-tabs__link">
+          
+  
+  
+  Algorithm
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="LXCSNotes" class="md-nav__button md-logo" aria-label="LXCSNotes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    LXCSNotes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yourname/lxcsnotes" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    欢迎使用 LXCSNotes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Blog
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Blog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/Anaconda%20Command/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Anaconda Command
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/BPR%20Loss%20vs.%20Contrastive%20Learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BPR Loss vs. Contrastive Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/CUDA%20%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CUDA 内存模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/CUDA%20%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CUDA 执行模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/CUDA%20%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CUDA编程入门
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/CUDA%20%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CUDA 编程模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/GitHub%20Workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GitHub Workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/LaTeX%20Note/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LaTeX Note
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/Linux%20Foundation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linux Foundation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/Numpy%20%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Numpy库常用方法总结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/PyTorch%20%E4%B8%AD%20tensor.view%28%29%20%E5%92%8C%20tensor.reshape%28%29%20%E7%9A%84%E5%8C%BA%E5%88%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch 中 tensor.view() 和 tensor.reshape() 的区别
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/PyTorch%20%E5%BC%A0%E9%87%8F%E5%92%8C%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch 张量和模型的保存与加载
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/Python%20%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python 命名规范
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/Python%20%E5%9B%BA%E5%AE%9A%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%A7%8D%E5%AD%90/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python 固定随机数种子
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/Python%20%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python 数据可视化
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/Python%20%E8%AF%8D%E4%BA%91%E5%AE%9E%E6%88%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python词云实战
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/QR%20Code%20Super%20Resolution-002/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QR Code Super Resolution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/SQL%20Server%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94T-SQL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SQL学习笔记
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/SQL%20Sever%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%9B%BE%E5%BD%A2%E5%8C%96%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SQL Sever Management Studio基础
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/Smale%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%AF%86%202023%20%E7%AC%AC%E4%B8%80%E8%AE%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smale 机器学习常识 2023 第一讲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/Smale%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%AF%86%202023%20%E7%AC%AC%E4%B8%89%E8%AE%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smale 机器学习常识 2023 第三讲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/Smale%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%AF%86%202023%20%E7%AC%AC%E4%BA%8C%E8%AE%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smale 机器学习常识 2023 第二讲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/Smale%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%AF%86%202023%20%E7%AC%AC%E4%BA%94%E8%AE%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smale 机器学习常识 2023 第五讲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/Smale%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%AF%86%202023%20%E7%AC%AC%E5%85%AD%E8%AE%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smale 机器学习常识 2023 第六讲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/Smale%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%AF%86%202023%20%E7%AC%AC%E5%9B%9B%E8%AE%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smale 机器学习常识 2023 第四讲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/TeX%20Live%20%2B%20CTeX%20%2B%20Visual%20Studio%20Code%20%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TeX Live + CTeX + Visual Studio Code 配置
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/Transformer%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transformer 学习笔记
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/Ubuntu%20%E4%B8%AD%E8%A7%A3%E5%8E%8B%E6%96%87%E4%BB%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ubuntu 中解压文件
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/jupyter%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jupyter快捷键
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/model.zero_grad%28%29%20and%20optimizer.zero_grad%28%29%20in%20PyTorch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    model.zero grad() and optimizer.zero grad() in PyTorch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/wget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Wget
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/%E4%BA%8C%E7%BB%B4%E7%A0%81%E8%B6%85%E5%88%86%E6%95%88%E6%9E%9C%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    二维码超分效果评价指标
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94CSS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    前端基础——CSS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94HTML/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    前端基础——HTML
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94JS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    前端基础——JS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/%E5%8D%9A%E5%AE%A2%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    博客入门教程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/%E5%8D%9A%E5%AE%A2%E7%9B%AE%E5%BD%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    博客目录
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    图神经网络
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/%E5%9F%BA%E4%BA%8E%20CUDA%20%E7%9A%84%E5%BC%82%E6%9E%84%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基于 CUDA 的异构并行计算
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/%E5%A6%82%E4%BD%95%E8%AF%BB%E6%96%87%E7%8C%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    如何读文献
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    实用机器学习
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/%E5%B9%B6%E8%A1%8C%E5%A4%84%E7%90%86%E5%8F%8A%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    并行处理及分布式系统
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/%E6%84%9F%E7%9F%A5%E6%9C%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    感知机模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    数字逻辑复习提纲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    正则表达式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    注意力机制
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    深度学习中的数学基础
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Blog/%E9%9B%85%E6%80%9D%E5%A4%87%E8%80%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    雅思备考
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    CPP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            CPP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CPP 学习笔记
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/CMake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CMake
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/CPP%20Note/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    C++ 笔记
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/Linux%2C%20C%2C%20and%20C%2B%2B%20ChatGPT%20guidance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linux, C, and C++ ChatGPT guidance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/STL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    STL
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    内存管理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E5%B8%B8%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    常用的设计模式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E5%B9%B6%E8%A1%8C%E7%BC%96%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    并行编程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    构造函数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    析构函数与生命周期
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    泛型编程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E7%BC%96%E8%AF%91%E5%92%8C%E9%93%BE%E6%8E%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    编译和链接
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Linux
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Linux
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linux基础课
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/1.%20%E5%B8%B8%E7%94%A8%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linux 常用命令整理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/2.%20tmux%E5%92%8Cvim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. tmux和vim
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/4%20ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ssh
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/5%20git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    git
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/6%20thrift/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    thrift
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/8%20docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8 docker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E9%85%8D%E7%BD%AE%20Ubuntu%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    从零开始配置 Ubuntu 开发环境
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Projects
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../C%2B%2B%20%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    C++ 项目实战
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../webbench%20%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    webbench 压力测试
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    一、从零开始实现C++ TinyWebServer 全过程记录
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    一、从零开始实现C++ TinyWebServer 全过程记录
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      学习记录
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      其他笔记
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      知识点整理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="知识点整理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      C++ 知识点
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C++ 知识点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1explicit" class="md-nav__link">
+    <span class="md-ellipsis">
+      1、explicit 关键字
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2containers-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      2、Containers library
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3、多线程和锁
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4constexpr-const" class="md-nav__link">
+    <span class="md-ellipsis">
+      4、constexpr 和 const 关键字
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5struct-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      5、struct 和 class 的区别
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6class" class="md-nav__link">
+    <span class="md-ellipsis">
+      6、class 相关的知识点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      7、匿名函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      8、回调函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9size_tsizeoftypedef" class="md-nav__link">
+    <span class="md-ellipsis">
+      9、size_t、sizeof()、typedef
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      10、模板函数和模板类
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      11、虚函数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11、虚函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      C++ 虚函数详解
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      虚函数使用场景
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      虚函数性能考虑
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      虚函数最佳实践
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12raii-resource-acquisition-is-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      12、RAII (Resource Acquisition Is Initialization) 是什么？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      13、左值引用和右值引用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      14、函数重载和运算符重载
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15stdmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      15、std::map
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      16、浅拷贝与深拷贝
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17oop-design-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      17、OOP Design Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      18、重写和重载
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18、重写和重载">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-overload" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 重载（Overload）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-override" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 重写（Override）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#override" class="md-nav__link">
+    <span class="md-ellipsis">
+      常见错误与 override 的作用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 对比总结
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ 关键结论
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19stdpair" class="md-nav__link">
+    <span class="md-ellipsis">
+      19、std::pair 的用法和优势
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20stdshared_ptr" class="md-nav__link">
+    <span class="md-ellipsis">
+      20、std::shared_ptr
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据结构
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数据结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1、小根堆
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2、循环数组
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络编程
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="网络编程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      1、一次完整的 HTTP 请求过程：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2epoll" class="md-nav__link">
+    <span class="md-ellipsis">
+      2、epoll
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考资料
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%B9%A0%E5%92%8C%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%AF%B4%E6%98%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    个人简历中实习和项目的说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%20MySQL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MySQL 基础
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_6" id="__nav_5_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    WebServer
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_6">
+            <span class="md-nav__icon md-icon"></span>
+            WebServer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../WebServer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    WebServer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Python
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python/%E6%B0%94%E5%8A%A8%E7%A0%94%E7%A9%B6%E6%99%BA%E8%83%BD%E5%8C%96%E5%B9%B3%E5%8F%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    气动科研智能云平台解决方案
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Trick
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Trick
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/PyTorch%20to%28device%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch to(device)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/PyTorch%20%E4%BD%BF%E7%94%A8%20TensorBoard%20%E5%8F%AF%E8%A7%86%E5%8C%96%E8%AE%AD%E7%BB%83%E7%BB%93%E6%9E%9C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch 使用 TensorBoard 可视化训练结果
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/Tricks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tricks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/Ubuntu%2022.04%20%E5%BC%80%E6%9C%BA%E5%8F%91%E9%80%81%20IP%20%E5%88%B0%E6%8C%87%E5%AE%9A%E9%82%AE%E7%AE%B1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ubuntu 22.04 开机发送 IP 到指定邮箱
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/macOS%20Visual%20Studio%20Code%20%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    macOS Visual Studio Code 快捷键
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E4%B8%B4%E7%95%8C%E5%9B%BE%28Critical%20Difference%20Diagrams%2C%20CD%20Diagrams%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    临界图(Critical Difference Diagrams, CD Diagrams)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%BB%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%82%BC%E4%B8%B9%E7%82%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    从零开始组建个人炼丹炉
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E4%BD%BF%E7%94%A8%20yapf%20%E6%A0%BC%E5%BC%8F%E5%8C%96%20python%20%E4%BB%A3%E7%A0%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    使用 yapf 格式化 python 代码
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E5%9C%A8%20Visual%20Studio%20Code%20%E9%85%8D%E7%BD%AE%20Python%20%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    在 Visual Studio Code 配置 Python 远程开发环境
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E6%9C%AC%E7%A7%91%E6%AF%95%E8%AE%BE%E6%8A%80%E5%B7%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    本科毕设技巧
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%20trick/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    模型训练中的常用 trick
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%AB%98%E6%95%88%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C%E5%92%8C%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    深度学习高效进行实验和代码管理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Algorithm
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Algorithm
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithm/LeetCode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LeetCode 刷题笔记
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    动态规划
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithm/%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%9B%BE%E8%AE%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    搜索与图论
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      学习记录
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      其他笔记
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      知识点整理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="知识点整理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      C++ 知识点
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C++ 知识点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1explicit" class="md-nav__link">
+    <span class="md-ellipsis">
+      1、explicit 关键字
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2containers-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      2、Containers library
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3、多线程和锁
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4constexpr-const" class="md-nav__link">
+    <span class="md-ellipsis">
+      4、constexpr 和 const 关键字
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5struct-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      5、struct 和 class 的区别
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6class" class="md-nav__link">
+    <span class="md-ellipsis">
+      6、class 相关的知识点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      7、匿名函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      8、回调函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9size_tsizeoftypedef" class="md-nav__link">
+    <span class="md-ellipsis">
+      9、size_t、sizeof()、typedef
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      10、模板函数和模板类
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      11、虚函数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11、虚函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      C++ 虚函数详解
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      虚函数使用场景
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      虚函数性能考虑
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      虚函数最佳实践
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12raii-resource-acquisition-is-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      12、RAII (Resource Acquisition Is Initialization) 是什么？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      13、左值引用和右值引用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      14、函数重载和运算符重载
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15stdmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      15、std::map
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      16、浅拷贝与深拷贝
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17oop-design-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      17、OOP Design Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      18、重写和重载
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18、重写和重载">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-overload" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 重载（Overload）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-override" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 重写（Override）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#override" class="md-nav__link">
+    <span class="md-ellipsis">
+      常见错误与 override 的作用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 对比总结
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ 关键结论
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19stdpair" class="md-nav__link">
+    <span class="md-ellipsis">
+      19、std::pair 的用法和优势
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20stdshared_ptr" class="md-nav__link">
+    <span class="md-ellipsis">
+      20、std::shared_ptr
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据结构
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数据结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1、小根堆
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2、循环数组
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络编程
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="网络编程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      1、一次完整的 HTTP 请求过程：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2epoll" class="md-nav__link">
+    <span class="md-ellipsis">
+      2、epoll
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考资料
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="c-tinywebserver">一、从零开始实现C++ TinyWebServer 全过程记录<a class="headerlink" href="#c-tinywebserver" title="Permanent link">&para;</a></h1>
+<p>[toc]</p>
+<h2 id="_1">学习记录<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>开始时间：2025-6-15</p>
+<p>我的实现：<a href="https://github.com/A-Egoist/WebServer">GitHub</a></p>
+<p><a href="https://blog.csdn.net/weixin_51322383/article/details/130470806">从零开始实现C++ TinyWebServer（一）---- 项目总述</a></p>
+<ol>
+<li>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_web_server">什么是 WebServer？</a></p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506151046879.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="通过 HTTP 的客户/服务器连接的基本表示方法" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506151046879.svg" /></a></p>
+</li>
+<li>
+<p>如何实现一个高并发的 WebServer？</p>
+<ul>
+<li>I/O 多路复用技术：<a href="https://zhuanlan.zhihu.com/p/367591714">IO多路复用——深入浅出理解select、poll、epoll的实现</a></li>
+<li>什么是 socket？</li>
+<li>线程池（多线程并发）</li>
+<li>Reactor 模型：<a href="https://blog.csdn.net/ldw201510803006/article/details/124365838">高性能网络编程之 Reactor 网络模型（彻底搞懂）</a></li>
+<li>Proactor 模型：</li>
+<li>数据库连接池</li>
+<li>定时器 (Timer)</li>
+</ul>
+</li>
+<li>
+<p>项目框架</p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506261508970.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="WebServer-架构图-001" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506261508970.png" /></a></p>
+</li>
+<li>
+<p>Logger Class</p>
+<ul>
+<li>
+<p>什么是单例模式？</p>
+<ul>
+<li>懒汉模式</li>
+<li>饿汉模式</li>
+</ul>
+</li>
+<li>
+<p>同步日志和异步日志</p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506182118865.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="在这里插入图片描述" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506182118865.jpeg" /></a></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Thread Pool</p>
+<ul>
+<li>进程和线程的概念：<a href="https://zhuanlan.zhihu.com/p/697963882">https://zhuanlan.zhihu.com/p/697963882</a>，线程的五种状态</li>
+<li>Linux 多线程 (pthread)</li>
+<li>线程同步的主要问题：竞争、死锁、活锁、饥饿</li>
+<li>互斥锁和条件变量</li>
+<li>读写锁</li>
+</ul>
+</li>
+<li>
+<p>Connection Pool</p>
+<ul>
+<li>RAII (Resource Acquisition Is Initialization)</li>
+<li>TCP 连接池</li>
+</ul>
+</li>
+<li>
+<p>HTTP</p>
+<ul>
+<li><a href="https://blog.csdn.net/sunyctf/article/details/129002163">HTTP协议 | 一文详解HTTP报文结构</a></li>
+<li><a href="https://blog.csdn.net/weixin_42527589/article/details/146357740">实现高效的URL编码与解码转换</a></li>
+</ul>
+</li>
+<li>
+<p>Timer Class</p>
+<ul>
+<li>定时器的实现，通常采用：排序链表、红黑树、时间堆和时间轮</li>
+<li>小根堆和大根堆</li>
+<li>Linux 时间机制：<a href="https://zhuanlan.zhihu.com/p/697968510">https://zhuanlan.zhihu.com/p/697968510</a></li>
+</ul>
+</li>
+<li>
+<p>Epoll</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/17856755436">Linux epoll完全图解，彻底搞懂epoll机制</a></li>
+</ul>
+</li>
+<li>
+<p>阻塞和非阻塞 I/O</p>
+<ul>
+<li>1.3 Linux 非阻塞 I/O：<a href="https://zhuanlan.zhihu.com/p/697968510">https://zhuanlan.zhihu.com/p/697968510</a></li>
+</ul>
+</li>
+<li>
+<p>定时器</p>
+<ul>
+<li>发布者-订阅者模型</li>
+<li>计时线程如何设计？<ul>
+<li>不是所有的线程都需要计时信息，所以计时器不能给所有线程都发通知，这很浪费不可取。因此计时线程要记录，<strong>记录要给哪些线程发通知</strong>。</li>
+<li>需要计时器的通知信息的线程可能会增多，可能会减少，所以要允许它们 <strong>既可以订阅，也可以取消订阅</strong>。</li>
+<li>计时线程并不知道到底会有多少个线程将来要订阅它的通知，所以它还要<strong>具备良好的可扩展性，能支持大量的线程订阅其信息</strong>。</li>
+<li>计时线程作为<strong>发布者通知到订阅者</strong>，一个计时周期已经到了</li>
+</ul>
+</li>
+</ul>
+</li>
+<li></li>
+</ol>
+<h2 id="_2">其他笔记<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>什么是 explicit 关键字，有什么作用：<a href="https://blog.csdn.net/weixin_45031801/article/details/137796214">【C++】explicit关键字详解（explicit关键字是什么? 为什么需要explicit关键字? 如何使用explicit 关键字）</a></p>
+</li>
+<li>
+<p>手动提交 POST 请求：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>curl<span class="w"> </span>-v<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="m">127</span>.0.0.1:8080<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;username=admin&amp;password=123456&quot;</span>
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>HTML 状态码：<a href="https://www.runoob.com/http/http-status-codes.html">HTTP 状态码</a>
+     200, 302, 404
+     在用户登录成功之后需要返回 <code>/welcome.html</code> 的时候，可以使用 HTTP 的重定向机制。即先发送 302 重定向响应，然后处理重定向后的 GET 请求。</p>
+</li>
+<li>
+<p>杀死tmux的会话</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 使用session编号</span>
+tmux<span class="w"> </span>kill-session<span class="w"> </span>-t<span class="w"> </span><span class="m">0</span>
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>闭包捕获 <code>[this, client_fd]</code>，什么是闭包捕获</p>
+</li>
+<li>
+<p>零拷贝技术 (Zero-copy)</p>
+</li>
+</ol>
+<h2 id="_3">知识点整理<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="c">C++ 知识点<a class="headerlink" href="#c" title="Permanent link">&para;</a></h3>
+<h4 id="1explicit">1、<code>explicit</code> 关键字<a class="headerlink" href="#1explicit" title="Permanent link">&para;</a></h4>
+<h4 id="2containers-library">2、Containers library<a class="headerlink" href="#2containers-library" title="Permanent link">&para;</a></h4>
+<p>Sequence containers：</p>
+<p>Associative containers：</p>
+<p>Unordered associate containers：</p>
+<p><code>queue</code> 和 <code>priority_queue</code></p>
+<p><code>map</code> 和 <code>unordered_map</code></p>
+<h4 id="3">3、多线程和锁<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<p><code>std::thread</code></p>
+<p><code>std::mutex</code></p>
+<p><code>std::condition_variable</code></p>
+<p><code>std::atomic</code></p>
+<h4 id="4constexpr-const">4、<code>constexpr</code> 和 <code>const</code> 关键字<a class="headerlink" href="#4constexpr-const" title="Permanent link">&para;</a></h4>
+<p>用 <code>constexpr</code>：</p>
+<ul>
+<li>需要编译期确定的量（数组大小、模板参数等）</li>
+<li>强制函数/对象在编译期可计算</li>
+<li>性能敏感的常量计算</li>
+</ul>
+<p>用 <code>const</code>：</p>
+<ul>
+<li>运行时常量</li>
+<li>函数参数/返回值的只读约束</li>
+<li>类成员常量（非静态成员不能用 <code>constexpr</code>）</li>
+</ul>
+<p><strong>最佳实践</strong>：优先用 <code>constexpr</code> 表示编译期常量，用 <code>const</code> 表示运行时常量或接口约束。C++17 起 <code>constexpr</code> 可替代大部分 <code>const</code> 的编译期场景。</p>
+<h4 id="5struct-class">5、<code>struct</code> 和 <code>class</code> 的区别<a class="headerlink" href="#5struct-class" title="Permanent link">&para;</a></h4>
+<p>在 C++ 中，<code>struct</code> 和 <code>class</code> 都用于定义自定义数据类型，它们的核心功能几乎相同，主要区别在于<strong>默认访问权限</strong>和<strong>默认继承方式</strong>。</p>
+<ol>
+<li>
+<p>默认访问权限不同：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// struct 默认所有成员为 public</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">Point</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">     </span><span class="c1">// 默认为 public</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w">     </span><span class="c1">// 默认为 public</span>
+<span class="p">};</span>
+
+<span class="c1">// class 默认所有成员为 private</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Circle</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">r</span><span class="p">;</span><span class="w">  </span><span class="c1">// 默认为 private</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">area</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mf">3.14</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>默认继承方式不同</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">Base</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">data</span><span class="p">;</span><span class="w"> </span><span class="p">};</span>
+
+<span class="c1">// struct 继承默认为 public</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">DerivedStruct</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">// 可直接访问 Base::data (public)</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DerivedClass</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">// 默认为 private 继承，Base::data 不可直接访问</span>
+<span class="p">};</span>
+</code></pre></div></td></tr></table></div>
+</li>
+</ol>
+<h4 id="6class">6、<code>class</code> 相关的知识点<a class="headerlink" href="#6class" title="Permanent link">&para;</a></h4>
+<ul>
+<li>构造函数、移动构造函数、拷贝构造函数</li>
+<li>析构函数</li>
+<li>运算符重载</li>
+</ul>
+<h4 id="7">7、匿名函数<a class="headerlink" href="#7" title="Permanent link">&para;</a></h4>
+<p>基本语法</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">[</span><span class="n">capture</span><span class="p">](</span><span class="n">parameters</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">return_type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">// 函数体 </span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>基本示例</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// 无参Lambda</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">greet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Hello, Lambda!&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="n">greet</span><span class="p">();</span><span class="w"> </span><span class="c1">// 输出: Hello, Lambda!</span>
+
+<span class="c1">// 带参Lambda</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// 输出: 7</span>
+</code></pre></div></td></tr></table></div>
+<p>捕获外部变量
+控制Lambda如何访问外部作用域的变量：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+
+<span class="c1">// 按值捕获（复制变量）</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">copy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="c1">// x=10（外部修改不影响内部）</span>
+<span class="p">};</span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="c1">// 修改外部x</span>
+<span class="n">copy</span><span class="p">();</span><span class="w">  </span><span class="c1">// 仍输出10</span>
+
+<span class="c1">// 按引用捕获（直接操作外部变量）</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="n">y</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="n">y</span><span class="o">++</span><span class="p">;</span><span class="w"> </span><span class="c1">// 修改外部y</span>
+<span class="p">};</span>
+<span class="n">ref</span><span class="p">();</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"> </span><span class="c1">// 输出21</span>
+</code></pre></div></td></tr></table></div>
+<p>捕获方式总结：</p>
+<table>
+<thead>
+<tr>
+<th>捕获形式</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[ ]</code></td>
+<td>不捕获任何变量</td>
+</tr>
+<tr>
+<td><code>[=]</code></td>
+<td>按值捕获所有外部变量</td>
+</tr>
+<tr>
+<td><code>[&amp;]</code></td>
+<td>按引用捕获所有外部变量</td>
+</tr>
+<tr>
+<td><code>[x, &amp;y]</code></td>
+<td>混合捕获（x按值，y按引用）</td>
+</tr>
+<tr>
+<td><code>[=, &amp;y]</code></td>
+<td>默认按值，但y按引用</td>
+</tr>
+<tr>
+<td><code>[&amp;, x]</code></td>
+<td>默认按引用，但x按值</td>
+</tr>
+<tr>
+<td><code>[this]</code></td>
+<td>捕获当前对象指针</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ 避免默认捕获（<code>[=]</code>/<code>[&amp;]</code>），显式列出变量更安全！
+最小捕获原则。</p>
+</blockquote>
+<h4 id="8">8、回调函数<a class="headerlink" href="#8" title="Permanent link">&para;</a></h4>
+<p>什么是回调函数？
+回调函数（Callback Function）是一种<strong>通过函数指针或函数对象传递的函数</strong>，它会在特定事件发生时被调用。核心思想是："你调用我，我稍后调用你"。</p>
+<p>Lambda表达式（现代C++推荐）</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">asyncOperation</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 模拟耗时操作</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="kr">thread</span><span class="p">([</span><span class="n">callback</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="mi">1</span><span class="n">s</span><span class="p">);</span>
+<span class="w">        </span><span class="n">callback</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w"> </span><span class="c1">// 完成后回调</span>
+<span class="w">    </span><span class="p">}).</span><span class="n">detach</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// 使用</span>
+<span class="n">asyncOperation</span><span class="p">([](</span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Operation result: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="9size_tsizeoftypedef">9、<code>size_t</code>、<code>sizeof()</code>、<code>typedef</code><a class="headerlink" href="#9size_tsizeoftypedef" title="Permanent link">&para;</a></h4>
+<p>实际上，<code>size_t</code> 是个无符号整型，它并不是一个全新的数据类型，更不是一个关键字。<code>size_t</code> 是由 <code>typedef</code> 定义而来的，我们在很多标准库头文件中都能发现。</p>
+<p>C 标准头文件<code>&lt;stddef.h&gt;</code>中可以找到<code>size_t</code>的实际定义。</p>
+<p>通常用于：
+(1) 表示对象大小和内存分配；
+(2) 表示容器大小和索引；
+(3) 内存和字符串操作；</p>
+<p>为什么需要 <code>size_t</code>：
+(1) <strong>平台无关性</strong>：自动适配不同架构（32位系统通常为 4 字节，64位系统为 8 字节）
+(2) <strong>足够大的表示范围</strong>：能表示系统中最大可能对象的大小（包括整个内存空间）
+(3) <strong>类型安全</strong>：区分普通整数和大小/索引值
+(4) <strong>标准化</strong>：所有标准库容器和内存相关函数统一使用</p>
+<h4 id="10">10、模板函数和模板类<a class="headerlink" href="#10" title="Permanent link">&para;</a></h4>
+<h4 id="11">11、虚函数<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<h5 id="c_1">C++ 虚函数详解<a class="headerlink" href="#c_1" title="Permanent link">&para;</a></h5>
+<p>虚函数是C++实现<strong>运行时多态</strong>的核心机制，它允许派生类重写基类的函数实现，并通过基类指针或引用调用派生类的实现。</p>
+<p><strong>定义方式</strong></p>
+<p>在基类中使用 <code>virtual</code> 关键字声明函数：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Base</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Base implementation</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></td></tr></table></div></p>
+<p><strong>重写规则</strong></p>
+<p>派生类重写虚函数时：
+- 函数签名必须完全相同（函数名、参数列表、返回类型）
+- 可选的 <code>override</code> 关键字（C++11起）增强安全性
+- 可选的 <code>virtual</code> 关键字（推荐省略）</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Derived</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">func</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// 正确重写</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Derived implementation</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>虚函数的工作原理</strong>（虚函数表）</p>
+<p>C++通过<strong>虚函数表（vtable）</strong> 实现多态：
+1. 每个包含虚函数的类都有一个虚函数表
+2. 表中存储指向该类虚函数的指针
+3. 每个对象包含一个指向vtable的指针（vptr）
+4. 调用虚函数时，通过vptr找到vtable，再调用对应的函数</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code>+----------------+      +-----------------+
+|    Base对象    |      | Base vtable     |
+| +----------+  |      | +-------------+ |
+| | vptr     |-----&gt;| | &amp;Base::func | |
+| +----------+  |      | +-------------+ |
++----------------+      +-----------------+
+
++-----------------+     +------------------+
+|   Derived对象   |     | Derived vtable   |
+| +------------+ |     | +--------------+ |
+| | vptr       |----&gt;| | &amp;Derived::func| |
+| +------------+ |     | +--------------+ |
++-----------------+     +------------------+
+</code></pre></div></td></tr></table></div>
+<p><strong>虚函数的关键特性</strong></p>
+<ol>
+<li>运行时多态</li>
+</ol>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">Base</span><span class="o">*</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Derived</span><span class="p">();</span>
+<span class="n">obj</span><span class="o">-&gt;</span><span class="n">func</span><span class="p">();</span><span class="w">  </span><span class="c1">// 调用Derived::func()</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li>虚析构函数</li>
+</ol>
+<p>当基类指针指向派生类对象时，必须将基类析构函数声明为虚函数：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Base</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">Base</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w">  </span><span class="c1">// 虚析构函数</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Derived</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="o">~</span><span class="n">Derived</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{}</span><span class="w">  </span><span class="c1">// 派生类析构函数</span>
+<span class="p">};</span>
+
+<span class="n">Base</span><span class="o">*</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Derived</span><span class="p">();</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">obj</span><span class="p">;</span><span class="w">  </span><span class="c1">// 正确调用Derived和Base的析构函数</span>
+</code></pre></div></td></tr></table></div></p>
+<ol>
+<li>纯虚函数与抽象类</li>
+</ol>
+<p>纯虚函数强制派生类实现特定接口：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// 抽象类</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">area</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">  </span><span class="c1">// 纯虚函数</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Circle</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Shape</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">area</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mf">3.14</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">radius</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">radius</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">radius</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></td></tr></table></div></p>
+<h5 id="_4">虚函数使用场景<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h5>
+<ol>
+<li><strong>多态行为</strong>：不同派生类对同一消息的不同响应</li>
+<li><strong>框架设计</strong>：定义通用接口，具体实现由派生类完成</li>
+<li><strong>回调机制</strong>：通过基类指针调用不同实现</li>
+<li><strong>插件系统</strong>：动态加载不同实现</li>
+</ol>
+<h5 id="_5">虚函数性能考虑<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h5>
+<ul>
+<li>虚函数调用比普通函数调用稍慢（多一次指针间接访问）</li>
+<li>每个对象增加一个指针大小的存储开销（vptr）</li>
+<li>虚函数表本身占用少量内存</li>
+<li>在性能关键代码中需谨慎使用</li>
+</ul>
+<h5 id="_6">虚函数最佳实践<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h5>
+<ol>
+<li><strong>为多态基类声明虚析构函数</strong></li>
+<li><strong>使用 <code>override</code> 关键字明确重写意图</strong></li>
+<li><strong>考虑将不需要重写的函数声明为 <code>final</code></strong></li>
+<li><strong>避免在构造函数和析构函数中调用虚函数</strong></li>
+<li><strong>合理使用纯虚函数定义接口契约</strong></li>
+<li><strong>在性能敏感场景评估虚函数开销</strong></li>
+</ol>
+<p>虚函数是C++面向对象编程的基石，正确理解和使用虚函数对于设计灵活、可扩展的软件架构至关重要。</p>
+<h4 id="12raii-resource-acquisition-is-initialization">12、RAII (Resource Acquisition Is Initialization) 是什么？<a class="headerlink" href="#12raii-resource-acquisition-is-initialization" title="Permanent link">&para;</a></h4>
+<p><strong>RAII（Resource Acquisition Is Initialization）</strong> 是 C++ 的核心编程范式，直译为“资源获取即初始化”。它利用对象生命周期管理资源（如内存、文件句柄、网络连接等），确保资源安全获取和自动释放，避免泄漏。核心思想：<strong>资源在构造函数中获取，在析构函数中释放</strong>。</p>
+<p><strong>核心原理</strong></p>
+<ol>
+<li><strong>构造时获取资源</strong>（Acquisition）</li>
+<li><strong>析构时释放资源</strong>（Release）</li>
+<li><strong>对象生命周期绑定资源管理</strong></li>
+</ol>
+<p><strong>典型应用场景</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fstream&gt;</span><span class="c1"> // 标准库中的 RAII 范例</span>
+
+<span class="c1">// 示例 1：文件操作（自动关闭）</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">readFile</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">ifstream</span><span class="w"> </span><span class="n">file</span><span class="p">(</span><span class="s">&quot;data.txt&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// 构造时打开文件（获取资源）</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">line</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// 离开作用域时 file 析构 → 自动关闭文件（释放资源）</span>
+
+<span class="c1">// 示例 2：内存管理（智能指针）</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;memory&gt;</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">manageMemory</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span><span class="w"> </span><span class="c1">// 构造时分配内存</span>
+<span class="w">    </span><span class="c1">// 使用 ptr...</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// 离开作用域时 unique_ptr 析构 → 自动释放内存</span>
+
+<span class="c1">// 示例 3：自定义锁管理</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MutexLock</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">MutexLock</span><span class="p">(</span><span class="n">Mutex</span><span class="o">&amp;</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">mutex</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">mutex</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// 构造时加锁</span>
+<span class="w">    </span><span class="o">~</span><span class="n">MutexLock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">mutex</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w">                </span><span class="c1">// 析构时解锁</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="n">Mutex</span><span class="o">&amp;</span><span class="w"> </span><span class="n">mutex</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">safeWrite</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Mutex</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MutexLock</span><span class="w"> </span><span class="n">lock</span><span class="p">(</span><span class="n">m</span><span class="p">);</span><span class="w"> </span><span class="c1">// 进入作用域时加锁</span>
+<span class="w">        </span><span class="c1">// 临界区操作...</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="c1">// 离开作用域时 lock 析构 → 自动解锁</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>RAII 的核心优势</strong></p>
+<table>
+<thead>
+<tr>
+<th>优势</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>异常安全</strong></td>
+<td>即使抛出异常，析构函数仍会调用</td>
+</tr>
+<tr>
+<td><strong>避免泄漏</strong></td>
+<td>资源释放由编译器保证</td>
+</tr>
+<tr>
+<td><strong>简化代码</strong></td>
+<td>无需手动释放资源</td>
+</tr>
+<tr>
+<td><strong>强资源所有权</strong></td>
+<td>资源与对象生命周期绑定</td>
+</tr>
+</tbody>
+</table>
+<p><strong>与手动管理的对比</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// 非 RAII 风格（危险！）</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">unsafeExample</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span><span class="w"> </span><span class="c1">// 手动分配</span>
+<span class="w">    </span><span class="c1">// ... 使用 arr</span>
+<span class="w">    </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">arr</span><span class="p">;</span><span class="w"> </span><span class="c1">// 必须手动释放（可能忘记或因异常跳过）</span>
+<span class="p">}</span>
+
+<span class="c1">// RAII 风格（安全）</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">safeExample</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">arr</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w"> </span><span class="c1">// 构造时分配</span>
+<span class="w">    </span><span class="c1">// ... 使用 arr</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// 自动释放（即使抛出异常）</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>RAII 的最佳实践</strong></p>
+<ol>
+<li><strong>优先使用标准库工具</strong></li>
+<li>内存管理：<code>std::unique_ptr</code>, <code>std::shared_ptr</code>, <code>std::vector</code></li>
+<li>文件处理：<code>std::ifstream</code>/<code>std::ofstream</code></li>
+<li>
+<p>线程同步：<code>std::lock_guard</code></p>
+</li>
+<li>
+<p><strong>自定义 RAII 类</strong></p>
+</li>
+<li>构造函数获取资源（打开文件、分配内存、加锁）</li>
+<li>析构函数释放资源（关闭文件、释放内存、解锁）</li>
+<li>
+<p>禁用复制/移动（或实现深拷贝/转移所有权）</p>
+</li>
+<li>
+<p><strong>遵循规则三/五/零</strong></p>
+</li>
+<li>管理资源时需正确处理拷贝/移动语义</li>
+</ol>
+<blockquote>
+<p>📌 <strong>关键结论</strong>：RAII 是 C++ 区别于其他语言的核心特性，它通过对象生命周期自动化资源管理，是现代 C++ 避免资源泄漏的基石。几乎所有 C++ 标准库组件（容器、智能指针、流等）都基于 RAII 实现。</p>
+</blockquote>
+<h4 id="13">13、左值引用和右值引用<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<p>在 C++ 中，<strong>左值引用（lvalue reference）</strong> 和 <strong>右值引用（rvalue reference）</strong> 是两种不同的引用类型，它们的主要区别在于 <strong>绑定对象的类别（左值 or 右值）</strong> 和 <strong>用途（拷贝优化 or 资源转移）</strong>。</p>
+<p><strong>左值</strong>是指既能出现在等号左边也能出现在等号右边的变量(或表达式)，<strong>右值</strong>则只能出现在等号右边。</p>
+<ul>
+<li>
+<p><strong>左值（lvalue）</strong>：可以取地址、有名字的持久对象（如变量、函数返回的引用等）。
+    <strong>绑定到左值（lvalue）</strong> 的引用，用 <code>&amp;</code> 表示。</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w">  </span>
+<span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">lref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">  </span><span class="c1">// ✅ 左值引用绑定左值</span>
+<span class="n">lref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w">      </span><span class="c1">// 修改 x 的值</span>
+
+<span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">bad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span><span class="w">  </span><span class="c1">// ❌ 错误：不能绑定到右值（临时对象）</span>
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p><strong>右值（rvalue）</strong>：临时对象、即将销毁的对象（如字面量、<code>std::move</code> 后的对象）。
+    <strong>绑定到右值（rvalue）</strong> 的引用，用 <code>&amp;&amp;</code> 表示。</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">int</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">rref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span><span class="w">          </span><span class="c1">// ✅ 右值引用绑定右值</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">rref2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w">  </span><span class="c1">// ✅ 使用 std::move 转为右值</span>
+
+<span class="kt">int</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">bad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">            </span><span class="c1">// ❌ 错误：不能直接绑定左值</span>
+</code></pre></div></td></tr></table></div>
+</li>
+</ul>
+<h4 id="14">14、函数重载和运算符重载<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
+<p>重载：函数名相同，参数列表不同。</p>
+<h4 id="15stdmap">15、<code>std::map</code><a class="headerlink" href="#15stdmap" title="Permanent link">&para;</a></h4>
+<p>读取元素时，统一用 <code>at()</code></p>
+<p>写入元素时，统一用 <code>[]</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="s">&quot;key1&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// 读</span>
+<span class="n">m</span><span class="p">[</span><span class="s">&quot;key2&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val</span><span class="p">;</span><span class="w">  </span><span class="c1">// 写</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="16">16、浅拷贝与深拷贝<a class="headerlink" href="#16" title="Permanent link">&para;</a></h4>
+<p><strong>浅拷贝（Shallow Copy）</strong> 和 <strong>深拷贝（Deep Copy）</strong></p>
+<h4 id="17oop-design-patterns">17、OOP Design Patterns<a class="headerlink" href="#17oop-design-patterns" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>Composite, Decorator, Bridge, Visitor, Proxy, Façade, ...
+  Iterator, Strategy, Observer, Command, Template Method, ...
+  Factory Method, Abstract Factory, Singleton, ...</p>
+</blockquote>
+<h4 id="18">18、重写和重载<a class="headerlink" href="#18" title="Permanent link">&para;</a></h4>
+<p>在 C++ 中，<strong>override（重写）</strong> 和 <strong>overload（重载）</strong> 是两个重要的概念，它们分别用于不同的场景，主要区别如下：</p>
+<hr />
+<h5 id="1-overload">1. 重载（Overload）<a class="headerlink" href="#1-overload" title="Permanent link">&para;</a></h5>
+<p>📌 定义</p>
+<p>在<strong>同一个作用域内</strong>（如类内部或全局作用域），定义多个<strong>同名函数</strong>，但它们的<strong>参数列表不同</strong>（参数类型、个数或顺序不同）。返回类型可以相同也可以不同。</p>
+<p>⚙️ 关键点</p>
+<ul>
+<li><strong>作用域</strong>：同一个类或命名空间内  </li>
+<li><strong>函数签名</strong>：<strong>必须不同</strong>（参数类型、数量或顺序）  </li>
+<li><strong>返回类型</strong>：可以不同（但仅返回类型不同不足以构成重载）  </li>
+<li><strong>virtual</strong>：不需要  </li>
+<li><strong>多态性</strong>：编译时多态（静态绑定）</li>
+</ul>
+<p>💡 用途</p>
+<ul>
+<li>提供<strong>功能类似但处理不同参数类型</strong>的函数  </li>
+<li>增强代码可读性和灵活性  </li>
+<li>例如：同一个 <code>print</code> 函数处理 <code>int</code>、<code>double</code> 或 <code>string</code></li>
+</ul>
+<p>📝 示例</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Printer</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="c1">// 重载示例：同名函数，参数不同</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;整数: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;浮点数: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;字符串: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="n">Printer</span><span class="w"> </span><span class="n">p</span><span class="p">;</span>
+<span class="n">p</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w">       </span><span class="c1">// 调用 print(int)</span>
+<span class="n">p</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="mf">3.14</span><span class="p">);</span><span class="w">     </span><span class="c1">// 调用 print(double)</span>
+<span class="n">p</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// 调用 print(string)</span>
+</code></pre></div></td></tr></table></div>
+<hr />
+<h5 id="2-override">2. 重写（Override）<a class="headerlink" href="#2-override" title="Permanent link">&para;</a></h5>
+<p>📌 定义</p>
+<p>在<strong>派生类中重新实现基类</strong>的虚函数（<code>virtual</code>），函数签名<strong>必须完全相同</strong>（包括参数列表、返回类型和 <code>const</code> 限定）。C++11 引入了 <code>override</code> 关键字显式标记。</p>
+<p>⚙️ 关键点</p>
+<ul>
+<li><strong>作用域</strong>：基类与派生类之间  </li>
+<li><strong>函数签名</strong>：<strong>必须完全相同</strong>  </li>
+<li><strong>virtual</strong>：基类函数必须声明为 <code>virtual</code>  </li>
+<li><strong>override 关键字</strong>：显式声明重写（编译器会检查签名）  </li>
+<li><strong>多态性</strong>：运行时多态（动态绑定）</li>
+</ul>
+<p>💡 用途</p>
+<ul>
+<li>实现<strong>运行时多态</strong>  </li>
+<li>支持<strong>接口继承</strong>和<strong>多态行为</strong>  </li>
+<li>例如：基类定义通用接口，派生类定制具体行为</li>
+</ul>
+<p>📝 示例</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Animal</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">makeSound</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 基类虚函数</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;动物叫声&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Dog</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Animal</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">makeSound</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 显式重写</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;汪汪!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Cat</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Animal</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">makeSound</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 显式重写</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;喵喵!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// 多态调用</span>
+<span class="n">Animal</span><span class="o">*</span><span class="w"> </span><span class="n">animal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="p">();</span>
+<span class="n">animal</span><span class="o">-&gt;</span><span class="n">makeSound</span><span class="p">();</span><span class="w"> </span><span class="c1">// 输出 &quot;汪汪!&quot;（动态绑定）</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">animal</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+<hr />
+<h5 id="override">常见错误与 <code>override</code> 的作用<a class="headerlink" href="#override" title="Permanent link">&para;</a></h5>
+<p>如果不小心写错函数签名（如参数类型、<code>const</code> 修饰符），编译器会认为这是一个<strong>新函数</strong>而非重写，导致多态失效。使用 <code>override</code> 关键字可以强制编译器检查：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Base</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">func</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Derived</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">func</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{}</span><span class="w">         </span><span class="c1">// 错误：缺少 const 修饰符</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">func</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span><span class="w">  </span><span class="c1">// 错误：参数类型不匹配</span>
+<span class="p">};</span>
+</code></pre></div></td></tr></table></div>
+编译器会直接报错，避免潜在问题。</p>
+<hr />
+<h5 id="_7">📊 对比总结<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>重载（Overload）</th>
+<th>重写（Override）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>作用域</strong></td>
+<td>同一作用域（类内/全局）</td>
+<td>派生类重写基类虚函数</td>
+</tr>
+<tr>
+<td><strong>函数签名</strong></td>
+<td>必须不同（参数列表）</td>
+<td>必须完全相同</td>
+</tr>
+<tr>
+<td><strong>virtual</strong></td>
+<td>不需要</td>
+<td>基类函数必须为 <code>virtual</code></td>
+</tr>
+<tr>
+<td><strong>关键字</strong></td>
+<td>无</td>
+<td>C++11 可用 <code>override</code> 显式标记</td>
+</tr>
+<tr>
+<td><strong>多态性</strong></td>
+<td>编译时多态（静态绑定）</td>
+<td>运行时多态（动态绑定）</td>
+</tr>
+<tr>
+<td><strong>目的</strong></td>
+<td>处理不同类型参数</td>
+<td>实现多态，定制派生类行为</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h5 id="_8">✅ 关键结论<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>重载</strong>：解决<strong>同名函数处理不同参数</strong>的问题（静态多态）。  </li>
+<li><strong>重写</strong>：实现<strong>运行时多态</strong>，是面向对象继承的核心机制。  </li>
+<li><strong>最佳实践</strong>：  </li>
+<li>重写时始终使用 <code>override</code> 关键字避免错误。  </li>
+<li>基类析构函数应为 <code>virtual</code>（确保派生类对象正确释放）。</li>
+</ul>
+<h4 id="19stdpair">19、<code>std::pair</code> 的用法和优势<a class="headerlink" href="#19stdpair" title="Permanent link">&para;</a></h4>
+<p><code>std::pair</code> 是一个简单但极其有用的工具，其核心优势在于：</p>
+<ol>
+<li><strong>轻量高效</strong>：零开销抽象</li>
+<li><strong>通用性强</strong>：适用于各种场景</li>
+<li><strong>与 STL 深度集成</strong>：容器和算法的关键组成部分</li>
+<li><strong>类型安全</strong>：编译时类型检查</li>
+<li><strong>现代特性支持</strong>：结构化绑定、移动语义等</li>
+</ol>
+<p>使用场景建议：
+- 需要返回两个值时 ➔ 替代输出参数
+- 创建简单键值对 ➔ 替代简单结构体
+- 需要临时组合数据 ➔ 避免定义临时结构
+- 与 STL 算法配合 ➔ 利用内置比较操作</p>
+<p>当需要组合超过两个值时，可升级到 <code>std::tuple</code>，但 <code>std::pair</code> 在二元数据组合场景中仍是最简洁高效的选择。</p>
+<h4 id="20stdshared_ptr">20、<code>std::shared_ptr</code><a class="headerlink" href="#20stdshared_ptr" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">mysql_connection</span><span class="w"> </span><span class="o">*</span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mysql_connect</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">);</span>
+<span class="n">mysql_execute</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;drop database paolu&quot;</span><span class="p">);</span>
+<span class="n">mysql_close</span><span class="p">(</span><span class="n">conn</span><span class="p">);</span><span class="w"> </span><span class="c1">// 用户可能忘记关闭连接！破坏库设计者想要的用法</span>
+</code></pre></div></td></tr></table></div>
+<p>shared_ptr 小妙招：构造函数的第二个参数可以指定释放函数，代替默认的 delete</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">auto</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">mysql_connection</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mysql_connect</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">mysql_close</span><span class="p">);</span>
+<span class="n">mysql_execute</span><span class="p">(</span><span class="n">conn</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;drop database paolu&quot;</span><span class="p">);</span>
+<span class="c1">// conn 离开作用域时，会自动调用 mysql_close，杜绝了一个出错的可能</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_9">数据结构<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<h4 id="1">1、小根堆<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<h4 id="2">2、循环数组<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
+<h3 id="_10">网络编程<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<h4 id="1-http">1、一次完整的 HTTP 请求过程：<a class="headerlink" href="#1-http" title="Permanent link">&para;</a></h4>
+<p>DNS域名解析 <span class="arithmatex">\(\to\)</span> TCP 的 3 次握手 <span class="arithmatex">\(\to\)</span> 建立 TCP 连接，发送 HTTP 请求 <span class="arithmatex">\(\to\)</span> 服务器响应 HTTP 请求，返回 HTML 代码给浏览器 <span class="arithmatex">\(\to\)</span> 浏览器解析 HTML 代码并请求其中的资源 (CSS、JS、图片等) <span class="arithmatex">\(\to\)</span> 浏览器渲染页面呈现给用户</p>
+<p>DNS 域名解析：<a href="https://blog.csdn.net/bangshao1989/article/details/121913780">DNS域名详细解析过程(最全面，看这一篇就够)</a></p>
+<p>TCP 三次握手四次挥手：<a href="https://blog.csdn.net/m0_56649557/article/details/119492899">简单理解TCP三次握手四次挥手（看一遍你就懂）</a></p>
+<h4 id="2epoll">2、<code>epoll</code><a class="headerlink" href="#2epoll" title="Permanent link">&para;</a></h4>
+<h2 id="_11">参考资料<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<p>[1] <a href="https://blog.csdn.net/weixin_51322383/article/details/130464403">从零开始实现C++ TinyWebServer 全过程记录</a>，JehanRio's <a href="https://github.com/JehanRio/TinyWebServer">TinyWebServer</a></p>
+<p>[2] <a href="https://love6.blog.csdn.net/article/details/123754194">从零开始自制实现C++ High-Performance WebServer 全流程记录</a></p>
+<p>[3] <a href="https://zhuanlan.zhihu.com/p/721880618">万字详解由C++14实现的Webserver</a></p>
+<p>[4] <a href="https://www.bilibili.com/video/BV1Mz421i7Fm">【C++17】小彭老师陪你从零手搓HTTP服务器</a></p>
+<p>[5] <a href="https://www.nowcoder.com/share/jump/1750039736048">烂大街的WebServer分享一下</a></p>
+<p>[6] <a href="https://geekdaxue.co/read/qingyubailou@gygiq6/tihx6bwirgug3b9d">TinyWebServer</a></p>
+<p>[7] <a href="https://blog.csdn.net/weixin_47243756/article/details/129494126">用C++实现的高性能WEB服务器</a></p>
+<p>[8] markparticle's <a href="https://github.com/markparticle/WebServer">WebServer</a></p>
+<p>[9] <a href="https://zhuanlan.zhihu.com/p/368154495">Tinywebserver——服务器常问面试题！</a></p>
+<p>[10] <a href="https://zhuanlan.zhihu.com/c_1774157245946933248">一个简单的从零开始的Linux网络服务器项目过程</a>，HuangCheng72's <a href="https://github.com/HuangCheng72/WebServer">WebServer</a></p>
+<p>[11] <a href="https://www.yuque.com/lianlianfengchen-cvvh2/qkmqzb/foc1ba268rg4370x">基于Epoll的边缘触发（ET）模式下的回声服务器</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 LXCSNotes | 使用 <a href='https://squidfunk.github.io/mkdocs-material/' target='_blank'>Material for MkDocs</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

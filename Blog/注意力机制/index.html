@@ -1,0 +1,3533 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="计算机科学与技术学习笔记">
+      
+      
+        <meta name="author" content="Amonologue">
+      
+      
+      
+        <link rel="prev" href="../%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+      
+      
+        <link rel="next" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>注意力机制 - LXCSNotes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-attention" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="LXCSNotes" class="md-header__button md-logo" aria-label="LXCSNotes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            LXCSNotes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              注意力机制
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yourname/lxcsnotes" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  欢迎使用 LXCSNotes
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Anaconda%20Command/" class="md-tabs__link">
+          
+  
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../CPP/" class="md-tabs__link">
+          
+  
+  
+  CPP
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Linux/" class="md-tabs__link">
+          
+  
+  
+  Linux
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Projects/C%2B%2B%20%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="md-tabs__link">
+          
+  
+  
+  Projects
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Python/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Trick/PyTorch%20to%28device%29/" class="md-tabs__link">
+          
+  
+  
+  Trick
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../algorithm/LeetCode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="md-tabs__link">
+          
+  
+  
+  Algorithm
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="LXCSNotes" class="md-nav__button md-logo" aria-label="LXCSNotes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    LXCSNotes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yourname/lxcsnotes" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    欢迎使用 LXCSNotes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Blog
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Blog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Anaconda%20Command/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Anaconda Command
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BPR%20Loss%20vs.%20Contrastive%20Learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BPR Loss vs. Contrastive Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUDA%20%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CUDA 内存模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUDA%20%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CUDA 执行模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUDA%20%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CUDA编程入门
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUDA%20%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CUDA 编程模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GitHub%20Workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GitHub Workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LaTeX%20Note/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LaTeX Note
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Linux%20Foundation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linux Foundation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Numpy%20%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Numpy库常用方法总结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PyTorch%20%E4%B8%AD%20tensor.view%28%29%20%E5%92%8C%20tensor.reshape%28%29%20%E7%9A%84%E5%8C%BA%E5%88%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch 中 tensor.view() 和 tensor.reshape() 的区别
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PyTorch%20%E5%BC%A0%E9%87%8F%E5%92%8C%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch 张量和模型的保存与加载
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%20%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python 命名规范
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%20%E5%9B%BA%E5%AE%9A%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%A7%8D%E5%AD%90/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python 固定随机数种子
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%20%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python 数据可视化
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%20%E8%AF%8D%E4%BA%91%E5%AE%9E%E6%88%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python词云实战
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../QR%20Code%20Super%20Resolution-002/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QR Code Super Resolution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20Server%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94T-SQL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SQL学习笔记
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20Sever%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%9B%BE%E5%BD%A2%E5%8C%96%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SQL Sever Management Studio基础
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Smale%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%AF%86%202023%20%E7%AC%AC%E4%B8%80%E8%AE%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smale 机器学习常识 2023 第一讲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Smale%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%AF%86%202023%20%E7%AC%AC%E4%B8%89%E8%AE%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smale 机器学习常识 2023 第三讲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Smale%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%AF%86%202023%20%E7%AC%AC%E4%BA%8C%E8%AE%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smale 机器学习常识 2023 第二讲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Smale%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%AF%86%202023%20%E7%AC%AC%E4%BA%94%E8%AE%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smale 机器学习常识 2023 第五讲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Smale%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%AF%86%202023%20%E7%AC%AC%E5%85%AD%E8%AE%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smale 机器学习常识 2023 第六讲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Smale%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%AF%86%202023%20%E7%AC%AC%E5%9B%9B%E8%AE%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smale 机器学习常识 2023 第四讲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TeX%20Live%20%2B%20CTeX%20%2B%20Visual%20Studio%20Code%20%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TeX Live + CTeX + Visual Studio Code 配置
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Transformer%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transformer 学习笔记
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Ubuntu%20%E4%B8%AD%E8%A7%A3%E5%8E%8B%E6%96%87%E4%BB%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ubuntu 中解压文件
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jupyter%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jupyter快捷键
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model.zero_grad%28%29%20and%20optimizer.zero_grad%28%29%20in%20PyTorch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    model.zero grad() and optimizer.zero grad() in PyTorch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Wget
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E4%BA%8C%E7%BB%B4%E7%A0%81%E8%B6%85%E5%88%86%E6%95%88%E6%9E%9C%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    二维码超分效果评价指标
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94CSS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    前端基础——CSS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94HTML/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    前端基础——HTML
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94JS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    前端基础——JS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%8D%9A%E5%AE%A2%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    博客入门教程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%8D%9A%E5%AE%A2%E7%9B%AE%E5%BD%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    博客目录
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    图神经网络
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9F%BA%E4%BA%8E%20CUDA%20%E7%9A%84%E5%BC%82%E6%9E%84%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基于 CUDA 的异构并行计算
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%A6%82%E4%BD%95%E8%AF%BB%E6%96%87%E7%8C%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    如何读文献
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    实用机器学习
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%B9%B6%E8%A1%8C%E5%A4%84%E7%90%86%E5%8F%8A%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    并行处理及分布式系统
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%84%9F%E7%9F%A5%E6%9C%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    感知机模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    数字逻辑复习提纲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    正则表达式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    注意力机制
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    注意力机制
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 Attention
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Attention">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 什么是 Attention
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 非参注意力池化层
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 参数化的注意力机制
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 注意力分数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 注意力分数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-additive-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.1 Additive Attention
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-scaled-dot-product-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.2 Scaled Dot-Product Attention
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-self-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 Self-attention
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Self-attention">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-self-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 什么是 Self-attention
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-self-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Self-attention 怎样运作
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-multi-head-self-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Multi-head Self-attention
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-position-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4 Position Encoding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-self-attention-for-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5 Self-attention for Image
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-self-attention-vs-cnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 Self-attention v.s. CNN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      4 Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    深度学习中的数学基础
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E9%9B%85%E6%80%9D%E5%A4%87%E8%80%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    雅思备考
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    CPP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            CPP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CPP 学习笔记
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/CMake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CMake
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/CPP%20Note/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    C++ 笔记
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/Linux%2C%20C%2C%20and%20C%2B%2B%20ChatGPT%20guidance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linux, C, and C++ ChatGPT guidance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/STL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    STL
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    内存管理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E5%B8%B8%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    常用的设计模式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E5%B9%B6%E8%A1%8C%E7%BC%96%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    并行编程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    构造函数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    析构函数与生命周期
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    泛型编程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPP/%E7%BC%96%E8%AF%91%E5%92%8C%E9%93%BE%E6%8E%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    编译和链接
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Linux
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Linux
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linux基础课
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/1.%20%E5%B8%B8%E7%94%A8%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linux 常用命令整理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/2.%20tmux%E5%92%8Cvim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. tmux和vim
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/4%20ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ssh
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/5%20git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    git
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/6%20thrift/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    thrift
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/8%20docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8 docker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E9%85%8D%E7%BD%AE%20Ubuntu%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    从零开始配置 Ubuntu 开发环境
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Projects
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/C%2B%2B%20%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    C++ 项目实战
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/webbench%20%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    webbench 压力测试
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/%E4%B8%80%E3%80%81%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AE%9E%E7%8E%B0%20C%2B%2B%20TinyWebServer%20%E5%85%A8%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    一、从零开始实现C++ TinyWebServer 全过程记录
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%B9%A0%E5%92%8C%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%AF%B4%E6%98%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    个人简历中实习和项目的说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%20MySQL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MySQL 基础
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_6" id="__nav_5_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    WebServer
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_6">
+            <span class="md-nav__icon md-icon"></span>
+            WebServer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/WebServer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    WebServer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Python
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python/%E6%B0%94%E5%8A%A8%E7%A0%94%E7%A9%B6%E6%99%BA%E8%83%BD%E5%8C%96%E5%B9%B3%E5%8F%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    气动科研智能云平台解决方案
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Trick
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Trick
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/PyTorch%20to%28device%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch to(device)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/PyTorch%20%E4%BD%BF%E7%94%A8%20TensorBoard%20%E5%8F%AF%E8%A7%86%E5%8C%96%E8%AE%AD%E7%BB%83%E7%BB%93%E6%9E%9C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch 使用 TensorBoard 可视化训练结果
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/Tricks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tricks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/Ubuntu%2022.04%20%E5%BC%80%E6%9C%BA%E5%8F%91%E9%80%81%20IP%20%E5%88%B0%E6%8C%87%E5%AE%9A%E9%82%AE%E7%AE%B1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ubuntu 22.04 开机发送 IP 到指定邮箱
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/macOS%20Visual%20Studio%20Code%20%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    macOS Visual Studio Code 快捷键
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E4%B8%B4%E7%95%8C%E5%9B%BE%28Critical%20Difference%20Diagrams%2C%20CD%20Diagrams%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    临界图(Critical Difference Diagrams, CD Diagrams)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%BB%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%82%BC%E4%B8%B9%E7%82%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    从零开始组建个人炼丹炉
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E4%BD%BF%E7%94%A8%20yapf%20%E6%A0%BC%E5%BC%8F%E5%8C%96%20python%20%E4%BB%A3%E7%A0%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    使用 yapf 格式化 python 代码
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E5%9C%A8%20Visual%20Studio%20Code%20%E9%85%8D%E7%BD%AE%20Python%20%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    在 Visual Studio Code 配置 Python 远程开发环境
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E6%9C%AC%E7%A7%91%E6%AF%95%E8%AE%BE%E6%8A%80%E5%B7%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    本科毕设技巧
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%20trick/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    模型训练中的常用 trick
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Trick/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%AB%98%E6%95%88%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C%E5%92%8C%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    深度学习高效进行实验和代码管理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Algorithm
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Algorithm
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithm/LeetCode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LeetCode 刷题笔记
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    动态规划
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithm/%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%9B%BE%E8%AE%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    搜索与图论
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 Attention
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Attention">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 什么是 Attention
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 非参注意力池化层
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 参数化的注意力机制
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 注意力分数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 注意力分数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-additive-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.1 Additive Attention
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-scaled-dot-product-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.2 Scaled Dot-Product Attention
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-self-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 Self-attention
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Self-attention">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-self-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 什么是 Self-attention
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-self-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Self-attention 怎样运作
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-multi-head-self-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Multi-head Self-attention
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-position-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4 Position Encoding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-self-attention-for-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5 Self-attention for Image
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-self-attention-vs-cnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 Self-attention v.s. CNN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      4 Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>注意力机制</h1>
+
+<h2 id="1-attention">1 Attention<a class="headerlink" href="#1-attention" title="Permanent link">&para;</a></h2>
+<h3 id="11-attention">1.1 什么是 Attention<a class="headerlink" href="#11-attention" title="Permanent link">&para;</a></h3>
+<p>灵长类动物的视觉系统中的视神经接受了大量的感官输入。在检查视觉场景时，我们的视觉神经系统大约每秒收到 <span class="arithmatex">\(10^8\)</span> 位的信息，这远远超过了大脑能够完全处理的水平。但是，并非所有刺激的影响都是相等的。意识的聚集和专注使灵长类动物能够在复杂的视觉环境中将注意力引向感兴趣的物体，例如猎物和天敌。</p>
+<p>在心理学框架中，人类根据<strong>随意(有意识)线索</strong>和<strong>不随意(无意识)线索</strong>选择注意点。下面两张图展现了在<strong>随意线索</strong>和<strong>不随意线索</strong>的影响改下，眼的注意力集中的位置。</p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331557.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331557.png" alt="基于不随意线索，注意力集中在红色杯子上" style="zoom: 60%;" /></a></p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331094.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331094.png" alt="基于随意线索，注意力集中在报纸上" style="zoom:60%;" /></a></p>
+<p>卷积、全连接层、池化层基本上都只考虑<strong>不随意线索</strong>，注意力机制则显示的考虑<strong>随意线索</strong>。</p>
+<p>在注意力机制中，定义以下三点：</p>
+<ul>
+<li>随意线索被称为查询(query)</li>
+<li>每个输入是一个不随意线索(key)和值(value)的 pair</li>
+<li>通过注意力池化层来有偏向性的选择某些输入</li>
+<li>一般写作 <span class="arithmatex">\(f(x)=\sum_i\alpha(x,x_i)y_i\)</span>，其中 <span class="arithmatex">\(\alpha(x,x_i)\)</span> 表示注意力权重</li>
+</ul>
+<h3 id="12">1.2 非参注意力池化层<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p>早在 60 年代就出现了非参数的注意力机制。假设给定数据 <span class="arithmatex">\((x_i,y_i),i=1,\dots,n\)</span>，其中 <span class="arithmatex">\(x_i\)</span> 表示 key，<span class="arithmatex">\(y_i\)</span> 表示 value，要想根据 query 将数据进行池化</p>
+<p>最简单的方案——平均池化：
+$$
+f(x)=\frac{1}{n}\sum_iy_i\tag{1}
+$$</p>
+<p>无论输入的 <span class="arithmatex">\(x\)</span> 是什么，每次都返回所有 value 的均值。</p>
+<p><strong>Nadaraya-Waston 核回归</strong>：
+$$
+f(x)=\sum_{i=1}^{n} \frac{K\left(x-x_{i}\right)}{\sum_{j=1}^{n} K\left(x-x_{j}\right)} y_{i}\tag{2}
+$$
+其中，<span class="arithmatex">\(f(\cdot)\)</span> 中的 <span class="arithmatex">\(x\)</span> 表示 query，<span class="arithmatex">\(K(\cdot)\)</span> 表示核函数，用于衡量 query <span class="arithmatex">\(x\)</span> 和 key <span class="arithmatex">\(x_i\)</span> 之间的距离。这一个方法可以类比于 K-Nearest Neighbor，对于一个 query 函数的输出跟倾向于与其最相关的 value，而这个相关性则通过 query 和 key 共同计算出来。</p>
+<p>若公式 <span class="arithmatex">\((2)\)</span> 中的 <span class="arithmatex">\(K(\cdot)\)</span> 使用的是高斯核：<span class="arithmatex">\(K(\mu)=\frac{1}{\sqrt{2\pi}}\exp(-\frac{\mu^2}{2})\)</span>，那么可得：
+$$
+\begin{aligned}
+f(x) &amp;=\sum_{i=1}^{n} \frac{\exp \left(-\frac{1}{2}\left(x-x_{i}\right)^{2}\right)}{\sum_{j=1}^{n} \exp \left(-\frac{1}{2}\left(x-x_{j}\right)^{2}\right)} y_{i} \
+&amp;=\sum_{i=1}^{n} \operatorname{softmax}\left(-\frac{1}{2}\left(x-x_{i}\right)^{2}\right) y_{i}
+\end{aligned}\tag{3}
+$$</p>
+<h3 id="13">1.3 参数化的注意力机制<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<p>在公式 <span class="arithmatex">\((3)\)</span> 的基础上引入可以学习的参数 <span class="arithmatex">\(w\)</span>：
+$$
+f(x)=\sum_{i=1}^{n} \operatorname{softmax}\left(-\frac{1}{2}\left(\left(x-x_{i}\right) w\right)^{2}\right) y_{i}\tag{4}
+$$</p>
+<h3 id="14">1.4 注意力分数<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
+<p>由公式 <span class="arithmatex">\((3)\)</span> 可得：
+$$
+f(x)=\sum_{i} \alpha\left(x, x_{i}\right) y_{i}=\sum_{i=1}^{n} \operatorname{softmax}\left(-\frac{1}{2}\left(x-x_{i}\right)^{2}\right) y_{i}\tag{5}
+$$
+其中 <span class="arithmatex">\(\alpha(\cdot)\)</span> 表示注意力权重，根据输入的 query 和 key 来计算当前 value 的权重；<span class="arithmatex">\(-\frac{1}{2}\left(x-x_{i}\right)^{2}\)</span> 表示的就是注意力分数。</p>
+<p>计算注意力的过程如图所示：</p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331100.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331100.png" alt="计算注意力汇聚的输出为值的加权和" style="zoom: 80%;" /></a></p>
+<p>首先根据输入的 query，来计算 query 和 key 之间的 attention score，然后将 score 进行一次 <span class="arithmatex">\(\operatorname{softmax}\)</span> 得到 attention weight，attention weight 和对应的 value 做乘法再求和得到最后的输出。</p>
+<p><strong>拓展到高纬度</strong></p>
+<p>假设 query <span class="arithmatex">\(\mathbf{q} \in \mathbb{R}^{q}\)</span>，<span class="arithmatex">\(m\)</span> 对 key-value <span class="arithmatex">\((\mathbf{k}_{1}, \mathbf{v}_{1}),\dots,\)</span> 这里 <span class="arithmatex">\(\mathbf{k}_{i} \in \mathbb{R}^{k}\)</span>，<span class="arithmatex">\(\mathbf{v}_{i} \in \mathbb{R}^{v}\)</span> </p>
+<p>注意力池化层：
+$$
+\begin{array}{c}
+f\left(\mathbf{q},\left(\mathbf{k}<em 1="1">{1}, \mathbf{v}</em>}\right), \ldots,\left(\mathbf{k<em m="m">{m}, \mathbf{v}</em>}\right)\right)=\sum_{i=1}^{m} \alpha\left(\mathbf{q}, \mathbf{k<em i="i">{i}\right) \mathbf{v}</em> \
+\alpha\left(\mathbf{q}, \mathbf{k}} \in \mathbb{R}^{v<em i="i">{i}\right)=\operatorname{softmax}\left(a\left(\mathbf{q}, \mathbf{k}</em>}\right)\right)=\frac{\exp \left(a\left(\mathbf{q}, \mathbf{k<em j="1">{i}\right)\right)}{\sum</em>
+\end{array}\tag{6}
+$$
+其中 }^{m} \exp \left(a\left(\mathbf{q}, \mathbf{k}_{j}\right)\right)} \in \mathbb{R<span class="arithmatex">\(\operatorname{softmax}(\cdot)\)</span> 中的参数 <span class="arithmatex">\(a(\mathbf{q},\mathbf{k}_i)\)</span> 表示注意力分数。</p>
+<p>从公式 <span class="arithmatex">\((6)\)</span> 可以看出，我们应该关注 <span class="arithmatex">\(a(\cdot)\)</span> 怎么设计，接下来介绍两种思路。</p>
+<h4 id="141-additive-attention">1.4.1 Additive Attention<a class="headerlink" href="#141-additive-attention" title="Permanent link">&para;</a></h4>
+<p>可学参数：$\mathbf{W}<em q="q">{k}\in\mathbb{R}^{h\times k},\mathbf{W}</em> $
+$$
+a(\mathbf{k}, \mathbf{q})=\mathbf{v}^{T} \tanh \left(\mathbf{W}}\in\mathbb{R}^{h\times q},\mathbf{v}\in \mathbb{R}^{h<em q="q">{k} \mathbf{k}+\mathbf{W}</em>\right)
+$$
+其中 } \mathbf{q<span class="arithmatex">\(\operatorname{tanh}(\cdot)\)</span> 表示 tanh 激活函数。等价于将 query 和 key 合并起来后放到一个隐藏层大小为 h 输出大小为 1 的单隐藏层 MLP</p>
+<p>该方法中 query、key 和 value 的长度可以不一样。</p>
+<h4 id="142-scaled-dot-product-attention">1.4.2 Scaled Dot-Product Attention<a class="headerlink" href="#142-scaled-dot-product-attention" title="Permanent link">&para;</a></h4>
+<p>如果 query 和 key 都是同样的长度 <span class="arithmatex">\(\mathbf{q},\mathbf{k}_i\in\mathbb{R}^d\)</span>，那么可以：
+$$
+a\left(\mathbf{q}, \mathbf{k}_i\right)=\left\langle\mathbf{q}, \mathbf{k}_i\right\rangle/\sqrt{d}
+$$
+向量化版本</p>
+<p>query <span class="arithmatex">\(\mathbf{Q} \in \mathbb{R}^{n \times d}\)</span>, key <span class="arithmatex">\(\mathbf{K} \in \mathbb{R}^{m \times d}\)</span>, value <span class="arithmatex">\(\mathbf{V} \in \mathbb{R}^{m \times v}\)</span></p>
+<p>attention score: $a(\mathbf{Q}, \mathbf{K})=\mathbf{Q K}^{T} / \sqrt{d} \in \mathbb{R}^{n \times m} $</p>
+<p>attention pooling: $f=\operatorname{softmax}(a(\mathbf{Q}, \mathbf{K})) \mathbf{V} \in \mathbb{R}^{n \times v} $</p>
+<h2 id="2-self-attention">2 Self-attention<a class="headerlink" href="#2-self-attention" title="Permanent link">&para;</a></h2>
+<h3 id="21-self-attention">2.1 什么是 Self-attention<a class="headerlink" href="#21-self-attention" title="Permanent link">&para;</a></h3>
+<p>下面三幅图展示了 CNN、RNN 和 self-attention 如何处理一个序列的输入。</p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331609.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331609.png" /></a></p>
+<p>CNN 会考虑当前输入和其前面的 n 个输入以及后面 n 个输入的关系。</p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331305.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331305.png" /></a></p>
+<p>RNN 会考虑当前输入和其前面的所有输入的关系。</p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331215.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331215.png" /></a></p>
+<p>Self-attention 会考虑当前输入和全局输入的关系。</p>
+<p>总的来说，Self-attention 可以表述为：给定序列 <span class="arithmatex">\(\mathbf{x}_{1},\ldots,\mathbf{x}_{n},\forall \mathbf{x}_{i}\in\mathbb{R}^{d}\)</span>，自注意力池化层将 <span class="arithmatex">\(\mathbf{x}_{i}\)</span> 当做 key, value, query 来对序列抽取特征得到  <span class="arithmatex">\(\mathbf{y}_{1},\ldots,\mathbf{y}_{n}\)</span>，这里
+$$
+\mathbf{y}<em i="i">{i}=f\left(\mathbf{x}</em>},\left(\mathbf{x<em 1="1">{1}, \mathbf{x}</em>}\right), \ldots,\left(\mathbf{x<em n="n">{n}, \mathbf{x}</em>
+$$
+}\right)\right) \in \mathbb{R}^{d<a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331326.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331326.png" /></a></p>
+<h3 id="22-self-attention">2.2 Self-attention 怎样运作<a class="headerlink" href="#22-self-attention" title="Permanent link">&para;</a></h3>
+<p>对于每一个输入 <span class="arithmatex">\(a^i\)</span> 在考虑其与全局的关联性之后得到 <span class="arithmatex">\(b^i\)</span></p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331627.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331627.png" style="zoom: 67%;" /></a></p>
+<p>如何计算 <span class="arithmatex">\(a^1\)</span> 和 <span class="arithmatex">\(a^2,a^3,a^4\)</span> 的关联性？在 1.4 节中介绍的注意力分数计算方法就是用于计算 query 和 key 之间关联性的方法。即常用的 Dot-product attention 和 Additive attention。</p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331778.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331778.png" style="zoom: 67%;" /></a></p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331516.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331516.png" alt="Dot-product attention" style="zoom:67%;" /></a></p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331960.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331960.png" alt="Additive attention" style="zoom:67%;" /></a></p>
+<p><strong>计算 <span class="arithmatex">\(a^1\)</span> 和 <span class="arithmatex">\(a^2,a^3,a^4\)</span> 的关联性</strong></p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331904.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331904.png" style="zoom: 67%;" /></a></p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331199.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331199.png" style="zoom:67%;" /></a></p>
+<p>对于输入 <span class="arithmatex">\(a^i\)</span> 将其分别左乘上矩阵 <span class="arithmatex">\(W^q,W^k,W^v\)</span> 得到 <span class="arithmatex">\(q^i,k^i,v^i\)</span>，然后利用 <span class="arithmatex">\(q^i,k^j\)</span> 计算 <span class="arithmatex">\(a^i,a^j\)</span> 之间的关联性，计算结果为 attention score，将 attention score 放入激活函数后得到 attention weight，attention weight 乘上 <span class="arithmatex">\(v^j\)</span> 再求和可得到 <span class="arithmatex">\(b^i\)</span>，即 <span class="arithmatex">\(a^i\)</span> 对应的输出。</p>
+<p><strong>矩阵化</strong></p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332399.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332399.png" style="zoom:67%;" /></a></p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332138.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332138.png" style="zoom:67%;" /></a></p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332252.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332252.png" style="zoom:67%;" /></a></p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332904.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332904.png" style="zoom:67%;" /></a></p>
+<p>通过上面的几张图可以看出，虽然 Self-attention 中间做了很多复杂的工作，但是在 Self-attention 中需要学习的参数只有 <span class="arithmatex">\(W^q,W^k,W^v\)</span>，其他的参数都是预先设定好的。</p>
+<h3 id="23-multi-head-self-attention">2.3 Multi-head Self-attention<a class="headerlink" href="#23-multi-head-self-attention" title="Permanent link">&para;</a></h3>
+<p>在 Self-attention 中，我们使用 query 去需要相关的 key，但是相关有很多种不同的定义，不同的定义与不同的 query 绑定，即同一个输入需要有多个 query。</p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332095.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332095.png" style="zoom:67%;" /></a></p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332763.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332763.png" style="zoom:67%;" /></a></p>
+<p>在上图中，在 Self-attention 的基础上对于每个 <span class="arithmatex">\(q^i,k^i,v^i\)</span> 其左乘上一个矩阵可以得到 <span class="arithmatex">\(q^{i,1},q^{i,2},k^{i,1},k^{i,2},v^{i,1},v^{i,2}\)</span>，然后按照 Self-attention 中相同的计算方式可以得到 <span class="arithmatex">\(b^{i,1},b^{i,2}\)</span>。</p>
+<p>然后将得到的 <span class="arithmatex">\(b^{i,1},b^{i,2}\)</span> 接起来左乘一个矩阵就可以得到 Multi-head Self-attention 的输出 <span class="arithmatex">\(b^i\)</span>。</p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332022.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332022.png" style="zoom:80%;" /></a></p>
+<h3 id="24-position-encoding">2.4 Position Encoding<a class="headerlink" href="#24-position-encoding" title="Permanent link">&para;</a></h3>
+<p>因为 Self-attention 考虑的是全局的信息，而且即便输入的顺序改变了，也不会影响输出的结果。但是在实际的应用中，很多时候需要考虑位置信息，例如一个 sequence。因此，为了让 Self-attention 能够考虑到位置信息，为每个输入加上一个 position encoding。</p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332522.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332522.png" style="zoom:80%;" /></a></p>
+<p>其中 <span class="arithmatex">\(e^i\)</span> 表示在每个输入上增加的 position encoding 信息，对于每个 <span class="arithmatex">\(a^i\)</span> 都有一个专属的 <span class="arithmatex">\(e^i\)</span> 与之对应。<span class="arithmatex">\(e^i\)</span> 产生的方式有很多种，在论文 <a href="https://arxiv.org/pdf/2003.09229.pdf">Learning to Encode Position for Transformer with Continuous Dynamical Model</a> 中提出并比较了 position encoding。</p>
+<h3 id="25-self-attention-for-image">2.5 Self-attention for Image<a class="headerlink" href="#25-self-attention-for-image" title="Permanent link">&para;</a></h3>
+<p>对于一张 shape = (5, 10, 3) 的 RGB 图片，可以将其看成一个 vector set，其中的每一个 pixel 都可以看成一个 vector (r, g, b)，然后就可以将其放入 Self-attention 模型进行计算。</p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332777.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332777.png" style="zoom:80%;" /></a></p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332130.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332130.png" style="zoom:67%;" /></a></p>
+<h2 id="3-self-attention-vs-cnn">3 Self-attention v.s. CNN<a class="headerlink" href="#3-self-attention-vs-cnn" title="Permanent link">&para;</a></h2>
+<p>CNN 和 Self-attention 都可以考虑一定范围内的信息，但是 CNN 只能够考虑到感受野内的信息，而 Self-attention 能够考虑到全局的信息。因此可以把 CNN 看做 Self-attention 的简化版本，Self-attention 看做 CNN 的复杂化版本。</p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332861.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332861.png" style="zoom:80%;" /></a></p>
+<p>从集合的角度来看，CNN 可以看做是 Self-attention 的子集。在论文 <a href="https://arxiv.org/pdf/1911.03584.pdf">ON THE RELATIONSHIP BETWEEN SELF-ATTENTION AND CONVOLUTIONAL LAYERS</a> 中详细介绍了 Self-attention 和 CNN 的关系。</p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332245.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332245.png" style="zoom:80%;" /></a></p>
+<p>从下图(出自论文 <a href="https://arxiv.org/pdf/2010.11929.pdf">AN IMAGE IS WORTH 16X16 WORDS: TRANSFORMERS FOR IMAGE RECOGNITION AT SCALE</a>)中的数据可以看出，利用较小的数据量训练时，CNN 的效果优于 Self-attention，但是随着数据量的增大，Self-attention 的效果越来越好，在数据量达到 300 Million 的时候 Self-attention 的效果会优于 CNN。</p>
+<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332530.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332530.png" style="zoom:80%;" /></a></p>
+<h2 id="4-summary">4 Summary<a class="headerlink" href="#4-summary" title="Permanent link">&para;</a></h2>
+<p>本篇博客对 attention 做了一个基本介绍，然后又介绍了 attention 最常用的一种实现 Self-attention，Self-attention 在 <a href="https://arxiv.org/abs/1706.03762">Transformer</a> 和 <a href="https://arxiv.org/abs/1810.04805">BERT</a> 中有着举足轻重的地位。我最开始学习 attention 的目的，是为了了解其在 computer vision 方向的应用，所以在之后的博客中我会更加详细的介绍目前 attention 在 computer vision 方向的应用以及遇到的问题。</p>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<p><a href="https://zh-v2.d2l.ai/index.html">《动手学深度学习》</a></p>
+<p><a href="https://www.bilibili.com/video/BV1264y1i7R1?spm_id_from=333.999.0.0">64 注意力机制【动手学深度学习v2】</a></p>
+<p><a href="https://www.bilibili.com/video/BV1Tb4y167rb?spm_id_from=333.999.0.0">65 注意力分数【动手学深度学习v2】</a></p>
+<p><a href="https://www.bilibili.com/video/BV19o4y1m7mo?spm_id_from=333.999.0.0">67 自注意力【动手学深度学习v2】</a></p>
+<p><a href="https://www.bilibili.com/video/BV1Kq4y1H7FL?spm_id_from=333.999.0.0">68 Transformer【动手学深度学习v2】</a></p>
+<p><a href="https://www.bilibili.com/video/BV1pu411o7BE?spm_id_from=333.999.0.0">Transformer论文逐段精读【论文精读】</a></p>
+<p><a href="https://www.bilibili.com/video/BV1Wv411h7kN?p=23">(强推)李宏毅2021春机器学习课程</a></p>
+<p><a href="https://speech.ee.ntu.edu.tw/~hylee/ml/ml2021-course-data/self_v7.pdf">【機器學習2021】自注意力機制 (Self-attention) slides</a></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 LXCSNotes | 使用 <a href='https://squidfunk.github.io/mkdocs-material/' target='_blank'>Material for MkDocs</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
