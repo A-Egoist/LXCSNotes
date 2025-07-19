@@ -4,12 +4,14 @@ site_author: Amonologue
 # site_favicon: favicon.ico
 copyright: Copyright &copy; 2025 LXCSNotes | 使用 <a href='https://squidfunk.github.io/mkdocs-material/' target='_blank'>Material for MkDocs</a>
 
-# repo_url: https://github.com/A-Egoist/LXCSNotes/tree/main
+repo_url: https://github.com/A-Egoist/LXCSNotes/tree/main
 # site_url: https://your-domain.com  # 可选
 
 theme:
   name: material
   language: zh
+  logo: assets/images/PenguinLogistics.png
+  favicon: assets/images/favicon.png
   features:
     - navigation.tabs
     - navigation.instant
@@ -53,3 +55,4 @@ extra_javascript:
 
 extra_css:
   - https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css
+  - stylesheets/extra.css
