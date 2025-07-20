@@ -50,8 +50,6 @@
       
     
     
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
-    
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -61,16 +59,7 @@
     
     
     
-   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-    html.glightbox-open { overflow: initial; height: 100%; }
-    .gslide-title { margin-top: 0px; user-select: text; }
-    .gslide-desc { color: #666; user-select: text; }
-    .gslide-image img { background: white; }
-    .gscrollbar-fixer { padding-right: 15px; }
-    .gdesc-inner { font-size: 0.75rem; }
-    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  </head>
   
   
     
@@ -3052,7 +3041,7 @@
 <p>为了规范化，在之后的代码中，主机内存中的变量名以 <code>h_</code> 为前缀，设备内存中的变量名以 <code>d_</code> 为前缀</p>
 </blockquote>
 <p>一个典型的 CUDA 程序包括由并行代码互补的串行代码，如图所示，串行代码在主机 CPU 上执行，而并行代码在 GPU 上执行。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335225.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335225.png" style="zoom: 50%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335225.png" style="zoom: 50%;" /></p>
 <p>Host API 和 CUDA C 的 API 的对比：</p>
 <table>
 <thead>
@@ -3104,7 +3093,7 @@
 <li>共享内存</li>
 </ul>
 <p>不同 block 内的 thread 不能协作，因为它们之间有物理隔离。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335508.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335508.png" style="zoom:50%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335508.png" style="zoom:50%;" /></p>
 <p><strong>如何确定每个 thread 的索引?</strong></p>
 <p>每个 gird 中存在以下结构体用于确定 thread 索引：</p>
 <ul>
@@ -3194,7 +3183,7 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335227.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335227.png" /></a></p>
+<p><img alt="" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335227.png" /></p>
 <h2 id="3-cuda">3 CUDA 核函数<a class="headerlink" href="#3-cuda" title="Permanent link">&para;</a></h2>
 <p><strong>启动一个 CUDA 核函数</strong></p>
 <p>在代码添加如下代码即可启动编写好的核函数</p>
@@ -3203,7 +3192,7 @@
 <p>假设有 32 个数据元素用于计算，每 8 个元素一个 block，则需要 4 个 block：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">kernel_name</span><span class="o">&lt;&lt;&lt;</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">parameters</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335107.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335107.png" style="zoom: 80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335107.png" style="zoom: 80%;" /></p>
 <p>由于 CUDA C 核函数的启动都是异步的，因此在启动核函数之后需要添加 <code>cudaDeviceSynchronize()</code> 用于显式的同步。</p>
 <p><strong>编写核函数</strong></p>
 <p>核函数是在设备上运行的代码。在核函数中，需要为一个线程规定要进行的计算以及要进行的数据访问。前文所述，当一个核函数启动时，会启动一个 grid，grid 中的所有 thread 并行执行同一个计算任务。使用 <code>__global__</code> 声明、定义核函数：</p>
@@ -3251,14 +3240,14 @@
 </ul>
 <h3 id="41">4.1 使用块和线程建立矩阵索引<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
 <p>一个矩阵通常采用行优先的方法线性存放在全局内存中。对于一个 8x6 的矩阵，其在内存中的存放方式如图所示：</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335934.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335934.png" style="zoom: 80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335934.png" style="zoom: 80%;" /></p>
 <p>对于下图所示由二维 block 构成的二维 grid 线程组织结构，其中任意一个 thread 的坐标(ix, iy)可以通过式子(1)计算出来。
 $$
 ix = blockIdx.x * blockDim.x + threadIdx.x\
 iy = blockIdx.y * blockDim.y + threadIdx.y\tag{1}
 $$
 那么对于坐标为(ix, iy)的 thread，其在内存中对应的线性索引为：<span class="arithmatex">\(idx = iy * nx + ix\)</span>，其中 <span class="arithmatex">\(nx = blockIdx.x * gridDim.x\)</span></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335915.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335915.png" style="zoom:80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335915.png" style="zoom:80%;" /></p>
 <p>上面已经计算出了每个 thread 的全局坐标(ix, iy)，用坐标为(ix, iy)的 thread 对应矩阵中坐标为(ix, iy)元素，这样就形成了一一对应，如使用坐标为(5, 5)的 thread 对应坐标为(5, 5)的元素。这样在做矩阵加法的时候，直接使用 idx 取得对应位置的元素做加法即可，如下面的核函数所示：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -3277,7 +3266,7 @@ $$
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="42-grid-block">4.2 使用二维 grid 和二维 block 对矩阵求和<a class="headerlink" href="#42-grid-block" title="Permanent link">&para;</a></h3>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335315.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335315.png" style="zoom: 80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335315.png" style="zoom: 80%;" /></p>
 <p>定义核函数</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -3311,7 +3300,7 @@ $$
 <span class="n">MatrixSum22</span><span class="o">&lt;&lt;&lt;</span><span class="n">grid</span><span class="p">,</span><span class="w"> </span><span class="n">block</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="p">,</span><span class="w"> </span><span class="n">ny</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="43-grid-block">4.3 使用一维 grid 和一维 block 对矩阵求和<a class="headerlink" href="#43-grid-block" title="Permanent link">&para;</a></h3>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335288.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335288.png" style="zoom:80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335288.png" style="zoom:80%;" /></p>
 <p>在该结构中，每一个 block 中只有一个 thread，每一个 thread 需要计算矩阵的一列元素。</p>
 <p>定义核函数</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -3354,7 +3343,7 @@ $$
 <span class="n">MatrixSum11</span><span class="o">&lt;&lt;&lt;</span><span class="n">grid</span><span class="p">,</span><span class="w"> </span><span class="n">block</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="p">,</span><span class="w"> </span><span class="n">ny</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="44-grid-block">4.4 使用二维 grid 和一维 block 对矩阵求和<a class="headerlink" href="#44-grid-block" title="Permanent link">&para;</a></h3>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335705.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335705.png" style="zoom:80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062335705.png" style="zoom:80%;" /></p>
 <p>当使用一个包含一维 block 的二维 grid 时，每个 thread 都只关注一个数据元素并且 grid 的第二个维数等于 ny。</p>
 <p>定义核函数</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -3459,10 +3448,6 @@ $$
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-      
     
-  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
-</script></body>
+  </body>
 </html>

@@ -50,8 +50,6 @@
       
     
     
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
-    
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -61,16 +59,7 @@
     
     
     
-   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-    html.glightbox-open { overflow: initial; height: 100%; }
-    .gslide-title { margin-top: 0px; user-select: text; }
-    .gslide-desc { color: #666; user-select: text; }
-    .gslide-image img { background: white; }
-    .gscrollbar-fixer { padding-right: 15px; }
-    .gdesc-inner { font-size: 0.75rem; }
-    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  </head>
   
   
     
@@ -3038,12 +3027,12 @@
 <h2 id="cuda_1">CUDA 概述<a class="headerlink" href="#cuda_1" title="Permanent link">&para;</a></h2>
 <p>CUDA 是 NVIDIA 推出的用于其发布的 GPU 的并行计算架构，使用 CUDA 可以利用 GPU 的并行计算引擎更加高效的完成复杂的计算难题。</p>
 <p>在目前主流的使用冯·诺依曼体系结构的计算机中，GPU 属于一个外置的设备，因此即便在利用 GPU 进行并行计算的时候也无法脱离 CPU，需要与 CPU 协同工作。因此当我们在说 GPU 并行计算时，其实指的是基于 CPU+GPU 的异构计算架构。在异构计算架构中，CPU 和 GPU 通过 PCI-E 总线连接在一起进行协同工作，所以 CPU 所在位置称为 Host，GPU 所在位置称为 Device，如下图所示。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062340086.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20211120161819279" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062340086.png" /></a></p>
+<p><img alt="image-20211120161819279" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062340086.png" /></p>
 <p>从上图可以看到，GPU 中有着更多的运算核心，非常适合数据并行的计算密集型任务，比如大型的矩阵计算。</p>
 <h2 id="cuda_2">CUDA 编程模型基础<a class="headerlink" href="#cuda_2" title="Permanent link">&para;</a></h2>
 <p>在了解了 CUDA 的基本概念之后，还需要了解 CUDA 编程模型的基本概念以便于之后利用 CUDA 编写并行计算程序。</p>
 <p>CUDA 模型时一个异构模型，需要 CPU 和 GPU 协同工作，在 CUDA 中一般用 Host 指代 CPU 及其内存，Device 指代 GPU 及其内存。CUDA 程序中既包含在 Host 上运行的程序，也包含在 Device 上运行的程序，并且 Host 和 Device 之间可以进行通信，如进行数据拷贝等操作。一般的将需要串行执行的程序放在 Host 上执行，需要并行执行的程序放在 Device 上进行。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062340255.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="异构编程" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062340255.png" /></a></p>
+<p><img alt="异构编程" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062340255.png" /></p>
 <p>CUDA 程序一般的执行流程：</p>
 <ol>
 <li>分配 Host 内存，并进行数据初始化</li>
@@ -3077,8 +3066,8 @@
 </code></pre></div></td></tr></table></div>
 <h3 id="kernel">Kernel 的层次结构<a class="headerlink" href="#kernel" title="Permanent link">&para;</a></h3>
 <p>Kernel 在 Device 执行的时候实际上是启动很多线程，这些线程都执行 Kernel 这个函数。其中，由这个 Kernel 启动的所有线程称为一个 grid，同一个 grid 中的线程共享相同的 Global memory，grid 是线程结构的第一个层次。一个 grid 又可以划分为多个 block，每一个 block 包含多个线程，其中的所有线程又共享 Per-block shared memory，block 是线程结构的第二个层次。最后，每一个线程(thread)有着自己的 Per-thread local memory。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062340122.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="线程两层组织结构" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062340122.png" /></a></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062340618.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="内存层次结构" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062340618.png" /></a></p>
+<p><img alt="线程两层组织结构" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062340122.png" /></p>
+<p><img alt="内存层次结构" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062340618.png" /></p>
 <p>下图是一个线程两层组织结构的示意图，其中 grid 和 block 均为 2-dim 的线程组织。grid 和 block 都是定义为 <code>dim3</code> 类型的变量，<code>dim3</code> 可以看成是包含三个无符号整数(x, y, z)成员的结构体变量，在定义时，缺省值初始化为1。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -3086,7 +3075,7 @@
 <span class="n">dim3</span><span class="w"> </span><span class="nf">block</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
 <span class="n">kernel</span><span class="o">&lt;&lt;&lt;</span><span class="n">grid</span><span class="p">,</span><span class="w"> </span><span class="n">block</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">parameters</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062340564.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062340564.jpeg" /></a></p>
+<p><img alt="img" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062340564.jpeg" /></p>
 <p>从线程的组织结构可以得知，一个线程是由(blockIdx, threadIdx)来唯一标识的，blockIdx 和 threadIdx 都是 <code>dim3</code> 类型的变量，其中 blockIdx 指定线程所在 block 在 grid 中的位置，threadIdx 指定线程在 block 中的位置，如图中的 Thread(2,1) 满足：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -3307,10 +3296,6 @@ CUDA CORE数量: 2496
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-      
     
-  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
-</script></body>
+  </body>
 </html>
