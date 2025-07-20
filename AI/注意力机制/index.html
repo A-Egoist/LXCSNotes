@@ -50,8 +50,6 @@
       
     
     
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
-    
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -61,16 +59,7 @@
     
     
     
-   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-    html.glightbox-open { overflow: initial; height: 100%; }
-    .gslide-title { margin-top: 0px; user-select: text; }
-    .gslide-desc { color: #666; user-select: text; }
-    .gslide-image img { background: white; }
-    .gscrollbar-fixer { padding-right: 15px; }
-    .gdesc-inner { font-size: 0.75rem; }
-    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  </head>
   
   
     
@@ -3208,8 +3197,8 @@
 <h3 id="11-attention">1.1 什么是 Attention<a class="headerlink" href="#11-attention" title="Permanent link">&para;</a></h3>
 <p>灵长类动物的视觉系统中的视神经接受了大量的感官输入。在检查视觉场景时，我们的视觉神经系统大约每秒收到 <span class="arithmatex">\(10^8\)</span> 位的信息，这远远超过了大脑能够完全处理的水平。但是，并非所有刺激的影响都是相等的。意识的聚集和专注使灵长类动物能够在复杂的视觉环境中将注意力引向感兴趣的物体，例如猎物和天敌。</p>
 <p>在心理学框架中，人类根据<strong>随意(有意识)线索</strong>和<strong>不随意(无意识)线索</strong>选择注意点。下面两张图展现了在<strong>随意线索</strong>和<strong>不随意线索</strong>的影响改下，眼的注意力集中的位置。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331557.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331557.png" alt="基于不随意线索，注意力集中在红色杯子上" style="zoom: 60%;" /></a></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331094.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331094.png" alt="基于随意线索，注意力集中在报纸上" style="zoom:60%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331557.png" alt="基于不随意线索，注意力集中在红色杯子上" style="zoom: 60%;" /></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331094.png" alt="基于随意线索，注意力集中在报纸上" style="zoom:60%;" /></p>
 <p>卷积、全连接层、池化层基本上都只考虑<strong>不随意线索</strong>，注意力机制则显示的考虑<strong>随意线索</strong>。</p>
 <p>在注意力机制中，定义以下三点：</p>
 <ul>
@@ -3249,7 +3238,7 @@ f(x)=\sum_{i} \alpha\left(x, x_{i}\right) y_{i}=\sum_{i=1}^{n} \operatorname{sof
 $$
 其中 <span class="arithmatex">\(\alpha(\cdot)\)</span> 表示注意力权重，根据输入的 query 和 key 来计算当前 value 的权重；<span class="arithmatex">\(-\frac{1}{2}\left(x-x_{i}\right)^{2}\)</span> 表示的就是注意力分数。</p>
 <p>计算注意力的过程如图所示：</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331100.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331100.png" alt="计算注意力汇聚的输出为值的加权和" style="zoom: 80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331100.png" alt="计算注意力汇聚的输出为值的加权和" style="zoom: 80%;" /></p>
 <p>首先根据输入的 query，来计算 query 和 key 之间的 attention score，然后将 score 进行一次 <span class="arithmatex">\(\operatorname{softmax}\)</span> 得到 attention weight，attention weight 和对应的 value 做乘法再求和得到最后的输出。</p>
 <p><strong>拓展到高纬度</strong></p>
 <p>假设 query <span class="arithmatex">\(\mathbf{q} \in \mathbb{R}^{q}\)</span>，<span class="arithmatex">\(m\)</span> 对 key-value <span class="arithmatex">\((\mathbf{k}_{1}, \mathbf{v}_{1}),\dots,\)</span> 这里 <span class="arithmatex">\(\mathbf{k}_{i} \in \mathbb{R}^{k}\)</span>，<span class="arithmatex">\(\mathbf{v}_{i} \in \mathbb{R}^{v}\)</span> </p>
@@ -3281,56 +3270,56 @@ $$
 <h2 id="2-self-attention">2 Self-attention<a class="headerlink" href="#2-self-attention" title="Permanent link">&para;</a></h2>
 <h3 id="21-self-attention">2.1 什么是 Self-attention<a class="headerlink" href="#21-self-attention" title="Permanent link">&para;</a></h3>
 <p>下面三幅图展示了 CNN、RNN 和 self-attention 如何处理一个序列的输入。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331609.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331609.png" /></a></p>
+<p><img alt="" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331609.png" /></p>
 <p>CNN 会考虑当前输入和其前面的 n 个输入以及后面 n 个输入的关系。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331305.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331305.png" /></a></p>
+<p><img alt="" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331305.png" /></p>
 <p>RNN 会考虑当前输入和其前面的所有输入的关系。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331215.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331215.png" /></a></p>
+<p><img alt="" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331215.png" /></p>
 <p>Self-attention 会考虑当前输入和全局输入的关系。</p>
 <p>总的来说，Self-attention 可以表述为：给定序列 <span class="arithmatex">\(\mathbf{x}_{1},\ldots,\mathbf{x}_{n},\forall \mathbf{x}_{i}\in\mathbb{R}^{d}\)</span>，自注意力池化层将 <span class="arithmatex">\(\mathbf{x}_{i}\)</span> 当做 key, value, query 来对序列抽取特征得到  <span class="arithmatex">\(\mathbf{y}_{1},\ldots,\mathbf{y}_{n}\)</span>，这里
 $$
 \mathbf{y}<em i="i">{i}=f\left(\mathbf{x}</em>},\left(\mathbf{x<em 1="1">{1}, \mathbf{x}</em>}\right), \ldots,\left(\mathbf{x<em n="n">{n}, \mathbf{x}</em>
 $$
-}\right)\right) \in \mathbb{R}^{d<a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331326.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331326.png" /></a></p>
+}\right)\right) \in \mathbb{R}^{d<img alt="" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331326.png" /></p>
 <h3 id="22-self-attention">2.2 Self-attention 怎样运作<a class="headerlink" href="#22-self-attention" title="Permanent link">&para;</a></h3>
 <p>对于每一个输入 <span class="arithmatex">\(a^i\)</span> 在考虑其与全局的关联性之后得到 <span class="arithmatex">\(b^i\)</span></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331627.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331627.png" style="zoom: 67%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331627.png" style="zoom: 67%;" /></p>
 <p>如何计算 <span class="arithmatex">\(a^1\)</span> 和 <span class="arithmatex">\(a^2,a^3,a^4\)</span> 的关联性？在 1.4 节中介绍的注意力分数计算方法就是用于计算 query 和 key 之间关联性的方法。即常用的 Dot-product attention 和 Additive attention。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331778.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331778.png" style="zoom: 67%;" /></a></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331516.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331516.png" alt="Dot-product attention" style="zoom:67%;" /></a></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331960.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331960.png" alt="Additive attention" style="zoom:67%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331778.png" style="zoom: 67%;" /></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331516.png" alt="Dot-product attention" style="zoom:67%;" /></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331960.png" alt="Additive attention" style="zoom:67%;" /></p>
 <p><strong>计算 <span class="arithmatex">\(a^1\)</span> 和 <span class="arithmatex">\(a^2,a^3,a^4\)</span> 的关联性</strong></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331904.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331904.png" style="zoom: 67%;" /></a></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331199.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331199.png" style="zoom:67%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331904.png" style="zoom: 67%;" /></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062331199.png" style="zoom:67%;" /></p>
 <p>对于输入 <span class="arithmatex">\(a^i\)</span> 将其分别左乘上矩阵 <span class="arithmatex">\(W^q,W^k,W^v\)</span> 得到 <span class="arithmatex">\(q^i,k^i,v^i\)</span>，然后利用 <span class="arithmatex">\(q^i,k^j\)</span> 计算 <span class="arithmatex">\(a^i,a^j\)</span> 之间的关联性，计算结果为 attention score，将 attention score 放入激活函数后得到 attention weight，attention weight 乘上 <span class="arithmatex">\(v^j\)</span> 再求和可得到 <span class="arithmatex">\(b^i\)</span>，即 <span class="arithmatex">\(a^i\)</span> 对应的输出。</p>
 <p><strong>矩阵化</strong></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332399.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332399.png" style="zoom:67%;" /></a></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332138.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332138.png" style="zoom:67%;" /></a></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332252.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332252.png" style="zoom:67%;" /></a></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332904.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332904.png" style="zoom:67%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332399.png" style="zoom:67%;" /></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332138.png" style="zoom:67%;" /></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332252.png" style="zoom:67%;" /></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332904.png" style="zoom:67%;" /></p>
 <p>通过上面的几张图可以看出，虽然 Self-attention 中间做了很多复杂的工作，但是在 Self-attention 中需要学习的参数只有 <span class="arithmatex">\(W^q,W^k,W^v\)</span>，其他的参数都是预先设定好的。</p>
 <h3 id="23-multi-head-self-attention">2.3 Multi-head Self-attention<a class="headerlink" href="#23-multi-head-self-attention" title="Permanent link">&para;</a></h3>
 <p>在 Self-attention 中，我们使用 query 去需要相关的 key，但是相关有很多种不同的定义，不同的定义与不同的 query 绑定，即同一个输入需要有多个 query。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332095.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332095.png" style="zoom:67%;" /></a></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332763.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332763.png" style="zoom:67%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332095.png" style="zoom:67%;" /></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332763.png" style="zoom:67%;" /></p>
 <p>在上图中，在 Self-attention 的基础上对于每个 <span class="arithmatex">\(q^i,k^i,v^i\)</span> 其左乘上一个矩阵可以得到 <span class="arithmatex">\(q^{i,1},q^{i,2},k^{i,1},k^{i,2},v^{i,1},v^{i,2}\)</span>，然后按照 Self-attention 中相同的计算方式可以得到 <span class="arithmatex">\(b^{i,1},b^{i,2}\)</span>。</p>
 <p>然后将得到的 <span class="arithmatex">\(b^{i,1},b^{i,2}\)</span> 接起来左乘一个矩阵就可以得到 Multi-head Self-attention 的输出 <span class="arithmatex">\(b^i\)</span>。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332022.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332022.png" style="zoom:80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332022.png" style="zoom:80%;" /></p>
 <h3 id="24-position-encoding">2.4 Position Encoding<a class="headerlink" href="#24-position-encoding" title="Permanent link">&para;</a></h3>
 <p>因为 Self-attention 考虑的是全局的信息，而且即便输入的顺序改变了，也不会影响输出的结果。但是在实际的应用中，很多时候需要考虑位置信息，例如一个 sequence。因此，为了让 Self-attention 能够考虑到位置信息，为每个输入加上一个 position encoding。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332522.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332522.png" style="zoom:80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332522.png" style="zoom:80%;" /></p>
 <p>其中 <span class="arithmatex">\(e^i\)</span> 表示在每个输入上增加的 position encoding 信息，对于每个 <span class="arithmatex">\(a^i\)</span> 都有一个专属的 <span class="arithmatex">\(e^i\)</span> 与之对应。<span class="arithmatex">\(e^i\)</span> 产生的方式有很多种，在论文 <a href="https://arxiv.org/pdf/2003.09229.pdf">Learning to Encode Position for Transformer with Continuous Dynamical Model</a> 中提出并比较了 position encoding。</p>
 <h3 id="25-self-attention-for-image">2.5 Self-attention for Image<a class="headerlink" href="#25-self-attention-for-image" title="Permanent link">&para;</a></h3>
 <p>对于一张 shape = (5, 10, 3) 的 RGB 图片，可以将其看成一个 vector set，其中的每一个 pixel 都可以看成一个 vector (r, g, b)，然后就可以将其放入 Self-attention 模型进行计算。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332777.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332777.png" style="zoom:80%;" /></a></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332130.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332130.png" style="zoom:67%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332777.png" style="zoom:80%;" /></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332130.png" style="zoom:67%;" /></p>
 <h2 id="3-self-attention-vs-cnn">3 Self-attention v.s. CNN<a class="headerlink" href="#3-self-attention-vs-cnn" title="Permanent link">&para;</a></h2>
 <p>CNN 和 Self-attention 都可以考虑一定范围内的信息，但是 CNN 只能够考虑到感受野内的信息，而 Self-attention 能够考虑到全局的信息。因此可以把 CNN 看做 Self-attention 的简化版本，Self-attention 看做 CNN 的复杂化版本。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332861.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332861.png" style="zoom:80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332861.png" style="zoom:80%;" /></p>
 <p>从集合的角度来看，CNN 可以看做是 Self-attention 的子集。在论文 <a href="https://arxiv.org/pdf/1911.03584.pdf">ON THE RELATIONSHIP BETWEEN SELF-ATTENTION AND CONVOLUTIONAL LAYERS</a> 中详细介绍了 Self-attention 和 CNN 的关系。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332245.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332245.png" style="zoom:80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332245.png" style="zoom:80%;" /></p>
 <p>从下图(出自论文 <a href="https://arxiv.org/pdf/2010.11929.pdf">AN IMAGE IS WORTH 16X16 WORDS: TRANSFORMERS FOR IMAGE RECOGNITION AT SCALE</a>)中的数据可以看出，利用较小的数据量训练时，CNN 的效果优于 Self-attention，但是随着数据量的增大，Self-attention 的效果越来越好，在数据量达到 300 Million 的时候 Self-attention 的效果会优于 CNN。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332530.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332530.png" style="zoom:80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062332530.png" style="zoom:80%;" /></p>
 <h2 id="4-summary">4 Summary<a class="headerlink" href="#4-summary" title="Permanent link">&para;</a></h2>
 <p>本篇博客对 attention 做了一个基本介绍，然后又介绍了 attention 最常用的一种实现 Self-attention，Self-attention 在 <a href="https://arxiv.org/abs/1706.03762">Transformer</a> 和 <a href="https://arxiv.org/abs/1810.04805">BERT</a> 中有着举足轻重的地位。我最开始学习 attention 的目的，是为了了解其在 computer vision 方向的应用，所以在之后的博客中我会更加详细的介绍目前 attention 在 computer vision 方向的应用以及遇到的问题。</p>
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
@@ -3412,10 +3401,6 @@ $$
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-      
     
-  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
-</script></body>
+  </body>
 </html>

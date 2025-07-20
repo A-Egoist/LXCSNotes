@@ -50,8 +50,6 @@
       
     
     
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
-    
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -61,16 +59,7 @@
     
     
     
-   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-    html.glightbox-open { overflow: initial; height: 100%; }
-    .gslide-title { margin-top: 0px; user-select: text; }
-    .gslide-desc { color: #666; user-select: text; }
-    .gslide-image img { background: white; }
-    .gscrollbar-fixer { padding-right: 15px; }
-    .gdesc-inner { font-size: 0.75rem; }
-    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  </head>
   
   
     
@@ -2950,13 +2939,13 @@
 </li>
 </ul>
 <p>举例：</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506051938091.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="1.PNG" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506051938091.png" /></a></p>
+<p><img alt="1.PNG" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506051938091.png" /></p>
 <p>开始时，图是这样的状态，发现 <code>A</code> 的入度为 0，所以删除<code>A</code>和<code>A</code>上所连的边，结果如下图：</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506051938890.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="2.PNG" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506051938890.png" /></a></p>
+<p><img alt="2.PNG" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506051938890.png" /></p>
 <p>这时发现<code>B</code>的入度为 0，<code>C</code>的入度为 0，所以删除<code>B</code>和<code>B</code>上所连的边、<code>C</code>和<code>C</code>上所连的边，结果如下图：</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506051939006.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="3.PNG" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506051939006.png" /></a></p>
+<p><img alt="3.PNG" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506051939006.png" /></p>
 <p>这时发现发现<code>D</code>的入度为 0，所以删除<code>D</code>和<code>D</code>上所连的边(如果有就删)，结果如下图：</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506051939717.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="5.PNG" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506051939717.png" /></a></p>
+<p><img alt="5.PNG" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506051939717.png" /></p>
 <p>这时整个图被删除干净，所有能进行拓扑排序。</p>
 <p><a href="https://www.acwing.com/problem/content/850/">848. 有向图的拓扑序列</a></p>
 <p><a href="https://leetcode.cn/problems/course-schedule/">207. 课程表</a></p>
@@ -3085,10 +3074,6 @@
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-      
     
-  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
-</script></body>
+  </body>
 </html>

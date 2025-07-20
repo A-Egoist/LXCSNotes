@@ -50,8 +50,6 @@
       
     
     
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
-    
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -61,16 +59,7 @@
     
     
     
-   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-    html.glightbox-open { overflow: initial; height: 100%; }
-    .gslide-title { margin-top: 0px; user-select: text; }
-    .gslide-desc { color: #666; user-select: text; }
-    .gslide-image img { background: white; }
-    .gscrollbar-fixer { padding-right: 15px; }
-    .gdesc-inner { font-size: 0.75rem; }
-    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  </head>
   
   
     
@@ -3250,11 +3239,11 @@
 <p>既有行索引也有列索引。它可以被看做由 Series 组成的字典（共同用一个行索引）</p>
 </li>
 </ul>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350367.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20220525104654476" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350367.png" /></a></p>
+<p><img alt="image-20220525104654476" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350367.png" /></p>
 <ul>
 <li>Pandas Series 类似表格中的一个列</li>
 </ul>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350727.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20220525104642062" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350727.png" /></a></p>
+<p><img alt="image-20220525104642062" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350727.png" /></p>
 <h3 id="series">Series<a class="headerlink" href="#series" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
@@ -3291,18 +3280,18 @@
 <h3 id="_3">索引<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./iris.csv&#39;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350718.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20220525112034879" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350718.png" /></a></p>
+<p><img alt="image-20220525112034879" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350718.png" /></p>
 <ul>
 <li>
 <p>列索引</p>
 </li>
 <li>
 <p>df['category']，返回一个 Series</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350714.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20220525112216071" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350714.png" /></a></p>
+<p><img alt="image-20220525112216071" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350714.png" /></p>
 </li>
 <li>
 <p>df[['category']]，返回一个 DataFrame</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350468.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20220525112648273" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350468.png" /></a></p>
+<p><img alt="image-20220525112648273" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350468.png" /></p>
 </li>
 <li>
 <p>行索引</p>
@@ -3316,7 +3305,7 @@
 <ul>
 <li>过滤</li>
 </ul>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350278.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20220525113327411" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350278.png" /></a></p>
+<p><img alt="image-20220525113327411" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350278.png" /></p>
 <ul>
 <li>排序</li>
 </ul>
@@ -3333,13 +3322,13 @@
 <li>是实际的图表或子图表</li>
 <li>包括 x 轴和 y 轴、spine 和图例</li>
 </ul>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350591.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20220525113552483" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350591.png" /></a></p>
+<p><img alt="image-20220525113552483" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350591.png" /></p>
 <p>Figure 和 Axes</p>
 <ul>
 <li>Figure 想象成一张纸（一般被称之为画布）</li>
 <li>Axes 代表的则是纸中的一片区域（当然可以有多个区域，这是后续要说到的 subplots）</li>
 </ul>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350106.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20220525113603338" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350106.png" /></a></p>
+<p><img alt="image-20220525113603338" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350106.png" /></p>
 <h3 id="_4">函数式编程和面向对象编程<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ol>
 <li>函数式编程(plt)</li>
@@ -3350,7 +3339,7 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350362.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-1" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350362.png" /></a></p>
+<p><img alt="image-1" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350362.png" /></p>
 <p>函数式编程方式，先生成一个 Figure 画布，然后在这个画布上隐式生成一个画图区域进行画图。</p>
 <ol>
 <li>面向对象编程(ax)</li>
@@ -3361,22 +3350,22 @@
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350405.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-2" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350405.png" /></a></p>
+<p><img alt="image-2" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350405.png" /></p>
 <p>面向对象编程方式，同时生成了 Figure 和 axes 两个对象，然后用 ax 对象在其区域内进行绘图。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350211.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20220525114521468" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350211.png" /></a></p>
+<p><img alt="image-20220525114521468" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350211.png" /></p>
 <h3 id="matplotlib_2">Matplotlib 中的格式化字符串<a class="headerlink" href="#matplotlib_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>颜色</li>
 </ul>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350309.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20220525114610828" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350309.png" /></a></p>
+<p><img alt="image-20220525114610828" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350309.png" /></p>
 <ul>
 <li>标记</li>
 </ul>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350139.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20220525114628264" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350139.png" /></a></p>
+<p><img alt="image-20220525114628264" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350139.png" /></p>
 <ul>
 <li>线条样式</li>
 </ul>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350127.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20220525114643473" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350127.png" /></a></p>
+<p><img alt="image-20220525114643473" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062350127.png" /></p>
 
 
 
@@ -3444,10 +3433,6 @@
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-      
     
-  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
-</script></body>
+  </body>
 </html>

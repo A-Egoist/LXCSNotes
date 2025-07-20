@@ -50,8 +50,6 @@
       
     
     
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
-    
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -61,16 +59,7 @@
     
     
     
-   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-    html.glightbox-open { overflow: initial; height: 100%; }
-    .gslide-title { margin-top: 0px; user-select: text; }
-    .gslide-desc { color: #666; user-select: text; }
-    .gslide-image img { background: white; }
-    .gscrollbar-fixer { padding-right: 15px; }
-    .gdesc-inner { font-size: 0.75rem; }
-    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  </head>
   
   
     
@@ -3268,14 +3257,14 @@
 <p><strong>评价标准</strong>：否定了 PSNR 和 SSIM 这两种评价指标。肯定了基于人类感知的无线照评价方法 Ma's score 和 NIQE，并根据这种评价标准创建了 PI(perceptual index) 评价方法。</p>
 <h2 id="3-proposed-methods">3 Proposed Methods<a class="headerlink" href="#3-proposed-methods" title="Permanent link">&para;</a></h2>
 <h3 id="31-network-architecture">3.1 Network Architecture<a class="headerlink" href="#31-network-architecture" title="Permanent link">&para;</a></h3>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062348643.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062348643.png" alt="image-20211119231948411" style="zoom:67%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062348643.png" alt="image-20211119231948411" style="zoom:67%;" /></p>
 <p>网络的整体结构如上图所示。</p>
 <p>Generator 部分较 SRGAN 论文<sup id="fnref3:3"><a class="footnote-ref" href="#fn:3">3</a></sup>，移除了 BN 层。因为 BN 层会将一个 batch 的特征进行归一化处理，从在像素级生成任务的效果上来看，BN 层会使得生成的图像出现伪影和模糊。而且由于不同网络的不同参数设置，BN 层的引入有时还能造成网络不稳定，所以为了稳定的训练和一致的性能，论文<sup id="fnref4:2"><a class="footnote-ref" href="#fn:2">2</a></sup>的作者去掉了 BN 层。</p>
 <h3 id="32-relativistic-discriminator">3.2 Relativistic Discriminator<a class="headerlink" href="#32-relativistic-discriminator" title="Permanent link">&para;</a></h3>
 <p>根据 Standard GAN 的缺点，论文<sup id="fnref2:1"><a class="footnote-ref" href="#fn:1">1</a></sup>提出了一种新的优化方案 Relativistic GAN，在此基础上论文<sup id="fnref5:2"><a class="footnote-ref" href="#fn:2">2</a></sup>给出了如下式子：</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062348364.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062348364.png" alt="image-20211119231922230" style="zoom:80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062348364.png" alt="image-20211119231922230" style="zoom:80%;" /></p>
 <p>首先给出 sigmoid 函数的图像：</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062348407.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062348407.png" alt="image-20211119232005625" style="zoom:80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062348407.png" alt="image-20211119232005625" style="zoom:80%;" /></p>
 <p><strong>Standard GAN</strong> 中的 Discriminator 的表达式为：
 $$
 D(I^{HR})=\sigma(C(I^{HR}))\to1\
@@ -3304,7 +3293,7 @@ $$
 <ol>
 <li>激活层后的特征是已经稀疏化了的，越深的网络越明显。稀疏的特征会导致更弱的监督，从而网络性能变差。</li>
 </ol>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062348009.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062348009.png" alt="image-20211119231906934" style="zoom:80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062348009.png" alt="image-20211119231906934" style="zoom:80%;" /></p>
 <ol>
 <li>使用激活层后的特征图计算感知损失会使得生成图像 SR 的亮度和目标图像 HR 不一致。</li>
 </ol>
@@ -3319,7 +3308,7 @@ $$
 w(x)=\frac{4e^{-\alpha{(x-128)}}}{(1+e^{-\alpha{(x-128)}})^2}\tag{6}
 $$
 函数图像如图所示：</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062348140.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062348140.png" alt="image-20211119232025891" style="zoom:80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062348140.png" alt="image-20211119232025891" style="zoom:80%;" /></p>
 <p>该函数对落在中间灰色区间的灰度值施以更大的惩罚，从而促使网络输出更符合二维码特性的重建结果。</p>
 <p>根据式子<span class="arithmatex">\((6)\)</span>可以将 Generator 中的 <span class="arithmatex">\(L_{content}\)</span> 表示如下：
 $$
@@ -3364,7 +3353,7 @@ $$
 </ul>
 <p><strong>训练过程</strong>：</p>
 <p>部分训练过程如下所示：</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062349916.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Generator and Discriminator loss" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062349916.png" /></a></p>
+<p><img alt="Generator and Discriminator loss" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062349916.png" /></p>
 <p><strong>训练结果</strong>：</p>
 <p>训练完成之后，对 <code>lr_img</code> 文件夹进行超分，然后使用 OpenCV 识别，得到 <code>lr_img</code>，<code>sr_img</code>，<code>hr_img</code> 的识别率：</p>
 <table>
@@ -3394,11 +3383,11 @@ $$
 <blockquote>
 <p>注：因为模型分成了两次训练，所以计算了一下中间的到模型的训练效果</p>
 </blockquote>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062349998.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062349998.png" alt="image-20211119232148168" style="zoom: 50%;" /></a></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062349945.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062349945.png" alt="image-20211119232200617" style="zoom: 50%;" /></a></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062349973.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062349973.jpeg" alt="2021-10-20_13_56_02" style="zoom: 50%;" /></a></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062349623.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="3_src" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062349623.png" /></a></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062349414.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="2021-10-20_13_55_41" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062349414.png" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062349998.png" alt="image-20211119232148168" style="zoom: 50%;" /></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062349945.png" alt="image-20211119232200617" style="zoom: 50%;" /></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062349973.jpeg" alt="2021-10-20_13_56_02" style="zoom: 50%;" /></p>
+<p><img alt="3_src" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062349623.png" /></p>
+<p><img alt="2021-10-20_13_55_41" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062349414.png" /></p>
 <h3 id="42-qualitative-results">4.2 Qualitative Results<a class="headerlink" href="#42-qualitative-results" title="Permanent link">&para;</a></h3>
 <h3 id="43-ablation-study">4.3 Ablation Study<a class="headerlink" href="#43-ablation-study" title="Permanent link">&para;</a></h3>
 <h3 id="44-network-interpolation">4.4 Network Interpolation<a class="headerlink" href="#44-network-interpolation" title="Permanent link">&para;</a></h3>
@@ -3492,10 +3481,6 @@ $$
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-      
     
-  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
-</script></body>
+  </body>
 </html>

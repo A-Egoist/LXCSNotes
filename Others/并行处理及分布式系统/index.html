@@ -50,8 +50,6 @@
       
     
     
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
-    
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -61,16 +59,7 @@
     
     
     
-   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-    html.glightbox-open { overflow: initial; height: 100%; }
-    .gslide-title { margin-top: 0px; user-select: text; }
-    .gslide-desc { color: #666; user-select: text; }
-    .gslide-image img { background: white; }
-    .gscrollbar-fixer { padding-right: 15px; }
-    .gdesc-inner { font-size: 0.75rem; }
-    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  </head>
   
   
     
@@ -3991,7 +3980,7 @@
 <h3 id="15">1.5 接下来做什么<a class="headerlink" href="#15" title="Permanent link">&para;</a></h3>
 <p>首先我会参考《并行程序设计导论》所讲的 C 语言的三种拓展：<span style='background:yellow'>消息传递接口(Message-Passing Interface，MPI)</span>、<span style='background:yellow'>POSIX 线程(POSIX threads，Pthreads)</span> 和 <span style='background:yellow'>OpenMP</span> 来编写基本的并行程序。</p>
 <p>选择并行程序实现框架的时候应该根据计算机的架构来选择，即根据硬件选择软件。Pthreads 和 OpenMP 是为 <span style='background:yellow'>共享内存系统</span> 的编程而设计的，它们提过访问共享内存的机制；而 MPI 是为 <span style='background:yellow'>分布式内存系统</span> 的编程而设计的，它提供发送消息的机制。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344363.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344363.png" /></a></p>
+<p><img alt="" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344363.png" /></p>
 <p>图中(a)表示共享内存系统，(b)表示分布式内存系统。</p>
 <h3 id="16">1.6 并发、并行、分布式<a class="headerlink" href="#16" title="Permanent link">&para;</a></h3>
 <ul>
@@ -4033,9 +4022,9 @@
 </ul>
 </blockquote>
 <p>CPU Cache 一般分为不同的层(level)，第一层(L1)最小但是访问速度最快，更高层的 Cache (L2, L3, ...)更大但访问速度较慢。大多数系统采用 3 层 Cache，每层 Cache 中的数据不重合，且都会存放在主存中。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344925.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344925.png" style="zoom:80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344925.png" style="zoom:80%;" /></p>
 <p>当 CPU 需要访问数据或指令时，它会沿着 <span style='background:yellow'>L1 Cache -&gt; L2 Cache -&gt; L3 Cache -&gt; 主存</span> 这条路径查询，若从 Cache 中查询到数据或指令时，则称为 <span style='background:yellow'>Cache 命中</span> 或 <span style='background:yellow'>命中</span>；若没有从 Cache 中查询到则称为 <span style='background:yellow'>Cache 缺失</span> 或 <span style='background:yellow'>缺失</span>。</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344260.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344260.png" alt="Cache 命中" style="zoom: 60%;" /></a><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344183.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344183.png" alt="Cache 缺失" style="zoom: 60%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344260.png" alt="Cache 命中" style="zoom: 60%;" /><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344183.png" alt="Cache 缺失" style="zoom: 60%;" /></p>
 <p>当 CPU 向 Cache 写数据时，会出现 Cache 中的值与主存中的值不一致的情况，为了解决这个问题，数中介绍了两种方法：</p>
 <ul>
 <li><span style='background:yellow'><strong>写直达</strong></span>：当 CPU 向 Cache 写数据时，同时更新主存中的数据。</li>
@@ -4068,7 +4057,7 @@
 </ul>
 <h3 id="23">2.3 并行硬件<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <p>利用 <span style='background:yellow'>Flynn 分类法</span> 对计算机体系结构进行划分：</p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344152.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344152.png" style="zoom: 80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344152.png" style="zoom: 80%;" /></p>
 <p>分别以数据和指令进行分析：</p>
 <ul>
 <li>单指令单数据 SISD (传统串行计算机，386)</li>
@@ -4080,9 +4069,9 @@
 <p>计算机架构也可以 <span style='background:yellow'>根据内存划分</span>：</p>
 <ul>
 <li>共享内存系统
-  <a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344811.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344811.png" alt="共享内存系统" style="zoom:80%;" /></a></li>
+  <img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344811.png" alt="共享内存系统" style="zoom:80%;" /></li>
 <li>分布式内存系统
-  <a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344622.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344622.png" alt="分布式内存系统" style="zoom:80%;" /></a></li>
+  <img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344622.png" alt="分布式内存系统" style="zoom:80%;" /></li>
 </ul>
 <p><strong>伪共享</strong>：</p>
 <p>在一个核更新了一个缓存行上某变量的值后，如果另一个核想要访问同一缓存行上的另一个变量，那么它不得不访问主存，因为缓存一致性的单位是行。</p>
@@ -4156,7 +4145,7 @@ $$</p>
 <li>将聚合任务 <strong>分配</strong> 给进程或线程：将聚合好的任务分配给进程或线程，还要使通信最小化，使得每个进程或线程得到的工作量大致均衡(<span style='background:yellow'>负载均衡</span>)。</li>
 </ul>
 <h2 id="3-mpi">3 MPI编程<a class="headerlink" href="#3-mpi" title="Permanent link">&para;</a></h2>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344613.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344613.png" alt="分布式内存系统" style="zoom:80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062344613.png" alt="分布式内存系统" style="zoom:80%;" /></p>
 <p>MPI 是为 <span style='background:yellow'>分布式内存系统</span> 的编程而设计的，它提供发送消息的机制。本节将会介绍怎么利用 MPI 使用 <strong>消息传递</strong> 来对分布式内存系统进行编程。</p>
 <h3 id="31">3.1 预备知识<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <h4 id="_2">头文件<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
@@ -4234,7 +4223,7 @@ MPI_Recv(recv_buf_p, recv_buf_sz, recv_type, src, recv_tag, recv_comm, &amp;stat
 <h4 id="_8">集合通信<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
 <p><strong>集合通信</strong> 不同于只涉及两个进程的 MPI_Send 和 MPI_Recv，它涉及到一个通信子汇总的所有进程。为了区分这两种通信方式，MPI_Send 和 MPI_Recv 常常称为 <strong>点对点通信</strong>。</p>
 <h2 id="4-pthreads">4 Pthreads编程<a class="headerlink" href="#4-pthreads" title="Permanent link">&para;</a></h2>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062345104.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062345104.png" alt="共享内存系统" style="zoom:80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062345104.png" alt="共享内存系统" style="zoom:80%;" /></p>
 <h3 id="41">4.1 预备知识<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
 <h4 id="_9">头文件<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pthread.h&gt;</span>
@@ -4272,7 +4261,7 @@ MPI_Recv(recv_buf_p, recv_buf_sz, recv_type, src, recv_tag, recv_comm, &amp;stat
 </li>
 </ul>
 <h2 id="5-openmp">5 OpenMP编程<a class="headerlink" href="#5-openmp" title="Permanent link">&para;</a></h2>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062345983.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062345983.png" alt="共享内存系统" style="zoom:80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062345983.png" alt="共享内存系统" style="zoom:80%;" /></p>
 <h3 id="51">5.1 预备知识<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
 <p>预处理器指令：#pragma</p>
 <h4 id="_12">编译<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
@@ -4293,9 +4282,9 @@ MPI_Recv(recv_buf_p, recv_buf_sz, recv_type, src, recv_tag, recv_comm, &amp;stat
 <h2 id="6">6 并行程序开发<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
 <h2 id="7">7 代码附录<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
 <h3 id="mpi">梯形积分法 MPI 程序<a class="headerlink" href="#mpi" title="Permanent link">&para;</a></h3>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062345048.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062345048.png" style="zoom: 80%;" /></a></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062345142.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062345142.png" style="zoom:80%;" /></a></p>
-<p><a class="glightbox" href="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062345009.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062345009.png" style="zoom:80%;" /></a></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062345048.png" style="zoom: 80%;" /></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062345142.png" style="zoom:80%;" /></p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062345009.png" style="zoom:80%;" /></p>
 <h3 id="_16">矩阵向量乘<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
 <h3 id="_17">通过数学求和公式计算π<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
 <h3 id="_18">蒙特卡洛方法计算π<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
@@ -4367,10 +4356,6 @@ MPI_Recv(recv_buf_p, recv_buf_sz, recv_type, src, recv_tag, recv_comm, &amp;stat
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-      
     
-  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
-</script></body>
+  </body>
 </html>
