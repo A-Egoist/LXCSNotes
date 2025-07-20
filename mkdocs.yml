@@ -40,13 +40,14 @@ markdown_extensions:
   - pymdownx.tabbed
   - pymdownx.magiclink
   - pymdownx.emoji:
-      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - attr_list  # 用于在 Markdown 中加 HTML 属性（如 class）
 
 plugins:
   - search
-  - glightbox
   - awesome-pages
+  - glightbox
 
 extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6

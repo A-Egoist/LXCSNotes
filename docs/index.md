@@ -159,3 +159,17 @@ UE
 [8] [【毕业前不懂，被社会毒打2年才明白的5个秋招真相！】](https://www.bilibili.com/video/BV1xM4m117XH/?share_source=copy_web&vd_source=b5ed364998fc1b958c57abd6dbda38e3)
 
 [9] [【入门人工智能算法工程师？微软工程院小伙送你一碗毒鸡汤。】](https://www.bilibili.com/video/BV1654y1B7Zi/?share_source=copy_web&vd_source=b5ed364998fc1b958c57abd6dbda38e3)
+
+
+
+mermaid 测试
+
+``` mermaid
+graph LR
+  A[Start] --> B{Error?};
+  B -->|Yes| C[Hmm...];
+  C --> D[Debug];
+  D --> B;
+  B ---->|No| E[Yay!];
+```
+
