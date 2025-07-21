@@ -1,12 +1,3 @@
----
-title: CUDA编程入门
-tags:
-  - CUDA
-mathjax: false
-abbrlink: 
-date: 2021-11-17 19:14:56
----
-
 # CUDA编程入门
 
 ## CUDA 概述
