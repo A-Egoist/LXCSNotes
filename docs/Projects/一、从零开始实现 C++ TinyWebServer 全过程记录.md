@@ -117,99 +117,15 @@
 
 #### 1、`explicit` 关键字
 
-
-
 #### 2、Containers library
-
-Sequence containers：
-
-Associative containers：
-
-Unordered associate containers：
-
-
-
-`queue` 和 `priority_queue`
-
-`map` 和 `unordered_map`
-
-
 
 #### 3、多线程和锁
 
-`std::thread`
-
-`std::mutex`
-
-`std::condition_variable`
-
-`std::atomic`
-
-
-
 #### 4、`constexpr` 和 `const` 关键字
-
-用 `constexpr`：
-
-*   需要编译期确定的量（数组大小、模板参数等）
-*   强制函数/对象在编译期可计算
-*   性能敏感的常量计算
-
-用 `const`：
-
-*   运行时常量
-*   函数参数/返回值的只读约束
-*   类成员常量（非静态成员不能用 `constexpr`）
-
-**最佳实践**：优先用 `constexpr` 表示编译期常量，用 `const` 表示运行时常量或接口约束。C++17 起 `constexpr` 可替代大部分 `const` 的编译期场景。
-
-
 
 #### 5、`struct` 和 `class` 的区别
 
-在 C++ 中，`struct` 和 `class` 都用于定义自定义数据类型，它们的核心功能几乎相同，主要区别在于**默认访问权限**和**默认继承方式**。
-
-1.   默认访问权限不同：
-
-     ```cpp
-     // struct 默认所有成员为 public
-     struct Point {
-         int x;     // 默认为 public
-         int y;     // 默认为 public
-     };
-     
-     // class 默认所有成员为 private
-     class Circle {
-         double r;  // 默认为 private
-     public:
-         double area() { return 3.14 * r * r; }
-     };
-     ```
-
-2.   默认继承方式不同
-
-     ```cpp
-     struct Base { int data; };
-     
-     // struct 继承默认为 public
-     struct DerivedStruct : Base { 
-         // 可直接访问 Base::data (public)
-     };
-     
-     class DerivedClass : Base { 
-         // 默认为 private 继承，Base::data 不可直接访问
-     };
-     ```
-
-
-
 #### 6、`class` 相关的知识点
-
-*   构造函数、移动构造函数、拷贝构造函数
-*   析构函数
-*   运算符重载
-
-
 
 #### 7、匿名函数
 
@@ -301,26 +217,7 @@ asyncOperation([](int result) {
 
 #### 9、`size_t`、`sizeof()`、`typedef`
 
-实际上，`size_t` 是个无符号整型，它并不是一个全新的数据类型，更不是一个关键字。`size_t` 是由 `typedef` 定义而来的，我们在很多标准库头文件中都能发现。
-
-C 标准头文件`<stddef.h>`中可以找到`size_t`的实际定义。
-
-通常用于：
-(1) 表示对象大小和内存分配；
-(2) 表示容器大小和索引；
-(3) 内存和字符串操作；
-
-为什么需要 `size_t`：
-(1) **平台无关性**：自动适配不同架构（32位系统通常为 4 字节，64位系统为 8 字节）
-(2) **足够大的表示范围**：能表示系统中最大可能对象的大小（包括整个内存空间）
-(3) **类型安全**：区分普通整数和大小/索引值
-(4) **标准化**：所有标准库容器和内存相关函数统一使用
-
-
-
 #### 10、模板函数和模板类
-
-
 
 #### 11、虚函数
 
@@ -455,128 +352,7 @@ private:
 
 #### 12、RAII (Resource Acquisition Is Initialization) 是什么？
 
-**RAII（Resource Acquisition Is Initialization）** 是 C++ 的核心编程范式，直译为“资源获取即初始化”。它利用对象生命周期管理资源（如内存、文件句柄、网络连接等），确保资源安全获取和自动释放，避免泄漏。核心思想：**资源在构造函数中获取，在析构函数中释放**。
-
-**核心原理**
-
-1. **构造时获取资源**（Acquisition）
-2. **析构时释放资源**（Release）
-3. **对象生命周期绑定资源管理**
-
-**典型应用场景**
-
-```cpp
-#include <iostream>
-#include <fstream> // 标准库中的 RAII 范例
-
-// 示例 1：文件操作（自动关闭）
-void readFile() {
-    std::ifstream file("data.txt"); // 构造时打开文件（获取资源）
-    std::string line;
-    while (std::getline(file, line)) {
-        std::cout << line << "\n";
-    }
-} // 离开作用域时 file 析构 → 自动关闭文件（释放资源）
-
-// 示例 2：内存管理（智能指针）
-#include <memory>
-void manageMemory() {
-    auto ptr = std::make_unique<int>(42); // 构造时分配内存
-    // 使用 ptr...
-} // 离开作用域时 unique_ptr 析构 → 自动释放内存
-
-// 示例 3：自定义锁管理
-class MutexLock {
-public:
-    MutexLock(Mutex& m) : mutex(m) { mutex.lock(); } // 构造时加锁
-    ~MutexLock() { mutex.unlock(); }                // 析构时解锁
-private:
-    Mutex& mutex;
-};
-
-void safeWrite() {
-    Mutex m;
-    {
-        MutexLock lock(m); // 进入作用域时加锁
-        // 临界区操作...
-    } // 离开作用域时 lock 析构 → 自动解锁
-}
-```
-
-**RAII 的核心优势**
-
-| 优势             | 说明                           |
-| ---------------- | ------------------------------ |
-| **异常安全**     | 即使抛出异常，析构函数仍会调用 |
-| **避免泄漏**     | 资源释放由编译器保证           |
-| **简化代码**     | 无需手动释放资源               |
-| **强资源所有权** | 资源与对象生命周期绑定         |
-
-**与手动管理的对比**
-
-```cpp
-// 非 RAII 风格（危险！）
-void unsafeExample() {
-    int* arr = new int[100]; // 手动分配
-    // ... 使用 arr
-    delete[] arr; // 必须手动释放（可能忘记或因异常跳过）
-}
-
-// RAII 风格（安全）
-void safeExample() {
-    std::vector<int> arr(100); // 构造时分配
-    // ... 使用 arr
-} // 自动释放（即使抛出异常）
-```
-
-**RAII 的最佳实践**
-
-1. **优先使用标准库工具**
-   - 内存管理：`std::unique_ptr`, `std::shared_ptr`, `std::vector`
-   - 文件处理：`std::ifstream`/`std::ofstream`
-   - 线程同步：`std::lock_guard`
-
-2. **自定义 RAII 类**
-   - 构造函数获取资源（打开文件、分配内存、加锁）
-   - 析构函数释放资源（关闭文件、释放内存、解锁）
-   - 禁用复制/移动（或实现深拷贝/转移所有权）
-
-3. **遵循规则三/五/零**
-   - 管理资源时需正确处理拷贝/移动语义
-
-> 📌 **关键结论**：RAII 是 C++ 区别于其他语言的核心特性，它通过对象生命周期自动化资源管理，是现代 C++ 避免资源泄漏的基石。几乎所有 C++ 标准库组件（容器、智能指针、流等）都基于 RAII 实现。
-
-
-
 #### 13、左值引用和右值引用
-
-在 C++ 中，**左值引用（lvalue reference）** 和 **右值引用（rvalue reference）** 是两种不同的引用类型，它们的主要区别在于 **绑定对象的类别（左值 or 右值）** 和 **用途（拷贝优化 or 资源转移）**。
-
-**左值**是指既能出现在等号左边也能出现在等号右边的变量(或表达式)，**右值**则只能出现在等号右边。
-
-*   **左值（lvalue）**：可以取地址、有名字的持久对象（如变量、函数返回的引用等）。
-    **绑定到左值（lvalue）** 的引用，用 `&` 表示。
-
-    ```cpp
-    int x = 10;  
-    int& lref = x;  // ✅ 左值引用绑定左值
-    lref = 20;      // 修改 x 的值
-    
-    int& bad = 42;  // ❌ 错误：不能绑定到右值（临时对象）
-    ```
-
-*   **右值（rvalue）**：临时对象、即将销毁的对象（如字面量、`std::move` 后的对象）。
-    **绑定到右值（rvalue）** 的引用，用 `&&` 表示。
-
-    ```cpp
-    int&& rref = 42;          // ✅ 右值引用绑定右值
-    int x = 10;
-    int&& rref2 = std::move(x);  // ✅ 使用 std::move 转为右值
-    
-    int&& bad = x;            // ❌ 错误：不能直接绑定左值
-    ```
-
-
 
 #### 14、函数重载和运算符重载
 
@@ -586,31 +362,9 @@ void safeExample() {
 
 #### 15、`std::map`
 
-读取元素时，统一用 `at()`
-
-写入元素时，统一用 `[]`
-
-```cpp
-std::map<std::string, int> m;
-auto val = m.at("key1");  // 读
-m["key2"] = val;  // 写
-```
-
-
-
 #### 16、浅拷贝与深拷贝
 
-**浅拷贝（Shallow Copy）** 和 **深拷贝（Deep Copy）**
-
-
-
 #### 17、OOP Design Patterns
-
->   Composite, Decorator, Bridge, Visitor, Proxy, Façade, ...
->   Iterator, Strategy, Observer, Command, Template Method, ...
->   Factory Method, Abstract Factory, Singleton, ...
-
-
 
 #### 18、重写和重载
 
@@ -757,39 +511,7 @@ public:
 
 #### 19、`std::pair` 的用法和优势
 
-`std::pair` 是一个简单但极其有用的工具，其核心优势在于：
-
-1. **轻量高效**：零开销抽象
-2. **通用性强**：适用于各种场景
-3. **与 STL 深度集成**：容器和算法的关键组成部分
-4. **类型安全**：编译时类型检查
-5. **现代特性支持**：结构化绑定、移动语义等
-
-使用场景建议：
-- 需要返回两个值时 ➔ 替代输出参数
-- 创建简单键值对 ➔ 替代简单结构体
-- 需要临时组合数据 ➔ 避免定义临时结构
-- 与 STL 算法配合 ➔ 利用内置比较操作
-
-当需要组合超过两个值时，可升级到 `std::tuple`，但 `std::pair` 在二元数据组合场景中仍是最简洁高效的选择。
-
-
-
 #### 20、`std::shared_ptr`
-
-```cpp
-mysql_connection *conn = mysql_connect("127.0.0.1");
-mysql_execute(conn, "drop database paolu");
-mysql_close(conn); // 用户可能忘记关闭连接！破坏库设计者想要的用法
-```
-
-shared_ptr 小妙招：构造函数的第二个参数可以指定释放函数，代替默认的 delete
-
-```cpp
-auto conn = std::shared_ptr<mysql_connection>(mysql_connect("127.0.0.1"), mysql_close);
-mysql_execute(conn.get(), "drop database paolu");
-// conn 离开作用域时，会自动调用 mysql_close，杜绝了一个出错的可能
-```
 
 
 

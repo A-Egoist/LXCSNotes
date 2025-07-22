@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../CMake/">
+        <link rel="prev" href="../">
       
       
-        <link rel="next" href="../STL/">
+        <link rel="next" href="../CMake/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -257,7 +257,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../Linux%2C%20C%2C%20and%20C%2B%2B%20ChatGPT%20guidance/" class="md-tabs__link">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -1070,35 +1070,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../Linux%2C%20C%2C%20and%20C%2B%2B%20ChatGPT%20guidance/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     Linux, C, and C++ ChatGPT guidance
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../CMake/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    CMake
     
   </span>
   
@@ -1166,20 +1143,53 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#lambda" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      lambda 表达式
+      优化技巧
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#tuple" class="md-nav__link">
+  <a href="#lambda-function" class="md-nav__link">
     <span class="md-ellipsis">
-      tuple
+      匿名函数(Lambda Function)
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="匿名函数(Lambda Function)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      基本语法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      基本示例
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      捕获外部变量
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1194,15 +1204,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#iterator" class="md-nav__link">
-    <span class="md-ellipsis">
-      Iterator（迭代器）
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#container" class="md-nav__link">
     <span class="md-ellipsis">
       Container（容器）
@@ -1213,27 +1214,63 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#vector" class="md-nav__link">
+  <a href="#stdvector" class="md-nav__link">
     <span class="md-ellipsis">
-      Vector
+      std::vector
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set" class="md-nav__link">
+  <a href="#stdlist" class="md-nav__link">
     <span class="md-ellipsis">
-      Set
+      std::list
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#string" class="md-nav__link">
+  <a href="#stdstring" class="md-nav__link">
     <span class="md-ellipsis">
-      String
+      std::string
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdstack" class="md-nav__link">
+    <span class="md-ellipsis">
+      std::stack
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdqueue" class="md-nav__link">
+    <span class="md-ellipsis">
+      std::queue
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdset" class="md-nav__link">
+    <span class="md-ellipsis">
+      std::set
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      std::map
     </span>
   </a>
   
@@ -1241,6 +1278,15 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iterator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Iterator（迭代器）
+    </span>
+  </a>
   
 </li>
         
@@ -1253,17 +1299,23 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
-      面向对象三大特性
+      面向对象编程
     </span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="面向对象编程">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       命名空间
     </span>
@@ -1272,9 +1324,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#constexpr" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
-      常量表达式和constexpr
+      生命周期
     </span>
   </a>
   
@@ -1306,45 +1358,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#default-constructor" class="md-nav__link">
+  <a href="#rule-of-threefive" class="md-nav__link">
     <span class="md-ellipsis">
-      默认构造函数(Default Constructor)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#parameterized-constructor" class="md-nav__link">
-    <span class="md-ellipsis">
-      带参数构造函数(Parameterized Constructor)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#copy-constructor" class="md-nav__link">
-    <span class="md-ellipsis">
-      拷贝构造函数(Copy Constructor)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#copy-assignment-constructor" class="md-nav__link">
-    <span class="md-ellipsis">
-      拷贝赋值构造函数(copy assignment constructor)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#move-constructor" class="md-nav__link">
-    <span class="md-ellipsis">
-      移动构造函数(Move Constructor)
+      Rule of Three/Five (三/五法则)
     </span>
   </a>
   
@@ -1356,7 +1372,16 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      析构函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       类的继承
     </span>
@@ -1366,7 +1391,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       定义不能被继承的类
     </span>
@@ -1436,6 +1461,66 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#raiiresource-acquisition-is-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      RAII(Resource Acquisition Is Initialization)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RAII(Resource Acquisition Is Initialization)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      核心原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      典型应用场景
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raii" class="md-nav__link">
+    <span class="md-ellipsis">
+      RAII 的核心优势
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      与手动管理的对比
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raii_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      RAII 的最佳实践
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#virtual-functions" class="md-nav__link">
     <span class="md-ellipsis">
       虚函数 (virtual functions)
@@ -1446,7 +1531,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       多态
     </span>
@@ -1460,7 +1545,172 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      并行编程
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      泛型编程
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      内存管理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      设计模式
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      拾遗
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="拾遗">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      零散知识点
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="零散知识点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explicit" class="md-nav__link">
+    <span class="md-ellipsis">
+      explicit 关键字
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#containers-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      Containers library
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constexpr-const" class="md-nav__link">
+    <span class="md-ellipsis">
+      constexpr 和 const 关键字
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#size_tsizeoftypedef" class="md-nav__link">
+    <span class="md-ellipsis">
+      size_t、sizeof()、typedef
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#struct-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      struct 和 class 的区别
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      左值引用和右值引用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdmap_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      std::map
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      浅拷贝与深拷贝
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdpair" class="md-nav__link">
+    <span class="md-ellipsis">
+      std::pair 的用法和优势
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdtuple" class="md-nav__link">
+    <span class="md-ellipsis">
+      std::tuple
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdshared_ptr" class="md-nav__link">
+    <span class="md-ellipsis">
+      std::shared_ptr
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
     <span class="md-ellipsis">
       参考资料
     </span>
@@ -1472,6 +1722,52 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CMake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CMake
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Class/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Class
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1582,29 +1878,6 @@
   
   <span class="md-ellipsis">
     泛型编程
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../%E7%B1%BB/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    类
     
   </span>
   
@@ -3135,20 +3408,53 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#lambda" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      lambda 表达式
+      优化技巧
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#tuple" class="md-nav__link">
+  <a href="#lambda-function" class="md-nav__link">
     <span class="md-ellipsis">
-      tuple
+      匿名函数(Lambda Function)
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="匿名函数(Lambda Function)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      基本语法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      基本示例
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      捕获外部变量
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3163,15 +3469,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#iterator" class="md-nav__link">
-    <span class="md-ellipsis">
-      Iterator（迭代器）
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#container" class="md-nav__link">
     <span class="md-ellipsis">
       Container（容器）
@@ -3182,27 +3479,63 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#vector" class="md-nav__link">
+  <a href="#stdvector" class="md-nav__link">
     <span class="md-ellipsis">
-      Vector
+      std::vector
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set" class="md-nav__link">
+  <a href="#stdlist" class="md-nav__link">
     <span class="md-ellipsis">
-      Set
+      std::list
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#string" class="md-nav__link">
+  <a href="#stdstring" class="md-nav__link">
     <span class="md-ellipsis">
-      String
+      std::string
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdstack" class="md-nav__link">
+    <span class="md-ellipsis">
+      std::stack
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdqueue" class="md-nav__link">
+    <span class="md-ellipsis">
+      std::queue
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdset" class="md-nav__link">
+    <span class="md-ellipsis">
+      std::set
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      std::map
     </span>
   </a>
   
@@ -3210,6 +3543,15 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iterator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Iterator（迭代器）
+    </span>
+  </a>
   
 </li>
         
@@ -3222,17 +3564,23 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
-      面向对象三大特性
+      面向对象编程
     </span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="面向对象编程">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       命名空间
     </span>
@@ -3241,9 +3589,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#constexpr" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
-      常量表达式和constexpr
+      生命周期
     </span>
   </a>
   
@@ -3275,45 +3623,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#default-constructor" class="md-nav__link">
+  <a href="#rule-of-threefive" class="md-nav__link">
     <span class="md-ellipsis">
-      默认构造函数(Default Constructor)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#parameterized-constructor" class="md-nav__link">
-    <span class="md-ellipsis">
-      带参数构造函数(Parameterized Constructor)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#copy-constructor" class="md-nav__link">
-    <span class="md-ellipsis">
-      拷贝构造函数(Copy Constructor)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#copy-assignment-constructor" class="md-nav__link">
-    <span class="md-ellipsis">
-      拷贝赋值构造函数(copy assignment constructor)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#move-constructor" class="md-nav__link">
-    <span class="md-ellipsis">
-      移动构造函数(Move Constructor)
+      Rule of Three/Five (三/五法则)
     </span>
   </a>
   
@@ -3325,7 +3637,16 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      析构函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       类的继承
     </span>
@@ -3335,7 +3656,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       定义不能被继承的类
     </span>
@@ -3405,6 +3726,66 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#raiiresource-acquisition-is-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      RAII(Resource Acquisition Is Initialization)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RAII(Resource Acquisition Is Initialization)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      核心原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      典型应用场景
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raii" class="md-nav__link">
+    <span class="md-ellipsis">
+      RAII 的核心优势
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      与手动管理的对比
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raii_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      RAII 的最佳实践
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#virtual-functions" class="md-nav__link">
     <span class="md-ellipsis">
       虚函数 (virtual functions)
@@ -3415,7 +3796,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       多态
     </span>
@@ -3429,7 +3810,172 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      并行编程
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      泛型编程
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      内存管理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      设计模式
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      拾遗
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="拾遗">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      零散知识点
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="零散知识点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explicit" class="md-nav__link">
+    <span class="md-ellipsis">
+      explicit 关键字
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#containers-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      Containers library
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constexpr-const" class="md-nav__link">
+    <span class="md-ellipsis">
+      constexpr 和 const 关键字
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#size_tsizeoftypedef" class="md-nav__link">
+    <span class="md-ellipsis">
+      size_t、sizeof()、typedef
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#struct-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      struct 和 class 的区别
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      左值引用和右值引用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdmap_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      std::map
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      浅拷贝与深拷贝
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdpair" class="md-nav__link">
+    <span class="md-ellipsis">
+      std::pair 的用法和优势
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdtuple" class="md-nav__link">
+    <span class="md-ellipsis">
+      std::tuple
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdshared_ptr" class="md-nav__link">
+    <span class="md-ellipsis">
+      std::shared_ptr
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
     <span class="md-ellipsis">
       参考资料
     </span>
@@ -3457,58 +4003,83 @@
 
 
 <h1 id="cpp">CPP 笔记<a class="headerlink" href="#cpp" title="Permanent link">&para;</a></h1>
-<p>模板元编程 (template)</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<h3 id="_1">优化技巧<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>乘法比除法更快，适当的优化表达式以减少除法的使用。</p>
+</li>
+<li>
+<p>使用数学函数时需要加上<code>std::</code>，这才是CPP的数学函数，全局的数学函数是C语言的。</p>
+</li>
+<li>
+<p>参数定义为常引用<code>void func(cconst&amp; a){}</code></p>
+</li>
+<li>
+<p>编译器优化总结</p>
+<blockquote>
+<ol>
+<li>函数尽量写在同一个文件内</li>
+<li>避免在 for 循环内调用外部函数</li>
+<li>非 const 指针加上 __restrict 修饰</li>
+<li>试着用 SOA 取代 AOS</li>
+<li>对齐到 16 或 64 字节</li>
+<li>简单的代码，不要复杂化</li>
+<li>试试看 #pragma omp simd</li>
+<li>循环中不变的常量挪到外面来</li>
+<li>对小循环体用 #pragma unroll</li>
+<li>-ffast-math 和 -march=native</li>
+</ol>
+</blockquote>
+</li>
+<li>
+<p>对函数来说，现在<code>inline</code>比较多余了，编译器会智能决定是否内联</p>
+</li>
+<li>
+<p>const int* 和 int const* 的辩证：<a href="https://www.zhihu.com/question/443195492">https://www.zhihu.com/question/443195492</a></p>
+</li>
+<li>
+<p>推荐将<code>const</code>写在类型右侧，比如<code>int const</code>，<code>std::string const</code>，<code>std::vector&lt;int&gt; const&amp;</code></p>
+</li>
+<li>
+<p>避免使用<code>long</code>数据类型，因为在不同的平台<code>long</code>的位数不相同。
+     C语言<code>stdint.h</code>定义了(C++中是<code>cstdint</code>)：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="kt">int8_t</span><span class="p">;</span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">short</span><span class="w"> </span><span class="kt">int16_t</span><span class="p">;</span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="kt">int32_t</span><span class="p">;</span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">int64_t</span><span class="p">;</span>
 
-<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Ptr</span><span class="o">&gt;</span>
-<span class="kt">void</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">Ptr</span><span class="w"> </span><span class="n">begPtr</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="w"> </span><span class="n">endPtr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Ptr</span><span class="w"> </span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">begPtr</span><span class="p">;</span><span class="w"> </span><span class="n">ptr</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">endPtr</span><span class="p">;</span><span class="w"> </span><span class="n">ptr</span><span class="w"> </span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="sc">&#39;h&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;i&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;j&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;k&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;l&#39;</span><span class="p">};</span>
-<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="k">const</span><span class="o">*</span><span class="w"> </span><span class="n">aBegPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">data</span><span class="p">();</span>
-<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="k">const</span><span class="o">*</span><span class="w"> </span><span class="n">aEndPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
-<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="n">aBegPtr</span><span class="p">,</span><span class="w"> </span><span class="n">aEndPtr</span><span class="p">);</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">};</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="k">const</span><span class="o">*</span><span class="w"> </span><span class="n">bBegPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">data</span><span class="p">();</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="k">const</span><span class="o">*</span><span class="w"> </span><span class="n">bEndPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
-<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="n">bBegPtr</span><span class="p">,</span><span class="w"> </span><span class="n">bEndPtr</span><span class="p">);</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="kt">uint8_t</span><span class="p">;</span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">short</span><span class="w"> </span><span class="kt">uint16_t</span><span class="p">;</span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="kt">uint32_t</span><span class="p">;</span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">uint64_t</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
-<p>自动类型推导 (auto)</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>
-</code></pre></div></td></tr></table></div>
-<p>类成员不可以定义为 auto</p>
-<h3 id="lambda">lambda 表达式<a class="headerlink" href="#lambda" title="Permanent link">&para;</a></h3>
+</li>
+<li>
+<p><code>size_t</code>表示大小的整数型，其等价于<code>uintptr_t</code></p>
+</li>
+<li>
+<p>在Modern C++中使用<code>nullptr</code>来表示空指针而不是<code>NULL</code>或者<code>0</code></p>
+</li>
+<li><code>for (int i = 0; i &lt; n; i ++)</code>最好写为<code>for (size_t i = 0; i &lt; n; i ++)</code>，记得<code>#include &lt;cstdint&gt;</code></li>
+<li>使用<code>new T[n]</code>分配的动态数组，请使用<code>delete[]</code>释放</li>
+<li>使用<code>new T</code>分配的单个元素，请使用<code>delete</code>释放</li>
+<li>使用<code>std::swap</code>来交换两个变量的值(<code>#include &lt;utility&gt;</code>)</li>
+<li><code>i++</code>和<code>++i</code>效果差不多，但是推荐使用<code>++i</code>，在使用迭代器时可以减少一些性能开销。</li>
+<li>C++中获取C数组的长度可以用<code>std::size(b)</code>，而不是<code>sizeof(b)/sizeof(b[0])</code></li>
+<li><code># pragma once</code></li>
+</ol>
+<p>堆栈的分配</p>
+<p>栈：array</p>
+<p>堆：vector、string</p>
+<h3 id="lambda-function">匿名函数(Lambda Function)<a class="headerlink" href="#lambda-function" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -3560,8 +4131,38 @@
 <p>可以使用<code>[=]</code>来捕获值而不是引用，<code>[=]</code>会给每一个引用了的变量做一份拷贝。</p>
 <p>lambda 作为参数：通常用 <code>[&amp;]</code> 存储引用。</p>
 <p>lambda 作为返回值：总是用 <code>[=]</code> 存储值。</p>
-<h3 id="tuple">tuple<a class="headerlink" href="#tuple" title="Permanent link">&para;</a></h3>
-<p>tuple 用于函数多个返回值</p>
+<h4 id="_2">基本语法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">[</span><span class="n">capture</span><span class="p">](</span><span class="n">parameters</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">return_type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">// 函数体 </span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_3">基本示例<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// 无参Lambda</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">greet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Hello, Lambda!&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="n">greet</span><span class="p">();</span><span class="w"> </span><span class="c1">// 输出: Hello, Lambda!</span>
+
+<span class="c1">// 带参Lambda</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// 输出: 7</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_4">捕获外部变量<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<p>控制Lambda如何访问外部作用域的变量：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -3576,200 +4177,121 @@
 <span class="normal">12</span>
 <span class="normal">13</span>
 <span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;tuple&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
 
-<span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mysqrt</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0.f</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)};</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">else</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">};</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
+<span class="c1">// 按值捕获（复制变量）</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">copy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="c1">// x=10（外部修改不影响内部）</span>
+<span class="p">};</span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="c1">// 修改外部x</span>
+<span class="n">copy</span><span class="p">();</span><span class="w">  </span><span class="c1">// 仍输出10</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">success</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mysqrt</span><span class="p">(</span><span class="mf">4.f</span><span class="p">);</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">success</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Succeed!, the result is %.2f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">else</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Failed, the input is lower than 0</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="c1">// 按引用捕获（直接操作外部变量）</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="n">y</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="n">y</span><span class="o">++</span><span class="p">;</span><span class="w"> </span><span class="c1">// 修改外部y</span>
+<span class="p">};</span>
+<span class="n">ref</span><span class="p">();</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"> </span><span class="c1">// 输出21</span>
 </code></pre></div></td></tr></table></div>
-<p>乘法比除法更快，适当的优化表达式以减少除法的使用。</p>
-<p>使用数学函数时需要加上<code>std::</code>，这才是CPP的数学函数，全局的数学函数是C语言的。</p>
-<p>参数定义为常引用<code>void func(cconst&amp; a){}</code></p>
-<p>编译器优化总结</p>
+<p>捕获方式总结：</p>
+<table>
+<thead>
+<tr>
+<th>捕获形式</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[ ]</code></td>
+<td>不捕获任何变量</td>
+</tr>
+<tr>
+<td><code>[=]</code></td>
+<td>按值捕获所有外部变量</td>
+</tr>
+<tr>
+<td><code>[&amp;]</code></td>
+<td>按引用捕获所有外部变量</td>
+</tr>
+<tr>
+<td><code>[x, &amp;y]</code></td>
+<td>混合捕获（x按值，y按引用）</td>
+</tr>
+<tr>
+<td><code>[=, &amp;y]</code></td>
+<td>默认按值，但y按引用</td>
+</tr>
+<tr>
+<td><code>[&amp;, x]</code></td>
+<td>默认按引用，但x按值</td>
+</tr>
+<tr>
+<td><code>[this]</code></td>
+<td>捕获当前对象指针</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
-<ol>
-<li>函数尽量写在同一个文件内</li>
-<li>避免在 for 循环内调用外部函数</li>
-<li>非 const 指针加上 __restrict 修饰</li>
-<li>试着用 SOA 取代 AOS</li>
-<li>对齐到 16 或 64 字节</li>
-<li>简单的代码，不要复杂化</li>
-<li>试试看 #pragma omp simd</li>
-<li>循环中不变的常量挪到外面来</li>
-<li>对小循环体用 #pragma unroll</li>
-<li>-ffast-math 和 -march=native</li>
-</ol>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:" />避免默认捕获（<code>[=]</code>/<code>[&amp;]</code>），显式列出变量更安全！
+最小捕获原则。</p>
 </blockquote>
-<p>对函数来说，现在<code>inline</code>比较多余了，编译器会智能决定是否内联</p>
-<p>const int* 和 int const* 的辩证：<a href="https://www.zhihu.com/question/443195492">https://www.zhihu.com/question/443195492</a></p>
-<p>推荐将<code>const</code>卸载类型右侧，比如<code>int const</code>，<code>std::string const</code>，<code>std::vector&lt;int&gt; const&amp;</code></p>
-<p>std::map</p>
-<p>std::unordered_map</p>
-<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:" />避免使用<code>long</code>数据类型，因为在不同的平台<code>long</code>的位数不相同。</p>
-<p>C语言<code>stdint.h</code>定义了(C++中是<code>cstdint</code>)：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="kt">int8_t</span><span class="p">;</span>
-<span class="k">typedef</span><span class="w"> </span><span class="kt">short</span><span class="w"> </span><span class="kt">int16_t</span><span class="p">;</span>
-<span class="k">typedef</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="kt">int32_t</span><span class="p">;</span>
-<span class="k">typedef</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">int64_t</span><span class="p">;</span>
-
-<span class="k">typedef</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="kt">uint8_t</span><span class="p">;</span>
-<span class="k">typedef</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">short</span><span class="w"> </span><span class="kt">uint16_t</span><span class="p">;</span>
-<span class="k">typedef</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="kt">uint32_t</span><span class="p">;</span>
-<span class="k">typedef</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">uint64_t</span><span class="p">;</span>
-</code></pre></div></td></tr></table></div>
-<p><code>size_t</code>表示大小的整数型，其等价于<code>uintptr_t</code></p>
-<p>在Modern C++中使用<code>nullptr</code>来表示空指针而不是<code>NULL</code>或者<code>0</code></p>
-<p><code>for (int i = 0; i &lt; n; i ++)</code>最好写为<code>for (size_t i = 0; i &lt; n; i ++)</code>，记得<code>#include &lt;cstdint&gt;</code></p>
-<p>使用<code>new T[n]</code>分配的动态数组，请使用<code>delete[]</code>释放</p>
-<p>使用<code>new T</code>分配的单个元素，请使用<code>delete</code>释放</p>
-<p>堆栈的分配</p>
-<p>栈：array</p>
-<p>堆：vector、string</p>
 <h2 id="c">C++ 标准库五大件<a class="headerlink" href="#c" title="Permanent link">&para;</a></h2>
-<h3 id="iterator">Iterator（迭代器）<a class="headerlink" href="#iterator" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th></th>
-<th><strong>提供的运算符重载</strong></th>
-<th><strong>具有此迭代器的容器</strong></th>
-<th><strong>相应的</strong> <strong>C++20 concept</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>输入迭代器</td>
-<td>*（可读取），!=，==，++（一次性）</td>
-<td>istream_iterator</td>
-<td>input_iterator</td>
-</tr>
-<tr>
-<td>输出迭代器</td>
-<td>*（可写入），!=，==，++（一次性）</td>
-<td>back_insert_iterator</td>
-<td>output_iterator</td>
-</tr>
-<tr>
-<td>前向迭代器</td>
-<td>*，!=，==，++</td>
-<td>forward_list</td>
-<td>forward_iterator</td>
-</tr>
-<tr>
-<td>双向迭代器</td>
-<td>*，!=，==，++，--</td>
-<td>set，map，list</td>
-<td>bidirectional_iterator</td>
-</tr>
-<tr>
-<td>随机访问迭代器</td>
-<td>*，!=，==，++，--，+，-，+=，-=，[]</td>
-<td>vector，array，deque</td>
-<td>random_access_iterator</td>
-</tr>
-<tr>
-<td>迭代器外包装</td>
-<td>和他所包装的迭代器保持一致</td>
-<td>reverse_iterator</td>
-<td>和所包装的迭代器一致</td>
-</tr>
-</tbody>
-</table>
-<p>包含关系：前向迭代器＞双向迭代器＞随机访问迭代器</p>
-<p>这意味着如果一个STL模板函数（比如std::find）要求迭代器是<strong>前向迭代器</strong>即可，那么也可以给他随机访问迭代器，因为<strong>前向迭代器</strong>是<strong>随机访问迭代器</strong>的子集。</p>
-<p>迭代器帮手函数</p>
-<table>
-<thead>
-<tr>
-<th><strong>帮手函数</strong></th>
-<th><strong>等价于</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>it2  = std::next(it1, n)</td>
-<td>it2  = it1 + n</td>
-</tr>
-<tr>
-<td>it2  = std::prev(it1, n)</td>
-<td>it2  = it1 - n</td>
-</tr>
-<tr>
-<td>it2  = std::next(it1)</td>
-<td>it2  = it1 + 1</td>
-</tr>
-<tr>
-<td>it2  = std::prev(it1)</td>
-<td>it2  = it1 - 1</td>
-</tr>
-<tr>
-<td>std::advance(it1,  n)</td>
-<td>it1  += n</td>
-</tr>
-<tr>
-<td>std::advance(it1,  -n)</td>
-<td>it1  -= n</td>
-</tr>
-<tr>
-<td>n =  std::distance(it1, it2)</td>
-<td>n =  it2 - it1</td>
-</tr>
-</tbody>
-</table>
+<p>详见：<a href="../STL/">STL</a></p>
 <h3 id="container">Container（容器）<a class="headerlink" href="#container" title="Permanent link">&para;</a></h3>
-<h4 id="vector">Vector<a class="headerlink" href="#vector" title="Permanent link">&para;</a></h4>
-<p>vector的<code>size</code>和<code>capacity</code>是分离的，并不是每次<code>push_back</code>都会改变<code>capacity</code>。（参考：<a href="https://hackingcpp.com/cpp/lang/memory_basics.html"><code>std::vector</code> Size vs. Capacity</a>）</p>
+<h4 id="stdvector"><code>std::vector</code><a class="headerlink" href="#stdvector" title="Permanent link">&para;</a></h4>
+<p>vector的<code>size</code>和<code>capacity</code>是分离的，并不是每次<code>push_back</code>都会改变<code>capacity</code>。（参考：<a href="https://hackingcpp.com/cpp/lang/memory_basics.html">std::vector Size vs. Capacity</a>）</p>
 <p>当<code>capacity</code>改变时，就是重新分配了一次内存，会将原来位置的数据copy到新的位置。</p>
-<p><code>clear</code>只是将<code>size</code>变为0</p>
+<p><code>clear()</code>只是将<code>size</code>变为0</p>
 <p><code>shrink_to_fit()</code>将<code>capacity</code>缩回到<code>size</code>大小。</p>
-<p>一对迭代器<code>begin</code>和<code>end</code>就标记了一个区间(range)，区间可以是一个容器的全部，例如<code>{a.being(), a.end()}</code>，也可以通过加减得到一个去头去尾的子列表，例如<code>{a.begin() +1, a.end() + 1}</code>，相当于python的<code>a[1:-1]</code>。</p>
-<h4 id="set">Set<a class="headerlink" href="#set" title="Permanent link">&para;</a></h4>
+<p>一对迭代器<code>begin()</code>和<code>end()</code>就标记了一个区间(range)，区间可以是一个容器的全部，例如<code>{a.being(), a.end()}</code>，也可以通过加减得到一个去头去尾的子列表，例如<code>{a.begin() +1, a.end() + 1}</code>，相当于python的<code>a[1:-1]</code>。</p>
+<h4 id="stdlist"><code>std::list</code><a class="headerlink" href="#stdlist" title="Permanent link">&para;</a></h4>
+<h4 id="stdstring"><code>std::string</code><a class="headerlink" href="#stdstring" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">auto</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;seven of&quot;</span><span class="n">s</span><span class="p">;</span><span class="w">  </span><span class="c1">// type of s1 is std::string</span>
+</code></pre></div></td></tr></table></div>
+<table>
+<thead>
+<tr>
+<th><code>R"(...)"</code></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>R"(raw "C"-string c:\users\joe)"</code></td>
+<td><code>char const[]</code></td>
+<td>C++11</td>
+</tr>
+<tr>
+<td><code>R"(raw "std"-string c:\users\moe)"s</code></td>
+<td><code>std::string</code></td>
+<td>C++14</td>
+</tr>
+</tbody>
+</table>
+<p><code>std::getline</code></p>
+<p><code>&lt;cctype&gt;</code>中的帮手函数</p>
+<blockquote>
+<p>isupper(c) 判断是否为大写字母（‘A’ &lt;= c &amp;&amp; c &lt;= ‘Z’）</p>
+<p>islower(c) 判断是否为小写字母（‘a’ &lt;= c &amp;&amp; c &lt;= ‘z’）</p>
+<p>isalpha(c) 判断是否为字母（包括大写和小写）</p>
+<p>isdigit(c) 判断是否为数字（‘0’ &lt;= c &amp;&amp; c &lt;= ‘9’）</p>
+<p>isalnum(c) 判断是否为字母或数字（包括字母和数字）</p>
+<p>isxdigit(c) 判断是否为十六进制数字（0~9 或 a-f 或 A-F）</p>
+<p>isspace(c) 判断是否为等价于空格的字符（‘ ’ 或 ‘\t’ 或 ‘\n’ 或 ‘\v’ 或 ‘\r’）</p>
+<p>iscntrl(c) 判断是否为控制字符（0 &lt;= c &amp;&amp; c &lt;= 31 或 c == 127）</p>
+<p>toupper(c) 把小写字母转换为大写字母，如果不是则原封不动返回</p>
+<p>tolower(c) 把大写字母转换为小写字母，如果不是则原封不动返回</p>
+</blockquote>
+<p>C 语言规定，双引号包裹的字符串是 <code>const char *</code> 类型的</p>
+<p><code>using namespace std::literials</code> 可以使用 <code>"hello"s</code> 来定义string了</p>
+<p><code>&lt;sstream&gt;</code>中的<code>stringstream</code></p>
+<p>to_string模板：<a href="https://www.bilibili.com/video/BV1ja411M7Di/">【C++标准库】std::string用法指南&amp;源码剖析</a> 1:26:57</p>
+<p>cout 有输出的精度，当需要输出高精度的数时(比如 3.14159265358)，需要使用<code>std::setprecision(100)</code>来设置精度</p>
+<h4 id="stdstack"><code>std::stack</code><a class="headerlink" href="#stdstack" title="Permanent link">&para;</a></h4>
+<h4 id="stdqueue"><code>std::queue</code><a class="headerlink" href="#stdqueue" title="Permanent link">&para;</a></h4>
+<h4 id="stdset"><code>std::set</code><a class="headerlink" href="#stdset" title="Permanent link">&para;</a></h4>
 <p>Set是用红黑树实现的，内部的元素从小到大排序。</p>
 <p>set中查询是否存在某个元素：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -3923,50 +4445,97 @@
 </tr>
 </tbody>
 </table>
-<h4 id="string">String<a class="headerlink" href="#string" title="Permanent link">&para;</a></h4>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>auto s1 = &quot;seven of&quot;s;  // type of s1 is std::string
-</code></pre></div></td></tr></table></div>
+<h4 id="stdmap"><code>std::map</code><a class="headerlink" href="#stdmap" title="Permanent link">&para;</a></h4>
+<h3 id="iterator">Iterator（迭代器）<a class="headerlink" href="#iterator" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th><code>R"(...)"</code></th>
 <th></th>
-<th></th>
+<th><strong>提供的运算符重载</strong></th>
+<th><strong>具有此迭代器的容器</strong></th>
+<th><strong>相应的</strong> <strong>C++20 concept</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>R"(raw "C"-string c:\users\joe)"</code></td>
-<td><code>char const[]</code></td>
-<td>C++11</td>
+<td>输入迭代器</td>
+<td>*（可读取），!=，==，++（一次性）</td>
+<td>istream_iterator</td>
+<td>input_iterator</td>
 </tr>
 <tr>
-<td><code>R"(raw "std"-string c:\users\moe)"s</code></td>
-<td><code>std::string</code></td>
-<td>C++14</td>
+<td>输出迭代器</td>
+<td>*（可写入），!=，==，++（一次性）</td>
+<td>back_insert_iterator</td>
+<td>output_iterator</td>
+</tr>
+<tr>
+<td>前向迭代器</td>
+<td>*，!=，==，++</td>
+<td>forward_list</td>
+<td>forward_iterator</td>
+</tr>
+<tr>
+<td>双向迭代器</td>
+<td>*，!=，==，++，--</td>
+<td>set，map，list</td>
+<td>bidirectional_iterator</td>
+</tr>
+<tr>
+<td>随机访问迭代器</td>
+<td>*，!=，==，++，--，+，-，+=，-=，[]</td>
+<td>vector，array，deque</td>
+<td>random_access_iterator</td>
+</tr>
+<tr>
+<td>迭代器外包装</td>
+<td>和他所包装的迭代器保持一致</td>
+<td>reverse_iterator</td>
+<td>和所包装的迭代器一致</td>
 </tr>
 </tbody>
 </table>
-<p><code>std::getline</code></p>
-<p><code>&lt;cctype&gt;</code>中的帮手函数</p>
-<blockquote>
-<p>isupper(c) 判断是否为大写字母（‘A’ &lt;= c &amp;&amp; c &lt;= ‘Z’）</p>
-<p>islower(c) 判断是否为小写字母（‘a’ &lt;= c &amp;&amp; c &lt;= ‘z’）</p>
-<p>isalpha(c) 判断是否为字母（包括大写和小写）</p>
-<p>isdigit(c) 判断是否为数字（‘0’ &lt;= c &amp;&amp; c &lt;= ‘9’）</p>
-<p>isalnum(c) 判断是否为字母或数字（包括字母和数字）</p>
-<p>isxdigit(c) 判断是否为十六进制数字（0~9 或 a-f 或 A-F）</p>
-<p>isspace(c) 判断是否为等价于空格的字符（‘ ’ 或 ‘\t’ 或 ‘\n’ 或 ‘\v’ 或 ‘\r’）</p>
-<p>iscntrl(c) 判断是否为控制字符（0 &lt;= c &amp;&amp; c &lt;= 31 或 c == 127）</p>
-<p>toupper(c) 把小写字母转换为大写字母，如果不是则原封不动返回</p>
-<p>tolower(c) 把大写字母转换为小写字母，如果不是则原封不动返回</p>
-</blockquote>
-<p>C 语言规定，双引号包裹的字符串是 <code>const char *</code> 类型的</p>
-<p><code>using namespace std::literials</code> 可以使用 <code>"hello"s</code> 来定义string了</p>
-<p><code>&lt;sstream&gt;</code>中的<code>stringstream</code></p>
-<p>to_string模板：<a href="https://www.bilibili.com/video/BV1ja411M7Di/">【C++标准库】std::string用法指南&amp;源码剖析</a> 1:26:57</p>
-<p>cout 有输出的精度，当需要输出高精度的数时(比如 3.14159265358)，需要使用<code>std::setprecision(100)</code>来设置精度</p>
-<p>智能指针</p>
+<p>包含关系：前向迭代器＞双向迭代器＞随机访问迭代器</p>
+<p>这意味着如果一个STL模板函数（比如<code>std::find</code>）要求迭代器是<strong>前向迭代器</strong>即可，那么也可以给他随机访问迭代器，因为<strong>前向迭代器</strong>是<strong>随机访问迭代器</strong>的子集。</p>
+<p>迭代器帮手函数</p>
+<table>
+<thead>
+<tr>
+<th><strong>帮手函数</strong></th>
+<th><strong>等价于</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>it2  = std::next(it1, n)</td>
+<td>it2  = it1 + n</td>
+</tr>
+<tr>
+<td>it2  = std::prev(it1, n)</td>
+<td>it2  = it1 - n</td>
+</tr>
+<tr>
+<td>it2  = std::next(it1)</td>
+<td>it2  = it1 + 1</td>
+</tr>
+<tr>
+<td>it2  = std::prev(it1)</td>
+<td>it2  = it1 - 1</td>
+</tr>
+<tr>
+<td>std::advance(it1,  n)</td>
+<td>it1  += n</td>
+</tr>
+<tr>
+<td>std::advance(it1,  -n)</td>
+<td>it1  -= n</td>
+</tr>
+<tr>
+<td>n =  std::distance(it1, it2)</td>
+<td>n =  it2 - it1</td>
+</tr>
+</tbody>
+</table>
 <h3 id="memory">Memory<a class="headerlink" href="#memory" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -4001,8 +4570,6 @@
 </table>
 <p>Heap（堆）</p>
 <p>Stack（栈）</p>
-<p>使用<code>std::swap</code>来交换两个变量的值(<code>#include &lt;utility&gt;</code>)</p>
-<p><code>i++</code>和<code>++i</code>效果差不多，但是推荐使用<code>++i</code>，在使用迭代器时可以减少一些性能开销。</p>
 <p>初始化列表</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4015,16 +4582,20 @@
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>其中<code>{1, 2, 3, 4, 5}</code>和<code>{-3, -2, -1, 0}</code>就是初始化列表，即<code>std::initializer_list&lt;int&gt;</code>，是<code>c++11</code>新增的内容。</p>
-<p>C++中获取C数组的长度可以用<code>std::size(b)</code>，而不是<code>sizeof(b)/sizeof(b[0])</code></p>
-<p><code># pragma once</code></p>
-<h3 id="_1">面向对象三大特性<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h2 id="_5">面向对象编程<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>面向对象编程（Object-Oriented Programming，简称 OOP）是一种编程范式，其核心思想是将现实世界中的事物抽象为程序中的对象。面向对象编程的三大特性是封装、继承和多态。下面将详细介绍这三个特性：</p>
 <ul>
 <li><strong>继承（Inheritance）</strong>： 继承是指一个类（子类）可以继承另一个类（父类）的属性和方法。子类除了拥有父类的特性外，还可以具有自己特有的属性和方法。这种方式可以实现代码的重用和模块化，减少重复代码的编写。继承有助于实现类之间的层次关系，并有助于理解和维护代码结构。</li>
 <li><strong>封装（Encapsulation）</strong>： 封装是指将数据和操作数据的方法包装在一起，形成一个独立的“对象”。这样的设计有助于降低系统的复杂性，提高可维护性。封装的主要目的是增强安全性，保护数据以免被外部代码随意访问和修改。为此，通常将对象的属性设为私有（private）或受保护（protected），并通过公共（public）方法（如 getter 和 setter 方法）来访问和修改这些属性。</li>
 <li><strong>多态（Polymorphism）</strong>： 多态是指允许不同类的对象对同一消息作出响应，即同一方法名可以在不同类中具有不同的实现。多态实现的主要方式有两种：接口实现和重写（覆盖）。</li>
 </ul>
-<h3 id="_2">命名空间<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>面向对象的设计模式(OOP Design Patterns)</p>
+<blockquote>
+<p>Composite, Decorator, Bridge, Visitor, Proxy, Façade, ...
+  Iterator, Strategy, Observer, Command, Template Method, ...
+  Factory Method, Abstract Factory, Singleton, ...</p>
+</blockquote>
+<h3 id="_6">命名空间<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -4037,13 +4608,59 @@
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">MyNameSpace</span><span class="o">::</span><span class="n">foo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="constexpr">常量表达式和constexpr<a class="headerlink" href="#constexpr" title="Permanent link">&para;</a></h3>
+<h3 id="_7">生命周期<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>自动存储周期（栈上） - 函数的局部变量，自动析构</li>
+<li>动态存储周期（堆上） - 通过 new 创建的变量，delete 时析构</li>
+<li>静态存储周期（static 和 inline） - 全局变量，程序结束时析构</li>
+</ul>
 <h2 id="class">Class<a class="headerlink" href="#class" title="Permanent link">&para;</a></h2>
 <h3 id="constructor">构造函数(Constructor)<a class="headerlink" href="#constructor" title="Permanent link">&para;</a></h3>
-<h4 id="default-constructor">默认构造函数(Default Constructor)<a class="headerlink" href="#default-constructor" title="Permanent link">&para;</a></h4>
-<h4 id="parameterized-constructor">带参数构造函数(Parameterized Constructor)<a class="headerlink" href="#parameterized-constructor" title="Permanent link">&para;</a></h4>
-<h4 id="copy-constructor">拷贝构造函数(Copy Constructor)<a class="headerlink" href="#copy-constructor" title="Permanent link">&para;</a></h4>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<p>详见：<a href="../Class/">Class</a></p>
+<ol>
+<li>
+<p>默认构造函数(Default Constructor)
+     <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="c1">// 显式定义默认构造函数</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">  </span><span class="c1">// 初始化成员</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="c1">// 使用：MyClass obj;</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>带参构造函数(Parameterized Constructor)
+     <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Point</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">Point</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">x_</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">y_</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">  </span><span class="c1">// 使用初始化列表</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x_</span><span class="p">,</span><span class="w"> </span><span class="n">y_</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="c1">// 使用：Point p(10, 20);</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>拷贝构造函数(Copy Constructor)
+     <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
@@ -4058,10 +4675,12 @@
 <span class="w">    </span><span class="n">MyTime</span><span class="w"> </span><span class="nf">t2</span><span class="p">(</span><span class="n">t1</span><span class="p">);</span><span class="w">  </span><span class="c1">// copy constructor</span>
 <span class="w">    </span><span class="n">MyTime</span><span class="w"> </span><span class="n">t3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t1</span><span class="p">;</span><span class="w">  </span><span class="c1">// copy constructor</span>
 <span class="p">}</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <p>如果没有定义 copy constructor 编译器默认生成一个,  copy constructor 会复制所有非静态成员.</p>
-<h4 id="copy-assignment-constructor">拷贝赋值构造函数(copy assignment constructor)<a class="headerlink" href="#copy-assignment-constructor" title="Permanent link">&para;</a></h4>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+</li>
+<li>
+<p>拷贝赋值构造函数(copy assignment constructor)
+     <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
@@ -4076,17 +4695,76 @@
 <span class="w">    </span><span class="n">MyTime</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t1</span><span class="p">;</span><span class="w">  </span><span class="c1">// copy constructor</span>
 <span class="w">    </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t1</span><span class="p">;</span><span class="w">  </span><span class="c1">// copy assignment</span>
 <span class="p">}</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <p>如果没有定义 copy assignment constructor 编译器默认生成一个, copy assignment constructor 会复制所有非静态成员.</p>
-<h4 id="move-constructor">移动构造函数(Move Constructor)<a class="headerlink" href="#move-constructor" title="Permanent link">&para;</a></h4>
-<h3 id="_3">类的继承<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+</li>
+<li>
+<p>移动构造函数(Move Constructor)
+     <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Array</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">Array</span><span class="p">(</span><span class="n">Array</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span>
+<span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">data_</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="p">),</span><span class="w"> </span><span class="n">size_</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">size_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w">  </span><span class="c1">// 置空原指针，防止资源释放</span>
+<span class="w">        </span><span class="n">other</span><span class="p">.</span><span class="n">size_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">data_</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">size_</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="c1">// 使用：Array a2 = std::move(a1); // 移动语义</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+</ol>
+<h4 id="rule-of-threefive">Rule of Three/Five (三/五法则)<a class="headerlink" href="#rule-of-threefive" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p><strong>Rule of Three (C++98/03)：</strong> 如果一个类需要显式地定义以下其中一项：</p>
+<ul>
+<li><strong>析构函数 (Destructor)</strong></li>
+<li><strong>拷贝构造函数 (Copy Constructor)</strong></li>
+<li><strong>拷贝赋值运算符 (Copy Assignment Operator)</strong>
+    那么它很可能也需要显式地定义<strong>全部三项</strong>。
+    <strong>为什么？</strong> 这通常意味着你的类正在管理某种资源（动态内存、文件句柄、网络连接、锁等）。编译器生成的默认拷贝操作（浅拷贝）对于资源管理类通常是错误的，会导致双重释放、资源泄漏等问题。如果你定义了析构函数来释放资源，就必须确保拷贝操作也能正确处理资源（通常是深拷贝或禁止拷贝）。</li>
+</ul>
+</li>
+<li>
+<p><strong>Rule of Five (C++11 及以后)：</strong> 在 Rule of Three 的基础上，增加了对移动语义的支持。如果一个类需要显式地定义以下其中一项：</p>
+<ul>
+<li>析构函数</li>
+<li>拷贝构造函数</li>
+<li>拷贝赋值运算符</li>
+<li><strong>移动构造函数 (Move Constructor)</strong></li>
+<li><strong>移动赋值运算符 (Move Assignment Operator)</strong>
+    那么它很可能也需要显式地定义<strong>全部五项</strong>（或者仔细考虑哪些需要定义，哪些需要删除 <code>=delete</code>，哪些可以用默认 <code>=default</code>）。
+    <strong>为什么？</strong> 移动语义允许高效地“窃取”资源。如果你定义了析构函数（表明管理资源），并且你希望你的类支持高效的移动操作（而不是回退到拷贝），那么你需要定义移动构造和移动赋值来正确地转移资源所有权。同时，你也需要确保拷贝操作的行为是正确的（深拷贝或禁止）。</li>
+</ul>
+</li>
+</ol>
+<h3 id="_8">析构函数<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:" /><strong>虚类的析构函数必须是虚的</strong></p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:" /><strong>析构函数的逆天大坑</strong></p>
+<p>定义了析构函数，就<strong>必须删除移动构造函数、移动赋值函数、拷贝构造函数、拷贝赋值函数</strong>！</p>
+<p>原因很复杂，整个故事要从 boost 当年如何设计出右值引用到图灵的停机问题讲起，讲了你也记不住，只需要记住结论：</p>
+<p>如果你要定义析构函数，就<strong>必须删除移动构造函数、移动赋值函数、拷贝构造函数、拷贝赋值函数</strong>！</p>
+<h3 id="_9">类的继承<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>继承类型：</p>
 <ul>
 <li>public 继承</li>
 <li>protected 继承</li>
 <li>private 继承</li>
 </ul>
-<h4 id="_4">定义不能被继承的类<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<h4 id="_10">定义不能被继承的类<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
 <p>在 C++ 中，要设计一个不能被继承的类，可以使用<strong>关键字</strong> <code>final</code>。将 <code>final</code> 关键字添加到类定义中，可以阻止其他类继承这个类。如果尝试继承带有 <code>final</code> 关键字的类，编译器将报错。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4104,8 +4782,207 @@
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>
 </code></pre></div></td></tr></table></div>
 <h2 id="template">模板(Template)<a class="headerlink" href="#template" title="Permanent link">&para;</a></h2>
-<h3 id="template-function">模板函数(Template Function)<a class="headerlink" href="#template-function" title="Permanent link">&para;</a></h3>
-<h3 id="template-class">模板类(Template Class)<a class="headerlink" href="#template-class" title="Permanent link">&para;</a></h3>
+<p>使用</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p>或</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="template-function">模板函数(Template Function)<a class="headerlink" href="#template-function" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="n">T</span><span class="w"> </span><span class="n">Vector3</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">getMax</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">m_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_vec</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_vec</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="template-class">模板类(Template Class)<a class="headerlink" href="#template-class" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Vector3</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">Vector3</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">v1</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">v2</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">v3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">m_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v1</span><span class="p">;</span>
+<span class="w">        </span><span class="n">m_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v2</span><span class="p">;</span>
+<span class="w">        </span><span class="n">m_vec</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v3</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="n">getMax</span><span class="p">();</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="n">m_vec</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="raiiresource-acquisition-is-initialization">RAII(Resource Acquisition Is Initialization)<a class="headerlink" href="#raiiresource-acquisition-is-initialization" title="Permanent link">&para;</a></h2>
+<p><strong>RAII（Resource Acquisition Is Initialization）</strong> 是 C++ 的核心编程范式，直译为“资源获取即初始化”。它利用对象生命周期管理资源（如内存、文件句柄、网络连接等），确保资源安全获取和自动释放，避免泄漏。核心思想：<strong>资源在构造函数中获取，在析构函数中释放</strong>。</p>
+<h3 id="_11">核心原理<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ol>
+<li>构造时获取资源（Acquisition）</li>
+<li>析构时释放资源（Release）</li>
+<li>对象生命周期绑定资源管理</li>
+</ol>
+<h3 id="_12">典型应用场景<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fstream&gt;</span><span class="c1"> // 标准库中的 RAII 范例</span>
+
+<span class="c1">// 示例 1：文件操作（自动关闭）</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">readFile</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">ifstream</span><span class="w"> </span><span class="n">file</span><span class="p">(</span><span class="s">&quot;data.txt&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// 构造时打开文件（获取资源）</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">line</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// 离开作用域时 file 析构 → 自动关闭文件（释放资源）</span>
+
+<span class="c1">// 示例 2：内存管理（智能指针）</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;memory&gt;</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">manageMemory</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span><span class="w"> </span><span class="c1">// 构造时分配内存</span>
+<span class="w">    </span><span class="c1">// 使用 ptr...</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// 离开作用域时 unique_ptr 析构 → 自动释放内存</span>
+
+<span class="c1">// 示例 3：自定义锁管理</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MutexLock</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">MutexLock</span><span class="p">(</span><span class="n">Mutex</span><span class="o">&amp;</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">mutex</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">mutex</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// 构造时加锁</span>
+<span class="w">    </span><span class="o">~</span><span class="n">MutexLock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">mutex</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w">                </span><span class="c1">// 析构时解锁</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="n">Mutex</span><span class="o">&amp;</span><span class="w"> </span><span class="n">mutex</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">safeWrite</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Mutex</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MutexLock</span><span class="w"> </span><span class="n">lock</span><span class="p">(</span><span class="n">m</span><span class="p">);</span><span class="w"> </span><span class="c1">// 进入作用域时加锁</span>
+<span class="w">        </span><span class="c1">// 临界区操作...</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="c1">// 离开作用域时 lock 析构 → 自动解锁</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="raii">RAII 的核心优势<a class="headerlink" href="#raii" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>优势</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>异常安全</strong></td>
+<td>即使抛出异常，析构函数仍会调用</td>
+</tr>
+<tr>
+<td><strong>避免泄漏</strong></td>
+<td>资源释放由编译器保证</td>
+</tr>
+<tr>
+<td><strong>简化代码</strong></td>
+<td>无需手动释放资源</td>
+</tr>
+<tr>
+<td><strong>强资源所有权</strong></td>
+<td>资源与对象生命周期绑定</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_13">与手动管理的对比<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// 非 RAII 风格（危险！）</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">unsafeExample</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span><span class="w"> </span><span class="c1">// 手动分配</span>
+<span class="w">    </span><span class="c1">// ... 使用 arr</span>
+<span class="w">    </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">arr</span><span class="p">;</span><span class="w"> </span><span class="c1">// 必须手动释放（可能忘记或因异常跳过）</span>
+<span class="p">}</span>
+
+<span class="c1">// RAII 风格（安全）</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">safeExample</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">arr</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w"> </span><span class="c1">// 构造时分配</span>
+<span class="w">    </span><span class="c1">// ... 使用 arr</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// 自动释放（即使抛出异常）</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="raii_1"><strong>RAII 的最佳实践</strong><a class="headerlink" href="#raii_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>优先使用标准库工具</strong></p>
+<ul>
+<li>内存管理：<code>std::unique_ptr</code>, <code>std::shared_ptr</code>, <code>std::vector</code></li>
+<li>文件处理：<code>std::ifstream</code>/<code>std::ofstream</code></li>
+<li>线程同步：<code>std::lock_guard</code></li>
+</ul>
+</li>
+<li>
+<p><strong>自定义 RAII 类</strong></p>
+<ul>
+<li>构造函数获取资源（打开文件、分配内存、加锁）</li>
+<li>析构函数释放资源（关闭文件、释放内存、解锁）</li>
+<li>禁用复制/移动（或实现深拷贝/转移所有权）</li>
+</ul>
+</li>
+<li>
+<p><strong>遵循规则三/五/零</strong></p>
+<ul>
+<li>管理资源时需正确处理拷贝/移动语义</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>📌 <strong>关键结论</strong>：RAII 是 C++ 区别于其他语言的核心特性，它通过对象生命周期自动化资源管理，是现代 C++ 避免资源泄漏的基石。几乎所有 C++ 标准库组件（容器、智能指针、流等）都基于 RAII 实现。</p>
+</blockquote>
 <h2 id="virtual-functions">虚函数 (virtual functions)<a class="headerlink" href="#virtual-functions" title="Permanent link">&para;</a></h2>
 <p>虚函数（Virtual Function）是一种特殊的成员函数，主要用于实现多态（Polymorphism）。虚函数允许基类的指针或引用调用派生类的成员函数，从而实现了对函数的动态绑定。这种绑定方式使得程序在运行时根据对象的实际类型来选择调用哪个函数，提高了代码的可扩展性和维护性。</p>
 <p>注意事项</p>
@@ -4209,8 +5086,224 @@
 <p><strong>总结</strong></p>
 <p>带有虚函数（前面加入<code>virtual</code>）的类，编译器会为其分配一个虚函数表，里面记录的是虚函数的函数的地址。当该类被继承时，子类如果重写了虚函数就在子类的虚函数表中将父类的虚函数覆盖，否则继承父类的虚函数地址。</p>
 <p>实例化之后，内存分配给对象虚函数指针+成员变量，虚函数指针指向虚函数表，这样程序运行的时候，通过虚函数指针找到虚函数表就是根据对象的类型来指向的，也就是实现了<code>运行时多态</code>。</p>
-<h3 id="_5">多态<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<h2 id="_6">参考资料<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="_14">多态<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<h2 id="_15">并行编程<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<p>详见：<a href="../%E5%B9%B6%E8%A1%8C%E7%BC%96%E7%A8%8B/">并行编程</a></p>
+<h2 id="_16">泛型编程<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
+<p>详见：<a href="../%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/">泛型编程</a></p>
+<h2 id="_17">内存管理<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
+<p>详见：<a href="../%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a></p>
+<h2 id="_18">设计模式<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
+<p>详见：<a href="../%E5%B8%B8%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">常用的设计模式</a></p>
+<h2 id="_19">拾遗<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
+<h3 id="_20">零散知识点<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<h4 id="explicit"><code>explicit</code> 关键字<a class="headerlink" href="#explicit" title="Permanent link">&para;</a></h4>
+<h4 id="containers-library">Containers library<a class="headerlink" href="#containers-library" title="Permanent link">&para;</a></h4>
+<p>Sequence containers：</p>
+<p>Associative containers：</p>
+<p>Unordered associate containers：</p>
+<p><code>queue</code> 和 <code>priority_queue</code></p>
+<p><code>map</code> 和 <code>unordered_map</code></p>
+<h4 id="constexpr-const"><code>constexpr</code> 和 <code>const</code> 关键字<a class="headerlink" href="#constexpr-const" title="Permanent link">&para;</a></h4>
+<p>用 <code>constexpr</code>：</p>
+<ul>
+<li>需要编译期确定的量（数组大小、模板参数等）</li>
+<li>强制函数/对象在编译期可计算</li>
+<li>性能敏感的常量计算</li>
+</ul>
+<p>用 <code>const</code>：</p>
+<ul>
+<li>运行时常量</li>
+<li>函数参数/返回值的只读约束</li>
+<li>类成员常量（非静态成员不能用 <code>constexpr</code>）</li>
+</ul>
+<p><strong>最佳实践</strong>：优先用 <code>constexpr</code> 表示编译期常量，用 <code>const</code> 表示运行时常量或接口约束。C++17 起 <code>constexpr</code> 可替代大部分 <code>const</code> 的编译期场景。</p>
+<h4 id="size_tsizeoftypedef"><code>size_t</code>、<code>sizeof()</code>、<code>typedef</code><a class="headerlink" href="#size_tsizeoftypedef" title="Permanent link">&para;</a></h4>
+<p>实际上，<code>size_t</code> 是个无符号整型，它并不是一个全新的数据类型，更不是一个关键字。<code>size_t</code> 是由 <code>typedef</code> 定义而来的，我们在很多标准库头文件中都能发现。</p>
+<p>C 标准头文件<code>&lt;stddef.h&gt;</code>中可以找到<code>size_t</code>的实际定义。</p>
+<p>通常用于：
+(1) 表示对象大小和内存分配；
+(2) 表示容器大小和索引；
+(3) 内存和字符串操作；</p>
+<p>为什么需要 <code>size_t</code>：
+(1) <strong>平台无关性</strong>：自动适配不同架构（32位系统通常为 4 字节，64位系统为 8 字节）
+(2) <strong>足够大的表示范围</strong>：能表示系统中最大可能对象的大小（包括整个内存空间）
+(3) <strong>类型安全</strong>：区分普通整数和大小/索引值
+(4) <strong>标准化</strong>：所有标准库容器和内存相关函数统一使用</p>
+<h4 id="struct-class"><code>struct</code> 和 <code>class</code> 的区别<a class="headerlink" href="#struct-class" title="Permanent link">&para;</a></h4>
+<p>在 C++ 中，<code>struct</code> 和 <code>class</code> 都用于定义自定义数据类型，它们的核心功能几乎相同，主要区别在于<strong>默认访问权限</strong>和<strong>默认继承方式</strong>。</p>
+<ol>
+<li>
+<p>默认访问权限不同：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// struct 默认所有成员为 public</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">Point</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">     </span><span class="c1">// 默认为 public</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w">     </span><span class="c1">// 默认为 public</span>
+<span class="p">};</span>
+
+<span class="c1">// class 默认所有成员为 private</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Circle</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">r</span><span class="p">;</span><span class="w">  </span><span class="c1">// 默认为 private</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">area</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mf">3.14</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>默认继承方式不同</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">Base</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">data</span><span class="p">;</span><span class="w"> </span><span class="p">};</span>
+
+<span class="c1">// struct 继承默认为 public</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">DerivedStruct</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">// 可直接访问 Base::data (public)</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DerivedClass</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">// 默认为 private 继承，Base::data 不可直接访问</span>
+<span class="p">};</span>
+</code></pre></div></td></tr></table></div>
+</li>
+</ol>
+<h4 id="_21">左值引用和右值引用<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h4>
+<p>在 C++ 中，<strong>左值引用（lvalue reference）</strong> 和 <strong>右值引用（rvalue reference）</strong> 是两种不同的引用类型，它们的主要区别在于 <strong>绑定对象的类别（左值 or 右值）</strong> 和 <strong>用途（拷贝优化 or 资源转移）</strong>。</p>
+<p><strong>左值</strong>是指既能出现在等号左边也能出现在等号右边的变量(或表达式)，<strong>右值</strong>则只能出现在等号右边。</p>
+<ul>
+<li>
+<p><strong>左值（lvalue）</strong>：可以取地址、有名字的持久对象（如变量、函数返回的引用等）。
+    <strong>绑定到左值（lvalue）</strong> 的引用，用 <code>&amp;</code> 表示。</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w">  </span>
+<span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">lref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">  </span><span class="c1">// ✅ 左值引用绑定左值</span>
+<span class="n">lref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w">      </span><span class="c1">// 修改 x 的值</span>
+
+<span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">bad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span><span class="w">  </span><span class="c1">// ❌ 错误：不能绑定到右值（临时对象）</span>
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p><strong>右值（rvalue）</strong>：临时对象、即将销毁的对象（如字面量、<code>std::move</code> 后的对象）。
+    <strong>绑定到右值（rvalue）</strong> 的引用，用 <code>&amp;&amp;</code> 表示。</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">int</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">rref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span><span class="w">          </span><span class="c1">// ✅ 右值引用绑定右值</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">rref2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w">  </span><span class="c1">// ✅ 使用 std::move 转为右值</span>
+
+<span class="kt">int</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">bad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">            </span><span class="c1">// ❌ 错误：不能直接绑定左值</span>
+</code></pre></div></td></tr></table></div>
+</li>
+</ul>
+<h4 id="stdmap_1"><code>std::map</code><a class="headerlink" href="#stdmap_1" title="Permanent link">&para;</a></h4>
+<p>读取元素时，统一用 <code>at()</code></p>
+<p>写入元素时，统一用 <code>[]</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="s">&quot;key1&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// 读</span>
+<span class="n">m</span><span class="p">[</span><span class="s">&quot;key2&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val</span><span class="p">;</span><span class="w">  </span><span class="c1">// 写</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_22">浅拷贝与深拷贝<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h4>
+<p><strong>浅拷贝(Shallow Copy)</strong>和<strong>深拷贝(Deep Copy)</strong></p>
+<h4 id="stdpair"><code>std::pair</code> 的用法和优势<a class="headerlink" href="#stdpair" title="Permanent link">&para;</a></h4>
+<p><code>std::pair</code> 是一个简单但极其有用的工具，其核心优势在于：</p>
+<ol>
+<li><strong>轻量高效</strong>：零开销抽象</li>
+<li><strong>通用性强</strong>：适用于各种场景</li>
+<li><strong>与 STL 深度集成</strong>：容器和算法的关键组成部分</li>
+<li><strong>类型安全</strong>：编译时类型检查</li>
+<li><strong>现代特性支持</strong>：结构化绑定、移动语义等</li>
+</ol>
+<p>使用场景建议：</p>
+<ul>
+<li>需要返回两个值时​ ➔ 替代输出参数</li>
+<li>创建简单键值对 ➔ 替代简单结构体</li>
+<li>需要临时组合数据 ➔ 避免定义临时结构</li>
+<li>与 STL 算法配合 ➔ 利用内置比较操作</li>
+</ul>
+<p>当需要组合超过两个值时，可升级到 <code>std::tuple</code>，但 <code>std::pair</code> 在二元数据组合场景中仍是最简洁高效的选择。</p>
+<h4 id="stdtuple"><code>std::tuple</code><a class="headerlink" href="#stdtuple" title="Permanent link">&para;</a></h4>
+<p>tuple 用于函数多个返回值</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;tuple&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mysqrt</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0.f</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)};</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">};</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">success</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mysqrt</span><span class="p">(</span><span class="mf">4.f</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">success</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Succeed!, the result is %.2f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Failed, the input is lower than 0</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="stdshared_ptr"><code>std::shared_ptr</code><a class="headerlink" href="#stdshared_ptr" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">mysql_connection</span><span class="w"> </span><span class="o">*</span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mysql_connect</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">);</span>
+<span class="n">mysql_execute</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;drop database paolu&quot;</span><span class="p">);</span>
+<span class="n">mysql_close</span><span class="p">(</span><span class="n">conn</span><span class="p">);</span><span class="w"> </span><span class="c1">// 用户可能忘记关闭连接！破坏库设计者想要的用法</span>
+</code></pre></div></td></tr></table></div>
+<p><code>std::shared_ptr</code> 小妙招：构造函数的第二个参数可以指定释放函数，代替默认的 delete</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">auto</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">mysql_connection</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mysql_connect</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">mysql_close</span><span class="p">);</span>
+<span class="n">mysql_execute</span><span class="p">(</span><span class="n">conn</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;drop database paolu&quot;</span><span class="p">);</span>
+<span class="c1">// conn 离开作用域时，会自动调用 mysql_close，杜绝了一个出错的可能</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="_23">参考资料<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h2>
 <p>[1] <a href="https://www.bilibili.com/video/BV1Vf4y1P7pq">快速学习C和C++，基础语法和优化策略，学了不再怕指针(南科大计算机系原版)</a>, <a href="https://github.com/ShiqiYu/CPP">GitHub</a></p>
 <p>[2] <a href="https://space.bilibili.com/263032155/channel/collectiondetail?sid=53025">合集·高性能并行编程与优化 - 录播</a></p>
 <p>[3] <a href="https://space.bilibili.com/263032155/channel/collectiondetail?sid=599074">合集·现代C++项目实战</a></p>

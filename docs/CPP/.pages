@@ -1,4 +1,5 @@
 title: CPP
 collapse: true
 arrange:
-  - Linux, C, and C++ ChatGPT guidance.md
+  - index.md
+  - CPP 笔记.md

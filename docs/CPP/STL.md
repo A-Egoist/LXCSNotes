@@ -6,12 +6,14 @@
 
 C++的STL（Standard Template Library，标准模板库）是C++编程语言中的一个功能强大且广泛使用的库，它提供了一系列通用的模板类和函数，可以帮助程序员更高效地处理各种数据结构和算法问题。STL主要包含以下几个组件：
 
--   **容器（Containers）**：容器是用来存储和管理数据的数据结构，例如向量（vector）、列表（list）、队列（queue）、栈（stack）、集合（set）和映射（map）等。
+-   **容器（Containers）**：容器是用来存储和管理数据的数据结构，例如向量（vector）、链表（list）、队列（queue）、栈（stack）、集合（set）和映射（map）等。
 -   **迭代器（Iterators）**：迭代器是一种类似于指针的对象，可以用来遍历容器中的元素。迭代器为容器中的数据提供了统一的访问接口，使得算法可以与容器无缝地协同工作。
 -   **算法（Algorithms）**：STL提供了许多通用的算法，如排序、查找、合并等，这些算法可以直接应用于容器和迭代器。
 -   **函数对象（Function Objects）**：函数对象是实现了函数调用操作符（operator()）的类的对象。它们通常用作算法的自定义操作，使得算法可以具有更高的灵活性和可扩展性。函数对象有时被称为“仿函数”（functors）。STL还提供了一些预定义的函数对象，例如less、greater、plus等，它们可以用于算法中的比较和运算操作。
 -   **适配器（Adapters）**：适配器是一种特殊的容器或函数对象，它们可以修改或扩展其他容器或函数对象的行为。例如，队列（queue）和栈（stack）就是容器适配器，它们分别基于deque和vector容器实现。函数适配器包括bind、mem_fn等，可以用来组合和修改函数对象。
 -   **分配器（Allocators）**：分配器是一种管理内存分配和释放的机制，它们可以用于自定义容器的内存管理策略。STL中默认使用的分配器是std::allocator，但用户可以根据需要提供自定义的分配器。
+
+
 
 ### 2. vector与list的区别与应用？
 
@@ -36,8 +38,6 @@ vector和list是C++ STL中两种常用的序列容器，它们用于存储和管
 
 -   vector：当需要频繁访问元素，且插入和删除操作主要发生在容器末尾时，vector是一个好的选择。由于其连续内存特性，vector通常更适用于需要高缓存友好性的场景。
 -   list：当需要频繁在容器中间或开头进行插入和删除操作，且对随机访问性能要求不高时，list是一个更合适的选择。list也适用于那些不支持或不方便进行内存移动的数据类型的场景，因为list在插入和删除时不会引起元素的内存移动。
-
-
 
 
 
@@ -77,7 +77,7 @@ vector和list是C++ STL中两种常用的序列容器，它们用于存储和管
 
 
 
-### 5. unordered_map与map的区别？
+### 5. `std::unordered_map` 与 `std::map` 的区别？
 
 `map` 和 `unordered_map`都是 C++ 中常用的关联容器，它们允许使用键（key）来存储和检索值（value）。尽管它们有相似的功能，但它们的底层实现和性能特点有很大的不同。
 
@@ -111,7 +111,9 @@ vector和list是C++ STL中两种常用的序列容器，它们用于存储和管
 -   `map`：当需要一个有序容器时，或者当对键值对的插入、删除和查找时间复杂度要求为对数级别时，使用 `map` 是一个不错的选择。
 -   `unordered_map`：当不需要关心键值对顺序，且需要更快速的插入、删除和查找操作时，使用 `unordered_map` 更为合适。
 
-### 6. map、set是怎么实现的，红黑树是怎么能够同时实现这两种容器？ 为什么使用红黑树？
+
+
+### 6. `std::map`、`std::set` 是怎么实现的，红黑树是怎么能够同时实现这两种容器？ 为什么使用红黑树？
 
 `map` 和 `set` 都是基于红黑树实现的关联容器。红黑树是一种自平衡的二叉搜索树，它通过在每个节点上添加一个颜色属性（红色或黑色）来确保树保持大致平衡。红黑树的平衡特性可以保证插入、删除和查找操作具有较好的时间复杂度（O(log n)）。
 
@@ -130,23 +132,25 @@ vector和list是C++ STL中两种常用的序列容器，它们用于存储和管
 
 
 
-### 12. STL中list与queue之间的区别？
+### 12. STL中 `std::list` 与 `std::queue` 之间的区别？
 
-`std::list`： `std::list` 是一个双向链表容器，支持在常数时间内在任何位置插入和删除元素。它提供了随机访问迭代器，这意味着你可以在链表中向前和向后移动，但不能直接访问任意位置的元素。`std::list` 是一种非连续存储的数据结构，这意味着它的元素可能分散在内存中的不同位置。
+#### `std::list`
+
+ `std::list` 是一个双向链表容器，支持在常数时间内在任何位置插入和删除元素。它提供了随机访问迭代器，这意味着你可以在链表中向前和向后移动，但不能直接访问任意位置的元素。`std::list` 是一种非连续存储的数据结构，这意味着它的元素可能分散在内存中的不同位置。
 
 `std::list` 主要用途：
 
 -   当需要在容器中间插入或删除元素时，使用 `std::list` 效率较高。
 -   当不需要随机访问元素时，可以考虑使用 `std::list`。
 
-`std::queue`： `std::queue` 是一个容器适配器，它基于其他容器（如 `std::deque`、`std::list` 或 `std::vector`）实现了一个先进先出（FIFO）的队列。`std::queue` 提供了有限的接口，仅支持在队列尾部插入元素（`push`），在队列头部移除元素（`pop`）以及访问队列头部元素（`front`）和尾部元素（`back`）。`std::queue` 的底层容器决定了它的存储方式和性能特性。
+#### `std::queue`
+
+ `std::queue` 是一个容器适配器，它基于其他容器（如 `std::deque`、`std::list` 或 `std::vector`）实现了一个先进先出（FIFO）的队列。`std::queue` 提供了有限的接口，仅支持在队列尾部插入元素（`push`），在队列头部移除元素（`pop`）以及访问队列头部元素（`front`）和尾部元素（`back`）。`std::queue` 的底层容器决定了它的存储方式和性能特性。
 
 `std::queue` 主要用途：
 
 -   当需要实现先进先出（FIFO）策略时，使用 `std::queue` 是很自然的选择。
 -   当不需要在容器中间插入或删除元素时，可以使用 `std::queue`。
-
-
 
 
 
@@ -166,53 +170,67 @@ vector和list是C++ STL中两种常用的序列容器，它们用于存储和管
 #### 基本用法
 
 1. 包含头文件
-
-```cpp
-#include <queue>
-```
+    ```cpp
+    #include <queue>
+    ```
 
 2. 声明和初始化
+    ```cpp
+    // 默认使用 vector 作为容器，最大堆
+    std::priority_queue<int> max_heap;
+    ```
 
-```cpp
-// 默认使用 vector 作为容器，最大堆
-std::priority_queue<int> max_heap;
+    ```cpp
+    // 使用 vector 作为容器，大根堆
+    std::priority_queue<int, std::vector<int>, std::less<int> > max_heap;
+    ```
 
-// 使用 vector 作为容器，大根堆
-std::priority_queue<int, std::vector<int>, std::less<int> > max_heap;
+    ```cpp
+    // 使用 vector 作为容器，小根堆
+    std::priority_queue<int, std::vector<int>, std::greater<int> > min_heap;
+    ```
 
-// 使用 vector 作为容器，小根堆
-std::priority_queue<int, std::vector<int>, std::greater<int> > min_heap;
+    ```cpp
+    // 使用 deque 作为容器
+    std::priority_queue<int, std::deque<int>> pq_deque;
+    ```
 
-// 使用 deque 作为容器
-std::priority_queue<int, std::deque<int>> pq_deque;
+    ```cpp
+    // 使用自定义比较函数
+    auto cmp = [](int left, int right) { return left > right; };
+    std::priority_queue<int, std::vector<int>, decltype(cmp)> custom_heap(cmp);
+    ```
 
-// 使用自定义比较函数
-auto cmp = [](int left, int right) { return left > right; };
-std::priority_queue<int, std::vector<int>, decltype(cmp)> custom_heap(cmp);
+    ```cpp
+    // 使用pair和自定义比较函数
+    auto cmp = [](std::pair<int, int> &a, std::pair<int, int> &b) { return a.second > b.second; };
+    std::priority_queue<pair<int, int>, std::vector<pair<int, int> >, decltype(cmp)> custom_heap(cmp);
+    ```
 
-// 使用pair和自定义比较函数
-auto cmp = [](std::pair<int, int> &a, std::pair<int, int> &b) { return a.second > b.second; };
-std::priority_queue<pair<int, int>, std::vector<pair<int, int> >, decltype(cmp)> custom_heap(cmp);
+    ```cpp
+    // 使用自定义数据类型和自定义比较函数
+    struct Count {
+        int key;
+        int value;
+    };
+    auto cmp = [](const Count &a, const Count &b) { return a.value > b.value; };
+    std::priority_queue<Count, std::vector<Count>, decltype(cmp)> custom_heap(cmp);
+    ```
 
-// 使用自定义数据类型和自定义比较函数
-struct Count {
-    int key;
-    int value;
-};
-auto cmp = [](const Count &a, const Count &b) { return a.value > b.value; };
-std::priority_queue<Count, std::vector<Count>, decltype(cmp)> custom_heap(cmp);
-
-// 使用自定义数据类型和运算符重载
-struct Count {
-    int key;
-    int value;
-    // 成员函数只需一个参数（另一个是this）
-    bool operator<(const Count& other) {
-        return value < other.value;
+    ```cpp
+    // 使用自定义数据类型和运算符重载
+    struct Count {
+        int key;
+        int value;
+        // 成员函数只需一个参数（另一个是this）
+        bool operator<(const Count& other) {
+            return value < other.value;
+        }
     }
-}
-std::priority_queue<Count, std::vector<Count>, std::less<Count> > custom_heap;
-```
+    std::priority_queue<Count, std::vector<Count>, std::less<Count> > custom_heap;
+    ```
+
+    
 
 #### 注意事项
 
