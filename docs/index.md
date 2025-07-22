@@ -106,25 +106,26 @@ C++ Primer
 
 C++ 进阶路径：
 
-【1】C++ 基础
+*   [ ] 【1】C++ 基础
 
-【2】网络编程：libevent, muduo, libcurl, Linux系统库
+*   [ ] 【2】网络编程：libevent, muduo, libcurl, Linux系统库
 
-【3】客户端框架：Qt
+*   [ ] 【3】客户端框架：Qt
 
-【4】服务器框架：Nginx, HP-Socket, Skynet
+*   [ ] 【4】服务器框架：Nginx, HP-Socket, Skynet
 
-【5】RPC：gRPC, bRPC
+*   [ ] 【5】RPC：gRPC, bRPC
 
-【6】数据格式解析：JSON --> libjson, XML --> TinyXML, word --> Qt::QAxContainer
+*   [ ] 【6】数据格式解析：JSON --> libjson, XML --> TinyXML, word --> Qt::QAxContainer
 
-【7】数据库解析：MySQL官方库，sqlite
+*   [ ] 【7】数据库解析：MySQL官方库，sqlite
 
-【8】日志功能：Log4cpp
+*   [ ] 【8】日志功能：Log4cpp
 
-【9】序列化库：protobuf
+*   [ ] 【9】序列化库：protobuf
 
-【10】协议处理：
+*   [ ] 【10】协议处理：
+
 
 UE
 
