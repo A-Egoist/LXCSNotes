@@ -1212,6 +1212,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 大端序和小端序
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#6-mallocfree" class="md-nav__link">
     <span class="md-ellipsis">
       6. malloc与free实现原理？
@@ -1224,6 +1233,15 @@
   <a href="#12-free" class="md-nav__link">
     <span class="md-ellipsis">
       12. 被free回收了的内存是否立刻还给操作系统？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      内存池
     </span>
   </a>
   
@@ -1291,58 +1309,35 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    构造函数
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    析构函数与生命周期
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     泛型编程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%B1%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    类
     
   </span>
   
@@ -2873,6 +2868,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 大端序和小端序
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#6-mallocfree" class="md-nav__link">
     <span class="md-ellipsis">
       6. malloc与free实现原理？
@@ -2885,6 +2889,15 @@
   <a href="#12-free" class="md-nav__link">
     <span class="md-ellipsis">
       12. 被free回收了的内存是否立刻还给操作系统？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      内存池
     </span>
   </a>
   
@@ -2910,7 +2923,7 @@
 
 
 <h1 id="_1">内存管理<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>1 大端序和小端序</p>
+<h3 id="1">1 大端序和小端序<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <p>大端序（Big-endian）和小端序（Little-endian）是计算机存储多字节数据类型（如整数、浮点数等）时使用的两种字节序。它们描述了多字节数据在内存中的存储顺序。不同的硬件架构和操作系统可能采用不同的字节序，这在跨平台通信和数据交换时可能导致问题。</p>
 <ul>
 <li>大端序（Big-endian）： 在大端序中，数据的高位字节（最重要的字节）存储在较低的内存地址中，而数据的低位字节（最不重要的字节）存储在较高的内存地址中。换句话说，字节序是从高位到低位。例如，32位整数 <code>0x12345678</code> 在大端序中的存储顺序是：</li>
@@ -2980,7 +2993,7 @@
 <p>当使用 <code>free</code> 函数回收内存时，这些内存是否立刻还给操作系统取决于实现和操作系统。C 库实现会在内部维护一个内存池，将回收的内存加入内存池以供将来分配。</p>
 <p>在某些情况下，内存池可能会变得非常大，C 库实现可以选择将部分内存归还给操作系统。归还内存的策略取决于实现和操作系统，例如可能会基于内存使用量、空闲内存块的大小或空闲时间来决定。</p>
 <p><code>free</code> 函数主要目的是将内存归还给内部的内存池，以便在后续的内存分配请求（如 <code>malloc</code>、<code>calloc</code> 和 <code>realloc</code>）中重用。只有在特定条件下，内存才可能被归还给操作系统。</p>
-<p>内存池</p>
+<h3 id="_2">内存池<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 
 
 
