@@ -491,7 +491,11 @@ std::cout << MyNameSpace::foo(0, 1) << std::endl;
 
 #### 默认构造函数(Default Constructor)
 
+
+
 #### 带参数构造函数(Parameterized Constructor)
+
+
 
 #### 拷贝构造函数(Copy Constructor)
 
@@ -508,7 +512,7 @@ int main()
 
 如果没有定义 copy constructor 编译器默认生成一个,  copy constructor 会复制所有非静态成员.
 
-#### copy assignment constructor
+#### 拷贝赋值构造函数(copy assignment constructor)
 
 ```c++
 MyTime &MyTime::operator=(MyTime &){...}
@@ -529,6 +533,8 @@ int main()
 
 ### 类的继承
 
+继承类型：
+
 *   public 继承
 *   protected 继承
 *   private 继承
@@ -548,13 +554,13 @@ public:
 
 
 
-### operator overloading
+### 运算符重载(operator overloading)
 
 ```c++
 
 ```
 
-### friend function
+### 友元函数(friend function)
 
 ```c++
 
@@ -562,7 +568,13 @@ public:
 
 
 
-## template
+## 模板(Template)
+
+### 模板函数(Template Function)
+
+
+
+### 模板类(Template Class)
 
 
 
