@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/">
+        <link rel="prev" href="../CMake/">
       
       
-        <link rel="next" href="../%E7%BC%96%E8%AF%91%E5%92%8C%E9%93%BE%E6%8E%A5/">
+        <link rel="next" href="../STL/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>类 - LXCSNotes</title>
+        <title>Class - LXCSNotes</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#class" class="md-skip">
           跳转至
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              类
+              Class
             
           </span>
         </div>
@@ -257,7 +257,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../Linux%2C%20C%2C%20and%20C%2B%2B%20ChatGPT%20guidance/" class="md-tabs__link">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -1070,12 +1070,35 @@
   
   
     <li class="md-nav__item">
-      <a href="../Linux%2C%20C%2C%20and%20C%2B%2B%20ChatGPT%20guidance/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     Linux, C, and C++ ChatGPT guidance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CPP%20%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CPP 笔记
     
   </span>
   
@@ -1113,20 +1136,227 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../CPP%20%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Class
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
-    CPP 笔记
+    Class
     
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      构造函数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="构造函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-default-constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 默认构造函数（Default Constructor）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-parameterized-constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 参数化构造函数（Parameterized Constructor）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-copy-constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 拷贝构造函数（Copy Constructor）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-move-constructorc11" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 移动构造函数（Move Constructor）（C++11引入）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-delegating-constructorc11" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 委托构造函数（Delegating Constructor）（C++11引入）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-converting-constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 转换构造函数（Converting Constructor）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-inheriting-constructorc11" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. 继承构造函数（Inheriting Constructor）（C++11引入）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      关键特性总结：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      注意事项：
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      生命周期
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      析构函数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="析构函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      析构函数的逆天大坑
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      虚类的析构函数必须是虚的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      临时变量的生命周期是一行
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考资料
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deepseek" class="md-nav__link">
+    <span class="md-ellipsis">
+      DeepSeek 回答
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1242,236 +1472,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    类
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    类
-    
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      构造函数
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="构造函数">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-default-constructor" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. 默认构造函数（Default Constructor）
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-parameterized-constructor" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. 参数化构造函数（Parameterized Constructor）
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-copy-constructor" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. 拷贝构造函数（Copy Constructor）
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-move-constructorc11" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. 移动构造函数（Move Constructor）（C++11引入）
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-delegating-constructorc11" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. 委托构造函数（Delegating Constructor）（C++11引入）
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6-converting-constructor" class="md-nav__link">
-    <span class="md-ellipsis">
-      6. 转换构造函数（Converting Constructor）
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#7-inheriting-constructorc11" class="md-nav__link">
-    <span class="md-ellipsis">
-      7. 继承构造函数（Inheriting Constructor）（C++11引入）
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      关键特性总结：
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      注意事项：
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      生命周期
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      析构函数
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="析构函数">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      析构函数的逆天大坑
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
-    <span class="md-ellipsis">
-      虚类的析构函数必须是虚的
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
-    <span class="md-ellipsis">
-      临时变量的生命周期是一行
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
-    <span class="md-ellipsis">
-      参考资料
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#deepseek" class="md-nav__link">
-    <span class="md-ellipsis">
-      DeepSeek 回答
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2997,7 +2997,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       构造函数
     </span>
@@ -3070,7 +3070,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       关键特性总结：
     </span>
@@ -3079,7 +3079,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       注意事项：
     </span>
@@ -3093,7 +3093,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       生命周期
     </span>
@@ -3102,7 +3102,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       析构函数
     </span>
@@ -3112,7 +3112,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       析构函数的逆天大坑
     </span>
@@ -3121,7 +3121,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       虚类的析构函数必须是虚的
     </span>
@@ -3130,7 +3130,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       临时变量的生命周期是一行
     </span>
@@ -3144,7 +3144,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       参考资料
     </span>
@@ -3180,8 +3180,8 @@
   
 
 
-<h1 id="_1">类<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<h2 id="_2">构造函数<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h1 id="class">Class<a class="headerlink" href="#class" title="Permanent link">&para;</a></h1>
+<h2 id="_1">构造函数<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>在C++中，构造函数（Constructor）是一种特殊的成员函数，用于初始化对象的成员变量。它在对象创建时自动调用，与类同名且无返回类型。以下是主要的构造函数类型及其详细介绍：</p>
 <hr />
 <h3 id="1-default-constructor">1. 默认构造函数（Default Constructor）<a class="headerlink" href="#1-default-constructor" title="Permanent link">&para;</a></h3>
@@ -3430,7 +3430,7 @@
 </li>
 </ul>
 <hr />
-<h3 id="_3">关键特性总结：<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h3 id="_2">关键特性总结：<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -3470,27 +3470,27 @@
 </tbody>
 </table>
 <hr />
-<h3 id="_4">注意事项：<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<h3 id="_3">注意事项：<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>初始化列表</strong>：优先使用成员初始化列表（效率更高，避免重复赋值）。</li>
 <li><strong><code>explicit</code> 关键字</strong>：阻止不期望的隐式类型转换。</li>
 <li><strong>编译器生成</strong>：若未定义拷贝/移动构造函数，编译器会生成默认版本（可能不满足深拷贝需求）。</li>
 </ol>
 <p>合理使用构造函数能提升代码的健壮性和效率，尤其在涉及资源管理（内存、文件句柄等）时！</p>
-<h2 id="_5">生命周期<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="_4">生命周期<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ul>
 <li>自动存储周期（栈上） - 函数的局部变量，自动析构</li>
 <li>动态存储周期（堆上） - 通过 new 创建的，delete 时析构</li>
 <li>静态存储周期（static 和 inline） - 全局变量，程序结束时析构</li>
 </ul>
-<h2 id="_6">析构函数<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<h3 id="_7">析构函数的逆天大坑<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h2 id="_5">析构函数<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="_6">析构函数的逆天大坑<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>定义了析构函数，就<strong>必须删除移动构造函数、移动赋值函数、拷贝构造函数、拷贝赋值函数</strong>！</p>
 <p>原因很复杂，整个故事要从 boost 当年如何设计出右值引用到图灵的停机问题讲起，讲了你也记不住，只需要记住结论：</p>
 <p>如果你要定义析构函数，就<strong>必须删除移动构造函数、移动赋值函数、拷贝构造函数、拷贝赋值函数</strong>！</p>
-<h3 id="_8">虚类的析构函数必须是虚的<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<h3 id="_9">临时变量的生命周期是一行<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<h2 id="_10">参考资料<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="_7">虚类的析构函数必须是虚的<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h3 id="_8">临时变量的生命周期是一行<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<h2 id="_9">参考资料<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p><a href="https://parallel101.github.io/cppguidebook/cpp_lifetime/">深入理解析构函数与生命周期</a></p>
 <h2 id="deepseek">DeepSeek 回答<a class="headerlink" href="#deepseek" title="Permanent link">&para;</a></h2>
 <blockquote>
