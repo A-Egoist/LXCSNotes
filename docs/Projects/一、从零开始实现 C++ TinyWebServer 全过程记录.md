@@ -94,6 +94,8 @@
      curl -v -X POST 127.0.0.1:8080 -d "username=admin&password=123456"
      ```
 
+     [curl 的用法指南](https://www.ruanyifeng.com/blog/2019/09/curl-reference.html)
+
 3.   HTML 状态码：[HTTP 状态码](https://www.runoob.com/http/http-status-codes.html)
      200, 302, 404
      在用户登录成功之后需要返回 `/welcome.html` 的时候，可以使用 HTTP 的重定向机制。即先发送 302 重定向响应，然后处理重定向后的 GET 请求。

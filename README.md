@@ -24,7 +24,7 @@ pip install -r requirements.txt
 ```bash
 # 本地预览
 mkdocs serve
-# 构建
+# 构建(如果是推送到 github pages，可以直接省略)
 mkdocs build
 # 推送到 github pages
 mkdocs gh-deploy
