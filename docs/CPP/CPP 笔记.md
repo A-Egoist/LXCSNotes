@@ -606,8 +606,6 @@ std::cout << MyNameSpace::foo(0, 1) << std::endl;
 
 
 
-
-
 ### 析构函数
 
 :warning:**虚类的析构函数必须是虚的**
@@ -645,23 +643,72 @@ public:
 
 
 
-### 运算符重载(operator overloading)
+## 运算符重载(operator overloading)
 
-参考资料：[https://gitbookcpp.llfc.club/sections/cpp/base/cppbase30.html](https://gitbookcpp.llfc.club/sections/cpp/base/cppbase30.html)
+### 运算符重载的方法
 
-```c++
+在C++中，运算符可以通过成员函数或非成员函数（通常是友元函数）来重载。
 
+#### 成员函数方式
+
+运算符作为类的成员函数进行重载时，左操作数是当前对象（`this`）。因此，对于需要修改左操作数的运算符，成员函数方式通常更直观。
+
+```cpp
+class ClassName {
+public:
+    ClassName operator+(const ClassName& other);
+};
 ```
 
 
 
-### 友元函数(friend function)
+#### 非成员函数方式(友元函数)
+
+当需要对两个不同类型的对象进行运算，或者左操作数不是当前类的对象时，通常使用非成员函数方式。为了访问类的私有成员，非成员函数通常被声明为类的友元函数。
 
 ```c++
-
+class ClassName {
+    friend ClassName operator+(const ClassName* lhs, const ClassName& rhs);
+};
 ```
 
 
+
+#### 示例
+
+```cpp title="Complex.cpp"
+#include <iostream>
+
+class Complex {
+public:
+    // 构造函数
+    Complex(double real = 0.0, double imag = 0.0) : real_(real), imag_(imag) {}
+    // 重载 "+" 运算符(成员函数)
+    Complex operator+(const Complex& other) const {
+        return Complex(this->real_ + other.real_, this->imag_ + other.imag_);
+    }
+    // 重载 "<<" 运算符用于输出
+    friend std::ostream& operator<<(std::ostream& os, const Complex& c) {
+        os << "(" << c.real_;
+        if (c.imag_ >= 0) os << " + " << c.imag_ << "i)";
+        else os << " - " << -c.imag_ << "i)";
+        return os;
+    }
+private:
+    double real_;
+    double imag_;
+};
+
+int main() {
+    Complex c1(3.0, 2.0);
+    Complex c2(1.5, -2.5);
+    Complex c3 = c1 + c2;
+    std::cout << "c1 + c2 = " << c3 << std::endl;
+    return 0;
+}
+```
+
+更多内容请见：[https://gitbookcpp.llfc.club/sections/cpp/base/cppbase30.html](https://gitbookcpp.llfc.club/sections/cpp/base/cppbase30.html)
 
 ## 模板(Template)
 
@@ -707,6 +754,8 @@ private:
     T m_vec[3];
 };
 ```
+
+更多内容请见：[https://gitbookcpp.llfc.club/sections/cpp/base/cppbase31.html](https://gitbookcpp.llfc.club/sections/cpp/base/cppbase31.html)
 
 
 
