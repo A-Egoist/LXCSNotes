@@ -1,4 +1,4 @@
-# Linux, C, and C++ ChatGPT guidance
+# Linux, C, and C++ guidance
 
 ## 基本路径
 
@@ -67,7 +67,14 @@
 *   [ ] 【6】数据格式解析：JSON --> libjson, XML --> TinyXML, word --> Qt::QAxContainer
 
 
-*   [ ] 【7】数据库解析：MySQL官方库，sqlite
+*   [ ] 【7】数据库解析：
+
+    *   [ ] MySQL官方库
+    *   [ ] MongoDB
+    *   [ ] sqlite
+    *   [ ] redis
+    *   [ ] leveldb
+
 
 
 *   [ ] 【8】日志功能：Log4cpp
@@ -81,6 +88,18 @@
 
 
 
+
+
+
+*   [ ] Lua
+*   [ ] 序列化与反序列化
+*   [ ] Protobuf
+*   [ ] MsgPack
+
+
+
 ## 参考资料
+
+[Google 开源项目风格指南](https://zh-google-styleguide.readthedocs.io/en/latest/contents.html)
 
 ![Linux+C+CPP Guidance](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202507192036236.png)
