@@ -185,3 +185,17 @@ DELETE FROM user;
 
 ```sql
 ```
+
+
+
+
+
+B+树
+
+write ahead log (WAL)
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202507241627460.png" alt="image-20250724162714439" style="zoom:25%;" />
+
+## 参考资料
+
+【Mysql是什么？架构是怎么样的？】 https://www.bilibili.com/video/BV1p5qhYsE4f/?share_source=copy_web&vd_source=b5ed364998fc1b958c57abd6dbda38e3
