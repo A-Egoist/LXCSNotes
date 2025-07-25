@@ -1,4 +1,4 @@
-# redis
+# Redis
 
 
 
@@ -32,3 +32,4 @@ io多路复用
 
 【【GeekHour】一小时Redis教程】 https://www.bilibili.com/video/BV1Jj411D7oG/?share_source=copy_web&vd_source=b5ed364998fc1b958c57abd6dbda38e3
 
+【面试官内心os：坏了，这小子是真懂Redis】 https://www.bilibili.com/video/BV1f4uRzREcL/?share_source=copy_web&vd_source=b5ed364998fc1b958c57abd6dbda38e3
