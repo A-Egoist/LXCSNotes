@@ -4,12 +4,95 @@
 
 ### 排序
 
-手写快排
+#### `std::sort`
+
+```cpp
+// 默认排序
+std::sort(nums.begin(), nums.end());
+
+// 使用 std::greater<T>() 降序排序或使用 std::less<T>()
+std::sort(nums.begin(), nums.end(), std::greator<int>());
+std::sort(nums.begin(), nums.end(), std::less<int>());
+
+// 使用 lambda 表达式
+std::sort(nums.begin(), nums.end(), []() {
+   return a > b; 
+});
+```
+
+[Sorting](https://hackingcpp.com/cpp/std/algorithms.html)
+
+
+
+#### 整数快排
+
+C++写法
 
 ```cpp
 #include <iostream>
+#include <vector>
 
+void quick_sort(std::vector<int>& arr, int l, int r) {
+    if (l >= r) return;
+    int i = l - 1, j = r + 1, q = arr[(l + r) / 2];
+    while (i < j) {
+        do i ++; while (arr[i] < q);
+        do j --; while (arr[j] > q);
+        if (i < j) std::swap(arr[i], arr[j]);
+    }
+    quick_sort(arr, l, j);
+    quick_sort(arr, j + 1, r);
+}
+int main() {
+    std::vector<int> nums = {1, 5, 3, 7, 9, 8, 2, 6, 4, 0};
+    for (auto num:nums) std::cout << num << " ";
+    std::cout << "\n";
+    quick_sort(nums, 0, nums.size() - 1);
+    for (auto num:nums) std::cout << num << " ";
+    std::cout << "\n";
+
+    return 0;
+}
 ```
+
+C写法
+
+```c
+#include<stdio.h>
+#define N 20
+
+void quick_sort(int q[], int l, int r) {
+    if (l >= r) return;
+    int i = l - 1, j = r + 1, x = q[(l + r) / 2];
+    while (i < j) {
+        do i ++; while (i <= r && q[i] < x);
+        do j --; while (j >= l && q[j] > x);
+        if (i < j) {
+            int temp = q[i];
+            q[i] = q[j];
+            q[j] = temp;
+        }
+    }
+    quick_sort(q, l, j);
+    quick_sort(q, j + 1, r);
+}
+
+int main() {
+    int n = 10;
+    int nums[N] = {1, 5, 3, 7, 9, 8, 2, 6, 4, 0};
+    for (int i = 0; i < n; ++ i) printf("%d ", nums[i]);
+    printf("\n");
+    quick_sort(nums, 0, n - 1);
+    for (int i = 0; i < n; ++ i) printf("%d ", nums[i]);
+    printf("\n");
+    
+    return 0;
+}
+```
+
+y总：[AcWing 785. 快速排序](https://www.acwing.com/activity/content/code/content/39784/)
+
+
 
 
 
@@ -66,8 +149,6 @@ public:
     }
 };
 ```
-
-
 
 
 
