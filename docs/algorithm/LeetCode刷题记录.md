@@ -276,7 +276,9 @@ int main() {
 
 ### 常用模板
 
-```c, title="C"
+C模板
+
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -305,9 +307,9 @@ int main() {
 }
 ```
 
+CPP模板
 
-
-```cpp, title="CPP"
+```cpp
 #include <iostream>
 #include <vector>
 #include <algorithm>
