@@ -1,5 +1,347 @@
 # LeetCode 刷题笔记
 
+## 输入输出
+
+### C语言
+
+首先需要包含头文件`stdio.h`
+
+```c
+#include <stdio.h>
+```
+
+
+
+#### 1. 读入单个数据(数字/字符/字符串)
+
+```c
+// 1. 单个读入
+int num;
+scanf("%d", &num);
+char ch;
+scanf("%c", &ch);
+char str[N];
+scanf("%s", str);  // 遇到空行或换行符停止，如果想要读取整行字符串，可以使用gets()
+```
+
+因为`scanf()`读入字符的时候也可能会读入空格、换行符等符号，需要注意，可以使用`getchar()`来读入用于间隔的符号。`scanf()`的返回值是成功读取的项数，如果遇到文件结束符则返回的EOF。
+
+
+
+#### 2. 读入多个数据(数组/字符串/字符串数组)
+
+```c
+int a[N], n;
+scanf("%d", &n);  // 数组长度
+for (int i = 0; i < n; ++ i) scanf("%d", &a[i]);
+```
+
+读取一行整数(未知数量)
+
+```c
+#include <stdio.h>
+#define MAX_SIZE 1000
+
+int main() {
+    int arr[MAX_SIZE];
+    int count = 0;
+    char c;
+    
+    // 方式1：使用字符判断
+    while (1) {
+        scanf("%d%c", &arr[count], &c);
+        count++;
+        if (c == '\n') break;
+    }
+    
+    // 方式2：使用fgets+sscanf（更健壮）
+    char buffer[5000];
+    fgets(buffer, sizeof(buffer), stdin);
+    
+    char *p = buffer;
+    int offset;
+    while (sscanf(p, "%d%n", &arr[count], &offset) == 1) {
+        count++;
+        p += offset;
+    }
+    
+    return 0;
+}
+```
+
+
+
+#### 3. 不定数量的读入
+
+有的时候一个样例有多次输入，每次输入需要计算一次，所以需要用while一直读，直到读到文件停止符号或约定的停止符号。
+
+```cpp
+#include <stdio.h>
+
+int main() {
+    int a, b;
+    // 方式1：检查返回值
+    while (scanf("%d %d", &a, &b) == 2) {
+        printf("%d\n", a + b);
+    }
+    
+    // 方式2：检查EOF
+    while (scanf("%d %d", &a, &b) != EOF) {
+        printf("%d\n", a + b);
+    }
+    
+    return 0;
+}
+```
+
+
+
+#### 4. 读取字符串
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str1[100];
+    // 读取不带空格的字符串
+    scanf("%s", str1);
+    printf("String: %s\n", str1);
+    
+    // 读取带空格的字符串
+    char str2[100];
+    getchar(); // 吸收前一个换行符
+    fgets(str2, sizeof(str2), stdin);
+    
+    // 去除末尾的换行符
+    if (str2[strlen(str2) - 1] == '\n') {
+        str2[strlen(str2) - 1] = '\0';
+    }
+    printf("Full line: %s\n", str2);
+    
+    return 0;
+}
+```
+
+#### 5. 特殊格式输入
+
+```c
+#include <stdio.h>
+
+int main() {
+    // 格式：10:30:45
+    int hour, minute, second;
+    scanf("%d:%d:%d", &hour, &minute, &second);
+    printf("Time: %02d:%02d:%02d\n", hour, minute, second);
+    
+    // 格式：1,2,3,4
+    int nums[10];
+    int count = 0;
+    char sep;
+    do {
+        scanf("%d%c", &nums[count], &sep);
+        count++;
+    } while (sep == ',');
+    
+    return 0;
+}
+```
+
+
+
+### CPP
+
+#### 1. 基本输入输出模式
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    // 加速输入输出（重要！）
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    
+    int n;
+    cin >> n;
+    cout << "Read n: " << n << endl;
+    
+    int a, b;
+    cin >> a >> b;
+    cout << "a=" << a << ", b=" << b << endl;
+    
+    return 0;
+}
+```
+
+#### 2. 多组测试数据（未知组数）
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {    
+    int a, b;
+    while (cin >> a >> b) {
+        cout << a + b << '\n';
+    }
+    
+    return 0;
+}
+```
+
+#### 3. 读取一行整数(未知数量)
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <sstream>
+#include <string>
+using namespace std;
+
+int main() {
+    string line;
+    getline(cin, line);
+    
+    stringstream ss(line);
+    vector<int> nums;
+    int num;
+    
+    while (ss >> num) {
+        nums.push_back(num);
+    }
+    
+    // 输出
+    for (int x : nums) {
+        cout << x << " ";
+    }
+    cout << '\n';
+    
+    return 0;
+}
+```
+
+#### 4. 读取字符串
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    // 读取不带空格的字符串
+    string word;
+    cin >> word;
+    cout << "Word: " << word << endl;
+    
+    // 读取带空格的整行
+    cin.ignore(); // 忽略之前的换行符，也可以用getchar()读入前面的空格或者换行符
+    string fullLine;
+    getline(cin, fullLine);
+    cout << "Full line: " << fullLine << endl;
+    
+    return 0;
+}
+```
+
+#### 5. 格式化输出
+
+格式化输出还是推荐使用`printf()`
+
+```cpp
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    double pi = 3.141592653589793;
+    
+    // 设置精度
+    cout << fixed << setprecision(2) << pi << endl; // 输出 3.14
+    
+    // 设置宽度和对齐
+    cout << setw(10) << "Hello" << setw(10) << "World" << endl;
+    
+    // 填充字符
+    cout << setfill('*') << setw(10) << 123 << endl; // 输出 *******123
+    
+    // 十六进制输出
+    cout << hex << 255 << endl; // 输出 ff
+    
+    return 0;
+}
+```
+
+
+
+### 常用模板
+
+```c, title="C"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_N 100000
+
+int main() {
+    // 读取多组测试数据
+    int n;
+    while (scanf("%d", &n) != EOF) {
+        // 读取n个整数
+        int arr[MAX_N];
+        for (int i = 0; i < n; i++) {
+            scanf("%d", &arr[i]);
+        }
+        
+        // 处理逻辑
+        
+        // 输出结果
+        for (int i = 0; i < n; i++) {
+            printf("%d%c", arr[i], " \n"[i == n-1]);
+        }
+    }
+    
+    return 0;
+}
+```
+
+
+
+```cpp, title="CPP"
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    int n;
+    while (cin >> n) {
+        vector<int> nums(n);
+        for (int i = 0; i < n; i++) {
+            cin >> nums[i];
+        }
+        
+        // 处理逻辑
+        
+        // 输出结果
+        for (int i = 0; i < n; i++) {
+            cout << nums[i] << (i == n-1 ? '\n' : ' ');
+        }
+    }
+    
+    return 0;
+}
+```
+
+
+
+:warning:注意输出的行末是否允许空格或空行。
+
+
+
 ## 基础算法
 
 ### 排序
