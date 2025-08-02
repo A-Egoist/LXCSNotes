@@ -155,20 +155,15 @@ int main() {
 
 ```cpp
 #include <iostream>
-using namespace std;
 
 int main() {
-    // 加速输入输出（重要！）
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    
     int n;
-    cin >> n;
-    cout << "Read n: " << n << endl;
+    std::cin >> n;
+    std::cout << "Read n: " << n << std::endl;
     
     int a, b;
-    cin >> a >> b;
-    cout << "a=" << a << ", b=" << b << endl;
+    std::cin >> a >> b;
+    std::cout << "a=" << a << ", b=" << b << std::endl;
     
     return 0;
 }
@@ -178,12 +173,11 @@ int main() {
 
 ```cpp
 #include <iostream>
-using namespace std;
 
 int main() {    
     int a, b;
-    while (cin >> a >> b) {
-        cout << a + b << '\n';
+    while (std::cin >> a >> b) {
+        std::cout << a + b << '\n';
     }
     
     return 0;
@@ -197,14 +191,13 @@ int main() {
 #include <vector>
 #include <sstream>
 #include <string>
-using namespace std;
 
 int main() {
-    string line;
-    getline(cin, line);
+    std::string line;
+    getline(std::cin, line);
     
-    stringstream ss(line);
-    vector<int> nums;
+    std::stringstream ss(line);
+    std::vector<int> nums;
     int num;
     
     while (ss >> num) {
@@ -213,9 +206,9 @@ int main() {
     
     // 输出
     for (int x : nums) {
-        cout << x << " ";
+        std::cout << x << " ";
     }
-    cout << '\n';
+    std::cout << '\n';
     
     return 0;
 }
@@ -295,8 +288,6 @@ int main() {
             scanf("%d", &arr[i]);
         }
         
-        // 处理逻辑
-        
         // 输出结果
         for (int i = 0; i < n; i++) {
             printf("%d%c", arr[i], " \n"[i == n-1]);
@@ -325,8 +316,6 @@ int main() {
         for (int i = 0; i < n; i++) {
             cin >> nums[i];
         }
-        
-        // 处理逻辑
         
         // 输出结果
         for (int i = 0; i < n; i++) {
@@ -510,7 +499,17 @@ public:
 
 ## 数据结构
 
+### 指针
+
+
+
 ### 链表
+
+#### 链表基础
+
+
+
+#### 例题
 
 [148. 排序链表](https://leetcode.cn/problems/sort-list/)：链表归并排序、快慢指针
 
@@ -628,6 +627,80 @@ public:
 
 [239. 滑动窗口最大值](https://leetcode.cn/problems/sliding-window-maximum/)
 
+使用大根堆来解决，构建 `(index, value)` 的 pair，每次滑动窗口向后滑动的时候判断堆顶的元素是否在窗口内，若在窗口内则符合条件，若不存在，则需要从堆中移出直到堆顶的元素在窗口内。
+
+```cpp
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        int n = nums.size();
+        priority_queue<pair<int, int>> max_heap;
+        for (int i = 0; i < k; ++ i) max_heap.push({nums[i], i});
+
+        vector<int> res;
+        res.push_back(max_heap.top().first);
+        for (int i = k; i < n; ++ i) {
+            max_heap.push({nums[i], i});
+            while (max_heap.top().second <= i - k) max_heap.pop();
+            res.push_back(max_heap.top().first);
+        }
+        return res;
+    }
+};
+```
+
+
+
+#### 大根堆(Max-Heap)
+
+直接声明：
+
+```cpp
+std::priority_queue<int, std::vector<int>, std::less<int>> max_heap;
+```
+
+或者使用 `std::make_heap()` 从已有数据中建堆：
+
+```cpp
+std::vector<int> max_heap;  // 已有数据
+std::make_heap(max_heap.begin(), max_heap.end(), std::less<int>());  // 构建大根堆
+
+// 删除元素
+std::pop_heap(max_heap.begin(), max_heap.end(), std::less<int>());  // 将堆顶元素移动到 vector 的末尾
+max_heap.pop_back();  // 然后使用 pop_back() 删除该元素
+
+// 添加元素
+max_heap.push_back(9);  // 将新元素放到 vector 的末尾
+std::push_heap(max_heap.begin(), max_heap.end(), std::less<int>());  // 使用 push_heap() 将元素放到合适的位置
+```
+
+
+
+#### 小根堆(Min-Heap)
+
+直接声明：
+
+```cpp
+std::priority_queue<int, std::vector<int>, std::greator<int>> min_heap;
+```
+
+或者直接使用 `std::make_heap()` 从已有数据中建堆：
+
+```cpp
+std::vector<int> min_heap;  // 已有数据
+std::make_heap(min_heap.begin(), min_heap.end(), std::greator<int>());  // 构建小根堆
+
+// 删除元素
+std::pop_heap(min_heap.begin(), min_heap.end(), std::greator<int>());  // 将堆顶元素移动到 vector 的末尾
+min_heap.pop_back();  // 然后使用 pop_back() 删除该元素
+
+// 添加元素
+min_heap.push_back(9);  // 将新元素放到 vector 的末尾
+std::push_heap(min_heap.begin(), min_heap.end(), std::greator<int>());  // 使用 push_heap() 将元素放到合适的位置
+```
+
+[Standard Library Heap Operations](https://hackingcpp.com/cpp/std/algorithms/heap_operations.html)
+
 
 
 ### 单调队列
@@ -700,8 +773,9 @@ public:
 
 [560. 和为 K 的子数组](https://leetcode.cn/problems/subarray-sum-equals-k/) --> 前缀和 + 哈希表优化
 
+前缀和实现：
+
 ```cpp
-# 前缀和实现
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
@@ -721,9 +795,9 @@ public:
 };
 ```
 
+哈希表优化，存储以第 i 个元素结尾的数组中前缀和为 prefix_sum - k 的数量：
+
 ```cpp
-# 哈希表优化
-# 存储以第 i 个元素结尾的数组中前缀和为 prefix_sum - k 的数量
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
@@ -744,7 +818,11 @@ public:
 
 
 
+### 并查集
 
+基础教程
+
+[399. 除法求值](https://leetcode.cn/problems/evaluate-division/)
 
 
 
@@ -1079,13 +1157,13 @@ public:
 
 
 
+https://www.nowcoder.com/share/jump/null
+
+https://www.nowcoder.com/share/jump/1486178631754138659829
 
 
 
-
-
-
-### 类的实现
+## 类的实现
 
 [146. LRU 缓存](https://leetcode.cn/problems/lru-cache/)：双向链表，LRU 缓存 (Least Recently Used Cache)，unordered_map 和 map 的用法与区别，结构体。
 
@@ -1167,9 +1245,5 @@ public:
 
 
 
-### 并查集
 
-基础教程
-
-[399. 除法求值](https://leetcode.cn/problems/evaluate-division/)
 

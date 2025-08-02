@@ -322,6 +322,58 @@ m.erase(2);
 
 
 
+#### 大根堆(Max-Heap)
+
+直接声明：
+
+```cpp
+std::priority_queue<int, std::vector<int>, std::less<int>> max_heap;
+```
+
+或者使用 `std::make_heap()` 从已有数据中建堆：
+
+```cpp
+std::vector<int> max_heap;  // 已有数据
+std::make_heap(max_heap.begin(), max_heap.end(), std::less<int>());  // 构建大根堆
+
+// 删除元素
+std::pop_heap(max_heap.begin(), max_heap.end(), std::less<int>());  // 将堆顶元素移动到 vector 的末尾
+max_heap.pop_back();  // 然后使用 pop_back() 删除该元素
+
+// 添加元素
+max_heap.push_back(9);  // 将新元素放到 vector 的末尾
+std::push_heap(max_heap.begin(), max_heap.end(), std::less<int>());  // 使用 push_heap() 将元素放到合适的位置
+```
+
+
+
+#### 小根堆(Min-Heap)
+
+直接声明：
+
+```cpp
+std::priority_queue<int, std::vector<int>, std::greator<int>> min_heap;
+```
+
+或者直接使用 `std::make_heap()` 从已有数据中建堆：
+
+```cpp
+std::vector<int> min_heap;  // 已有数据
+std::make_heap(min_heap.begin(), min_heap.end(), std::greator<int>());  // 构建小根堆
+
+// 删除元素
+std::pop_heap(min_heap.begin(), min_heap.end(), std::greator<int>());  // 将堆顶元素移动到 vector 的末尾
+min_heap.pop_back();  // 然后使用 pop_back() 删除该元素
+
+// 添加元素
+min_heap.push_back(9);  // 将新元素放到 vector 的末尾
+std::push_heap(min_heap.begin(), min_heap.end(), std::greator<int>());  // 使用 push_heap() 将元素放到合适的位置
+```
+
+[Standard Library Heap Operations](https://hackingcpp.com/cpp/std/algorithms/heap_operations.html)
+
+
+
 ## 参考资料
 
 【1】[Standard Library Containers](https://hackingcpp.com/cpp/std/containers.html)

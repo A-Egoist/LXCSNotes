@@ -150,6 +150,39 @@ graph TD
 
 
 
+## 其他常见问题
+
+### 1. 将本地git仓库绑定的HTTP连接切换为ssh连接
+
+1.   检查当前远程仓库地址
+     ```bash
+     git remote -v
+     ```
+
+2.   替换为ssh地址
+     ```bash
+     git remote set-url origin 新的ssh地址
+     ```
+
+3.   验证是否切换成功
+     ```bash
+     git remote -v
+     ```
+
+### 2. 配置ssh密钥
+
+1.   生成ssh密钥
+     ```bash
+     ssh-keygen -t ed25519 -C "your_email@example.com"
+     ```
+
+2.   将公钥添加到github
+     ```bash
+     cat ~/.ssh/id_ed25519.pub | clip   # PowerShell
+     ```
+
+     将 `id_ed25519.pub` 复制到 GitHub $\to$ Settings $\to$ SSH and GPG keys $\to$ New SSH key。
+
 ## 参考资料
 
 * [十分钟学会正确的github工作流，和开源作者们使用同一套流程](https://www.bilibili.com/video/BV19e4y1q7JJ/)
