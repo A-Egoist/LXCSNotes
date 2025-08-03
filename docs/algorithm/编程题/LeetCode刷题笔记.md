@@ -497,6 +497,44 @@ public:
 
 
 
+### 区间合并
+
+[803. 区间合并](https://www.acwing.com/problem/content/description/805/)
+
+将所有区间按照左边界升序排列，然后从前往后遍历，判断区间是否重合，区间合并的时候，右边界为两个区间右边界的最大值。
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    int n;
+    std::vector<std::pair<int, int>> intervals;
+    std::cin >> n;
+    for (int i = 0; i < n; ++ i) {
+        int a, b;
+        std::cin >> a >> b;
+        intervals.push_back({a, b});
+    }
+    std::sort(intervals.begin(), intervals.end(), [](std::pair<int, int> a, std::pair<int, int> b) {
+        return a.first < b.first;
+    });
+    int cnt = 1, pre_right = intervals[0].second;
+    for (auto interval : intervals) {
+        if (pre_right < interval.first) {
+            ++ cnt;
+        }
+        pre_right = std::max(pre_right, interval.second);
+    }
+    std::cout << cnt << std::endl;
+
+    return 0;
+}
+```
+
+
+
 ## 数据结构
 
 ### 指针
@@ -623,6 +661,10 @@ public:
 };
 ```
 
+### KMP
+
+
+
 ### 优先队列
 
 [239. 滑动窗口最大值](https://leetcode.cn/problems/sliding-window-maximum/)
@@ -681,25 +723,83 @@ std::push_heap(max_heap.begin(), max_heap.end(), std::less<int>());  // 使用 p
 直接声明：
 
 ```cpp
-std::priority_queue<int, std::vector<int>, std::greator<int>> min_heap;
+std::priority_queue<int, std::vector<int>, std::greater<int>> min_heap;
 ```
 
 或者直接使用 `std::make_heap()` 从已有数据中建堆：
 
 ```cpp
 std::vector<int> min_heap;  // 已有数据
-std::make_heap(min_heap.begin(), min_heap.end(), std::greator<int>());  // 构建小根堆
+std::make_heap(min_heap.begin(), min_heap.end(), std::greater<int>());  // 构建小根堆
 
 // 删除元素
-std::pop_heap(min_heap.begin(), min_heap.end(), std::greator<int>());  // 将堆顶元素移动到 vector 的末尾
+std::pop_heap(min_heap.begin(), min_heap.end(), std::greater<int>());  // 将堆顶元素移动到 vector 的末尾
 min_heap.pop_back();  // 然后使用 pop_back() 删除该元素
 
 // 添加元素
 min_heap.push_back(9);  // 将新元素放到 vector 的末尾
-std::push_heap(min_heap.begin(), min_heap.end(), std::greator<int>());  // 使用 push_heap() 将元素放到合适的位置
+std::push_heap(min_heap.begin(), min_heap.end(), std::greater<int>());  // 使用 push_heap() 将元素放到合适的位置
 ```
 
 [Standard Library Heap Operations](https://hackingcpp.com/cpp/std/algorithms/heap_operations.html)
+
+
+
+#### 模拟堆
+
+[839. 模拟堆](https://www.acwing.com/problem/content/description/841/)
+
+使用惰性删除方法，将 "D k" 操作中标明的第 k 个插入的元素标示为删除，即从 dict 中删除。
+
+关键语句：
+```cpp
+while (!dict.count(min_heap.top().second) || dict[min_heap.top().second] != min_heap.top().first) min_heap.pop();
+```
+
+其中第一项，若堆顶元素 (value, index) pair 在 min_heap 中存在，但是在 dict 中不存在，则表明该元素已经被删除了，现在需要从 min_heap 的顶部删除所有不存在 dict 中的元素，直到堆顶的元素在 dict 中存在。
+其中第二项，因为 dict 中始终保持最新的 (value, index) pair，若堆顶元素中 index 对应的 value 不等于该 index 在 dict 中对应的 value，则表示这个 value 已经被修改过了不是最新的，需要删除该元素，直到堆顶元素中 index 对应的 value 与在 index 中对应的 value 相同。
+其实还应该加上 min_heap 的判空，不过从题目分析可以分析出 min_heap 不为空。
+
+```cpp
+#include <iostream>
+#include <queue>
+#include <string>
+#include <algorithm>
+#include <unordered_map>
+
+int main() {
+    int n, index = 1, k, x;
+    std::cin >> n;
+    std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>> min_heap;
+    std::unordered_map<int, int> dict;
+    while (n --) {
+        std::string option;
+        std::cin >> option;
+        if (option == "I") {
+            int x;
+            std::cin >> x;
+            min_heap.push({x, index});
+            dict[index ++] = x;
+        } else if (option == "PM") {
+            while (!dict.count(min_heap.top().second) || dict[min_heap.top().second] != min_heap.top().first) min_heap.pop();
+            std::cout << min_heap.top().first << "\n";
+        } else if (option == "DM") {
+            while (!dict.count(min_heap.top().second) || dict[min_heap.top().second] != min_heap.top().first) min_heap.pop();
+            dict.erase(min_heap.top().second);
+            min_heap.pop();
+        } else if (option == "D") {
+            std::cin >> k;
+            dict.erase(k);
+        } else if (option == "C") {
+            std::cin >> k >> x;
+            dict[k] = x;
+            min_heap.push({x, k});
+        }
+    }
+
+    return 0;
+}
+```
 
 
 
