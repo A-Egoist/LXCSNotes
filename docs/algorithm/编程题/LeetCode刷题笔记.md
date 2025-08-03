@@ -333,6 +333,38 @@ int main() {
 
 
 
+### 重定向标准输入输出
+
+将输入重定向到 `in.txt` 文件中，这样就不用在调试的时候手动输入数据：
+
+```cpp
+#include <iostream>
+
+int main() {
+    freopen("in.txt", "rt", stdin);
+    freopen("out.txt", "wt", stdout);
+    
+    return 0;
+}
+```
+
+也可以进一步使用预处理指令
+
+```cpp
+#include <iostream>
+
+int main() {
+#ifdef ONLINE_JUDGE
+#else
+    freopen("in.txt", "rt", stdin);
+#endif
+    
+    return 0;
+}
+```
+
+
+
 ## 基础算法
 
 ### 排序
@@ -922,7 +954,122 @@ public:
 
 基础教程
 
+[合并集合](https://www.acwing.com/problem/content/description/838/)
+
+初始化的时候，所有节点的父母节点是其自身，每次在查找当前节点的祖先结点的时候做路径压缩
+
+```cpp
+#include <iostream>
+int parent[100050];  // parent[index] 存储当前节点 index 的父结点
+
+int find(int index) {
+    if (parent[index] != index)
+        parent[index] = find(parent[index]);
+    return parent[index];
+}
+
+int main() {
+    int n, m, a, b;
+    std::cin >> n >> m;
+    for (int i = 1; i <= n; ++ i) parent[i] = i;
+    char ch;
+    while (m --) {
+        getchar();
+        scanf("%c %d %d", &ch, &a, &b);
+        if (ch == 'M') {
+            parent[find(a)] = parent[find(b)];
+        } else if (ch == 'Q') {
+            if (find(a) == find(b)) std::cout << "Yes\n";
+            else std::cout << "No\n";
+        }
+    }
+
+    return 0;
+}
+```
+
+
+
 [399. 除法求值](https://leetcode.cn/problems/evaluate-division/)
+
+从示例可知：
+
+```
+输入：equations = [["a","b"],["b","c"]], values = [2.0,3.0], queries = [["a","c"],["b","a"],["a","e"],["a","a"],["x","x"]]
+输出：[6.00000,0.50000,-1.00000,1.00000,-1.00000]
+```
+
+其中，a = 2b，b = 3c，
+
+所以，有权重的并查集：
+
+```cpp
+class Solution {
+private:
+    vector<int> parents;
+    vector<double> weights;
+    int count = 0;
+    unordered_map<string, int> dict;
+
+    int find(int index) {
+        if (parents[index] != index) {
+            int parent = parents[index];
+            parents[index] = find(parent);
+            weights[index] = weights[index] * weights[parent];
+        }
+        return parents[index];
+    }
+
+    void merge(int x, int y, double value) {
+        int parent_x = find(x);
+        int parent_y = find(y);
+        if (parent_x == parent_y) return;
+
+        parents[parent_x] = parent_y;
+        weights[parent_x] = weights[y] * value / weights[x];
+    }
+public:
+    vector<double> calcEquation(vector<vector<string>>& equations, vector<double>& values, vector<vector<string>>& queries) {
+        parents.resize(2 * equations.size());
+        weights.resize(2 * equations.size());
+        
+        // init
+        for (int i = 0; i < parents.size(); ++ i) parents[i] = i, weights[i] = 1.0;
+
+        // build
+        for (int i = 0; i < equations.size(); ++ i) {
+            string a = equations[i][0], b = equations[i][1];
+            double value = values[i];
+
+            if (!dict.count(a)) dict[a] = count ++;
+            if (!dict.count(b)) dict[b] = count ++;
+
+            int id_a = dict[a], id_b = dict[b];
+            merge(id_a, id_b, value);
+        }
+
+        // query
+        vector<double> res;
+        for (int i = 0; i < queries.size(); ++ i) {
+            string c = queries[i][0], d = queries[i][1];
+            if (!dict.count(c) || !dict.count(d)) {
+                res.push_back(-1.0);
+                continue;
+            }
+
+            int id_c = dict[c], id_d = dict[d];
+            int parent_c = find(id_c), parent_d = find(id_d);
+
+            if (parent_c != parent_d) res.push_back(-1.0);
+            else res.push_back(weights[id_c] / weights[id_d]);
+        }
+
+        return res;
+    }
+};
+```
+
+
 
 
 
