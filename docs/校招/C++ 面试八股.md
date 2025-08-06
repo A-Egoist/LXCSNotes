@@ -2,7 +2,68 @@
 
 
 
+### 引用和指针的区别
+
+1.   引用必须在声明时初始化，指针可以不需要初始化
+     ```cpp
+     #include <iostream>
+     
+     int main() {
+         int value = 10;
+         int* p;  // 不初始化
+         p = nullptr;  // 将指针设置为空
+         p = &value;  // 给指针赋值
+         // int& ref_value;  // 报错
+         int& ref_value = value;
+     
+         return 0;
+     }
+     ```
+
+2.   指针是一个变量，存储的是一个地址，引用跟原来的变量实质上是同一个东西，是原变量的别名，引用本身并不存储地址，而是在底层通过指针来实现对原变量的访问
+
+3.   引用被创建之后，就不可以进行更改，指针可以更改
+
+4.   不存在指向空值的引用，必须有具体实体；但是存在指向空值的指针。
+
+
+
+### 引用在声明的时候可以不初始化吗
+
+引用在声明的时候必须初始化
+
+
+
+### 指针常量和常量指针的区别
+
+`const` 默认修饰左侧的内容，如果左侧无内容，则修饰右侧的内容
+
+```cpp
+int const* ptr;  // 指向常量整型的指针 --> 指针可以变，指向的内容不可以变
+const int* ptr;  // 指向常量整型的指针 --> 指针可以变，指向的内容不可以变
+int* const ptr;  // 指向整型的常量指针 --> 指针不可以变，指向的内容可以变
+const int* const ptr;  // 指向常量整型的常量指针 --> 指针和指向的内容都不可以变
+```
+
+[[C/C++] const int* 与 int const* 的区别](https://blog.csdn.net/tengqi200/article/details/115441616)
+
+
+
+### C++ 中的原子变量
+
+C++ 中 `std::atomic` 用于实现原子操作，是 C++11 中引入的新特性。
+
+多个线程可以对同一个变量进行读写操作，不会导致数据竞争或中间状态，也不需要锁的保护，一定程度上简化了代码编写，性能也会有提高。
+
+1）什么是原子操作：
+
+2）如何使用 `std::atomic`：
+
+
+
 ## C++ 多态
+
+### 介绍多态，具体如何实现
 
 C++ 中的多态分为静态多态和动态多态，没有特别指明的情况下，一般是指动态多态，即使用 virtual 实现的多态。
 
@@ -22,7 +83,61 @@ C++ 中的多态分为静态多态和动态多态，没有特别指明的情况�
 
 5）实例：
 
+```cpp
+#include <iostream>
+#include <vector>
+#include <memory>
 
+class Shape {
+public:
+    virtual ~Shape() = default;
+    virtual void Draw() const = 0;
+};
+
+class Circle : public Shape {
+public:
+    virtual void Draw() const override {
+        std::cout << "Draw a circle.\n";
+    }
+};
+
+class Square : public Shape {
+public:
+    virtual void Draw() const override {
+        std::cout << "Draw a square.\n";
+    }
+};
+
+void RenderAll(const std::vector<std::unique_ptr<Shape>>& shapes) {
+    for (const auto& shape : shapes) {
+        shape->Draw();  // 动态绑定，调用具体实现
+    }
+}
+
+int main() {
+    std::vector<std::unique_ptr<Shape>> shapes;
+    shapes.push_back(std::make_unique<Circle>());
+    shapes.push_back(std::make_unique<Square>());
+    RenderAll(shapes);
+
+    return 0;
+}
+```
+
+6）:warning:注意事项：
+
+*   使用多态会有一定的内存和性能开销，因为每个类需要维护 vtable，每个对象也需要存储 vptr；
+*   虚函数调用通常比普通函数调用更慢，因为多了一次指针间接寻址。
+
+
+
+### 析构函数可以是虚函数吗，构造函数可以是虚函数吗
+
+**构造函数不能是虚函数**。
+
+虚函数的机制依赖于虚函数表，而虚表对象的建立需要在调用构造函数之后才能完成。因为构造函数是用来初始化对象的，而在对象的初始化阶段虚表对象还没有被建立，如果构造函数是虚函数，就会导致对象初始化和多态机制的矛盾，因此，构造函数不能是虚函数。
+
+虽然构造函数不能是虚函数，但是**析构函数应当是虚函数**，特别是在基类中。这样做的目的是为了确保在删除一个指向派生类对象的基类指针时，能正确调用派生类对象的析构函数，从而避免资源泄露
 
 
 
@@ -190,6 +305,16 @@ int main() {
 
 ## 参考资料
 
-[1] [史上最全C/C++面试、C++面经八股文，一文带你彻底搞懂C/C++面试、C++面经！](https://blog.csdn.net/songbijian/article/details/132507421)
+[1] [百度一面面经（C++）](https://blog.csdn.net/qq_29426201/article/details/147271710)
 
-[2] 
+[2] [百度C++开发岗三面面经(已offer)](https://www.nowcoder.com/discuss/353155780922777600)
+
+[3] [百度提前批，三面被推迟一周，喜提秋招第一凉](https://zhuanlan.zhihu.com/p/1935627993805463760)
+
+[4] [百度c++开发面经（已OC）](https://www.nowcoder.com/feed/main/detail/1f237804872148f38fbcb8f6fae03ad9?sourceSSR=dynamic)
+
+[5] [百度后端C++，一面、二面 + 主管面面经（已拿offer）](https://blog.csdn.net/weixin_55305220/article/details/121121416)
+
+[6] [史上最全C/C++面试、C++面经八股文，一文带你彻底搞懂C/C++面试、C++面经！](https://blog.csdn.net/songbijian/article/details/132507421)
+
+[7] 

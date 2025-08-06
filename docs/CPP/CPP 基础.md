@@ -883,15 +883,17 @@ void safeExample() {
 #include <iostream>
 #include <string>
 
-# 包含至少一个纯虚函数，这个类为抽象类(Abstract Class)
+// 包含至少一个纯虚函数，这个类为抽象类(Abstract Class)
 class Base {
 public:
-    # 纯虚函数(Pure Virtual Function)
+    virtual ~Base() = default;  // 基类添加虚析构函数
+    // 纯虚函数(Pure Virtual Function)
     virtual void pure_virtual_func() = 0;
-}
+};
 
 class Person {
 public:
+    virtual ~Person() = default;
     std::string name;
     Person(std::string n): name(n){}
     virtual void print() {
