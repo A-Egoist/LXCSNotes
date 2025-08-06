@@ -2709,10 +2709,25 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="堆栈">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      堆和栈在操作系统的底层实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       参考资料
     </span>
@@ -3790,10 +3805,25 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="堆栈">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      堆和栈在操作系统的底层实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       参考资料
     </span>
@@ -3822,6 +3852,18 @@
 
 <h1 id="c">C++ 面试八股<a class="headerlink" href="#c" title="Permanent link">&para;</a></h1>
 <h2 id="c_1">C++ 多态<a class="headerlink" href="#c_1" title="Permanent link">&para;</a></h2>
+<p>C++ 中的多态分为静态多态和动态多态，没有特别指明的情况下，一般是指动态多态，即使用 virtual 实现的多态。</p>
+<p>在 C++ 面向对象的程序设计方法中，面向对象的三大特性：</p>
+<ol>
+<li>封装</li>
+<li>继承</li>
+<li>多态</li>
+</ol>
+<p>1）虚函数：在基类中使用 <code>virtual</code> 关键字声明虚函数之后，子类可以重写这个函数 (override)。</p>
+<p>2）虚函数表 (vtable)：每一个包含虚函数的类在<strong>编译时</strong>都会生成虚函数表 (vtable)。它存储该类所有指向虚函数的指针，对于每个类，编译器会创建唯一的 vtable。</p>
+<p>3）虚函数表指针 (vptr)：每个包含虚函数的对象实例<strong>编译器</strong>会为其生成一个隐藏的虚函数表指针 (vptr)，它在对象创建时自动初始化，指向该类的 vtable。不同类型的对象，其 vptr 指向不同的虚表。</p>
+<p>4）多态的调用机制：当通过基类指针或引用调用虚函数时，程序会通过该指针或引用找到对应的对象，然后通过 vptr 从 vtable 中找到对应的虚函数函数地址，最终调用适当的函数实现，这样程序能够在<strong>运行时决定</strong>调用哪一个函数实现。</p>
+<p>5）实例：</p>
 <h3 id="c_2">C++ 多态解决了什么问题<a class="headerlink" href="#c_2" title="Permanent link">&para;</a></h3>
 <p>多态分为静态多态和动态多态</p>
 <p>静态多态通过模板和函数重载实现</p>
@@ -3987,7 +4029,47 @@
 </ol>
 <p><a href="https://www.bilibili.com/video/BV1vNTtzuEVj/?spm_id_from=333.1391.0.0&amp;vd_source=f4cc25a44af6631d6f4db023b3bb88e4">字节后端C++一面：C++多态解决了什么问题？【码农Mark】</a></p>
 <h2 id="_1">堆栈<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<h2 id="_2">参考资料<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_2">堆和栈在操作系统的底层实现<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>扩展问题：</p>
+<ol>
+<li>为什么栈的分配速度比堆快？</li>
+<li>多线程程序中，栈和堆如何隔离？</li>
+</ol>
+<p><img alt="image-20250806150652747" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202508061509556.png" /></p>
+<p><a href="https://www.cnblogs.com/binlovetech/p/16824522.html">一步一图带你深入理解 Linux 虚拟内存管理 </a></p>
+<p>栈在操作系统底层实现：</p>
+<ol>
+<li>
+<p>线程创建的时候，操作系统为其创建栈空间；</p>
+</li>
+<li>
+<p>栈的使用：只需移动栈指针；</p>
+</li>
+<li>
+<p>硬件支持：寄存器 x86 下为 rsp 和 rbp；</p>
+</li>
+<li>
+<p>操作系统管理：</p>
+<p>a. 函数调用时，先将参数压栈；
+ b. 执行 call 指令，将返回地址（返回上一级函数的下一条指令）压栈；
+ c. 创建栈帧，保存旧的 rbp，设置新的 rbp；
+ d. 可能为局部变量分配栈空间，以及清理局部变量等的栈空间；
+ e. 恢复之前的 rbp 和 rsp，ret 指令弹出返回地址。</p>
+</li>
+</ol>
+<p>栈又分为进程栈和线程栈：
+进程栈(主线程栈)：进程启动时创建；
+线程栈：pthread_create clone 系统调用。</p>
+<p><img alt="image-20250806150912686" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202508061509668.png" /></p>
+<p>堆在用户态空间以及扩展方向(低地址向高地址扩展)。</p>
+<ol>
+<li>为什么栈的分配速度比堆快？
+     答：因为栈只需要移动栈指针，而堆需要查找空闲块、处理碎片和系统调用。</li>
+<li>多线程程序中，栈和堆如何隔离？
+     答：栈是线程私有的，堆是进程共享的，需要用同步机制控制，比如锁。</li>
+</ol>
+<p><a href="https://www.bilibili.com/video/BV1pZPieyEym/?spm_id_from=333.1391.0.0&amp;vd_source=f4cc25a44af6631d6f4db023b3bb88e4">拼多多C++二面：堆和栈在操作系统底层的实现、为什么栈的分配速度比堆快？</a></p>
+<h2 id="_3">参考资料<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>[1] <a href="https://blog.csdn.net/songbijian/article/details/132507421">史上最全C/C++面试、C++面经八股文，一文带你彻底搞懂C/C++面试、C++面经！</a></p>
 <p>[2] </p>
 
