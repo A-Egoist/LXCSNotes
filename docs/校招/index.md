@@ -18,6 +18,5 @@
 *   简历中的实习经历和项目 --> Projects/MyResume/3. 面试/个人简历中的实习和项目的说明.md
 *   [C++ 面试八股](./C++ 面试八股.md)
 *   计算机四大件八股
+*   [面试常见手撕算法题](./面试常见手撕算法题.md)
 *   其他
-
-[面试常见手撕算法](http://www.csview.cn/algorithm-mandatory/handtearing.html)
