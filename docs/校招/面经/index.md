@@ -42,13 +42,13 @@
 
 [1] [大厂面试官：不同轮面试考察重点、挂的原因是什么](https://www.bilibili.com/video/BV11bMizmEx4?spm_id_from=333.1245.0.0)
 
-[2]
+[2] [银行实习ai面试 这些细节直接影响面试结果！千万别忽略！](https://www.bilibili.com/video/BV1gm3xziEUp?spm_id_from=333.1245.0.0)
 
-[3]
+[3] [发现大厂会录的小朋友，风格出奇的一致](https://www.bilibili.com/video/BV116MJzKE9a?spm_id_from=333.1245.0.0)
 
-[4]
+[4] [银行ai面试高频真题考哪些？无非就这几道！手把手教你拿下暑期实习offer！](https://www.bilibili.com/video/BV1um3xziEvN?spm_id_from=333.1245.0.0)
 
-[5]
+[5] [25秋招经验真诚分享||小米offer好拿吗?||应届校招生应该如何准备春秋招?](https://www.bilibili.com/video/BV1cSjUzwEfV?spm_id_from=333.1245.0.0)
 
 [6]
 

@@ -67,3 +67,19 @@
 [2]  [代码随想录知识星球](https://www.programmercarl.com/other/kstar.html)
 
 <img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506191156865.png" alt="image-20250619115555160" style="zoom: 67%;" />
+
+[3] [C++校招项目防雷同之：高性能RPC框架-支持json/protobuf等多种序列化方式](https://www.bilibili.com/video/BV176Niz8ENj?spm_id_from=333.1245.0.0)
+
+[4] [你知道C++ Linux校招简历项目有多雷同吗？别再写muduo网络库、webserver了](https://www.bilibili.com/video/BV1mJTtzZEpk?spm_id_from=333.1245.0.0)
+
+[5] [【C++】从零搭建聊天服务器（面试加分必备实战项目）](https://www.bilibili.com/video/BV1sE4m1d7Mp?spm_id_from=333.1245.0.0)
+
+[6] [C++项目要做到什么程度才可以校招-以实际项目和腾讯招聘要求讲解](https://www.bilibili.com/video/BV16BJ6z7EFD?spm_id_from=333.1245.0.0)
+
+[7]
+
+[8]
+
+[9]
+
+[10]

@@ -1,6 +1,16 @@
 # 大纲
 
-笔试题目类型大纲：
+## 时间线
+
+[26届秋招求职时间线](https://www.bilibili.com/video/BV1AaKWz3ER5?spm_id_from=333.1245.0.0)
+
+[计算机专业秋招，央国企合理的规划路径，不要去报班了](https://www.bilibili.com/video/BV1wi421U7E8?spm_id_from=333.1245.0.0)
+
+
+
+
+
+## 笔试大纲
 
 *   [编程题](./编程题/LeetCode刷题笔记.md)
 *   [数据结构与算法](./数据结构与算法.md)
@@ -13,7 +23,9 @@
 *   [系统设计](./系统设计.md)
 *   [海量数据处理](./海量数据处理.md)
 
-面试题目类型大纲：
+
+
+## 面试大纲
 
 *   简历中的实习经历和项目 --> Projects/MyResume/3. 面试/个人简历中的实习和项目的说明.md
 *   [C++ 面试八股](./C++ 面试八股.md)
@@ -30,6 +42,12 @@
 <img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202508082259951.png" alt="image-20250808225847515" style="zoom: 67%;" />
 
 来源：[你投出去的C++简历为什么没有任何反馈-C++简历坑点分析](https://www.bilibili.com/video/BV1BdMgzPEqa?spm_id_from=333.1245.0.0)
+
+
+
+[请大数据把这条视频推给所有找工作的计算机学生！一个从BOSS直聘反推学习路线的“逆向求职法”](https://www.bilibili.com/video/BV1g2TczxEEi?spm_id_from=333.1245.0.0)
+
+[校招互联网大厂C++学习路线和项目推荐](https://www.bilibili.com/video/BV1attpz6Eid?spm_id_from=333.1245.0.0)
 
 
 
