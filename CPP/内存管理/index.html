@@ -4025,16 +4025,6 @@
 <p><strong>free</strong></p>
 <p>当调用 <code>free</code> 函数释放一块内存时，<code>free</code> 首先会根据之前 <code>malloc</code> 存储的元数据获取内存块的大小和位置。然后，<code>free</code> 会将这个内存块放回到空闲内存块列表中。</p>
 <p>为了减少内存碎片，<code>free</code> 可能会合并相邻的空闲内存块。例如，如果一个被释放的内存块和它相邻的内存块都是空闲的，<code>free</code> 可以将它们合并成一个更大的空闲内存块。</p>
-<p><code>malloc</code> 和 <code>free</code> 仅分配和释放内存，而不对内存内容进行初始化。在 C++ 中，<code>new</code> 和 <code>delete</code> 操作符不仅负责内存分配和释放，还负责对象的构造和析构。6. malloc与free实现原理？</p>
-<p><code>malloc</code> 和 <code>free</code> 是 C 语言中用于在堆上分配和释放内存的标准库函数。</p>
-<p><strong>malloc</strong></p>
-<ul>
-<li>内存分配：<code>malloc</code> 向操作系统请求内存，根据系统平台和库实现的不同，它可以使用 <code>brk()</code> 和 <code>mmap()</code> 两种方式来从操作系统请求内存。小于128K用<code>brk()</code> 调整数据段的大小，以分配堆内存；大于128K用<code>mmap()</code> ，通过内存映射，在进程的虚拟地址空间中分配内存。</li>
-<li>内存管理：<code>malloc</code> 使用一种数据结构（通常是链表或树形结构）来管理已分配和未分配的内存块。当用户请求内存时，<code>malloc</code> 首先在内存管理数据结构中查找一个合适大小的空闲内存块。如果找到合适的内存块，<code>malloc</code> 会将其从空闲列表中移除并返回给用户。如果没有找到合适的内存块，<code>malloc</code> 会向操作系统请求更多的内存。</li>
-</ul>
-<p><strong>free</strong></p>
-<p>当调用 <code>free</code> 函数释放一块内存时，<code>free</code> 首先会根据之前 <code>malloc</code> 存储的元数据获取内存块的大小和位置。然后，<code>free</code> 会将这个内存块放回到空闲内存块列表中。</p>
-<p>为了减少内存碎片，<code>free</code> 可能会合并相邻的空闲内存块。例如，如果一个被释放的内存块和它相邻的内存块都是空闲的，<code>free</code> 可以将它们合并成一个更大的空闲内存块。</p>
 <p><code>malloc</code> 和 <code>free</code> 仅分配和释放内存，而不对内存内容进行初始化。在 C++ 中，<code>new</code> 和 <code>delete</code> 操作符不仅负责内存分配和释放，还负责对象的构造和析构。</p>
 <h3 id="12-free">12. 被free回收了的内存是否立刻还给操作系统？<a class="headerlink" href="#12-free" title="Permanent link">&para;</a></h3>
 <p>当使用 <code>free</code> 函数回收内存时，这些内存是否立刻还给操作系统取决于实现和操作系统。C 库实现会在内部维护一个内存池，将回收的内存加入内存池以供将来分配。</p>
