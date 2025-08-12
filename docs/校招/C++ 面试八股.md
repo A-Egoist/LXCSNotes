@@ -6,23 +6,23 @@
 
 源文件
 
-$\downarrow$
+:arrow_down:
 
 预编译 (Pre-Processor)：将头文件编译，进行宏替换，输出.i文件
 
-$\downarrow$
+:arrow_down:
 
 编译 (Compiler)：将其转化为汇编语言文件，主要做词法分析，语义分析以及检查错误，检查无误后将代码翻译成汇编语言，生成.s文件
 
-$\downarrow$
+:arrow_down:
 
 汇编 (Assembler)：汇编器将汇编语言文件翻译成机器语言，生成.o文件
 
-$\downarrow$
+:arrow_down:
 
 链接 (Linker)：将目标文件和库链接到一起，生成可执行文件.exe
 
-$\downarrow$
+:arrow_down:
 
 可执行文件
 
@@ -621,6 +621,114 @@ struct A::Impl{
 
 
 
+## 内存对齐
+
+### 什么是内存对齐？
+
+
+
+### 为什么内存对齐？
+
+
+
+### 代码分析样例
+
+分析如下代码的输出结果：
+
+```cpp
+#include <iostream>
+
+class Base {
+public:
+    int a = 1;
+    virtual void print(int n = 2) {
+        std::cout << "Base: " << a + n << std::endl;
+    }
+};
+
+class Derive : public Base {
+public:
+    int b = 3;
+    virtual void print(int n = 10) override {
+        std::cout << "Derive: " << b + n << std::endl;
+    }
+};
+
+int main() {
+    Base* arr = new Derive[10];
+    arr[7].print();  // 输出结果是？
+    delete[] arr;
+
+    Base *ptr = new Derive();
+    ptr->print();  // 输出结果是？
+    delete ptr;
+
+    return 0;
+}
+```
+
+>   来源：[网易C++一面：代码分析题（多态+内存对齐）【码农Mark】](https://www.bilibili.com/video/BV1DoMwzhETG?spm_id_from=333.1245.0.0)
+
+分析：
+
+首先看代码第 24 行，可以发现使用了多态，**虚函数是动态绑定**的，但是**默认参数是静态绑定**的，所以 Base 类对象的 n = 2 Derive 类对象的 n = 10，所以第 25 行的输出为 5；
+
+>   ```cpp
+>   Derive *ptr = new Derive();
+>   ptr->print();  // 默认参数来自 Derive::print(int n = 10), 输出结果是13
+>   delete ptr;
+>   ```
+>
+>   ```cpp
+>   Base *ptr = new Derive();
+>   ptr->print();  // 默认参数来自 Base::print(int n = 2), 输出结果是5
+>   delete ptr;
+>   ```
+>
+>   **虚函数的动态绑定只影响函数体的选择，不影响默认参数的选择**。默认参数在 **编译期** 按 **静态类型** 绑定。
+
+然后看第 20 行，可以发现构造了一个 Derive 类数组，然后 arr 指向这个数组。第 21 行，想要使用 `arr[7]` 来调用 `Derive::print()` 函数，`arr[7]` 等价于 `*(arr + 7 * sizeof(Base))`，所以这里就要求 sizeof(Base) 和 sizeof(Derive) 相等。假设在 64 位机器上运行，从类的定义可以分别得到 `sizeof(Base) = 8B(虚函数指针) + 4B(整型变量 a) + 4B(填充用于内存对齐) = 16B`，`sizeof(Derive) = 8B(虚函数指针) + 4B(整型变量 a) + 4B(整型变量 b) = 16B`。可以看到这段代码中 sizeof(Base) 和 sizeof(Derive) 很巧合的相等了，那么 arr[7].print() 能够得到预期的结果 5。
+
+所以最终的结果为：
+```bash
+Derive: 5
+Derive: 5
+```
+
+:warning:但实际上这是一个很巧合的事情，如果 Derive 类多一个变量 int c，在运行时就会出现段错误。
+
+:warning:**不能用父类指针指向子类对象数组**并用 `[]` 访问，否则是未定义行为。因为数组访问依赖 `sizeof(T)` 做偏移，而指针类型决定了偏移的单位。
+
+解决方案：
+
+1.   直接用**子类指针数组**：
+     ```cpp
+     Derive* arr = new Derive[10];
+     arr[7].print(); // 安全
+     delete[] arr;
+     ```
+
+2.   如果必须用 `Base*` 来管理多个 `Derive` 对象，使用**单个对象的指针容器**，比如 `std::vector<Base*>`：
+     ```cpp
+     std::vector<Base*> arr;
+     for (int i = 0; i < 10; ++i) arr.push_back(new Derive());
+     arr[7]->print();
+     for (auto p : arr) delete p;
+     ```
+
+3.   用**智能指针**管理多态对象：
+     ```cpp
+     #include <memory>
+     #include <vector>
+     
+     std::vector<std::unique_ptr<Base>> arr;
+     for (int i = 0; i < 10; ++i)
+         arr.push_back(std::make_unique<Derive>());
+     arr[7]->print();
+     ```
+
+
+
 
 ## C++ 多态
 
@@ -873,6 +981,16 @@ int main() {
 
 
 [拼多多C++二面：堆和栈在操作系统底层的实现、为什么栈的分配速度比堆快？](https://www.bilibili.com/video/BV1pZPieyEym/?spm_id_from=333.1391.0.0&vd_source=f4cc25a44af6631d6f4db023b3bb88e4)
+
+
+
+## 设计模式
+
+详见[常用的设计模式](../CPP/常用的设计模式.md)
+
+### 工厂模式
+
+详见[工厂模式](../CPP/常用的设计模式.md#_5)
 
 
 
