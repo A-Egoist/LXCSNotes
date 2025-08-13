@@ -988,6 +988,10 @@ int main() {
 
 详见[常用的设计模式](../CPP/常用的设计模式.md)
 
+### 单例模式
+
+详见[单例模式](../CPP/常用的设计模式.md#_1)
+
 ### 工厂模式
 
 详见[工厂模式](../CPP/常用的设计模式.md#_5)
@@ -1012,7 +1016,7 @@ int main() {
 
 [8] [网易C++一面：代码分析题（多态+内存对齐）【码农Mark】](https://www.bilibili.com/video/BV1DoMwzhETG?spm_id_from=333.1245.0.0)
 
-[9]
+[9] [面试中计算机基础到底考什么，应该怎么学](https://www.bilibili.com/video/BV1oS9qYkEm9?spm_id_from=333.1245.0.0)
 
 [10]
 

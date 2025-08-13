@@ -247,41 +247,57 @@ m.erase(2);
     #include <queue>
     ```
 
-2. 声明和初始化
+2. 声明和初始化</br>
+    默认使用 vector 作为容器，最大堆：
+    
     ```cpp
-    // 默认使用 vector 作为容器，最大堆
     std::priority_queue<int> max_heap;
     ```
-
+    
+    使用 vector 作为容器，大根堆：
+    
     ```cpp
-    // 使用 vector 作为容器，大根堆
     std::priority_queue<int, std::vector<int>, std::less<int> > max_heap;
     ```
-
+    
+    使用 vector 作为容器，小根堆：
+    
     ```cpp
-    // 使用 vector 作为容器，小根堆
     std::priority_queue<int, std::vector<int>, std::greater<int> > min_heap;
     ```
+    
+    使用 deque 作为容器：
 
     ```cpp
-    // 使用 deque 作为容器
-    std::priority_queue<int, std::deque<int>> pq_deque;
+    std::priority_queue<int, std::deque<int> > pq_deque;
     ```
+    
+    使用自定义比较函数：
 
     ```cpp
-    // 使用自定义比较函数
     auto cmp = [](int left, int right) { return left > right; };
     std::priority_queue<int, std::vector<int>, decltype(cmp)> custom_heap(cmp);
     ```
-
+    
+    使用 `std::pair` 和自定义比较函数：
+    
     ```cpp
-    // 使用pair和自定义比较函数
     auto cmp = [](std::pair<int, int> &a, std::pair<int, int> &b) { return a.second > b.second; };
     std::priority_queue<pair<int, int>, std::vector<pair<int, int> >, decltype(cmp)> custom_heap(cmp);
     ```
-
+    
+    使用 `std::pair` 和自定义比较器类 (重载 `()` 运算符)：
     ```cpp
-    // 使用自定义数据类型和自定义比较函数
+    struct cmp
+    {
+        bool operator()(const std::pair<int, int>& a, const std::pair<int, int>& b) { return a.first < b.first; }
+    };
+    std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, cmp> max_heap;
+    ```
+    
+    使用自定义数据类型和自定义比较函数：
+    
+    ```cpp
     struct Count {
         int key;
         int value;
@@ -289,9 +305,10 @@ m.erase(2);
     auto cmp = [](const Count &a, const Count &b) { return a.value > b.value; };
     std::priority_queue<Count, std::vector<Count>, decltype(cmp)> custom_heap(cmp);
     ```
-
+    
+    使用自定义数据类型和运算符重载：
+    
     ```cpp
-    // 使用自定义数据类型和运算符重载
     struct Count {
         int key;
         int value;
@@ -302,7 +319,7 @@ m.erase(2);
     }
     std::priority_queue<Count, std::vector<Count>, std::less<Count> > custom_heap;
     ```
-
+    
     
 
 #### 注意事项
