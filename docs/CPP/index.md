@@ -2,26 +2,24 @@
 
 ## 基本路径
 
-为了在明年的秋招中脱颖而出，你可以采取以下步骤来提升你的 Linux C/C++ 技能：
+为了在秋招中脱颖而出，你可以采取以下步骤来提升你的 Linux C/C++ 技能：
 
 1.   **深入理解基础知识**：
      *   **复习基础概念**：包括指针、内存管理（malloc/free）、文件操作、字符串处理等。确保你对这些概念非常熟悉。
      *   **进阶数据结构和算法**：深入学习常用的数据结构（如链表、树、图、哈希表）和算法（如排序、搜索、动态规划）。这些在面试中经常被考察。
 
 2.   **系统编程**：
-
      - **学习进程和线程**：理解进程的创建、管理和进程间通信（如管道、信号、共享内存等），掌握多线程编程以及相关的同步机制（如互斥锁、信号量、条件变量等）。
-
+     
      - **掌握网络编程**：熟悉 Socket 编程，了解 TCP/IP 协议，学习如何编写基本的客户端和服务器程序。
-
+     
      - **文件系统和 I/O 操作**：理解 Linux 文件系统的工作原理，深入学习文件 I/O 操作的系统调用（如 open、read、write、close）。
-
+     
 3.   **项目实战**：
-
      - **开发小型项目**：尝试用 C/C++ 编写一些小型项目，如简单的 Web 服务器、命令行工具、或者实现一个基本的 shell（终端）。
-
+     
      - **参与开源项目**：挑选一些与你的兴趣相关的开源项目，参与贡献代码。通过实际开发来提高你的代码质量和团队协作能力。
-
+     
 4.   **阅读优秀的源码**：
 
      - **分析经典代码**：阅读并分析一些经典的 C/C++ 项目源码，如 Linux 内核、Redis、nginx 等。理解它们的设计思想和代码实现。
@@ -32,7 +30,7 @@
 
      - **掌握调试工具**：熟练使用 GDB、Valgrind、strace 等工具来调试程序，分析内存泄漏、段错误等常见问题。
 
-     - **熟悉开发环境**：熟练使用 Vim、Emacs 或其他常用的开发工具，掌握 Makefile、CMake 等构建工具的使用。
+     - **熟悉开发环境**：熟练使用 Vim、Emacs 或其他常用的开发工具，掌握 CMake 等构建工具的使用。
 
 6.   **刷题**：
      - **参加在线编程挑战**：在 LeetCode、牛客网等平台上刷题，特别关注涉及系统编程和算法的题目。培养解决问题的能力和编程速度。
@@ -75,8 +73,6 @@
     *   [ ] redis
     *   [ ] leveldb
 
-
-
 *   [ ] 【8】日志功能：Log4cpp
 
 
@@ -100,6 +96,14 @@
 
 ## 参考资料
 
-[Google 开源项目风格指南](https://zh-google-styleguide.readthedocs.io/en/latest/contents.html)
+[1] [Google 开源项目风格指南](https://zh-google-styleguide.readthedocs.io/en/latest/contents.html)
 
-![Linux+C+CPP Guidance](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202507192036236.png)
+
+
+[2] <img src="C:\Users\Amonologue\AppData\Roaming\Typora\typora-user-images\image-20250814101032944.png" alt="image-20250814101032944" style="zoom: 40%;" />
+
+>   来源：[给C++就业方向的应届毕业生的一些分析与建议，帮助大家少浪费时间，多花时间在有意义的事情上](https://www.bilibili.com/video/BV1PY4y1e7VB?spm_id_from=333.1245.0.0)
+
+[3] <img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202507192036236.png" alt="Linux+C+CPP Guidance" style="zoom:67%;" />
+
+[4] 

@@ -621,13 +621,23 @@ struct A::Impl{
 
 
 
-## 内存对齐
+## 内存
 
-### 什么是内存对齐？
+### 内存对齐
+
+#### 什么是内存对齐？
 
 
 
-### 为什么内存对齐？
+#### 为什么内存对齐？
+
+
+
+### 内存布局
+
+>   [计算机系统篇之链接（10）：.bss、.data 和 .rodata sections 之间的区别](https://csstormq.github.io/blog/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AF%87%E4%B9%8B%E9%93%BE%E6%8E%A5%EF%BC%8810%EF%BC%89%EF%BC%9A.bss%E3%80%81.data%20%E5%92%8C%20.rodata%20section%20%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB)
+
+
 
 
 
