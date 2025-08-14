@@ -1648,6 +1648,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../Projects/Hadoop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hadoop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../Projects/Kafka/" class="md-nav__link">
         
   
@@ -1900,6 +1923,29 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../Projects/%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0vector%E5%AE%B9%E5%99%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    自己动手实现vector容器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     
     
     
@@ -1912,10 +1958,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_14" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_16" >
         
           
-          <label class="md-nav__link" for="__nav_5_14" id="__nav_5_14_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5_16" id="__nav_5_16_label" tabindex="0">
             
   
   
@@ -1928,8 +1974,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_14_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_14">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_16">
             <span class="md-nav__icon md-icon"></span>
             WebServer
           </label>
@@ -3074,6 +3120,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#stdvector" class="md-nav__link">
+    <span class="md-ellipsis">
+      手撕 std::vector
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       参考资料
@@ -4080,6 +4135,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#stdvector" class="md-nav__link">
+    <span class="md-ellipsis">
+      手撕 std::vector
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       参考资料
@@ -4177,6 +4241,28 @@
 <h3 id="_5">二叉树中最近的公共祖先<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>第二道 二叉树中最近的公共祖先 我说了一下递归找两个节点是不一个在左一个在右，不在的话继续往那个方向搜
 都是hot100的题，这个因为已经二刷过了很熟悉，基本上都秒答了</p>
+<h3 id="stdvector">手撕 <code>std::vector</code><a class="headerlink" href="#stdvector" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>参考资料：
+  [1] <a href="https://www.bilibili.com/video/BV1XSNizpEah?spm_id_from=333.1245.0.0">拼多多C++一面：手撕 std::vector,源码文档分享~【码农Mark】</a>
+  [2] <a href="https://www.bilibili.com/video/BV1V84y127Pi/?spm_id_from=333.1387.collection.video_card.click&amp;vd_source=f4cc25a44af6631d6f4db023b3bb88e4">【C++标准库】自己动手实现vector容器</a></p>
+</blockquote>
+<p>实现一个什么样的 vector？动态数组</p>
+<p>包含关键特性：</p>
+<ol>
+<li>内存管理（分离内存分配和对象构造，分离内存释放和对象析构，扩容机制）</li>
+<li>移动语义优化（移动构造和移动赋值）</li>
+<li>增、删操作数据移动</li>
+<li>支持迭代器</li>
+<li>不提供范围操作，仅提供单个元素的操作，目的是展示对 vector 的理解</li>
+<li>采用 <code>T*</code>，<code>size_t size_, capacity_</code> 来实现</li>
+</ol>
+<blockquote>
+<p>什么是 POD 类型：<a href="https://zhuanlan.zhihu.com/p/45545035">什么是 POD 数据类型？</a></p>
+<p>什么是完美转发：</p>
+<p>test-driven development</p>
+<p>size_t 类型</p>
+</blockquote>
 <h2 id="_6">参考资料<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>[1] <a href="http://www.csview.cn/algorithm-mandatory/handtearing.html">面试常见手撕算法</a></p>
 <p>[2] </p>
