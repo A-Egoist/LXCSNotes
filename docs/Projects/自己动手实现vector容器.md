@@ -1,5 +1,7 @@
 # 自己动手实现vector容器
 
+### 实现要求
+
 >   参考资料：
 >   [1] [拼多多C++一面：手撕 std::vector,源码文档分享~【码农Mark】](https://www.bilibili.com/video/BV1XSNizpEah?spm_id_from=333.1245.0.0)
 >   [2] [【C++标准库】自己动手实现vector容器](https://www.bilibili.com/video/BV1V84y127Pi/?spm_id_from=333.1387.collection.video_card.click&vd_source=f4cc25a44af6631d6f4db023b3bb88e4)
@@ -49,7 +51,7 @@
 
 
 
-逐步实现 `MyVector` 类
+### 逐步实现 `MyVector` 类
 
 1.   定义 `MyVector` 类的基本结构，包括三个核心成员变量：`data_` (指向数据的指针)，`capacity_` (容量)，`size_` (大小)；
 2.   定义默认构造函数、显式带参数的构造函数、析构函数、常用的成员函数 (`size()`，`capacity()`，`empty()`)；
@@ -61,7 +63,7 @@
 8.   移动构造函数和移动赋值运算符 (C++11)。用于优化性能，避免不必要的内存分配和拷贝，显著提升性能。`noexcept` 用于表示这些操作不会抛出异常；
 9.   实现迭代器的简单版本。将 `iterator` 和 `const_iterator` 简单的定义为 `T*` 和 `const T*`，因为指针本身就可以作为迭代器使用。此外，实现 `begin()` 和 `end()` 分别用于获取 `vector` 的第一个元素指针，和最后一个元素的下一个元素的指针，对齐 `std::begin()` 和 `std::end()`。
 
-完整代码：
+### 完整代码
 
 ```cpp
 #pragma once
@@ -317,9 +319,11 @@ private:
 };
 ```
 
-以上代码提供了一个 `MyVector` 的基础实现，但是参考 `std::vector`，该类存在一些改进的地方：
+以上代码提供了一个 `MyVector` 的基础实现，但是参考 `std::vector`，该类存在一些改进的地方。
 
-### 1. 将内存分配和对象构造分离：
+### 进一步优化
+
+#### 1. 将内存分配和对象构造分离：
 
 ```cpp
 // ... (之前的代码)
@@ -348,7 +352,7 @@ private:
 };
 ```
 
-#### `new T[capacity_]` 的行为
+##### `new T[capacity_]` 的行为
 
 因为原来的 `new T[capacity_]` 会做两件事情：1）分配内存，分配足够的原始内存来存储 `capacity_` 个 `T` 类型的对象；2）构造对象，调用 `T` 的**默认构造函数**，在分配的内存上对 `capacity_` 个对象进行原地构造（placement new）。
 
@@ -361,7 +365,7 @@ private:
 *   效率问题：如果 `vector` 需要很大的容量，但大多数元素并不会立即被使用或赋值，那么提前构造这些对象是浪费时间和资源的。对于**非平凡类型**（non-trivial types，即有自定义构造函数、析构函数、拷贝/移动操作的类型），默认构造可能会有显著的开销。
 *   不必要的构造：我们希望在 `push_back` 或 `emplace_back` 时才实际构造元素，而不是在 `reserve` 或 `resize` 时就构造。
 
-#### `::operator new` (和 `placement new`) 的行为
+##### `::operator new` 和 `placement new` 的行为
 
 `::operator new` 是一个全局的内存分配函数（就像 `malloc`），它只负责分配指定大小的原始、未初始化的内存块。它**不会**调用任何对象的构造函数。
 
@@ -384,11 +388,15 @@ new (data_ + size_) T(value); // 调用 T 的拷贝构造函数
 
 `static_cast<T*>` 的核心作用就是将 `::operator new` 返回的通用 `void*` 指针**明确地转换为 `T` 类型的指针**，从而使我们能够以类型安全的方式管理和操作这块内存，将其作为 `T` 类型对象的存储区域。
 
-### 2. 
+#### 2. 使用 `emplace_back()` 同时处理左值和右值
+
+
+
+
 
 ---
 
-**深入理解和学习 `std::vector` 的关键点**
+### **深入理解和学习 `std::vector` 的关键点**
 
 在实现 `MyVector` 的过程中，你需要注意以下几点，这能帮助你更深入地理解 `std::vector`：
 
@@ -402,7 +410,7 @@ new (data_ + size_) T(value); // 调用 T 的拷贝构造函数
 
 ---
 
-**应对面试建议**
+### **应对面试建议**
 
 -   **从核心功能开始**：面试时，如果时间有限，先实现最核心的功能，如构造函数、析构函数、`push_back` 和 `operator[]`。
 -   **逐步完善**：在核心功能实现后，再逐步添加拷贝构造、赋值运算符、`reserve`、`at` 等。

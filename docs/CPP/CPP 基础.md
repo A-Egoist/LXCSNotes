@@ -189,6 +189,10 @@ std::cout << y; // 输出21
 
 
 
+### 类型转换
+
+`static_cast<T*>`
+
 ## STL
 
 详见：[STL](./STL.md)
@@ -969,11 +973,9 @@ int main() {
 
 ## 拾遗
 
-### 零散知识点
+### `explicit` 关键字
 
-#### `explicit` 关键字
-
-#### Containers library
+### Containers library
 
 Sequence containers：
 
@@ -989,7 +991,7 @@ Unordered associate containers：
 
 
 
-#### `constexpr` 和 `const` 关键字
+### `constexpr` 和 `const` 关键字
 
 用 `constexpr`：
 
@@ -1007,7 +1009,7 @@ Unordered associate containers：
 
 
 
-#### `size_t`、`sizeof()`、`typedef`
+### `size_t`、`sizeof()`、`typedef`
 
 实际上，`size_t` 是个无符号整型，它并不是一个全新的数据类型，更不是一个关键字。`size_t` 是由 `typedef` 定义而来的，我们在很多标准库头文件中都能发现。
 
@@ -1026,7 +1028,7 @@ C 标准头文件`<stddef.h>`中可以找到`size_t`的实际定义。
 
 
 
-#### `struct` 和 `class` 的区别
+### `struct` 和 `class` 的区别
 
 在 C++ 中，`struct` 和 `class` 都用于定义自定义数据类型，它们的核心功能几乎相同，主要区别在于**默认访问权限**和**默认继承方式**。
 
@@ -1064,7 +1066,67 @@ C 标准头文件`<stddef.h>`中可以找到`size_t`的实际定义。
 
 
 
-#### 左值引用和右值引用
+### (`new`) V.S. (`::operator new` && `placement new`)
+
+#### `new`
+
+当使用普通的 `new` 的时候，会做两件事情：
+
+1.   分配内存（调用 `operator new`，从堆上拿空间）；
+2.   调用构造函数（用传入的参数构造对象）；
+
+内存分配和对象构造是在一起的。
+
+但是有的时候我们并不希望内存分配和对象构造在一起执行，比如我们在 `std::vector` 中，我们会申请 `capacity_ * sizeof(T)` 的空间来存储类型 T 的对象，但是我们并不希望在申请空间的时候就初始化这些空间，而是在调用 `push_back()` 或者 `emplace_back()` 才实际构造元素。所以我们需要将内存分配和对象构造分离，这就需要使用到 `::operator new` 和 `placement new` 了。
+
+#### `::operator new` && `placement new`
+
+使用 `::operator new` 和 `placement new` 需要先导入头文件：
+```cpp
+#include <new>
+```
+
+在[自己动手实现vector容器](../Projects/自己动手实现vector容器.md)中，我使用 `::operator new` 来进行内存分配，返回类型是 `void*`，所以需要使用 `static_cast<T*>` 进行类型转换，分配的内存大小为 `capacity * sizeof(T)`。
+```cpp
+// ::operator new(元素数量 * sizeof(元素类型));
+T* allocate(size_t capacity) {
+    return static_cast<T*>(::operator new(capacity * sizeof(T)));
+}
+```
+
+>   :warning: `::operator new(数量 * sizeof(类型))`  好 `::operator new[](数量 * sizeof(类型))` 的区别，更推荐使用 `::operator new(数量 * sizeof(类型))`，避免不必要的开销。
+
+然后又实现了 `emplace_back()` 函数用于在用户调用 `push_back` 或者 `emplace_back()` 的时候实际构造对象：
+
+```cpp
+// new (地址) T(arg1, arg2, ...);
+new (data_ + size_) T(std::forward<Args>(args)...);
+```
+
+对应的，在使用 `::operator new` 和 `placement new` 之后，在析构对象和释放内存的时候也需要手动调用：
+```cpp
+// 清空 vector，但不释放内存
+void clear() {
+    for (int i = 0; i < size_; ++ i) {
+        // 对应非 POD 类型，需要显式调用每个元素的析构函数
+        data_[i].~T();  // 调用元素的析构函数
+    }
+    size_ = 0;
+}
+```
+
+```cpp
+    // 内存释放
+    void deallocate() {
+        ::operator delete(data_);
+        data_ = nullptr;
+        capacity_ = 0;
+    }
+```
+
+
+
+### 左值引用和右值引用
 
 在 C++ 中，**左值引用（lvalue reference）** 和 **右值引用（rvalue reference）** 是两种不同的引用类型，它们的主要区别在于 **绑定对象的类别（左值 or 右值）** 和 **用途（拷贝优化 or 资源转移）**。
 
@@ -1094,7 +1156,150 @@ C 标准头文件`<stddef.h>`中可以找到`size_t`的实际定义。
 
 
 
-#### `std::map`
+### 完美转发 (Perfect Forwarding) 
+
+完美转发是一种在**模板函数**中保持参数的**值类别（左值或右值）**的能力。当一个函数模板接收参数并将其转发给另一个函数时，我们希望原始参数的左值/右值属性能够得到保留。
+
+这主要通过以下两个特性实现：
+
+-   **万能引用 (Universal References) / 转发引用 (Forwarding References)**：当模板参数形如 `T&&`，并且 `T` 是一个推导的模板参数时（例如 `template <typename T> void foo(T&& arg)`），`T&&` 就不再仅仅是右值引用，它会根据传入参数的类型表现出两种行为：
+    -   如果传入的是**左值**，`T` 会被推导为 `Type&` (一个左值引用类型)，那么 `Type& &&` 经过引用折叠后变为 `Type&` (左值引用)。
+    -   如果传入的是**右值**，`T` 会被推导为 `Type` (一个非引用类型)，那么 `Type&&` 保持为 `Type&&` (右值引用)。 因此，`T&&` 能够“万能地”接收左值和右值。
+-   **`std::forward<T>(arg)`**：这是完美转发的核心工具。它是一个条件性转换：
+    -   如果 `arg` 最初是**左值**，`std::forward` 会将其转换回**左值引用**（`Type& &&` 折叠为 `Type&`）。
+    -   如果 `arg` 最初是**右值**，`std::forward` 会将其转换为**右值引用**（`Type&&` 保持为 `Type&&`）。
+
+这样，`std::forward` 确保了参数在转发过程中保持其原始的值类别。
+
+**代码示例**
+
+```cpp
+#include <iostream>
+#include <string>
+#include <utility>
+
+void real_func(const std::string& s) {
+    std::cout << "左值版本: " << s << "\n";
+}
+
+void real_func(std::string&& s) {
+    std::cout << "右值版本: " << s << "\n";
+}
+
+template <typename T>
+void wrapper(T&& arg) { // 万能引用
+    // 完美转发
+    real_func(std::forward<T>(arg));
+}
+
+int main() {
+    std::string s = "hello";
+    wrapper(s);  // 左值调用
+    wrapper(std::string("world"));  // 右值调用
+}
+```
+
+**常见应用场景**
+
+1.  **容器的 `emplace` 系列**
+     `std::vector::emplace_back` 用完美转发把参数直接传给元素构造函数，避免临时对象。
+
+2.  **工厂函数**
+
+    ```
+    template <typename T, typename... Args>
+    std::unique_ptr<T> make_smart(Args&&... args) {
+        return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+    }
+    ```
+
+3.  **通用封装 / 装饰器模式**
+
+    -   例如包装一个日志函数，然后把参数“完美转发”到真实逻辑函数。
+
+
+
+### 可变参数模板（variadic templates）
+
+```cpp
+// 完美转发
+template <typename... Args>
+T& emplace_back(Args&&... args) {
+    if (size_ == capacity_) {
+        reallocate(capacity_ == 0 ? 1 : capacity_ * 2);
+    }
+
+    new (data_ + size_) T(std::forward<Args>(args)...);  // 完美转发
+    return data_[size_ ++];
+}
+```
+
+在如上完美转发的代码中，使用到了 可变参数模板（variadic templates） 和 参数包展开（parameter pack expansion）。
+
+具体来说：
+
+#### 1. `template <typename... Args>` — 定义参数包
+
+-   `...` 在类型名后面（`typename... Args`）表示 **Args 是一个类型参数包**，可以代表任意多个类型：
+
+    ```cpp
+    Args = {int, double, std::string} // 可能的情况
+    Args = {std::string}              // 也可以是一个
+    Args = {}                         // 甚至可以是空
+    ```
+
+-   就好像 `Args` 是一个**类型列表**。
+
+#### 2. `Args&&... args` — 万能引用的参数包
+
+-   `args` 是一个**参数包变量**，里面有多个参数，每个参数类型对应 `Args` 里的一个类型。
+-   因为是 `Args&&` 并且 `Args` 是模板参数，所以这里是 **万能引用参数包**，可以同时接收：
+    -   任意数量的左值
+    -   任意数量的右值
+    -   任意混合的左值和右值
+
+#### 3. `std::forward<Args>(args)...` — 参数包展开
+
+-   最后的 `...` 是 **展开操作**（pack expansion）。
+-   作用：把 `args` 里的多个参数，依次用 `std::forward` 转发，然后按顺序展开成实参列表。
+-   如果你去掉 `...`，编译器会说它不知道怎么把一整个包传给构造函数，因为构造函数是期望**多个参数**，而不是一个“包对象”。
+
+例子：
+
+```cpp
+emplace_back(42, 3.14, "hello");
+
+// 展开过程：
+std::forward<Args>(args)...   // 展开成：
+std::forward<int>(42), std::forward<double>(3.14), std::forward<const char*>("hello")
+```
+
+#### 4. 为什么必须展开？
+
+因为 C++ 里构造函数（`T(...)`）的参数是一个一个匹配的，而参数包是一个“集合”，要让编译器自动把它拆成单个参数传过去，就需要 `...` 来展开。
+
+`...` 出现在不同位置的意义：
+
+-   定义类型包：`typename... Args`
+-   定义变量包：`Args&&... args`
+-   展开：`std::forward<Args>(args)...`
+
+#### 5. 结合你的 `emplace_back`
+
+```cpp
+new (data_ + size_) T(std::forward<Args>(args)...);
+```
+
+它的意思是：
+
+-   取 `args` 里的每个参数，
+-   根据 `Args` 的推导结果决定它是左值还是右值，
+-   保留原本的值类别（完美转发），
+-   按顺序一个个传给 `T` 的构造函数。
+
+
+
+### `std::map`
 
 读取元素时，统一用 `at()`
 
@@ -1108,13 +1313,13 @@ m["key2"] = val;  // 写
 
 
 
-#### 浅拷贝与深拷贝
+### 浅拷贝与深拷贝
 
 **浅拷贝(Shallow Copy)**和**深拷贝(Deep Copy)**
 
 
 
-#### `std::pair` 的用法和优势
+### `std::pair` 的用法和优势
 
 `std::pair` 是一个简单但极其有用的工具，其核心优势在于：
 
@@ -1135,7 +1340,7 @@ m["key2"] = val;  // 写
 
 
 
-#### `std::tuple`
+### `std::tuple`
 
 tuple 用于函数多个返回值
 
@@ -1165,13 +1370,13 @@ int main() {
 
 
 
-#### 智能指针
+### 智能指针
 
-##### `std::unique_ptr`
+#### `std::unique_ptr`
 
 
 
-##### `std::shared_ptr`
+#### `std::shared_ptr`
 
 ```cpp
 mysql_connection *conn = mysql_connect("127.0.0.1");
@@ -1189,7 +1394,7 @@ mysql_execute(conn.get(), "drop database paolu");
 
 
 
-#### 常量成员函数
+### 常量成员函数
 
 
 
