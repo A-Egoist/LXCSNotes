@@ -1979,6 +1979,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      实现要求
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#myvector" class="md-nav__link">
+    <span class="md-ellipsis">
+      逐步实现 MyVector 类
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      完整代码
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      进一步优化
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="进一步优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       1. 将内存分配和对象构造分离：
@@ -2000,7 +2037,21 @@
           <li class="md-nav__item">
   <a href="#operator-new-placement-new" class="md-nav__link">
     <span class="md-ellipsis">
-      ::operator new (和 placement new) 的行为
+      ::operator new 和 placement new 的行为
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-emplace_back" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 使用 emplace_back() 同时处理左值和右值
     </span>
   </a>
   
@@ -2012,9 +2063,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#stdvector" class="md-nav__link">
     <span class="md-ellipsis">
-      2.
+      深入理解和学习 std::vector 的关键点
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      应对面试建议
     </span>
   </a>
   
@@ -3967,6 +4027,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      实现要求
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#myvector" class="md-nav__link">
+    <span class="md-ellipsis">
+      逐步实现 MyVector 类
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      完整代码
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      进一步优化
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="进一步优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       1. 将内存分配和对象构造分离：
@@ -3988,7 +4085,21 @@
           <li class="md-nav__item">
   <a href="#operator-new-placement-new" class="md-nav__link">
     <span class="md-ellipsis">
-      ::operator new (和 placement new) 的行为
+      ::operator new 和 placement new 的行为
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-emplace_back" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 使用 emplace_back() 同时处理左值和右值
     </span>
   </a>
   
@@ -4000,9 +4111,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#stdvector" class="md-nav__link">
     <span class="md-ellipsis">
-      2.
+      深入理解和学习 std::vector 的关键点
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      应对面试建议
     </span>
   </a>
   
@@ -4028,6 +4148,7 @@
 
 
 <h1 id="vector">自己动手实现vector容器<a class="headerlink" href="#vector" title="Permanent link">&para;</a></h1>
+<h3 id="_1">实现要求<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p>参考资料：
   [1] <a href="https://www.bilibili.com/video/BV1XSNizpEah?spm_id_from=333.1245.0.0">拼多多C++一面：手撕 std::vector,源码文档分享~【码农Mark】</a>
@@ -4064,7 +4185,7 @@
 <li>容量 (Capacity)：当前已分配内存块能够容纳的元素总数。当 <code>vector</code> 的元素数量 <code>size_</code> 大于 <code>capacity_</code> 时会扩容，它会重新分配一块更大的内存，将现有的元素移动/拷贝过去，然后释放旧的内存。在这里扩容逻辑保持和 GCC  一致，即两倍扩容；</li>
 <li>大小 (Size)：当前 <code>vector</code> 中实际存储的元素数量，它总是小于等于 <code>capacity_</code>。</li>
 </ol>
-<p>逐步实现 <code>MyVector</code> 类</p>
+<h3 id="myvector">逐步实现 <code>MyVector</code> 类<a class="headerlink" href="#myvector" title="Permanent link">&para;</a></h3>
 <ol>
 <li>定义 <code>MyVector</code> 类的基本结构，包括三个核心成员变量：<code>data_</code> (指向数据的指针)，<code>capacity_</code> (容量)，<code>size_</code> (大小)；</li>
 <li>定义默认构造函数、显式带参数的构造函数、析构函数、常用的成员函数 (<code>size()</code>，<code>capacity()</code>，<code>empty()</code>)；</li>
@@ -4076,7 +4197,7 @@
 <li>移动构造函数和移动赋值运算符 (C++11)。用于优化性能，避免不必要的内存分配和拷贝，显著提升性能。<code>noexcept</code> 用于表示这些操作不会抛出异常；</li>
 <li>实现迭代器的简单版本。将 <code>iterator</code> 和 <code>const_iterator</code> 简单的定义为 <code>T*</code> 和 <code>const T*</code>，因为指针本身就可以作为迭代器使用。此外，实现 <code>begin()</code> 和 <code>end()</code> 分别用于获取 <code>vector</code> 的第一个元素指针，和最后一个元素的下一个元素的指针，对齐 <code>std::begin()</code> 和 <code>std::end()</code>。</li>
 </ol>
-<p>完整代码：</p>
+<h3 id="_2">完整代码<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
 <span class="normal">  2</span>
 <span class="normal">  3</span>
@@ -4579,8 +4700,9 @@
 <span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size_</span><span class="p">;</span>
 <span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<p>以上代码提供了一个 <code>MyVector</code> 的基础实现，但是参考 <code>std::vector</code>，该类存在一些改进的地方：</p>
-<h3 id="1">1. 将内存分配和对象构造分离：<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>以上代码提供了一个 <code>MyVector</code> 的基础实现，但是参考 <code>std::vector</code>，该类存在一些改进的地方。</p>
+<h3 id="_3">进一步优化<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h4 id="1">1. 将内存分配和对象构造分离：<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -4629,7 +4751,7 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="new-tcapacity_"><code>new T[capacity_]</code> 的行为<a class="headerlink" href="#new-tcapacity_" title="Permanent link">&para;</a></h4>
+<h5 id="new-tcapacity_"><code>new T[capacity_]</code> 的行为<a class="headerlink" href="#new-tcapacity_" title="Permanent link">&para;</a></h5>
 <p>因为原来的 <code>new T[capacity_]</code> 会做两件事情：1）分配内存，分配足够的原始内存来存储 <code>capacity_</code> 个 <code>T</code> 类型的对象；2）构造对象，调用 <code>T</code> 的<strong>默认构造函数</strong>，在分配的内存上对 <code>capacity_</code> 个对象进行原地构造（placement new）。</p>
 <p><strong>优点</strong>：</p>
 <ul>
@@ -4640,7 +4762,7 @@
 <li>效率问题：如果 <code>vector</code> 需要很大的容量，但大多数元素并不会立即被使用或赋值，那么提前构造这些对象是浪费时间和资源的。对于<strong>非平凡类型</strong>（non-trivial types，即有自定义构造函数、析构函数、拷贝/移动操作的类型），默认构造可能会有显著的开销。</li>
 <li>不必要的构造：我们希望在 <code>push_back</code> 或 <code>emplace_back</code> 时才实际构造元素，而不是在 <code>reserve</code> 或 <code>resize</code> 时就构造。</li>
 </ul>
-<h4 id="operator-new-placement-new"><code>::operator new</code> (和 <code>placement new</code>) 的行为<a class="headerlink" href="#operator-new-placement-new" title="Permanent link">&para;</a></h4>
+<h5 id="operator-new-placement-new"><code>::operator new</code> 和 <code>placement new</code> 的行为<a class="headerlink" href="#operator-new-placement-new" title="Permanent link">&para;</a></h5>
 <p><code>::operator new</code> 是一个全局的内存分配函数（就像 <code>malloc</code>），它只负责分配指定大小的原始、未初始化的内存块。它<strong>不会</strong>调用任何对象的构造函数。</p>
 <p>后续你需要手动在这些原始内存上构造对象，这通常通过<strong>定位 new (placement new)</strong> 来完成。例如，当你 <code>push_back</code> 一个元素时：
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -4662,9 +4784,9 @@
 </ul>
 <p><code>::operator new</code> 返回的是一个 <code>void*</code> 指针。<code>void*</code> 是一个通用指针类型，它可以指向任何类型的数据，但它本身没有类型信息，不能直接进行指针算术运算（如 <code>ptr + 1</code>）或解引用。为了能够将这块原始内存视为存储 <code>T</code> 类型对象的数组，并对其进行后续操作（例如，通过 <code>data_[index]</code> 访问元素或使用定位 <code>new</code> 构造对象），我们需要将这个 <code>void*</code> 指针转换为 <code>T*</code> 类型的指针。</p>
 <p><code>static_cast&lt;T*&gt;</code> 的核心作用就是将 <code>::operator new</code> 返回的通用 <code>void*</code> 指针<strong>明确地转换为 <code>T</code> 类型的指针</strong>，从而使我们能够以类型安全的方式管理和操作这块内存，将其作为 <code>T</code> 类型对象的存储区域。</p>
-<h3 id="2">2.<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<h4 id="2-emplace_back">2. 使用 <code>emplace_back()</code> 同时处理左值和右值<a class="headerlink" href="#2-emplace_back" title="Permanent link">&para;</a></h4>
 <hr />
-<p><strong>深入理解和学习 <code>std::vector</code> 的关键点</strong></p>
+<h3 id="stdvector"><strong>深入理解和学习 <code>std::vector</code> 的关键点</strong><a class="headerlink" href="#stdvector" title="Permanent link">&para;</a></h3>
 <p>在实现 <code>MyVector</code> 的过程中，你需要注意以下几点，这能帮助你更深入地理解 <code>std::vector</code>：</p>
 <ul>
 <li><strong>内存管理</strong>：<code>std::vector</code> 最重要的职责是内存管理。你需要手动 <code>new</code> 和 <code>delete</code> 数组，并处理好内存的分配、释放和重新分配。这是面试中考察的重点。</li>
@@ -4676,7 +4798,7 @@
 <li><strong>迭代器失效</strong>：理解 <code>vector</code> 在什么操作下会导致迭代器失效。例如，当 <code>vector</code> 重新分配内存时，所有指向旧内存的迭代器都会失效。</li>
 </ul>
 <hr />
-<p><strong>应对面试建议</strong></p>
+<h3 id="_4"><strong>应对面试建议</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>从核心功能开始</strong>：面试时，如果时间有限，先实现最核心的功能，如构造函数、析构函数、<code>push_back</code> 和 <code>operator[]</code>。</li>
 <li><strong>逐步完善</strong>：在核心功能实现后，再逐步添加拷贝构造、赋值运算符、<code>reserve</code>、<code>at</code> 等。</li>
