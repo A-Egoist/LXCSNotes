@@ -1,6 +1,6 @@
 # 自己动手实现vector容器
 
-### 实现要求
+### 需求分析
 
 >   参考资料：
 >   [1] [拼多多C++一面：手撕 std::vector,源码文档分享~【码农Mark】](https://www.bilibili.com/video/BV1XSNizpEah?spm_id_from=333.1245.0.0)
@@ -274,7 +274,8 @@ public:
         if (empty()) {
             throw std::out_of_range("MyVector::pop_back: vector is empty\n");
         }
-        -- size_;
+        // 调用析构函数
+        data_[-- size_].~T();
     }
 
     // 清空 vector，但不释放内存
@@ -390,7 +391,206 @@ new (data_ + size_) T(value); // 调用 T 的拷贝构造函数
 
 #### 2. 使用 `emplace_back()` 同时处理左值和右值
 
+使用可变参数模板函数 `emplace_back()`，利用完美转发来实现原地构造函数。使用 `push_back(const T& value)` 来接收左值，使用 `push_back(T&& value)` 来接收右值。
 
+:warning: `push_back(T&& value)` 在接收右值之后，`value` 本身是一个具名变量被视为左值（具名右值引用是左值）。
+
+`push_back` 与 `emplace_back` 的构造行为详解，`Node` 结构体来精确地梳理一下：
+
+```cpp
+struct Node {
+    int a;
+    double b;
+    char c;
+
+    // 为了更好地演示，我们手动添加一些构造函数
+    Node() : a(0), b(0.0), c(' ') {
+        std::cout << "Node::Default Constructor" << std::endl;
+    }
+
+    Node(int a_val, double b_val, char c_val) : a(a_val), b(b_val), c(c_val) {
+        std::cout << "Node::Custom Constructor (int, double, char)" << std::endl;
+    }
+
+    // 拷贝构造函数
+    Node(const Node& other) : a(other.a), b(other.b), c(other.c) {
+        std::cout << "Node::Copy Constructor" << std::endl;
+    }
+
+    // 移动构造函数 (C++11)
+    Node(Node&& other) noexcept : a(other.a), b(other.b), c(other.c) {
+        std::cout << "Node::Move Constructor" << std::endl;
+        // 移动后通常会将源对象置于有效但未指定状态，
+        // 对于简单类型这里没有资源需要转移，只是打印示意
+    }
+
+    // 拷贝赋值运算符
+    Node& operator=(const Node& other) {
+        if (this != &other) {
+            a = other.a;
+            b = other.b;
+            c = other.c;
+            std::cout << "Node::Copy Assignment" << std::endl;
+        }
+        return *this;
+    }
+
+    // 移动赋值运算符 (C++11)
+    Node& operator=(Node&& other) noexcept {
+        if (this != &other) {
+            a = other.a;
+            b = other.b;
+            c = other.c;
+            std::cout << "Node::Move Assignment" << std::endl;
+        }
+        return *this;
+    }
+};
+```
+
+1.使用 `push_back(const T& value)` (左值版本)
+
+**用法**：`Node node_obj = {1, 2.0, '3'}; my_vector.push_back(node_obj);`
+
+**发生的过程**：
+
+1.  `Node node_obj = {1, 2.0, '3'};`：首先，这里会调用 `Node::Custom Constructor (int, double, char)` 创建一个名为 `node_obj` 的 **左值** `Node` 对象。
+2.  `my_vector.push_back(node_obj);`：
+    -   `node_obj` 是一个左值，所以调用 `void push_back(const T& value)`。
+    -   内部调用 `emplace_back(node_obj);`。
+    -   `emplace_back` 收到 `node_obj` 这个左值，通过**完美转发**，会找到 `Node` 的**拷贝构造函数 `Node(const Node&)`**。
+    -   在 `vector` 内部预留的内存上，通过拷贝构造函数构造一个新的 `Node` 对象，其内容是 `node_obj` 的副本。
+
+**总结**：`Node` 对象首先在外部被完全构造，然后被**拷贝构造**到 `vector` 内部。总共经历了：一次自定义构造 + 一次拷贝构造。
+
+2.使用 `push_back(Node&& value)` (右值版本)
+
+**用法**：`my_vector.push_back({1, 2.0, '3'});`
+
+**发生的过程**：
+
+1.  `{1, 2.0, '3'}`：这是一个**临时右值 `Node` 对象**。它会调用 `Node::Custom Constructor (int, double, char)` 来创建。
+2.  `my_vector.push_back(临时 Node 对象);`：
+    -   这个临时对象是右值，所以调用 `void push_back(T&& value)`。
+    -   内部调用 `emplace_back(std::move(value));`。（记住，`value` 在 `push_back` 函数内部是个具名左值，`std::move` 将其转为右值引用）
+    -   `emplace_back` 收到一个右值引用，通过**完美转发**，会找到 `Node` 的**移动构造函数 `Node(Node&&)`**。
+    -   在 `vector` 内部预留的内存上，通过移动构造函数构造一个新的 `Node` 对象，其内容是“从临时对象中移动”而来。
+
+**总结**：`Node` 对象首先在外部被临时构造，然后被**移动构造**到 `vector` 内部。总共经历了：一次自定义构造 + 一次移动构造。相比拷贝，移动通常效率更高，因为避免了资源的深层复制。
+
+3.使用 `emplace_back(Args&&... args)` (完美转发版本)
+
+这是 `emplace_back` 最强大的地方，它实现了**原地构造**，从而避免了任何临时 `Node` 对象的产生。
+
+**用法 1**：`int i = 1; double d = 2.0; char c = '3'; my_vector.emplace_back(i, d, c);` (通过左值构造)
+
+**发生的过程**：
+
+1.  `i, d, c` 是独立的**左值**变量。
+2.  `my_vector.emplace_back(i, d, c);`：
+    -   `emplace_back` 的模板参数 `Arges` 会被推导为 `int&`, `double&`, `char&`（因为传入的是左值）。
+    -   `new (data_ + size_) Node(std::forward<Arges>(args) ...);`：通过**完美转发**，`Node` 的**自定义构造函数 `Node(int a_val, double b_val, char c_val)`** 会被直接调用，并将 `i, d, c` 以左值引用的形式传递给它。
+    -   在 `vector` 内部预留的内存上，直接构造一个新的 `Node` 对象。
+
+**总结**：**只经历了一次自定义构造**。没有额外的拷贝或移动发生，也没有临时 `Node` 对象的产生。
+
+**用法 2**：`my_vector.emplace_back(1, 2.0, '3');` (通过右值构造)
+
+**发生的过程**：
+
+1.  `1, 2.0, '3'` 是独立的**右值**字面量。
+2.  `my_vector.emplace_back(1, 2.0, '3');`：
+    -   `emplace_back` 的模板参数 `Arges` 会被推导为 `int`, `double`, `char`（因为传入的是右值字面量）。
+    -   `new (data_ + size_) Node(std::forward<Arges>(args) ...);`：通过**完美转发**，`Node` 的**自定义构造函数 `Node(int a_val, double b_val, char c_val)`** 会被直接调用，并将 `1, 2.0, '3'` 以右值（或常量右值，取决于类型）的形式传递给它。
+    -   在 `vector` 内部预留的内存上，直接构造一个新的 `Node` 对象。
+
+**总结**：**只经历了一次自定义构造**。同样没有额外的拷贝或移动发生，也没有临时 `Node` 对象的产生。
+
+**构造函数的调用总结**
+
+在这个构造过程中，`Node` 对应的构造函数（包括你手动添加的**自定义构造函数**、**拷贝构造函数**和**移动构造函数**）都会根据不同的调用路径被选择性地调用。
+
+-   `push_back(const T&)` -> `emplace_back(T&)` -> `T::Copy Constructor`
+-   `push_back(T&&)` -> `emplace_back(T&&)` -> `T::Move Constructor`
+-   `emplace_back(Args&&...)` -> `T::Custom Constructor` (使用传递进来的参数直接构造)
+
+所以使用可变参数模板实现的万能转发 `emplace_back()` 有三个功能：
+
+1.   接收左值
+2.   接收右值
+3.   在容器内部去构造元素
+
+修改之后的代码：
+```cpp
+    // 向 vector 的末尾添加元素，左值引用用来接收左值
+    void push_back(const T& value) {
+        emplace_back(value);
+    }
+
+    // 移动语义版本的 push_back (C++11 及更高版本)，右值用来接收右值
+    void push_back(T&& value) {
+        // value 接收右值，但是之后就因为其是具名变量就变成了左值，所以需要使用 std::move 将其转回右值
+        // 接收右值，避免临时变量的产生
+        emplace_back(std::move(value));
+    }
+
+    // 完美转发
+    template <typename... Args>
+    T& emplace_back(Args&&... args) {
+        if (size_ == capacity_) {
+            reallocate(capacity_ == 0 ? 1 : capacity_ * 2);
+        }
+
+        new (data_ + size_) T(std::forward<Args>(args)...);  // 完美转发
+        return data_[size_ ++];
+    }
+```
+
+#### 3. 移动语义优化 `reallocate()`
+
+使用移动语义优化，考虑容量缩小的情况，考虑移动失败的情况需要数据回滚。
+
+1.   使用 `::operator new` 分配内存；
+2.   将旧数据移动（优先移动，否则拷贝）到新内存。使用 `std::move_if_noexcept()` 确保优先使用移动构造，然后使用 `placement new` 原地构造类型为 `T` 的对象。如果捕获到异常，则需要回滚数据，将之前构造的对象全部析构并通过 `::operator delete` 释放内存，然后抛出异常；
+3.   若成功将旧数据移动/拷贝到新内存之后，需要清空旧内存中的所有对象，并释放就内存；
+4.   最后将设置新内存，包括 `data_`，`size_`，`capacity_`。
+
+```cpp
+// 重新分配内存
+    void reallocate(size_t new_capacity) {
+        // 分配新内存
+        T* new_data = allocate(new_capacity);
+
+        // 将旧数据移动/拷贝到新内存
+        size_t new_size = 0;
+        try
+        {
+            for (; new_size < size_; ++ new_size) {
+                // 使用 move_if_noexcept 优先使用没有异常的移动构造，否则使用拷贝构造
+                new (new_data + new_size) T(std::move_if_noexcept(data_[new_size]));
+            }    
+        }
+        catch(...)
+        {
+            // 当把就内存中的数据移动/拷贝到新内存的时候出现异常，就需要回滚
+            for (int i = 0; i < new_size; ++ i) {
+                new_data[i].~T();
+            }
+            ::operator delete(new_data);
+            throw;
+        }
+
+        // 清理释放旧内存
+        clear();  // 清空旧元素
+        deallocate();  // 释放内存
+        delete[] data_;
+        
+        // 设置新内存
+        data_ = new_data;
+        capacity_ = new_capacity;
+        size_ = new_size;
+    }
+```
 
 
 
@@ -418,3 +618,216 @@ new (data_ + size_) T(value); // 调用 T 的拷贝构造函数
 -   **讨论边界情况和异常处理**：主动讨论你的实现如何处理空 `vector`、越界访问、内存分配失败等边界情况和异常。
 -   **优化思路**：讨论如何优化性能，例如使用移动语义，以及为什么选择特定的容量增长策略。
 -   **提问**：如果面试官允许，可以问一些关于 `std::vector` 实现的细节问题，表明你对这个话题有深入的思考。
+
+---
+
+### 个人总结
+
+如果在面试中遇到手撕 `std::vector` 的要求，我们首先需要明确具体要实现 `std::vector` 的哪些操作。现在我们我们实现 `std::vector` 的一些核心功能，包括：
+
+1.   基本概念。需要包括 `std::vector` 最基本的三个概念：
+     *   指向数据开头的指针 `T* data_;`
+     *   `vector` 中实际存储的元素数量 `size_t size_;`
+     *   当前已分配内存能够容纳的元素总数 `size_t capacity_;`
+2.   内存管理。将内存分配和对象构造分离，将对象析构和内存释放分离。分别为：
+     *   内存分配：`T* allocate(size_t capacity);`，使用 `::operator new` 申请内存
+     *   对象构造：使用 `placement new` 构造对象
+     *   对象析构：调用对象的析构函数
+     *   内存释放：使用 `::operator delete` 释放内存
+3.   容量控制。实现扩容机制（默认采用 GCC 的 2 倍扩容机制），需要实现 `void reallocate(size_t new_capactity);`
+4.   元素访问。重载 `[]` 运算符，添加 `at()` 函数访问前判断边界，添加 `front()` 和 `back()` 分别查看首元素和尾元素。
+5.   插入删除。实现 `void push_back(const T& value)`，`void push_back(T&& value)`。用可变参数模板函数和完美转发实现 `T& emplace_back(Args&&... args)`
+
+**简洁版的实现**（没有实现拷贝构造函数、拷贝赋值运算符、移动构造函数、移动赋值运算符）：
+
+```cpp
+#pragma once
+#include <cstddef>
+#include <new>
+#include <algorithm>
+// #include <move.h>
+#include <stdexcept>
+
+template <typename T>
+class MyVector {
+public:
+    MyVector() : data_(nullptr), size_(0), capacity_(0) {}
+
+    ~MyVector() {
+        clear();
+        deallocate();
+    }
+
+    size_t size() { return size_; }
+    size_t capacity() { return capacity_; }
+    bool empty() { return size_ == 0; }
+
+    T& operator[](size_t index) {
+        return data_[index];
+    }
+
+    T& at(size_t index) {
+        if (index < 0 || index >= size_) {
+            throw std::out_of_range("MyVector::at: out of range\n");
+        }
+        return data_[index];
+    }
+
+    T& front() {
+        if (empty()) {
+            throw std::out_of_range("MyVector::front: out of range\n");
+        }
+    }
+
+    T& back() {
+        if (empty()) {
+            throw std::out_of_range("MyVector::back: out of range\n");
+        }
+    }
+
+    // 接收左值
+    void push_back(const T& value) {
+        emplace_back(value);
+    }
+
+    // 接收右值
+    void push_back(T&& value) {
+        emplace_back(std::move(value));
+    }
+
+    template <typename... Args>
+    T& emplace_back(Args&&... args) {
+        // 首先判断是否需要扩容
+        if (size_ == capacity_) {
+            reallocate(capacity_ == 0 ? 1 : capacity_ * 2);
+        }
+        new (data_ + size_) T(std::forward<Args>(args)...);  // 通过完美转发原地构造对象
+        return data_[size_ ++];  // 返回插入结果
+    }
+
+    void pop_back() {
+        if (empty()) {
+            throw std::out_of_range("MyVector::pop_back: vector is empty\n");
+        }
+        // 调用析构函数
+        data_[-- size_].~T();
+    }
+
+    void reserve(size_t new_capacity) {
+        reallocate(new_capacity);
+    }
+
+    void clear() {
+        for (int i = 0; i < size_; ++ i) {
+            data_[i].~T();  // 调用对象的析构函数
+        }
+        size_ = 0;  // 置为 0，表示删除了所有的元素
+    }
+
+private:
+    // 内存分配
+    T* allocate(size_t new_capacity) {
+        return static_cast<T*>(::operator new(new_capacity * sizeof(T)));
+    }
+
+    void reallocate(size_t new_capacity) {
+        // 内存分配
+        T* new_data = allocate(new_capacity);
+
+        // 将元素从旧内存移动/拷贝到新内存
+        size_t new_size = 0;
+        try
+        {
+            for (; new_size < size_; ++ new_size) {
+                new (new_data + new_size) T(std::move_if_noexcept(data_[new_size]));
+            }
+        }
+        catch(...)
+        {
+            // 移动/拷贝失败则回滚
+            for (int i = 0; i < new_size; ++ i) {
+                new_data[i].~T();
+            }
+            ::operator delete(new_data);
+            throw;
+        }
+        
+        // 析构旧内存对象并释放空间
+        clear();
+        deallocate();
+
+        // 设置新内存
+        data_ = new_data;
+        size_ = new_size;
+        capacity_ = new_capacity;
+    }
+
+    void deallocate() {
+        ::operator delete(data_);
+        data_ = nullptr;
+        capacity_ = 0;
+    }
+
+    T* data_;
+    size_t size_;
+    size_t capacity_;
+};
+```
+
+补充拷贝构造函数、拷贝赋值运算符、移动构造函数、移动赋值运算符
+
+```cpp
+// 拷贝构造函数
+    MyVector(const MyVector& other) : size_(other.size_), capacity_(other.capacity_) {
+        data_ = new T[capacity_];
+        for (size_t i = 0; i < size_; ++ i) {
+            data_[i] = other.data_[i];
+        }
+    }
+
+    // 拷贝赋值运算符
+    MyVector& operator=(const MyVector& other) {
+        if (this == &this) {
+            // 处理自我赋值
+            return *this;
+        }
+
+        delete[] data_;
+
+        // 拷贝其他 MyVector 的shuju
+        capacity_ = other.capacity_;
+        size_ = other.size_;
+        data_ = new T[capacity_];
+        for (size_t i = 0; i < size_; ++ i) {
+            data_[i] = other.data_[i];
+        }
+        return *this;
+    }
+
+    // 移动构造函数(C++11 及更高版本)
+    MyVector(MyVector&& other) noexcept : data_(other.data_), size_(other.size_), capacity_(other.capacity_) {
+        other.data_ = nullptr;
+        other.size_ = 0;
+        other.capacity_ = 0;
+    }
+
+    // 移动赋值运算符(C++11 及更高版本)
+    MyVector& operator=(MyVector&& other) noexcept {
+        if (this == &other) {
+            // 处理自我赋值
+            return *this;
+        }
+
+        delete[] data_;  // 释放当前资源
+
+        data_ = other.data_;
+        size_ = other.size_;
+        capacity_ = other.capacity_;
+
+        other.data_ = nullptr;
+        other.size_ = 0;
+        other.capacity_ = 0;
+        return *this;
+    }
+```
+

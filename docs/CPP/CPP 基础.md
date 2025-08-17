@@ -975,6 +975,12 @@ int main() {
 
 ### `explicit` 关键字
 
+
+
+### `noexcept` 关键字
+
+
+
 ### Containers library
 
 Sequence containers：
@@ -988,6 +994,74 @@ Unordered associate containers：
 `queue` 和 `priority_queue`
 
 `map` 和 `unordered_map`
+
+
+
+### 构造函数
+
+默认构造函数
+
+自定义构造函数
+
+拷贝构造函数
+
+移动构造函数
+
+
+
+
+
+### 构造函数和析构函数的调用顺序
+
+```cpp
+#include <iostream>
+struct A {
+    A()  { std::cout << "A ctor\n"; }
+    ~A() { std::cout << "A dtor\n"; }
+};
+
+struct B {
+    B()  { std::cout << "B ctor\n"; }
+    ~B() { std::cout << "B dtor\n"; }
+};
+
+struct C : public A {
+    B b;
+    C()  { std::cout << "C ctor\n"; }
+    ~C() { std::cout << "C dtor\n"; }
+};
+
+int main() {
+    C c;
+}
+```
+
+运行结果：
+
+```cpp
+A ctor   // 先构造基类 A
+B ctor   // 然后构造成员 b
+C ctor   // 最后执行派生类 C 自己的构造体
+C dtor   // 析构时先执行 C 的析构体
+B dtor   // 再析构成员 b
+A dtor   // 最后析构基类 A
+```
+
+总结：
+
+-   **构造**：先基类 → 再成员 → 再派生类自己。
+-   **析构**：先派生类自己 → 再成员 → 再基类。
+-   这就是 C++ 的对象构造/析构模型，和你理解的一样，只是还有“成员变量”和“虚基类”的顺序需要注意。
+
+
+
+### 联合体
+
+联合体的内存对齐和结构体的内存对齐
+
+
+
+### 友元函数
 
 
 
@@ -1153,6 +1227,14 @@ void clear() {
     
     int&& bad = x;            // ❌ 错误：不能直接绑定左值
     ```
+
+
+
+### 万能引用
+
+
+
+### `std::forward`
 
 
 

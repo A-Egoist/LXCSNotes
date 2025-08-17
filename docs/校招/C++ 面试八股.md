@@ -621,6 +621,20 @@ struct A::Impl{
 
 
 
+### 串行、并行、并发、异步、同步
+
+C++中 串行、并行、并发、同步、异步的区别
+
+[任务执行模式全解析：并发、并行、串行与同步、异步的对比](https://blog.csdn.net/qq_42399932/article/details/144949891)
+
+[深入浅出理解同步 /异步/并发/并行/串行](https://www.cnblogs.com/Archer-Fang/p/8962156.html)
+
+
+
+
+
+
+
 ## 内存
 
 ### 内存对齐
@@ -636,6 +650,8 @@ struct A::Impl{
 ### 内存布局
 
 >   [计算机系统篇之链接（10）：.bss、.data 和 .rodata sections 之间的区别](https://csstormq.github.io/blog/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AF%87%E4%B9%8B%E9%93%BE%E6%8E%A5%EF%BC%8810%EF%BC%89%EF%BC%9A.bss%E3%80%81.data%20%E5%92%8C%20.rodata%20section%20%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB)
+>
+>   [What is the difference between .rodata and .rdata](https://stackoverflow.com/questions/65745514/what-is-the-difference-between-rodata-and-rdata)
 
 
 
