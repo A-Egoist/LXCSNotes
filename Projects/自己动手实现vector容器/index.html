@@ -1981,7 +1981,7 @@
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      实现要求
+      需求分析
     </span>
   </a>
   
@@ -2057,6 +2057,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#3-reallocate" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 移动语义优化 reallocate()
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2075,6 +2084,15 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       应对面试建议
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      个人总结
     </span>
   </a>
   
@@ -3182,6 +3200,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../%E6%A0%A1%E6%8B%9B/%E7%9C%9F%E9%A2%98/B%E7%AB%99/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    B站
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../%E6%A0%A1%E6%8B%9B/%E7%9C%9F%E9%A2%98/%E4%BA%AC%E4%B8%9C/" class="md-nav__link">
         
   
@@ -4029,7 +4070,7 @@
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      实现要求
+      需求分析
     </span>
   </a>
   
@@ -4105,6 +4146,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#3-reallocate" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 移动语义优化 reallocate()
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4123,6 +4173,15 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       应对面试建议
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      个人总结
     </span>
   </a>
   
@@ -4148,7 +4207,7 @@
 
 
 <h1 id="vector">自己动手实现vector容器<a class="headerlink" href="#vector" title="Permanent link">&para;</a></h1>
-<h3 id="_1">实现要求<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h3 id="_1">需求分析<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p>参考资料：
   [1] <a href="https://www.bilibili.com/video/BV1XSNizpEah?spm_id_from=333.1245.0.0">拼多多C++一面：手撕 std::vector,源码文档分享~【码农Mark】</a>
@@ -4448,7 +4507,8 @@
 <span class="normal">248</span>
 <span class="normal">249</span>
 <span class="normal">250</span>
-<span class="normal">251</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#pragma once</span>
+<span class="normal">251</span>
+<span class="normal">252</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#pragma once</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstddef&gt;</span><span class="c1">  // size_t</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdexcept&gt;</span><span class="c1">  // std::out_of_range</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;algorithm&gt;</span><span class="c1">  // std::copy</span>
@@ -4656,7 +4716,8 @@
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">out_of_range</span><span class="p">(</span><span class="s">&quot;MyVector::pop_back: vector is empty</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="o">--</span><span class="w"> </span><span class="n">size_</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// 调用析构函数</span>
+<span class="w">        </span><span class="n">data_</span><span class="p">[</span><span class="o">--</span><span class="w"> </span><span class="n">size_</span><span class="p">].</span><span class="o">~</span><span class="n">T</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// 清空 vector，但不释放内存</span>
@@ -4785,6 +4846,293 @@
 <p><code>::operator new</code> 返回的是一个 <code>void*</code> 指针。<code>void*</code> 是一个通用指针类型，它可以指向任何类型的数据，但它本身没有类型信息，不能直接进行指针算术运算（如 <code>ptr + 1</code>）或解引用。为了能够将这块原始内存视为存储 <code>T</code> 类型对象的数组，并对其进行后续操作（例如，通过 <code>data_[index]</code> 访问元素或使用定位 <code>new</code> 构造对象），我们需要将这个 <code>void*</code> 指针转换为 <code>T*</code> 类型的指针。</p>
 <p><code>static_cast&lt;T*&gt;</code> 的核心作用就是将 <code>::operator new</code> 返回的通用 <code>void*</code> 指针<strong>明确地转换为 <code>T</code> 类型的指针</strong>，从而使我们能够以类型安全的方式管理和操作这块内存，将其作为 <code>T</code> 类型对象的存储区域。</p>
 <h4 id="2-emplace_back">2. 使用 <code>emplace_back()</code> 同时处理左值和右值<a class="headerlink" href="#2-emplace_back" title="Permanent link">&para;</a></h4>
+<p>使用可变参数模板函数 <code>emplace_back()</code>，利用完美转发来实现原地构造函数。使用 <code>push_back(const T&amp; value)</code> 来接收左值，使用 <code>push_back(T&amp;&amp; value)</code> 来接收右值。</p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:" /> <code>push_back(T&amp;&amp; value)</code> 在接收右值之后，<code>value</code> 本身是一个具名变量被视为左值（具名右值引用是左值）。</p>
+<p><code>push_back</code> 与 <code>emplace_back</code> 的构造行为详解，<code>Node</code> 结构体来精确地梳理一下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">Node</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 为了更好地演示，我们手动添加一些构造函数</span>
+<span class="w">    </span><span class="n">Node</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Node::Default Constructor&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">Node</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a_val</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b_val</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">c_val</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">a_val</span><span class="p">),</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="n">b_val</span><span class="p">),</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="n">c_val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Node::Custom Constructor (int, double, char)&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 拷贝构造函数</span>
+<span class="w">    </span><span class="n">Node</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Node</span><span class="o">&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">b</span><span class="p">),</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Node::Copy Constructor&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 移动构造函数 (C++11)</span>
+<span class="w">    </span><span class="n">Node</span><span class="p">(</span><span class="n">Node</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">b</span><span class="p">),</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Node::Move Constructor&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// 移动后通常会将源对象置于有效但未指定状态，</span>
+<span class="w">        </span><span class="c1">// 对于简单类型这里没有资源需要转移，只是打印示意</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 拷贝赋值运算符</span>
+<span class="w">    </span><span class="n">Node</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Node</span><span class="o">&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">a</span><span class="p">;</span>
+<span class="w">            </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">b</span><span class="p">;</span>
+<span class="w">            </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">c</span><span class="p">;</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Node::Copy Assignment&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 移动赋值运算符 (C++11)</span>
+<span class="w">    </span><span class="n">Node</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">Node</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">a</span><span class="p">;</span>
+<span class="w">            </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">b</span><span class="p">;</span>
+<span class="w">            </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">c</span><span class="p">;</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Node::Move Assignment&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></td></tr></table></div>
+<p>1.使用 <code>push_back(const T&amp; value)</code> (左值版本)</p>
+<p><strong>用法</strong>：<code>Node node_obj = {1, 2.0, '3'}; my_vector.push_back(node_obj);</code></p>
+<p><strong>发生的过程</strong>：</p>
+<ol>
+<li><code>Node node_obj = {1, 2.0, '3'};</code>：首先，这里会调用 <code>Node::Custom Constructor (int, double, char)</code> 创建一个名为 <code>node_obj</code> 的 <strong>左值</strong> <code>Node</code> 对象。</li>
+<li><code>my_vector.push_back(node_obj);</code>：<ul>
+<li><code>node_obj</code> 是一个左值，所以调用 <code>void push_back(const T&amp; value)</code>。</li>
+<li>内部调用 <code>emplace_back(node_obj);</code>。</li>
+<li><code>emplace_back</code> 收到 <code>node_obj</code> 这个左值，通过<strong>完美转发</strong>，会找到 <code>Node</code> 的<strong>拷贝构造函数 <code>Node(const Node&amp;)</code></strong>。</li>
+<li>在 <code>vector</code> 内部预留的内存上，通过拷贝构造函数构造一个新的 <code>Node</code> 对象，其内容是 <code>node_obj</code> 的副本。</li>
+</ul>
+</li>
+</ol>
+<p><strong>总结</strong>：<code>Node</code> 对象首先在外部被完全构造，然后被<strong>拷贝构造</strong>到 <code>vector</code> 内部。总共经历了：一次自定义构造 + 一次拷贝构造。</p>
+<p>2.使用 <code>push_back(Node&amp;&amp; value)</code> (右值版本)</p>
+<p><strong>用法</strong>：<code>my_vector.push_back({1, 2.0, '3'});</code></p>
+<p><strong>发生的过程</strong>：</p>
+<ol>
+<li><code>{1, 2.0, '3'}</code>：这是一个<strong>临时右值 <code>Node</code> 对象</strong>。它会调用 <code>Node::Custom Constructor (int, double, char)</code> 来创建。</li>
+<li><code>my_vector.push_back(临时 Node 对象);</code>：<ul>
+<li>这个临时对象是右值，所以调用 <code>void push_back(T&amp;&amp; value)</code>。</li>
+<li>内部调用 <code>emplace_back(std::move(value));</code>。（记住，<code>value</code> 在 <code>push_back</code> 函数内部是个具名左值，<code>std::move</code> 将其转为右值引用）</li>
+<li><code>emplace_back</code> 收到一个右值引用，通过<strong>完美转发</strong>，会找到 <code>Node</code> 的<strong>移动构造函数 <code>Node(Node&amp;&amp;)</code></strong>。</li>
+<li>在 <code>vector</code> 内部预留的内存上，通过移动构造函数构造一个新的 <code>Node</code> 对象，其内容是“从临时对象中移动”而来。</li>
+</ul>
+</li>
+</ol>
+<p><strong>总结</strong>：<code>Node</code> 对象首先在外部被临时构造，然后被<strong>移动构造</strong>到 <code>vector</code> 内部。总共经历了：一次自定义构造 + 一次移动构造。相比拷贝，移动通常效率更高，因为避免了资源的深层复制。</p>
+<p>3.使用 <code>emplace_back(Args&amp;&amp;... args)</code> (完美转发版本)</p>
+<p>这是 <code>emplace_back</code> 最强大的地方，它实现了<strong>原地构造</strong>，从而避免了任何临时 <code>Node</code> 对象的产生。</p>
+<p><strong>用法 1</strong>：<code>int i = 1; double d = 2.0; char c = '3'; my_vector.emplace_back(i, d, c);</code> (通过左值构造)</p>
+<p><strong>发生的过程</strong>：</p>
+<ol>
+<li><code>i, d, c</code> 是独立的<strong>左值</strong>变量。</li>
+<li><code>my_vector.emplace_back(i, d, c);</code>：<ul>
+<li><code>emplace_back</code> 的模板参数 <code>Arges</code> 会被推导为 <code>int&amp;</code>, <code>double&amp;</code>, <code>char&amp;</code>（因为传入的是左值）。</li>
+<li><code>new (data_ + size_) Node(std::forward&lt;Arges&gt;(args) ...);</code>：通过<strong>完美转发</strong>，<code>Node</code> 的<strong>自定义构造函数 <code>Node(int a_val, double b_val, char c_val)</code></strong> 会被直接调用，并将 <code>i, d, c</code> 以左值引用的形式传递给它。</li>
+<li>在 <code>vector</code> 内部预留的内存上，直接构造一个新的 <code>Node</code> 对象。</li>
+</ul>
+</li>
+</ol>
+<p><strong>总结</strong>：<strong>只经历了一次自定义构造</strong>。没有额外的拷贝或移动发生，也没有临时 <code>Node</code> 对象的产生。</p>
+<p><strong>用法 2</strong>：<code>my_vector.emplace_back(1, 2.0, '3');</code> (通过右值构造)</p>
+<p><strong>发生的过程</strong>：</p>
+<ol>
+<li><code>1, 2.0, '3'</code> 是独立的<strong>右值</strong>字面量。</li>
+<li><code>my_vector.emplace_back(1, 2.0, '3');</code>：<ul>
+<li><code>emplace_back</code> 的模板参数 <code>Arges</code> 会被推导为 <code>int</code>, <code>double</code>, <code>char</code>（因为传入的是右值字面量）。</li>
+<li><code>new (data_ + size_) Node(std::forward&lt;Arges&gt;(args) ...);</code>：通过<strong>完美转发</strong>，<code>Node</code> 的<strong>自定义构造函数 <code>Node(int a_val, double b_val, char c_val)</code></strong> 会被直接调用，并将 <code>1, 2.0, '3'</code> 以右值（或常量右值，取决于类型）的形式传递给它。</li>
+<li>在 <code>vector</code> 内部预留的内存上，直接构造一个新的 <code>Node</code> 对象。</li>
+</ul>
+</li>
+</ol>
+<p><strong>总结</strong>：<strong>只经历了一次自定义构造</strong>。同样没有额外的拷贝或移动发生，也没有临时 <code>Node</code> 对象的产生。</p>
+<p><strong>构造函数的调用总结</strong></p>
+<p>在这个构造过程中，<code>Node</code> 对应的构造函数（包括你手动添加的<strong>自定义构造函数</strong>、<strong>拷贝构造函数</strong>和<strong>移动构造函数</strong>）都会根据不同的调用路径被选择性地调用。</p>
+<ul>
+<li><code>push_back(const T&amp;)</code> -&gt; <code>emplace_back(T&amp;)</code> -&gt; <code>T::Copy Constructor</code></li>
+<li><code>push_back(T&amp;&amp;)</code> -&gt; <code>emplace_back(T&amp;&amp;)</code> -&gt; <code>T::Move Constructor</code></li>
+<li><code>emplace_back(Args&amp;&amp;...)</code> -&gt; <code>T::Custom Constructor</code> (使用传递进来的参数直接构造)</li>
+</ul>
+<p>所以使用可变参数模板实现的万能转发 <code>emplace_back()</code> 有三个功能：</p>
+<ol>
+<li>接收左值</li>
+<li>接收右值</li>
+<li>在容器内部去构造元素</li>
+</ol>
+<p>修改之后的代码：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="c1">// 向 vector 的末尾添加元素，左值引用用来接收左值</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">push_back</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">emplace_back</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 移动语义版本的 push_back (C++11 及更高版本)，右值用来接收右值</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">push_back</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// value 接收右值，但是之后就因为其是具名变量就变成了左值，所以需要使用 std::move 将其转回右值</span>
+<span class="w">        </span><span class="c1">// 接收右值，避免临时变量的产生</span>
+<span class="w">        </span><span class="n">emplace_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">value</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 完美转发</span>
+<span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">emplace_back</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">size_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">capacity_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">reallocate</span><span class="p">(</span><span class="n">capacity_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">capacity_</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="p">(</span><span class="n">data_</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">size_</span><span class="p">)</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span><span class="w">  </span><span class="c1">// 完美转发</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">data_</span><span class="p">[</span><span class="n">size_</span><span class="w"> </span><span class="o">++</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<h4 id="3-reallocate">3. 移动语义优化 <code>reallocate()</code><a class="headerlink" href="#3-reallocate" title="Permanent link">&para;</a></h4>
+<p>使用移动语义优化，考虑容量缩小的情况，考虑移动失败的情况需要数据回滚。</p>
+<ol>
+<li>使用 <code>::operator new</code> 分配内存；</li>
+<li>将旧数据移动（优先移动，否则拷贝）到新内存。使用 <code>std::move_if_noexcept()</code> 确保优先使用移动构造，然后使用 <code>placement new</code> 原地构造类型为 <code>T</code> 的对象。如果捕获到异常，则需要回滚数据，将之前构造的对象全部析构并通过 <code>::operator delete</code> 释放内存，然后抛出异常；</li>
+<li>若成功将旧数据移动/拷贝到新内存之后，需要清空旧内存中的所有对象，并释放就内存；</li>
+<li>最后将设置新内存，包括 <code>data_</code>，<code>size_</code>，<code>capacity_</code>。</li>
+</ol>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// 重新分配内存</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">reallocate</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">new_capacity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 分配新内存</span>
+<span class="w">        </span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">new_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">allocate</span><span class="p">(</span><span class="n">new_capacity</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// 将旧数据移动/拷贝到新内存</span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">new_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">try</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(;</span><span class="w"> </span><span class="n">new_size</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size_</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="n">new_size</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// 使用 move_if_noexcept 优先使用没有异常的移动构造，否则使用拷贝构造</span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="p">(</span><span class="n">new_data</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">new_size</span><span class="p">)</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move_if_noexcept</span><span class="p">(</span><span class="n">data_</span><span class="p">[</span><span class="n">new_size</span><span class="p">]));</span>
+<span class="w">            </span><span class="p">}</span><span class="w">    </span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">catch</span><span class="p">(...)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 当把就内存中的数据移动/拷贝到新内存的时候出现异常，就需要回滚</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">new_size</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">new_data</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="o">~</span><span class="n">T</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="o">::</span><span class="k">operator</span><span class="w"> </span><span class="k">delete</span><span class="p">(</span><span class="n">new_data</span><span class="p">);</span>
+<span class="w">            </span><span class="k">throw</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// 清理释放旧内存</span>
+<span class="w">        </span><span class="n">clear</span><span class="p">();</span><span class="w">  </span><span class="c1">// 清空旧元素</span>
+<span class="w">        </span><span class="n">deallocate</span><span class="p">();</span><span class="w">  </span><span class="c1">// 释放内存</span>
+<span class="w">        </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">data_</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// 设置新内存</span>
+<span class="w">        </span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_data</span><span class="p">;</span>
+<span class="w">        </span><span class="n">capacity_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_capacity</span><span class="p">;</span>
+<span class="w">        </span><span class="n">size_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_size</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
 <hr />
 <h3 id="stdvector"><strong>深入理解和学习 <code>std::vector</code> 的关键点</strong><a class="headerlink" href="#stdvector" title="Permanent link">&para;</a></h3>
 <p>在实现 <code>MyVector</code> 的过程中，你需要注意以下几点，这能帮助你更深入地理解 <code>std::vector</code>：</p>
@@ -4807,6 +5155,395 @@
 <li><strong>优化思路</strong>：讨论如何优化性能，例如使用移动语义，以及为什么选择特定的容量增长策略。</li>
 <li><strong>提问</strong>：如果面试官允许，可以问一些关于 <code>std::vector</code> 实现的细节问题，表明你对这个话题有深入的思考。</li>
 </ul>
+<hr />
+<h3 id="_5">个人总结<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>如果在面试中遇到手撕 <code>std::vector</code> 的要求，我们首先需要明确具体要实现 <code>std::vector</code> 的哪些操作。现在我们我们实现 <code>std::vector</code> 的一些核心功能，包括：</p>
+<ol>
+<li>基本概念。需要包括 <code>std::vector</code> 最基本的三个概念：<ul>
+<li>指向数据开头的指针 <code>T* data_;</code></li>
+<li><code>vector</code> 中实际存储的元素数量 <code>size_t size_;</code></li>
+<li>当前已分配内存能够容纳的元素总数 <code>size_t capacity_;</code></li>
+</ul>
+</li>
+<li>内存管理。将内存分配和对象构造分离，将对象析构和内存释放分离。分别为：<ul>
+<li>内存分配：<code>T* allocate(size_t capacity);</code>，使用 <code>::operator new</code> 申请内存</li>
+<li>对象构造：使用 <code>placement new</code> 构造对象</li>
+<li>对象析构：调用对象的析构函数</li>
+<li>内存释放：使用 <code>::operator delete</code> 释放内存</li>
+</ul>
+</li>
+<li>容量控制。实现扩容机制（默认采用 GCC 的 2 倍扩容机制），需要实现 <code>void reallocate(size_t new_capactity);</code></li>
+<li>元素访问。重载 <code>[]</code> 运算符，添加 <code>at()</code> 函数访问前判断边界，添加 <code>front()</code> 和 <code>back()</code> 分别查看首元素和尾元素。</li>
+<li>插入删除。实现 <code>void push_back(const T&amp; value)</code>，<code>void push_back(T&amp;&amp; value)</code>。用可变参数模板函数和完美转发实现 <code>T&amp; emplace_back(Args&amp;&amp;... args)</code></li>
+</ol>
+<p><strong>简洁版的实现</strong>（没有实现拷贝构造函数、拷贝赋值运算符、移动构造函数、移动赋值运算符）：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#pragma once</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstddef&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;new&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;algorithm&gt;</span>
+<span class="c1">// #include &lt;move.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdexcept&gt;</span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MyVector</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">MyVector</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">data_</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span><span class="w"> </span><span class="n">size_</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">capacity_</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="o">~</span><span class="n">MyVector</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">clear</span><span class="p">();</span>
+<span class="w">        </span><span class="n">deallocate</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">size_</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">capacity</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">capacity_</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">empty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">size_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">data_</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">at</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">size_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">out_of_range</span><span class="p">(</span><span class="s">&quot;MyVector::at: out of range</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">data_</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">front</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">out_of_range</span><span class="p">(</span><span class="s">&quot;MyVector::front: out of range</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">back</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">out_of_range</span><span class="p">(</span><span class="s">&quot;MyVector::back: out of range</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 接收左值</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">push_back</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">emplace_back</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 接收右值</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">push_back</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">emplace_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">value</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">emplace_back</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 首先判断是否需要扩容</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">size_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">capacity_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">reallocate</span><span class="p">(</span><span class="n">capacity_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">capacity_</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="p">(</span><span class="n">data_</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">size_</span><span class="p">)</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span><span class="w">  </span><span class="c1">// 通过完美转发原地构造对象</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">data_</span><span class="p">[</span><span class="n">size_</span><span class="w"> </span><span class="o">++</span><span class="p">];</span><span class="w">  </span><span class="c1">// 返回插入结果</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">pop_back</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">out_of_range</span><span class="p">(</span><span class="s">&quot;MyVector::pop_back: vector is empty</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// 调用析构函数</span>
+<span class="w">        </span><span class="n">data_</span><span class="p">[</span><span class="o">--</span><span class="w"> </span><span class="n">size_</span><span class="p">].</span><span class="o">~</span><span class="n">T</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">reserve</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">new_capacity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">reallocate</span><span class="p">(</span><span class="n">new_capacity</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">clear</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size_</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">data_</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="o">~</span><span class="n">T</span><span class="p">();</span><span class="w">  </span><span class="c1">// 调用对象的析构函数</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">size_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">  </span><span class="c1">// 置为 0，表示删除了所有的元素</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="c1">// 内存分配</span>
+<span class="w">    </span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">allocate</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">new_capacity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">::</span><span class="k">operator</span><span class="w"> </span><span class="k">new</span><span class="p">(</span><span class="n">new_capacity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">T</span><span class="p">)));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">reallocate</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">new_capacity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 内存分配</span>
+<span class="w">        </span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">new_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">allocate</span><span class="p">(</span><span class="n">new_capacity</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// 将元素从旧内存移动/拷贝到新内存</span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">new_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">try</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(;</span><span class="w"> </span><span class="n">new_size</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size_</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="n">new_size</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="p">(</span><span class="n">new_data</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">new_size</span><span class="p">)</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move_if_noexcept</span><span class="p">(</span><span class="n">data_</span><span class="p">[</span><span class="n">new_size</span><span class="p">]));</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">catch</span><span class="p">(...)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 移动/拷贝失败则回滚</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">new_size</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">new_data</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="o">~</span><span class="n">T</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="o">::</span><span class="k">operator</span><span class="w"> </span><span class="k">delete</span><span class="p">(</span><span class="n">new_data</span><span class="p">);</span>
+<span class="w">            </span><span class="k">throw</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// 析构旧内存对象并释放空间</span>
+<span class="w">        </span><span class="n">clear</span><span class="p">();</span>
+<span class="w">        </span><span class="n">deallocate</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// 设置新内存</span>
+<span class="w">        </span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_data</span><span class="p">;</span>
+<span class="w">        </span><span class="n">size_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_size</span><span class="p">;</span>
+<span class="w">        </span><span class="n">capacity_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_capacity</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">deallocate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="o">::</span><span class="k">operator</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="n">data_</span><span class="p">);</span>
+<span class="w">        </span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="w">        </span><span class="n">capacity_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">data_</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size_</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">capacity_</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></td></tr></table></div>
+<p>补充拷贝构造函数、拷贝赋值运算符、移动构造函数、移动赋值运算符</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// 拷贝构造函数</span>
+<span class="w">    </span><span class="n">MyVector</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">MyVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">size_</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">size_</span><span class="p">),</span><span class="w"> </span><span class="n">capacity_</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">capacity_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">T</span><span class="p">[</span><span class="n">capacity_</span><span class="p">];</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size_</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">data_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 拷贝赋值运算符</span>
+<span class="w">    </span><span class="n">MyVector</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">MyVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">&amp;</span><span class="k">this</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 处理自我赋值</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">data_</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// 拷贝其他 MyVector 的shuju</span>
+<span class="w">        </span><span class="n">capacity_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">capacity_</span><span class="p">;</span>
+<span class="w">        </span><span class="n">size_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">size_</span><span class="p">;</span>
+<span class="w">        </span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">T</span><span class="p">[</span><span class="n">capacity_</span><span class="p">];</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size_</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">data_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 移动构造函数(C++11 及更高版本)</span>
+<span class="w">    </span><span class="n">MyVector</span><span class="p">(</span><span class="n">MyVector</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">data_</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="p">),</span><span class="w"> </span><span class="n">size_</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">size_</span><span class="p">),</span><span class="w"> </span><span class="n">capacity_</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">capacity_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="w">        </span><span class="n">other</span><span class="p">.</span><span class="n">size_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">other</span><span class="p">.</span><span class="n">capacity_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 移动赋值运算符(C++11 及更高版本)</span>
+<span class="w">    </span><span class="n">MyVector</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">MyVector</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">&amp;</span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 处理自我赋值</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">data_</span><span class="p">;</span><span class="w">  </span><span class="c1">// 释放当前资源</span>
+
+<span class="w">        </span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="p">;</span>
+<span class="w">        </span><span class="n">size_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">size_</span><span class="p">;</span>
+<span class="w">        </span><span class="n">capacity_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">capacity_</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="w">        </span><span class="n">other</span><span class="p">.</span><span class="n">size_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">other</span><span class="p">.</span><span class="n">capacity_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
 
 
 
