@@ -777,56 +777,122 @@ private:
 补充拷贝构造函数、拷贝赋值运算符、移动构造函数、移动赋值运算符
 
 ```cpp
-// 拷贝构造函数
+    // 拷贝构造函数
     MyVector(const MyVector& other) : size_(other.size_), capacity_(other.capacity_) {
-        data_ = new T[capacity_];
-        for (size_t i = 0; i < size_; ++ i) {
-            data_[i] = other.data_[i];
+        data_ = allocate(capacity_);
+
+        size_t new_size = 0;
+        try
+        {
+            for (; new_size < size_; ++ new_size) {
+                new (data_ + new_size) T(other.data_[new_size]);
+            }
         }
+        catch(...)
+        {
+            for (int i = 0; i < new_size; ++ i) {
+                data_[i].~T();  // 手动析构
+            }
+            ::operator delete(data_);
+            size_ = 0;
+            capacity_ = 0;
+            throw;
+        }
+        
     }
 
     // 拷贝赋值运算符
     MyVector& operator=(const MyVector& other) {
-        if (this == &this) {
-            // 处理自我赋值
-            return *this;
+        if (this == &other) {
+            return *this; // 处理自我赋值
         }
 
-        delete[] data_;
+        // 析构原有对象并释放内存
+        clear();    // 析构 T 对象，size_ 置0
+        deallocate(); // 释放原始内存，data_ 置空，capacity_ 置0
 
-        // 拷贝其他 MyVector 的shuju
-        capacity_ = other.capacity_;
+        // 复制 size_ 和 capacity_
         size_ = other.size_;
-        data_ = new T[capacity_];
+        capacity_ = other.capacity_;
+        data_ = allocate(capacity_); // 申请新内存
+
+        // 复制 other 存储的元素
         for (size_t i = 0; i < size_; ++ i) {
-            data_[i] = other.data_[i];
+            new (data_ + i) T(other.data_[i]); // 正确地使用定位 new 和拷贝构造
         }
+
         return *this;
     }
 
-    // 移动构造函数(C++11 及更高版本)
-    MyVector(MyVector&& other) noexcept : data_(other.data_), size_(other.size_), capacity_(other.capacity_) {
+    // 移动构造函数，直接转移权限
+    MyVector(MyVector&& other) noexcept
+        : data_(other.data_), size_(other.size_), capacity_(other.capacity_) {
+        // 将 other 的资源置空
         other.data_ = nullptr;
         other.size_ = 0;
         other.capacity_ = 0;
     }
 
-    // 移动赋值运算符(C++11 及更高版本)
+    // 移动赋值运算符
     MyVector& operator=(MyVector&& other) noexcept {
         if (this == &other) {
             // 处理自我赋值
             return *this;
         }
 
-        delete[] data_;  // 释放当前资源
+        clear();  // 析构当前 vector 中的所有元素
+        deallocate();  // 释放当前内存
 
+        // 浅拷贝，转移资源
         data_ = other.data_;
         size_ = other.size_;
         capacity_ = other.capacity_;
 
+        // 将 other 的资源置空
         other.data_ = nullptr;
         other.size_ = 0;
         other.capacity_ = 0;
+
+        return *this;
+    }
+```
+
+直接交换惯用法优化拷贝赋值运算符和移动赋值运算符：
+```cpp
+    // 拷贝赋值运算符
+    MyVector& operator=(const MyVector& other) {
+        if (this == &other) {
+            return *this;
+        }
+        // 1. 创建一个临时副本。这会调用你上面实现的拷贝构造函数。
+        //    如果拷贝构造过程中发生异常，异常会在这一行被捕获，
+        //    而 *this (原始对象) 将保持不变，不会被损坏。
+        MyVector temp(other);  // 使用拷贝构造函数构造一个临时的 vector 对象
+
+        // 2. 交换 *this 和 temp 的内部状态。
+        //    std::swap 是 noexcept 的，不会抛出异常。
+        //    交换后，*this 现在拥有了 other 的内容，而 temp 则拥有 *this 原来的内容。
+        std::swap(data_, temp.data_);
+        std::swap(size_, temp.size_);
+        std::swap(capacity_, temp.capacity_);
+
+        // 3. 当 'temp' 超出作用域时，其析构函数 (~MyVector()) 会被调用，
+        //    它会负责清理原来属于 *this 的旧资源 (调用 clear() 和 deallocate())。
+        //    这确保了旧资源得到正确释放，且整个操作是异常安全的。
+        return *this;
+    }
+
+    // 移动赋值运算符
+    MyVector& operator=(MyVector&& other) noexcept {
+        if (this == &other) {
+            // 处理自我赋值
+            return *this;
+        }
+
+        std::swap(data_, other.data_);
+        std::swap(size_, other.size_);
+        std::swap(capacity_, other.capacity_);
+
         return *this;
     }
 ```
