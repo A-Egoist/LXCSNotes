@@ -1,4 +1,4 @@
-# 一、从零开始实现C++ TinyWebServer 全过程记录
+# 从零开始实现C++ TinyWebServer
 
 
 

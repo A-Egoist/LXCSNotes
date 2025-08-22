@@ -34,6 +34,157 @@
 
 
 
+### 介绍一下 DHCP 网络协议
+
+知识点：网路协议，IP地址分配
+
+DHCP 是一个网络协议，用于自动分配 IP 地址和其他网络配置参数给网络中的设备。
+
+工作原理：
+
+1.   DHCP Discover：
+2.   DHCP Offer：
+3.   DHCP Request：
+4.   DHCP ACK：
+
+代码示例（简化版 DHCP 客户端模拟）：
+
+```cpp
+```
+
+>   [盘点互联网大厂秋招面试题、影石C++二面：继承、虚函数、malloc、static、内存分配、内存对齐【码农Mark】](https://www.bilibili.com/video/BV16FYBzkEtL/?share_source=copy_web&vd_source=b5ed364998fc1b958c57abd6dbda38e3)
+
+
+
+#### DHCP 的租约续期
+
+
+
+### 内存泄漏
+
+>   参考：[拼多多C++一面：内存泄露相关面试题，什么是内存泄露？列举检测内存泄露的方案](https://www.bilibili.com/video/BV1T3q5YpEzt/?spm_id_from=333.337.search-card.all.click&vd_source=f4cc25a44af6631d6f4db023b3bb88e4)
+
+#### 什么是内存泄漏
+
+**内存泄露**是指在程序运行过程中，动态分配的内存（使用 `new` 或 `new[]`）在不再使用后，没有被正确地释放（使用 `delete` 或 `delete[]`），从而导致这块内存无法被程序再次利用。随着程序的持续运行，泄露的内存会不断累积，最终可能耗尽系统可用内存，导致程序崩溃或系统运行缓慢。
+
+可以把内存泄露想象成一个没有及时清理的储物柜。你往里面放东西，但从来不拿出来。刚开始空间还很充足，但随着你放的东西越来越多，柜子总会被塞满。同样，内存泄露会导致系统内存被“塞满”，最终导致程序无法再分配新的内存。
+
+
+
+#### 什么原因造成了内存泄漏
+
+造成内存泄露的主要原因有：
+
+1.   动态分配的内存未释放。最常见的内存泄漏场景是使用 `new` 或 `malloc()`动态分配的内存没有被及时释放。C++ 需要手动释放动态分配的内存，如果忘记使用 `delete` 或 `free()` 释放这块内存，程序退出之前这部分内存将无法被使用。
+     ```cpp
+     void memoryLeak() {
+         int* arr = new int[100];  // 动态分配内存
+         // 忘记释放内存
+         // delete[] arr;  // 这行代码没有执行，导致内存泄漏
+     }
+     ```
+
+2.   在异常处理时未释放内存。当程序抛出异常时，如果没有适当地处理内存释放，可能会导致内存泄漏。特别是在使用 `new` 动态分配内存的过程中，如果在释放内存之前发生了异常，分配的内存将无法被释放。
+     ```cpp
+     void exceptionLeak() {
+         int* data = new int[10];  // 动态分配内存
+         throw std::runtime_error("Some error");  // 抛出异常，但没有 delete[] data;
+     }
+     ```
+
+3.   没有为类的析构函数释放内存。在类中使用 **`new`** 动态分配内存时，如果没有在析构函数中正确释放这部分内存，会导致每次创建对象时动态分配的内存得不到释放，进而造成内存泄漏。
+     ```cpp
+     class MyClass {
+     private:
+         int* data;
+     public:
+         MyClass() {
+             data = new int[100];  // 动态分配内存
+         }
+         ~MyClass() {
+             // 如果析构函数没有释放内存
+             // delete[] data;  // 忘记释放内存，导致泄漏
+         }
+     };
+     ```
+
+4.   循环引用。在使用智能指针（特别是 std::shared_ptr）时，循环引用是导致内存泄漏的一个常见原因。std::shared_ptr 会使用引用计数来管理内存，当引用计数为 0 时，内存会被释放。然而，如果两个对象通过 std::shared_ptr 互相引用，它们的引用计数永远不会变为 0，导致内存无法释放。
+     ```cpp
+     #include <memory>
+      
+     class B;
+     class A {
+     public:
+         std::shared_ptr<B> b_ptr;
+     };
+      
+     class B {
+     public:
+         std::shared_ptr<A> a_ptr;
+     };
+      
+     void circularReference() {
+         std::shared_ptr<A> a = std::make_shared<A>();
+         std::shared_ptr<B> b = std::make_shared<B>();
+         a->b_ptr = b;  // A 引用 B
+         b->a_ptr = a;  // B 引用 A，形成循环引用
+         // 循环引用导致两者的引用计数无法变为 0，内存泄漏
+     }
+     ```
+
+     解决办法是使用 **`std::weak_ptr`** 解决循环引用问题。**`std::weak_ptr`** 不会增加引用计数，从而避免循环引用。 
+     ```cpp
+     class A {
+     public:
+         std::weak_ptr<B> b_ptr;  // 使用 weak_ptr
+     };
+     ```
+
+     
+
+#### 如何避免内存泄漏
+
+1.   代码规范，智能指针或 RAII 机制管理资源
+2.   正确捕获异常处理/回滚式编程
+3.   使用 `weak_ptr` 解决循环引用
+
+
+
+#### 怎么定位内存泄露，原理是什么
+
+*   静态检测工具。使用 cppcheck 或 clang-tidy 来检查代码中是否出现内存泄漏，但是有局限性。
+*   动态检测
+    *   valgrind。`valgrind --leak-check=full 可执行程序`。将 valgrind 视为虚拟机，将可执行程序当做文件来处理，读取二进制文件的内容，进行指令解析并执行。需要可执行程序携带调试信息，以便定位到具体的代码位置。
+    *   hook + backtrace
+        *   hook 住内存分配和内存释放的接口
+        *   每次申请内存都记录一下，每次释放时也记录一下，然后再把这两种记录进行一个比较，把相同的去掉，剩下的就是没有释放的。
+        *   同时在申请内存时，记录其调用堆栈信息
+        *   侵入式
+        *   需要调试信息
+    *   eBPF + uprobes
+        *   非侵入式
+        *   不需要调试信息
+        *   原理和上面一种相同，但是运行在内核
+
+>   参考资料：
+>
+>   [1] [Linux内存泄露定位1：valgrind篇](https://mp.weixin.qq.com/s/dWbqNIA4pLWs4pd53Gaq8A)
+>
+>   [2] [Linux内存泄露定位3：hook+backtrace篇](https://mp.weixin.qq.com/s/JX2NVI35ze02k7LwCodhLA)
+>
+>   [3] [Linux内存泄露定位4：eBPF+uprobes 篇](https://mp.weixin.qq.com/s/gb3hcwgoFXTiZhmWxyf-bg)
+>
+>   [4] [Linux内存泄露定位5：gdb+python篇](https://mp.weixin.qq.com/s/j1Lc43zN49xhOKfx-eInRQ)
+>
+>   [5] [Linux内存泄露定位2：mtrace篇](https://mp.weixin.qq.com/s?__biz=MzU4NjY0NTExNA==&mid=2247486485&idx=1&sn=a4ff43bbf0f25700369fd433ac66613a&poc_token=HA0qp2ijFlkKYA-7XZx4Pro38DJgZSW43XV3lm1F)
+>
+>   [6] [拼多多C++一面：内存泄露相关面试题，什么是内存泄露？列举检测内存泄露的方案](https://www.bilibili.com/video/BV1T3q5YpEzt/?spm_id_from=333.337.search-card.all.click&vd_source=f4cc25a44af6631d6f4db023b3bb88e4)
+>
+>   [7] [【C++】 使用CRT 库检测内存泄漏](https://blog.csdn.net/qq_65207641/article/details/139372244)
+
+
+
 ### C++ 中强制类型转换和 C 语言类型转换的区别
 
 
@@ -49,45 +200,7 @@
 
 
 
-### class 和 struct 的区别
 
-在 C++ 中，`struct` 和 `class` 都用于定义自定义数据类型，它们的核心功能几乎相同，主要区别在于**默认访问权限**和**默认继承方式**。
-
-class默认继承的是private继承，struct默认是public继承。
-
-1.   默认访问权限不同：
-     ```cpp
-     // struct 默认所有成员为 public
-     struct Point {
-         int x;     // 默认为 public
-         int y;     // 默认为 public
-     };
-     
-     // class 默认所有成员为 private
-     class Circle {
-         double r;  // 默认为 private
-     public:
-         double area() { return 3.14 * r * r; }
-     };
-     ```
-
-2.   默认继承方式不同：
-     ```cpp
-     struct Base { int data; };
-     
-     // struct 继承默认为 public
-     struct DerivedStruct : Base { 
-         // 可直接访问 Base::data (public)
-     };
-     
-     class DerivedClass : Base { 
-         // 默认为 private 继承，Base::data 不可直接访问
-     };
-     ```
-
-
-
-class 还可用于**定义模板参数**，但是关键字 struct 不能同于定义模板参数，C++ 保留 struct 关键字，原因是保证与 C 语言的向下兼容性，为了保证百分百的与 C 语言中的 struct 向下兼容，，C++ 把最基本的对象单元规定为 class 而不是 struct，就是为了避免各种兼容性的限制。
 
 
 
@@ -188,6 +301,10 @@ atomic 默认使用的是 memory_order_seq_cst，也就是最严格的内存序�
 
 
 
+### array 和 vector 的区别
+
+
+
 ### map 和 unordered_map 的区别
 
 |              | map                                | unordered_map                                              |
@@ -197,6 +314,10 @@ atomic 默认使用的是 memory_order_seq_cst，也就是最严格的内存序�
 | 空间复杂度   | 相对较低                           | 相对较高，因为哈希表需要分配额外的空间来存储和处理冲突     |
 | 元素顺序     | 有序，按照键排序                   | 无序                                                       |
 | 适用场景     | 有序，对时空复杂度严格要求O(log n) | 不关心顺序，需要更快的插入、删除和查询操作                 |
+
+
+
+### set 和 unordered_set 的区别
 
 
 
@@ -643,14 +764,20 @@ C++中 串行、并行、并发、同步、异步的区别
 
 其实现原理主要依赖于：
 
-1.   **RAII 范式**：构造函数中获取资源，析构函数中释放资源，当智能指针对象离开作用域的时候，析构函数会自动释放它所持有的原始指针。
+1.   **RAII 范式**：构造函数中获取资源，析构函数中释放资源，当智能指针对象离开作用域的时候，析构函数会自动释放它所持有的原始指针。详见：[RAII](../CPP/CPP 基础.md#raii)
 2.   **运算符重载**：重载 `*` 和 `->` 运算符，使其使用起来和普通指针一样。
 3.   **引用计数** (`std::shared_ptr`场景)：
      *   通过一个**额外的计数器**记录当前有多少个 `shared_ptr` 指向同一块内存。
      *   当引用计数减为 0 时，自动释放资源。
 4.   **移动语义**：`std::unique_ptr` 通过禁止拷贝构造和拷贝赋值，保证"唯一所有权"，但是其支持移动构造和移动赋值，转移所有权而不拷贝资源。
 
+**智能指针的类型**：
 
+1.   `unique_ptr`：独占所有权，不能复制
+2.   `shared_ptr`：共享所有权，引用计数
+3.   `weak_ptr`：弱引用，不能增加计数
+
+:warning: `shared_ptr` 中可能出现循环引用问题，通过 `weak_ptr` 去解决。如何解决的？
 
 ### `unique_ptr`
 
@@ -668,6 +795,17 @@ C++中 串行、并行、并发、同步、异步的区别
 
 
 
+### 如何在类的内部返回一个指向自己的智能指针？
+
+
+
+### 智能指针的线程安全性
+
+*   `shared_ptr` 的引用计数是线程安全的
+*   但对象本身的访问需要额外的同步机制
+
+
+
 ## C++ 关键字
 
 ### `const` v.s. `constexpr`
@@ -682,6 +820,57 @@ C++中 串行、并行、并发、同步、异步的区别
 
 
 
+### class 和 struct 的区别
+
+在 C++ 中，`struct` 和 `class` 都用于定义自定义数据类型，它们的核心功能几乎相同，主要区别在于**默认访问权限**和**默认继承方式**。
+
+class默认继承的是private继承，struct默认是public继承。
+
+1.   默认访问权限不同：
+
+     ```cpp
+     // struct 默认所有成员为 public
+     struct Point {
+         int x;     // 默认为 public
+         int y;     // 默认为 public
+     };
+     
+     // class 默认所有成员为 private
+     class Circle {
+         double r;  // 默认为 private
+     public:
+         double area() { return 3.14 * r * r; }
+     };
+     ```
+
+2.   默认继承方式不同：
+
+     ```cpp
+     struct Base { int data; };
+     
+     // struct 继承默认为 public
+     struct DerivedStruct : Base { 
+         // 可直接访问 Base::data (public)
+     };
+     
+     class DerivedClass : Base { 
+         // 默认为 private 继承，Base::data 不可直接访问
+     };
+     ```
+
+
+
+class 还可用于**定义模板参数**，但是关键字 struct 不能同于定义模板参数，C++ 保留 struct 关键字，原因是保证与 C 语言的向下兼容性，为了保证百分百的与 C 语言中的 struct 向下兼容，，C++ 把最基本的对象单元规定为 class 而不是 struct，就是为了避免各种兼容性的限制。
+
+
+
+#### 内联函数的限制
+
+*   函数体不能太大
+*   不能有递归调用
+*   不能有循环语句
+*   编译器可能拒绝内联
+
 
 
 ### `static`
@@ -689,6 +878,10 @@ C++中 串行、并行、并发、同步、异步的区别
 
 
 ### `volatile`
+
+
+
+### `extern`
 
 
 
@@ -700,9 +893,84 @@ C++中 串行、并行、并发、同步、异步的区别
 
 #### 什么是内存对齐？
 
+C++ 内存对齐的两个基本规则：
+
+1.  **成员对齐（Member Alignment）**：每个成员变量的起始地址必须是其自身大小（或其自然对齐边界）的整数倍。
+2.  **结构体对齐（Structure Alignment）**：整个结构体的大小必须是其最大成员变量大小（或指定的对齐字节数）的整数倍。如果不是，编译器会在结构体的末尾进行填充。
+
+对齐规则：
+
+1.   基本对齐：成员按最大对齐要求对齐
+2.   结构体对齐：结构体大小是最大成员对齐的倍数
+3.   数组对齐：数组元素按数组类型对齐
+
+代码示例：
+
+```cpp
+#include <iostream>
+
+struct Example1 {
+    char a;  // 1字节，填充3字节
+    int b;  // 4字节
+    char c;  // 1字节，填充7字节
+    double d;  // 8字节
+};  // 总大小：24字节
+
+struct Example2 {
+    char a;  // 1字节
+    char c;  // 1字节，填充2字节
+    int b;  // 4字节
+    double d;  // 8字节
+};  // 总大小：16字节
+
+struct Example3 {
+    double d;  // 8字节
+    char a;  // 1字节，填充3字节
+    int b;  // 4字节
+    char c;  // 1字节，填充7字节
+};  // 总大小：24字节
+
+// 使用 pragma pack 改变对齐
+#pragma pack(push, 1)
+struct PackedStruct {
+    char a;  // 1字节
+    int b;  // 4字节
+    double c;  // 8字节
+};  // 总大小：13字节
+#pragma pack(pop)
+
+struct Example4 {
+    char a;  // 1字节，填充3字节
+    int b[3];  // 4字节 * 3
+    char c;  // 1字节，填充3字节
+};  // 总大小：20字节
+
+int main() {
+    std::cout << "Example1 size：" << sizeof(Example1) << std::endl;
+    std::cout << "Example2 size：" << sizeof(Example2) << std::endl;
+    std::cout << "Example3 size：" << sizeof(Example3) << std::endl;
+    std::cout << "PackedStruct size：" << sizeof(PackedStruct) << std::endl;
+    std::cout << "Example4 size：" << sizeof(Example4) << std::endl;
+    
+    return 0;
+}
+```
+
+`#pragma pack(push, 1)` 指令会改变其后所有新定义的结构体的对齐规则，直到遇到 `pop` 指令或文件结束。
+
 
 
 #### 为什么内存对齐？
+
+*   提高 CPU 访问效率
+*   确保硬件兼容性，某些架构要求特定对齐
+*   避免性能损失
+
+存储效率和访问效率
+
+
+
+#### 结构体大小的内存排序规则
 
 
 
@@ -716,7 +984,11 @@ C++中 串行、并行、并发、同步、异步的区别
 
 
 
+
+
 ### 代码分析样例
+
+知识点：多态、内存对齐
 
 分析如下代码的输出结果：
 
@@ -1015,6 +1287,12 @@ int main() {
 
 
 
+### 虚函数表的实现原理
+
+虚函数表是 C++ 多态的核心机制，每个包含虚函数的类都有一个虚函数表，存储虚函数的地址。
+
+
+
 ## 堆栈
 
 ### 堆和栈在操作系统的底层实现
@@ -1103,7 +1381,7 @@ int main() {
 
 [9] [面试中计算机基础到底考什么，应该怎么学](https://www.bilibili.com/video/BV1oS9qYkEm9?spm_id_from=333.1245.0.0)
 
-[10]
+[10] [盘点互联网大厂秋招面试题、影石C++二面：继承、虚函数、malloc、static、内存分配、内存对齐【码农Mark】](https://www.bilibili.com/video/BV16FYBzkEtL/?share_source=copy_web&vd_source=b5ed364998fc1b958c57abd6dbda38e3)
 
 [11]
 

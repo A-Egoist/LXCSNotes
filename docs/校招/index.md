@@ -46,10 +46,11 @@
     *   操作系统中的进程控制、内存管理；
     *   C++ 是技术语言，对四大件依赖非常严重，四大件不是加分项，而是基本要求。
 *   技术栈、工程能力
-    *   前后端协作、Linux、Docker、编译工具、Git、
-    *   VS 断点调试，gdb 调试
-    *   MySQL 数据库，如索引、事务、三大范式、日志、MVCC 等原理
-    *   Redis
+    -   [ ] 前后端协作、[Linux](../Linux/Linux基础课/1 Linux 常用命令.md)、[Docker](../Linux/Linux基础课/8 docker.md)、[编译工具](../Projects/CMake.md)、[Git](../Linux/Linux基础课/5 git.md)、
+    -   [ ] VS 断点调试
+    -   [x] [gdb 调试](../Linux/GDB.md)
+    -   [ ] MySQL 数据库，如索引、事务、三大范式、日志、MVCC 等原理
+    -   [ ] Redis
 *   项目
     *   建议：团队后端项目 + 个人技术开发项目
     *   

@@ -44,17 +44,17 @@
      typedef unsigned long long uint64_t;
      ```
 
-9.   `size_t`表示大小的整数型，其等价于`uintptr_t`
+9.   `size_t` 表示大小的整数型，其等价于 `uintptr_t`
 
-10.   在Modern C++中使用`nullptr`来表示空指针而不是`NULL`或者`0`
-11.   `for (int i = 0; i < n; i ++)`最好写为`for (size_t i = 0; i < n; i ++)`，记得`#include <cstdint>`
-12.   使用`new T[n]`分配的动态数组，请使用`delete[]`释放
-13.   使用`new T`分配的单个元素，请使用`delete`释放
-14.   使用`std::swap`来交换两个变量的值(`#include <utility>`)
-15.   `i++`和`++i`效果差不多，但是推荐使用`++i`，在使用迭代器时可以减少一些性能开销。
+10.   在 Modern C++ 中使用 `nullptr` 来表示空指针而不是 `NULL` 或者 `0`
+11.   `for (int i = 0; i < n; i ++)` 最好写为 `for (size_t i = 0; i < n; i ++)`，记得 `#include <cstdint>`
+12.   使用 `new T[n]` 分配的动态数组，请使用 `delete[]` 释放
+13.   使用 `new T` 分配的单个元素，请使用 `delete` 释放
+14.   使用 `std::swap` 来交换两个变量的值(`#include <utility>`)
+15.   `i++` 和 `++i` 效果差不多，但是推荐使用 `++i`，在使用迭代器时可以减少一些性能开销。
 16.   C++中获取C数组的长度可以用`std::size(b)`，而不是`sizeof(b)/sizeof(b[0])`
 17.   `# pragma once` 是一个**非标准**的但广泛支持的预处理指令，它告诉编译器该头文件在单个编译过程中只应被包含一次。编译器在第一次遇到 `#pragma once` 时会记住该文件名，并在后续的包含操作中忽略它。
-18.   使用预处理指令防止头文件被重复包含（也称为“头文件保护”或“包含卫士”）：`#ifndef`, `#define`, `#endif`
+18.   使用预处理指令防止头文件被重复包含（也称为“头文件保护”或“包含卫士”）：`#ifndef`，`#define`，`#endif`
       ```cpp title="example.h"
       #ifndef EXAMPLE_H
       #define EXAMPLE_H
@@ -519,74 +519,146 @@ std::cout << MyNameSpace::foo(0, 1) << std::endl;
 
 详见：[Class](./Class.md)
 
-1.   默认构造函数(Default Constructor)
-     ```cpp
-     class MyClass {
-     public:
-         // 显式定义默认构造函数
-         MyClass() {
-             data = 0;  // 初始化成员
-         }
-     private:
-         int data;
-     };
-     // 使用：MyClass obj;
-     ```
+```cpp
+#include <iostream>
+#include <utility> // 包含 std::move
 
-2.   带参构造函数(Parameterized Constructor)
-     ```cpp
-     class Point {
-     public:
-         Point(int x, int y) : x_(x), y_(y) {}  // 使用初始化列表
-     private:
-         int x_, y_;
-     };
-     // 使用：Point p(10, 20);
-     ```
+class MyClass {
+public:
+    // 默认构造函数(Default Constructor)
+    MyClass() : value_(0), ptr_(nullptr) {
+        std::cout << "Default constructor called." << std::endl;
+    }
+    
+    // 带参构造函数(Parameterized Constructor)
+    MyClass(int value) : value_(value), ptr_(nullptr) {
+        std::cout << "Parameterized constructor (int) called." << std::endl;
+    }
+    
+    // 带参构造函数(Parameterized Constructor)
+    MyClass(int value, int* ptr) : value_(value), ptr_(ptr) {
+        std::cout << "Parameterized constructor (int, int*) called." << std::endl;
+    }
+    
+    // 拷贝构造函数(Copy Constructor)
+    MyClass(const MyClass &other) : value_(other.value_), ptr_(other.ptr_) {
+        std::cout << "Copy constructor called." << std::endl;
+    }
+    
+    // 拷贝赋值运算符(Copy Assignment Operator)
+    MyClass& operator=(const MyClass &other) {
+        std::cout << "Copy assignment operator called." << std::endl;
+  
+        // 防止自我赋值
+        if (this == &other) return *this;
+        value_ = other.value_;
+        ptr_ = other.ptr_;
+        
+        return *this;
+    }
+    
+    // 移动构造函数(Move Constructor)
+    MyClass(MyClass&& other) noexcept
+        : value_(other.value_), ptr_(other.ptr_) {
+            std::cout << "Move constructor called." << std::endl;
+            other.value_ = 0;
+            other.ptr_ = nullptr;
+        }
+    
+    // 移动赋值运算符(Move Assignment Operator)
+    MyClass& operator=(MyClass&& other) noexcept {
+        std::cout << "Move assignment operator called." << std::endl;
+        
+        // 防止自我赋值
+        if (this == &other) return *this;
+        value_ = other.value_;
+        ptr_ = other.ptr_;
+        
+        other.value_ = 0;
+		other.ptr_ = nullptr;
+        
+        return *this;
+    }
+    
+private:
+    int value_;
+    int* ptr_;
+};
 
-3.   拷贝构造函数(Copy Constructor)
-     ```cpp
-     MyTime::MyTime(MyTime &t){...}
-     
-     int main()
-     {
-         MyTime t1(1, 59);
-         MyTime t2(t1);  // copy constructor
-         MyTime t3 = t1;  // copy constructor
-     }
-     ```
+int main() {
+    std::cout << "-------------------------------\n";
+    std::cout << "1\n";
+    MyClass a(12);  // 调用带参构造函数
+    std::cout << "-------------------------------\n";
+    std::cout << "2\n";
+    MyClass b = a;  // 调用拷贝构造函数，等价于 MyClass b(a);
+    std::cout << "-------------------------------\n";
+    std::cout << "3\n";
+    MyClass c;  // 调用默认构造函数
+    c = a;  // 调用拷贝赋值运算符
+    std::cout << "-------------------------------\n";
+    std::cout << "4\n";
+    MyClass d = std::move(a);  // 调用移动构造函数
+    std::cout << "-------------------------------\n";
+    std::cout << "5\n";
+    MyClass e;  // 调用默认构造函数
+    e = std::move(b);  // 调用移动赋值运算符
+    std::cout << "-------------------------------\n";
+    
+    return 0;
+}
+```
 
-     如果没有定义 copy constructor 编译器默认生成一个,  copy constructor 会复制所有非静态成员.
+它们各自的目的：
 
-4.   拷贝赋值构造函数(copy assignment constructor)
-     ```cpp
-     MyTime &MyTime::operator=(MyTime &){...}
-     
-     int main()
-     {
-         MyTime t1(1, 59);
-         MyTime t2 = t1;  // copy constructor
-         t2 = t1;  // copy assignment
-     }
-     ```
+-   **默认构造函数：** 在不提供参数时创建对象。
+-   **带参构造函数：** 允许在创建对象时用特定值初始化成员。
+-   **拷贝构造函数：** 用一个已有的对象**初始化**一个新对象。
+-   **拷贝赋值运算符：** 将一个已有的对象**赋值**给另一个已有的对象。
+-   **移动构造函数：** “窃取”一个临时对象（或即将被销毁的对象）的资源，避免昂贵的深拷贝。
+-   **移动赋值运算符：** 将一个临时对象的资源**赋给**一个已有的对象。
 
-     如果没有定义 copy assignment constructor 编译器默认生成一个, copy assignment constructor 会复制所有非静态成员.
+区分**初始化**（通过构造函数）和**赋值**（通过赋值运算符）是理解这些概念的关键。
 
-5.   移动构造函数(Move Constructor)
-     ```cpp
-     class Array {
-     public:
-         Array(Array&& other) noexcept 
-             : data_(other.data_), size_(other.size_) {
-             other.data_ = nullptr;  // 置空原指针，防止资源释放
-             other.size_ = 0;
-         }
-     private:
-         int* data_;
-         int size_;
-     };
-     // 使用：Array a2 = std::move(a1); // 移动语义
-     ```
+如果没有定义拷贝构造函数、拷贝赋值运算符、移动构造函数、移动赋值运算符编译器默认生成。
+
+如果不想要编译器默认生成，需要使用 `= delete`，比如：
+
+```cpp
+class MyClass {
+public:
+    // 默认构造函数(Default Constructor)
+    MyClass() : value_(0), ptr_(nullptr) {
+        std::cout << "Default constructor called." << std::endl;
+    }
+    
+    // 带参构造函数(Parameterized Constructor)
+    MyClass(int value) : value_(value), ptr_(nullptr) {
+        std::cout << "Parameterized constructor (int) called." << std::endl;
+    }
+    
+    // 带参构造函数(Parameterized Constructor)
+    MyClass(int value, int* ptr) : value_(value), ptr_(ptr) {
+        std::cout << "Parameterized constructor (int, int*) called." << std::endl;
+    }
+    
+    // 拷贝构造函数(Copy Constructor)
+    MyClass(const MyClass &other) = delete;
+    
+    // 拷贝赋值运算符(Copy Assignment Operator)
+    MyClass& operator=(const MyClass &other) = delete;
+    
+    // 移动构造函数(Move Constructor)
+    MyClass(MyClass&& other) = delete;
+    
+    // 移动赋值运算符(Move Assignment Operator)
+    MyClass& operator=(MyClass&& other) = delete;
+    
+private:
+    int value_;
+    int* ptr_;
+};
+```
 
 
 
@@ -777,7 +849,7 @@ private:
 
 
 
-## RAII(Resource Acquisition Is Initialization)
+## RAII
 
 **RAII（Resource Acquisition Is Initialization）** 是 C++ 的核心编程范式，直译为“资源获取即初始化”。它利用对象生命周期管理资源（如内存、文件句柄、网络连接等），确保资源安全获取和自动释放，避免泄漏。核心思想：**资源在构造函数中获取，在析构函数中释放**。
 
