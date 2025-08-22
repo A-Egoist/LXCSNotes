@@ -277,7 +277,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../Projects/C%2B%2B%20%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="md-tabs__link">
+        <a href="../../Projects/" class="md-tabs__link">
           
   
   
@@ -596,12 +596,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Linux/Linux%E5%9F%BA%E7%A1%80%E8%AF%BE/1%20%E5%B8%B8%E7%94%A8%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+      <a href="../../Linux/Linux%E5%9F%BA%E7%A1%80%E8%AF%BE/1%20Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    1 Linux 常用命令整理
+    1 Linux 常用命令
     
   </span>
   
@@ -1309,13 +1309,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#raiiresource-acquisition-is-initialization" class="md-nav__link">
+  <a href="#raii" class="md-nav__link">
     <span class="md-ellipsis">
-      RAII(Resource Acquisition Is Initialization)
+      RAII
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="RAII(Resource Acquisition Is Initialization)">
+    <nav class="md-nav" aria-label="RAII">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1337,7 +1337,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#raii" class="md-nav__link">
+  <a href="#raii_1" class="md-nav__link">
     <span class="md-ellipsis">
       RAII 的核心优势
     </span>
@@ -1355,7 +1355,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#raii_1" class="md-nav__link">
+  <a href="#raii_2" class="md-nav__link">
     <span class="md-ellipsis">
       RAII 的最佳实践
     </span>
@@ -2531,7 +2531,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Projects/C%2B%2B%20%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="md-nav__link">
+      <a href="../../Projects/" class="md-nav__link">
         
   
   
@@ -2830,12 +2830,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Projects/%E4%B8%80%E3%80%81%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AE%9E%E7%8E%B0%20C%2B%2B%20TinyWebServer%20%E5%85%A8%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/" class="md-nav__link">
+      <a href="../../Projects/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AE%9E%E7%8E%B0%20C%2B%2B%20TinyWebServer/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    一、从零开始实现C++ TinyWebServer 全过程记录
+    从零开始实现C++ TinyWebServer
     
   </span>
   
@@ -5271,13 +5271,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#raiiresource-acquisition-is-initialization" class="md-nav__link">
+  <a href="#raii" class="md-nav__link">
     <span class="md-ellipsis">
-      RAII(Resource Acquisition Is Initialization)
+      RAII
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="RAII(Resource Acquisition Is Initialization)">
+    <nav class="md-nav" aria-label="RAII">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -5299,7 +5299,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#raii" class="md-nav__link">
+  <a href="#raii_1" class="md-nav__link">
     <span class="md-ellipsis">
       RAII 的核心优势
     </span>
@@ -5317,7 +5317,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#raii_1" class="md-nav__link">
+  <a href="#raii_2" class="md-nav__link">
     <span class="md-ellipsis">
       RAII 的最佳实践
     </span>
@@ -5791,20 +5791,20 @@
 </code></pre></div></td></tr></table></div>
 </li>
 <li>
-<p><code>size_t</code>表示大小的整数型，其等价于<code>uintptr_t</code></p>
+<p><code>size_t</code> 表示大小的整数型，其等价于 <code>uintptr_t</code></p>
 </li>
 <li>
-<p>在Modern C++中使用<code>nullptr</code>来表示空指针而不是<code>NULL</code>或者<code>0</code></p>
+<p>在 Modern C++ 中使用 <code>nullptr</code> 来表示空指针而不是 <code>NULL</code> 或者 <code>0</code></p>
 </li>
-<li><code>for (int i = 0; i &lt; n; i ++)</code>最好写为<code>for (size_t i = 0; i &lt; n; i ++)</code>，记得<code>#include &lt;cstdint&gt;</code></li>
-<li>使用<code>new T[n]</code>分配的动态数组，请使用<code>delete[]</code>释放</li>
-<li>使用<code>new T</code>分配的单个元素，请使用<code>delete</code>释放</li>
-<li>使用<code>std::swap</code>来交换两个变量的值(<code>#include &lt;utility&gt;</code>)</li>
-<li><code>i++</code>和<code>++i</code>效果差不多，但是推荐使用<code>++i</code>，在使用迭代器时可以减少一些性能开销。</li>
+<li><code>for (int i = 0; i &lt; n; i ++)</code> 最好写为 <code>for (size_t i = 0; i &lt; n; i ++)</code>，记得 <code>#include &lt;cstdint&gt;</code></li>
+<li>使用 <code>new T[n]</code> 分配的动态数组，请使用 <code>delete[]</code> 释放</li>
+<li>使用 <code>new T</code> 分配的单个元素，请使用 <code>delete</code> 释放</li>
+<li>使用 <code>std::swap</code> 来交换两个变量的值(<code>#include &lt;utility&gt;</code>)</li>
+<li><code>i++</code> 和 <code>++i</code> 效果差不多，但是推荐使用 <code>++i</code>，在使用迭代器时可以减少一些性能开销。</li>
 <li>C++中获取C数组的长度可以用<code>std::size(b)</code>，而不是<code>sizeof(b)/sizeof(b[0])</code></li>
 <li><code># pragma once</code> 是一个<strong>非标准</strong>的但广泛支持的预处理指令，它告诉编译器该头文件在单个编译过程中只应被包含一次。编译器在第一次遇到 <code>#pragma once</code> 时会记住该文件名，并在后续的包含操作中忽略它。</li>
 <li>
-<p>使用预处理指令防止头文件被重复包含（也称为“头文件保护”或“包含卫士”）：<code>#ifndef</code>, <code>#define</code>, <code>#endif</code>
+<p>使用预处理指令防止头文件被重复包含（也称为“头文件保护”或“包含卫士”）：<code>#ifndef</code>，<code>#define</code>，<code>#endif</code>
       <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">example.h</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -6410,90 +6410,7 @@
 <p><a href="https://gitbookcpp.llfc.club/sections/cpp/base/cppbase21.html">类面试常见问题</a></p>
 <h3 id="constructor">构造函数(Constructor)<a class="headerlink" href="#constructor" title="Permanent link">&para;</a></h3>
 <p>详见：<a href="../Class/">Class</a></p>
-<ol>
-<li>
-<p>默认构造函数(Default Constructor)
-     <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="w"> </span><span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="c1">// 显式定义默认构造函数</span>
-<span class="w">    </span><span class="n">MyClass</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">  </span><span class="c1">// 初始化成员</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="k">private</span><span class="o">:</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
-<span class="p">};</span>
-<span class="c1">// 使用：MyClass obj;</span>
-</code></pre></div></td></tr></table></div></p>
-</li>
-<li>
-<p>带参构造函数(Parameterized Constructor)
-     <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Point</span><span class="w"> </span><span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="n">Point</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">x_</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">y_</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">  </span><span class="c1">// 使用初始化列表</span>
-<span class="k">private</span><span class="o">:</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x_</span><span class="p">,</span><span class="w"> </span><span class="n">y_</span><span class="p">;</span>
-<span class="p">};</span>
-<span class="c1">// 使用：Point p(10, 20);</span>
-</code></pre></div></td></tr></table></div></p>
-</li>
-<li>
-<p>拷贝构造函数(Copy Constructor)
-     <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">MyTime</span><span class="o">::</span><span class="n">MyTime</span><span class="p">(</span><span class="n">MyTime</span><span class="w"> </span><span class="o">&amp;</span><span class="n">t</span><span class="p">){...}</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="n">MyTime</span><span class="w"> </span><span class="nf">t1</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">59</span><span class="p">);</span>
-<span class="w">    </span><span class="n">MyTime</span><span class="w"> </span><span class="nf">t2</span><span class="p">(</span><span class="n">t1</span><span class="p">);</span><span class="w">  </span><span class="c1">// copy constructor</span>
-<span class="w">    </span><span class="n">MyTime</span><span class="w"> </span><span class="n">t3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t1</span><span class="p">;</span><span class="w">  </span><span class="c1">// copy constructor</span>
-<span class="p">}</span>
-</code></pre></div></td></tr></table></div></p>
-<p>如果没有定义 copy constructor 编译器默认生成一个,  copy constructor 会复制所有非静态成员.</p>
-</li>
-<li>
-<p>拷贝赋值构造函数(copy assignment constructor)
-     <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">MyTime</span><span class="w"> </span><span class="o">&amp;</span><span class="n">MyTime</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">MyTime</span><span class="w"> </span><span class="o">&amp;</span><span class="p">){...}</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="n">MyTime</span><span class="w"> </span><span class="nf">t1</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">59</span><span class="p">);</span>
-<span class="w">    </span><span class="n">MyTime</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t1</span><span class="p">;</span><span class="w">  </span><span class="c1">// copy constructor</span>
-<span class="w">    </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t1</span><span class="p">;</span><span class="w">  </span><span class="c1">// copy assignment</span>
-<span class="p">}</span>
-</code></pre></div></td></tr></table></div></p>
-<p>如果没有定义 copy assignment constructor 编译器默认生成一个, copy assignment constructor 会复制所有非静态成员.</p>
-</li>
-<li>
-<p>移动构造函数(Move Constructor)
-     <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -6504,21 +6421,247 @@
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Array</span><span class="w"> </span><span class="p">{</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span><span class="c1"> // 包含 std::move</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="w"> </span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="n">Array</span><span class="p">(</span><span class="n">Array</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span>
-<span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">data_</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="p">),</span><span class="w"> </span><span class="n">size_</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">size_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w">  </span><span class="c1">// 置空原指针，防止资源释放</span>
-<span class="w">        </span><span class="n">other</span><span class="p">.</span><span class="n">size_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// 默认构造函数(Default Constructor)</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">value_</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">ptr_</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Default constructor called.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 带参构造函数(Parameterized Constructor)</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">value_</span><span class="p">(</span><span class="n">value</span><span class="p">),</span><span class="w"> </span><span class="n">ptr_</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Parameterized constructor (int) called.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 带参构造函数(Parameterized Constructor)</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">value_</span><span class="p">(</span><span class="n">value</span><span class="p">),</span><span class="w"> </span><span class="n">ptr_</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Parameterized constructor (int, int*) called.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 拷贝构造函数(Copy Constructor)</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">MyClass</span><span class="w"> </span><span class="o">&amp;</span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">value_</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">value_</span><span class="p">),</span><span class="w"> </span><span class="n">ptr_</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">ptr_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Copy constructor called.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 拷贝赋值运算符(Copy Assignment Operator)</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">MyClass</span><span class="w"> </span><span class="o">&amp;</span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Copy assignment operator called.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// 防止自我赋值</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">&amp;</span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="w">        </span><span class="n">value_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">value_</span><span class="p">;</span>
+<span class="w">        </span><span class="n">ptr_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">ptr_</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 移动构造函数(Move Constructor)</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="p">(</span><span class="n">MyClass</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span>
+<span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">value_</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">value_</span><span class="p">),</span><span class="w"> </span><span class="n">ptr_</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">ptr_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Move constructor called.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">            </span><span class="n">other</span><span class="p">.</span><span class="n">value_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="n">other</span><span class="p">.</span><span class="n">ptr_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 移动赋值运算符(Move Assignment Operator)</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">MyClass</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Move assignment operator called.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// 防止自我赋值</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">&amp;</span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="w">        </span><span class="n">value_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">value_</span><span class="p">;</span>
+<span class="w">        </span><span class="n">ptr_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">ptr_</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">other</span><span class="p">.</span><span class="n">value_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">other</span><span class="p">.</span><span class="n">ptr_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
 <span class="k">private</span><span class="o">:</span>
-<span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">data_</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">size_</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">value_</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">ptr_</span><span class="p">;</span>
 <span class="p">};</span>
-<span class="c1">// 使用：Array a2 = std::move(a1); // 移动语义</span>
-</code></pre></div></td></tr></table></div></p>
-</li>
-</ol>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;-------------------------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;1</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span><span class="w">  </span><span class="c1">// 调用带参构造函数</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;-------------------------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;2</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w">  </span><span class="c1">// 调用拷贝构造函数，等价于 MyClass b(a);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;-------------------------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;3</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w">  </span><span class="c1">// 调用默认构造函数</span>
+<span class="w">    </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w">  </span><span class="c1">// 调用拷贝赋值运算符</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;-------------------------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;4</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w">  </span><span class="c1">// 调用移动构造函数</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;-------------------------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;5</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="w"> </span><span class="n">e</span><span class="p">;</span><span class="w">  </span><span class="c1">// 调用默认构造函数</span>
+<span class="w">    </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="c1">// 调用移动赋值运算符</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;-------------------------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>它们各自的目的：</p>
+<ul>
+<li><strong>默认构造函数：</strong> 在不提供参数时创建对象。</li>
+<li><strong>带参构造函数：</strong> 允许在创建对象时用特定值初始化成员。</li>
+<li><strong>拷贝构造函数：</strong> 用一个已有的对象<strong>初始化</strong>一个新对象。</li>
+<li><strong>拷贝赋值运算符：</strong> 将一个已有的对象<strong>赋值</strong>给另一个已有的对象。</li>
+<li><strong>移动构造函数：</strong> “窃取”一个临时对象（或即将被销毁的对象）的资源，避免昂贵的深拷贝。</li>
+<li><strong>移动赋值运算符：</strong> 将一个临时对象的资源<strong>赋给</strong>一个已有的对象。</li>
+</ul>
+<p>区分<strong>初始化</strong>（通过构造函数）和<strong>赋值</strong>（通过赋值运算符）是理解这些概念的关键。</p>
+<p>如果没有定义拷贝构造函数、拷贝赋值运算符、移动构造函数、移动赋值运算符编译器默认生成。</p>
+<p>如果不想要编译器默认生成，需要使用 <code>= delete</code>，比如：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="c1">// 默认构造函数(Default Constructor)</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">value_</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">ptr_</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Default constructor called.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 带参构造函数(Parameterized Constructor)</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">value_</span><span class="p">(</span><span class="n">value</span><span class="p">),</span><span class="w"> </span><span class="n">ptr_</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Parameterized constructor (int) called.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 带参构造函数(Parameterized Constructor)</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">value_</span><span class="p">(</span><span class="n">value</span><span class="p">),</span><span class="w"> </span><span class="n">ptr_</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Parameterized constructor (int, int*) called.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 拷贝构造函数(Copy Constructor)</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">MyClass</span><span class="w"> </span><span class="o">&amp;</span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">delete</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 拷贝赋值运算符(Copy Assignment Operator)</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">MyClass</span><span class="w"> </span><span class="o">&amp;</span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">delete</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 移动构造函数(Move Constructor)</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="p">(</span><span class="n">MyClass</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">delete</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 移动赋值运算符(Move Assignment Operator)</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">MyClass</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">delete</span><span class="p">;</span>
+
+<span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">value_</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">ptr_</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></td></tr></table></div>
 <h4 id="rule-of-threefive">Rule of Three/Five (三/五法则)<a class="headerlink" href="#rule-of-threefive" title="Permanent link">&para;</a></h4>
 <ol>
 <li>
@@ -6698,7 +6841,7 @@
 <h4 id="_21">非类型参数<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h4>
 <h4 id="_22">模板模板参数<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h4>
 <p>其他更多模板内容请见：<a href="https://gitbookcpp.llfc.club/sections/cpp/base/cppbase31.html">https://gitbookcpp.llfc.club/sections/cpp/base/cppbase31.html</a></p>
-<h2 id="raiiresource-acquisition-is-initialization">RAII(Resource Acquisition Is Initialization)<a class="headerlink" href="#raiiresource-acquisition-is-initialization" title="Permanent link">&para;</a></h2>
+<h2 id="raii">RAII<a class="headerlink" href="#raii" title="Permanent link">&para;</a></h2>
 <p><strong>RAII（Resource Acquisition Is Initialization）</strong> 是 C++ 的核心编程范式，直译为“资源获取即初始化”。它利用对象生命周期管理资源（如内存、文件句柄、网络连接等），确保资源安全获取和自动释放，避免泄漏。核心思想：<strong>资源在构造函数中获取，在析构函数中释放</strong>。</p>
 <h3 id="_23">核心原理<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
 <ol>
@@ -6777,7 +6920,7 @@
 <span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="c1">// 离开作用域时 lock 析构 → 自动解锁</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="raii">RAII 的核心优势<a class="headerlink" href="#raii" title="Permanent link">&para;</a></h3>
+<h3 id="raii_1">RAII 的核心优势<a class="headerlink" href="#raii_1" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -6829,7 +6972,7 @@
 <span class="w">    </span><span class="c1">// ... 使用 arr</span>
 <span class="p">}</span><span class="w"> </span><span class="c1">// 自动释放（即使抛出异常）</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="raii_1"><strong>RAII 的最佳实践</strong><a class="headerlink" href="#raii_1" title="Permanent link">&para;</a></h3>
+<h3 id="raii_2"><strong>RAII 的最佳实践</strong><a class="headerlink" href="#raii_2" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
 <p><strong>优先使用标准库工具</strong></p>

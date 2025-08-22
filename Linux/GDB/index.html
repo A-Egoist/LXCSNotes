@@ -277,7 +277,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../Projects/C%2B%2B%20%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="md-tabs__link">
+        <a href="../../Projects/" class="md-tabs__link">
           
   
   
@@ -518,7 +518,244 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#gdb_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      什么是 GDB？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gdb_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      GDB 安装
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gdb-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      GDB 快速入门：调试 C++ 程序
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GDB 快速入门：调试 C++ 程序">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 编译带调试信息的代码
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-gdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 启动 GDB
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 设置断点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 运行程序
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 常用调试命令
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 结束调试
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gdb_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      GDB 调试实战
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      指令总结
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="指令总结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      行号显示
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      断点设置
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      查看断点信息
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      删除断点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      开启 / 禁用断点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      运行 / 调试
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      逐过程和逐语句
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      打印 / 追踪变量
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      查看函数调用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      修改变量的值
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      指定行号跳转
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      强制执行函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      跳转到下一个断点
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gdb_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      GDB 小技巧
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       参考资料
     </span>
@@ -652,12 +889,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../Linux%E5%9F%BA%E7%A1%80%E8%AF%BE/1%20%E5%B8%B8%E7%94%A8%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+      <a href="../Linux%E5%9F%BA%E7%A1%80%E8%AF%BE/1%20Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    1 Linux 常用命令整理
+    1 Linux 常用命令
     
   </span>
   
@@ -1658,7 +1895,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Projects/C%2B%2B%20%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="md-nav__link">
+      <a href="../../Projects/" class="md-nav__link">
         
   
   
@@ -1957,12 +2194,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Projects/%E4%B8%80%E3%80%81%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AE%9E%E7%8E%B0%20C%2B%2B%20TinyWebServer%20%E5%85%A8%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/" class="md-nav__link">
+      <a href="../../Projects/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AE%9E%E7%8E%B0%20C%2B%2B%20TinyWebServer/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    一、从零开始实现C++ TinyWebServer 全过程记录
+    从零开始实现C++ TinyWebServer
     
   </span>
   
@@ -3957,7 +4194,244 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#gdb_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      什么是 GDB？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gdb_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      GDB 安装
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gdb-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      GDB 快速入门：调试 C++ 程序
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GDB 快速入门：调试 C++ 程序">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 编译带调试信息的代码
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-gdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 启动 GDB
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 设置断点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 运行程序
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 常用调试命令
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 结束调试
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gdb_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      GDB 调试实战
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      指令总结
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="指令总结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      行号显示
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      断点设置
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      查看断点信息
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      删除断点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      开启 / 禁用断点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      运行 / 调试
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      逐过程和逐语句
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      打印 / 追踪变量
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      查看函数调用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      修改变量的值
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      指定行号跳转
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      强制执行函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      跳转到下一个断点
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gdb_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      GDB 小技巧
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       参考资料
     </span>
@@ -3985,7 +4459,265 @@
 
 
 <h1 id="gdb">GDB<a class="headerlink" href="#gdb" title="Permanent link">&para;</a></h1>
-<h2 id="_1">参考资料<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="gdb_1">什么是 GDB？<a class="headerlink" href="#gdb_1" title="Permanent link">&para;</a></h3>
+<p><strong>GDB</strong> (GNU Debugger) 是一个功能强大的命令行调试工具，用于调试 C、C++、Go、Rust 等多种语言编写的程序。对于以后想称为一个 Linux 下工作的 C/C++ 程序员，GDB 是必不可少的工具，所以本篇来从零讲解 GDB 在 Linux 的调试。你可以用它来：</p>
+<ul>
+<li>启动程序，并设置断点让程序在指定位置停止。</li>
+<li>检查程序停止时内存中的变量和数据。</li>
+<li>逐步执行代码，一行一行地观察程序的执行流程。</li>
+<li>修改变量的值，并继续执行程序。</li>
+</ul>
+<p>简单来说，GDB 就像是你程序的一个“X光机”，让你能深入地看到程序运行时的每一个细节，从而更高效地定位和修复问题。</p>
+<h3 id="gdb_2">GDB 安装<a class="headerlink" href="#gdb_2" title="Permanent link">&para;</a></h3>
+<p><strong>查看是否安装</strong></p>
+<p>使用 <code>which</code> 或 <code>command -v</code> 命令判断是否安装 <code>GDB</code>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>which<span class="w"> </span>gdb
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span>gdb
+</code></pre></div></td></tr></table></div>
+<p><strong>安装</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>gdb
+</code></pre></div></td></tr></table></div>
+<h3 id="gdb-c">GDB 快速入门：调试 C++ 程序<a class="headerlink" href="#gdb-c" title="Permanent link">&para;</a></h3>
+<p>要使用 GDB 调试 C++ 程序，你需要先用一个特定的编译选项来编译你的代码：<strong><code>-g</code></strong>。这个选项会在编译时将调试信息嵌入到可执行文件中，这些信息包括变量名、函数名、行号等，GDB 才能理解你的源代码。</p>
+<p>这是一个简单的 C++ 程序 <code>main.cpp</code>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">AddToTop</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">top</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enter AddToTop</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">top</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">count</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Quit AddToTop</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">top</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AddToTop</span><span class="p">(</span><span class="n">top</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;ret = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ret</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="1">1. 编译带调试信息的代码<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<p>在终端中，使用 <code>g++</code> 编译器，并加上 <code>-g</code> 选项：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>g++<span class="w"> </span>-g<span class="w"> </span>main.cpp<span class="w"> </span>-o<span class="w"> </span>main
+</code></pre></div></td></tr></table></div>
+<p><code>-g</code> 表示编译为【Debug】版本，g++ 默认编译为【Release】版本。【Debug】版本相比于【Release】版本多了<strong>调试信息</strong>。</p>
+<h4 id="2-gdb">2. 启动 GDB<a class="headerlink" href="#2-gdb" title="Permanent link">&para;</a></h4>
+<p>运行 GDB 并加载可执行文件：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>gdb<span class="w"> </span>./main
+</code></pre></div></td></tr></table></div>
+<p>你会看到 GDB 的命令行提示符 <code>(gdb)</code>。</p>
+<h4 id="3">3. 设置断点<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<p><strong>断点</strong> (breakpoint) 是程序中你希望暂停执行的位置。你可以用 <code>b</code> 或 <code>break</code> 命令来设置。</p>
+<ul>
+<li>
+<p><strong>按函数名设置断点：</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>(gdb) b main
+(gdb) b printVector
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p><strong>按行号设置断点：</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>(gdb) b example.cpp:11
+</code></pre></div></td></tr></table></div>
+</li>
+</ul>
+<h4 id="4">4. 运行程序<a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
+<p>使用 <code>r</code> 或 <code>run</code> 命令开始运行程序。程序会在第一个断点处停止。</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>(gdb) r
+</code></pre></div></td></tr></table></div>
+<h4 id="5">5. 常用调试命令<a class="headerlink" href="#5" title="Permanent link">&para;</a></h4>
+<p>一旦程序停止，你可以使用以下命令来检查程序状态：</p>
+<ul>
+<li>
+<p><strong><code>n</code> (next)：</strong> 单步执行，跳到下一行代码。如果下一行是函数调用，<code>n</code> 会把这个函数当作一个整体执行，而不是进入函数内部。</p>
+</li>
+<li>
+<p><strong><code>s</code> (step)：</strong> 单步执行，但会进入函数内部。</p>
+</li>
+<li>
+<p><strong><code>c</code> (continue)：</strong> 继续执行，直到遇到下一个断点或程序结束。</p>
+</li>
+<li>
+<p><strong><code>p &lt;变量名&gt;</code> (print)：</strong> 打印变量的值。</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>(gdb) p sum
+(gdb) p numbers
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p><strong><code>bt</code> (backtrace)：</strong> 打印函数调用栈，可以看到程序是如何一步步走到当前位置的。</p>
+</li>
+<li>
+<p><strong><code>l</code> (list)：</strong> 查看源代码。可以指定行号或函数名，例如 <code>l main</code> 或 <code>l 15</code>。</p>
+</li>
+<li>
+<p><strong><code>i b</code> (info breakpoints)：</strong> 查看所有已设置的断点。</p>
+</li>
+<li>
+<p><strong><code>d &lt;断点编号&gt;</code> (delete)：</strong> 删除一个或多个断点。</p>
+</li>
+</ul>
+<h4 id="6">6. 结束调试<a class="headerlink" href="#6" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong><code>q</code> (quit)：</strong> 退出 GDB。</li>
+</ul>
+<h3 id="gdb_3">GDB 调试实战<a class="headerlink" href="#gdb_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">swap</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
+<span class="w">    </span><span class="o">*</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="p">;</span><span class="w">                                                                 </span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;a = %d, b = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="w">    </span><span class="n">swap</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;a = %d, b = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_1">指令总结<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h4 id="_2"><img alt="✨" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2728.svg" title=":sparkles:" /> 行号显示<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<p>l(list) 行号——显示对应的代码和行号</p>
+<p>【l】随机显示10行内容</p>
+<p>【l 0】从第一行开始往下列10行</p>
+<p>若想看到后面的代码，只需要多按几次【Enter】键就行，gbd 会自动记忆上次命令</p>
+<p><img alt="image-20250822111346573" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202508221113128.png" /></p>
+<h4 id="_3"><img alt="✨" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2728.svg" title=":sparkles:" /> 断点设置<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<p>【b 行号】——在这一行打断点</p>
+<p>【b 源文件: 函数名】——在该函数的第一行打断点</p>
+<p>【b 源文件: 行号】——在该源文件中的这一行打断点</p>
+<p><img alt="image-20250822111441053" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202508221114609.png" /></p>
+<h4 id="_4"><img alt="✨" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2728.svg" title=":sparkles:" /> 查看断点信息<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<p>【info】——查看所有的调试信息</p>
+<p>【info b】——查看断点的信息</p>
+<p>字段信息：</p>
+<ul>
+<li>Num——编号</li>
+<li>Type——类型</li>
+<li>Disp——状态</li>
+<li>Enb——是否可用</li>
+<li>Address——地址</li>
+<li>What——断点位置</li>
+</ul>
+<p><img alt="image-20250822111303447" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202508221113830.png" /></p>
+<h4 id="_5"><img alt="✨" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2728.svg" title=":sparkles:" /> 删除断点<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<p>【d 断点编号】——删除对应断点</p>
+<p>【d breakpoints】——删除所有断点</p>
+<p><img alt="image-20250822111640648" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202508221118947.png" /></p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:" /> 在退出 gdb 之前，断点编号是不断累加的，即现在删除了断点5之后，下次增加的断点编号为6，而不是5：</p>
+<p><img alt="image-20250822111823690" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202508221118352.png" /></p>
+<h4 id="_6"><img alt="✨" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2728.svg" title=":sparkles:" /> 开启 / 禁用断点<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<p>【disable b】——使所有断点无效，即禁用所有断点</p>
+<p>【enable b】——使所有断点有效，即启用所有断点</p>
+<p>【disable b 断点编号】——使一个断点无效，禁用断点</p>
+<p>【enable b 断点编号】——使一个断点有效，启用断点</p>
+<p><img alt="image-20250822112141621" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202508221121012.png" /></p>
+<h4 id="_7"><img alt="✨" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2728.svg" title=":sparkles:" /> 运行 / 调试<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<p>r(run)——F5，无断点直接运行，有断点则会停在第一个断点处</p>
+<p><img alt="image-20250822112637822" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202508221126591.png" /></p>
+<h4 id="_8"><img alt="✨" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2728.svg" title=":sparkles:" /> 逐过程和逐语句<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<p>n(next)——逐过程，相当于F10，单步执行。如果函数中不存在断点，则不会进入函数；如果函数中存在断点则会进入函数。</p>
+<p>s(step)——逐语句，相当于F11，单步执行，可以进入函数。</p>
+<p>c(continue)——继续运行，直到遇到断点或程序结束。</p>
+<p><img alt="image-20250822112958345" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202508221141060.png" /></p>
+<p>如图所示，启用的断点为第6行、第11行、第16行和第19行的断点。</p>
+<h4 id="_9"><img alt="✨" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2728.svg" title=":sparkles:" /> 打印 / 追踪变量<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<p>p(print)——打印变量值</p>
+<p>【print 变量名】</p>
+<p><img alt="image-20250822114138009" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202508221141993.png" /></p>
+<p>【display 变量名】——跟踪查看一个变量，每次停下来都会显示它的值。</p>
+<p>【display &amp;变量名】——追踪变量的地址。</p>
+<p>【undisplay 变量名编号】——取消追踪指定变量</p>
+<h4 id="_10"><img alt="✨" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2728.svg" title=":sparkles:" /> 查看函数调用<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<p>【bt】——看到底层函数调用的过程，函数压栈</p>
+<h4 id="_11"><img alt="✨" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2728.svg" title=":sparkles:" /> 修改变量的值<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<p>【set var 变量名=变量值】——修改变量的值</p>
+<p><img alt="image-20250822114735490" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202508221147206.png" /></p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:" /> 不能在第16行的位置修改 top 的值，因为在断点位置停下的时候并没有运行这一行代码，所以需要使用【n】运行到下一行，然后再修改 top 的值。</p>
+<h4 id="_12"><img alt="✨" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2728.svg" title=":sparkles:" /> 指定行号跳转<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<p>【until 行号】——进行指定位置挑战，执行完区间代码</p>
+<p>如下所示，在进入 for 循环之后，使用 【n】会逐步运行 for 循环，非常麻烦：</p>
+<p><img alt="image-20250822115043452" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202508221152197.png" /></p>
+<p>使用【until】就可以运行完 for 循环且在没有断点的位置——第11行停止：</p>
+<p><img alt="image-20250822115457406" src="C:\Users\Amonologue\AppData\Roaming\Typora\typora-user-images\image-20250822115457406.png" /></p>
+<h4 id="_13"><img alt="✨" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2728.svg" title=":sparkles:" /> 强制执行函数<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
+<p>finish——在一个函数内部，执行到当前函数返回，然后停下来等待命令</p>
+<ul>
+<li>有时候我们会有这样的需求，在初步排查的时候推断可能是某个函数内部的逻辑出了问题，但是呢又不想一步步地进到函数内部进行调试，在VS中其实很简单，只需要在函数下方设个断点，然后F5直接运行到断点处即可。</li>
+<li>但是在Linux下的gdb中，我们可以使用【finsh】指令来直接使一个函数执行完毕。从下图我们可以看到，首先【s】进到函数内部，接下去我直接使用finish，可以看到它直接回到了调用函数的位置，returned了一个返回值。</li>
+<li>然后可以看到，在获取到返回值后，也就直接进行了printf打印。</li>
+</ul>
+<h4 id="_14"><img alt="✨" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2728.svg" title=":sparkles:" /> 跳转到下一个断点<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
+<p><code>c(continue)</code></p>
+<p>【c】——从一个断点处，直接运行至下一个断点处。</p>
+<h3 id="gdb_4">GDB 小技巧<a class="headerlink" href="#gdb_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>命令自动补全：</strong> 在 GDB 命令行中，按 <code>Tab</code> 键可以自动补全命令和变量名。</p>
+</li>
+<li>
+<p><strong>历史命令：</strong> 使用上下方向键可以查看和重复之前的命令。</p>
+</li>
+<li>
+<p><strong>设置观察点：</strong> <code>watch &lt;表达式&gt;</code>。当表达式的值发生变化时，程序会自动停止。这对于跟踪变量何时被意外修改非常有用。例如：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>(gdb) watch sum
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p><strong>查看局部变量：</strong> <code>i locals</code>。打印当前函数的所有局部变量。</p>
+</li>
+</ul>
+<p>掌握这些基本命令和技巧，你就可以快速上手使用 GDB 来定位和解决 C++ 程序中的 Bug 了。</p>
+<h2 id="_15">参考资料<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
 <p>[1] <a href="https://blog.csdn.net/weixin_45031801/article/details/134399664">【Linux】GDB保姆级调试指南（什么是GDB？GDB如何使用？）</a></p>
 
 

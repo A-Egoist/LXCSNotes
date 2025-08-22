@@ -13,7 +13,7 @@
       
       
       
-        <link rel="prev" href="../C%2B%2B%20%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/">
+        <link rel="prev" href="../">
       
       
         <link rel="next" href="../Hadoop/">
@@ -277,7 +277,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../C%2B%2B%20%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="md-tabs__link">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -596,12 +596,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Linux/Linux%E5%9F%BA%E7%A1%80%E8%AF%BE/1%20%E5%B8%B8%E7%94%A8%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+      <a href="../../Linux/Linux%E5%9F%BA%E7%A1%80%E8%AF%BE/1%20Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    1 Linux 常用命令整理
+    1 Linux 常用命令
     
   </span>
   
@@ -1607,7 +1607,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../C%2B%2B%20%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
@@ -1682,6 +1682,186 @@
         <li class="md-nav__item">
   <a href="#cmake_1" class="md-nav__link">
     <span class="md-ellipsis">
+      CMake 快速入门：一个简单示例
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CMake 快速入门：一个简单示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      项目结构
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cmakeliststxt" class="md-nav__link">
+    <span class="md-ellipsis">
+      编写 CMakeLists.txt 文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      编写源代码
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      创建构建目录并生成构建文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      编译项目
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      运行可执行程序
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cmake_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      常用的 CMake 命令
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      更复杂的项目示例
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="更复杂的项目示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      项目场景
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      项目结构
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cmakeliststxt_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      编写 CMakeLists.txt 文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      编写源代码
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      构建和运行
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cmake_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      CMake 参数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CMake 参数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      指定生成版本
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      指定编译器
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cmake_4" class="md-nav__link">
+    <span class="md-ellipsis">
       CMake 如何打包并发布程序
     </span>
   </a>
@@ -1713,7 +1893,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       参考资料
     </span>
@@ -1990,12 +2170,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E4%B8%80%E3%80%81%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AE%9E%E7%8E%B0%20C%2B%2B%20TinyWebServer%20%E5%85%A8%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/" class="md-nav__link">
+      <a href="../%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AE%9E%E7%8E%B0%20C%2B%2B%20TinyWebServer/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    一、从零开始实现C++ TinyWebServer 全过程记录
+    从零开始实现C++ TinyWebServer
     
   </span>
   
@@ -3992,6 +4172,186 @@
         <li class="md-nav__item">
   <a href="#cmake_1" class="md-nav__link">
     <span class="md-ellipsis">
+      CMake 快速入门：一个简单示例
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CMake 快速入门：一个简单示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      项目结构
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cmakeliststxt" class="md-nav__link">
+    <span class="md-ellipsis">
+      编写 CMakeLists.txt 文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      编写源代码
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      创建构建目录并生成构建文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      编译项目
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      运行可执行程序
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cmake_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      常用的 CMake 命令
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      更复杂的项目示例
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="更复杂的项目示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      项目场景
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      项目结构
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cmakeliststxt_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      编写 CMakeLists.txt 文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      编写源代码
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      构建和运行
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cmake_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      CMake 参数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CMake 参数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      指定生成版本
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      指定编译器
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cmake_4" class="md-nav__link">
+    <span class="md-ellipsis">
       CMake 如何打包并发布程序
     </span>
   </a>
@@ -4023,7 +4383,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       参考资料
     </span>
@@ -4051,12 +4411,332 @@
 
 
 <h1 id="cmake">CMake<a class="headerlink" href="#cmake" title="Permanent link">&para;</a></h1>
-<h2 id="cmake_1">CMake 如何打包并发布程序<a class="headerlink" href="#cmake_1" title="Permanent link">&para;</a></h2>
+<h2 id="cmake_1">CMake 快速入门：一个简单示例<a class="headerlink" href="#cmake_1" title="Permanent link">&para;</a></h2>
+<h3 id="_1">项目结构<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>.
+├── src/
+│   ├── main.cpp
+│   ├── greet.cpp
+│   └── greet.h
+└── CMakeLists.txt
+</code></pre></div></td></tr></table></div>
+<h3 id="cmakeliststxt">编写 <code>CMakeLists.txt</code> 文件<a class="headerlink" href="#cmakeliststxt" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c"># 指定项目所需的 CMake 最低版本</span>
+<span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.10</span><span class="p">)</span>
+
+<span class="c"># 定义项目名称</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">MyHelloProject</span><span class="w"> </span><span class="s">VERSION</span><span class="w"> </span><span class="s">1.0</span><span class="p">)</span>
+
+<span class="c"># 添加 C++ 可执行文件，它的源文件是 &#39;src/main.cpp&#39; 和 &#39;src/greet.cpp&#39;</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">hello</span><span class="w"> </span><span class="s">src/main.cpp</span><span class="w"> </span><span class="s">src/greet.cpp</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_2">编写源代码<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p><code>src/main.cpp</code>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;greet.h&quot;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">getGreeting</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p><code>src/greet.h</code>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#ifndef GREET_H</span>
+<span class="cp">#define GREET_H</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">getGreeting</span><span class="p">();</span>
+
+<span class="cp">#endif</span>
+</code></pre></div></td></tr></table></div>
+<p><code>stc/greet.cpp</code>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;greet.h&quot;</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">getGreeting</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Hello, CMake!&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_3">创建构建目录并生成构建文件<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>mkdir<span class="w"> </span>build
+<span class="nb">cd</span><span class="w"> </span>build
+</code></pre></div></td></tr></table></div>
+<p>在 <code>build</code> 目录下，运行 <code>cmake ..</code> （注意，<code>..</code> 表示父目录，即你的项目根目录，里面有 <code>CMakeLists.txt</code>）：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>cmake<span class="w"> </span>..
+</code></pre></div></td></tr></table></div>
+<p>运行这个命令后，CMake 会根据 <code>CMakeLists.txt</code> 的内容，在 <code>build</code> 目录中生成 <code>Makefile</code>（在 Linux 上）或其它相应的构建文件。</p>
+<h3 id="_4">编译项目<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>在 <code>build</code> 目录中，运行 <code>cmake --build .</code> 命令来编译项目：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>cmake<span class="w"> </span>--build<span class="w"> </span>.
+</code></pre></div></td></tr></table></div>
+<p>这个命令会调用底层的构建工具（比如 <code>make</code> 或 <code>ninja</code>）来编译你的代码。</p>
+<h3 id="_5">运行可执行程序<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./hello
+</code></pre></div></td></tr></table></div>
+<p>你会看到输出：<code>Hello, CMake!</code></p>
+<h3 id="cmake_2">常用的 CMake 命令<a class="headerlink" href="#cmake_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cmake_minimum_required</code></td>
+<td>指定项目所需的 CMake 最低版本，这是每个 <code>CMakeLists.txt</code> 文件的第一行。</td>
+</tr>
+<tr>
+<td><code>project</code></td>
+<td>定义项目名称，并可以指定版本、语言等。</td>
+</tr>
+<tr>
+<td><code>add_executable</code></td>
+<td>添加一个可执行文件目标。指定目标名称和所有源文件。</td>
+</tr>
+<tr>
+<td><code>add_library</code></td>
+<td>添加一个库目标。可以指定为 <code>STATIC</code>（静态库）或 <code>SHARED</code>（动态库）。</td>
+</tr>
+<tr>
+<td><code>target_link_libraries</code></td>
+<td>将一个目标（例如可执行文件）与所需的库链接起来。</td>
+</tr>
+<tr>
+<td><code>set</code></td>
+<td>设置一个变量。</td>
+</tr>
+<tr>
+<td><code>include_directories</code></td>
+<td>为编译过程添加头文件搜索路径。</td>
+</tr>
+<tr>
+<td><code>add_subdirectory</code></td>
+<td>包含子目录中的 <code>CMakeLists.txt</code> 文件。这是组织大型项目的重要方式。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_6">更复杂的项目示例<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="_7">项目场景<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>我们来创建一个简单的数学计算库 <code>math_lib</code> 和一个使用该库的可执行程序 <code>calculator</code>。</p>
+<ul>
+<li><strong><code>math_lib</code> 库</strong>：提供一个 <code>add</code> 函数。</li>
+<li><strong><code>calculator</code> 程序</strong>：调用 <code>math_lib</code> 中的 <code>add</code> 函数。</li>
+</ul>
+<p>我们将项目分解成两个子目录：<code>src</code> 和 <code>lib</code>。</p>
+<h3 id="_8">项目结构<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code>.
+├── CMakeLists.txt              # 根目录的 CMakeLists.txt
+├── src/                        # 存放可执行程序的源代码
+│   ├── CMakeLists.txt
+│   └── main.cpp
+└── lib/                        # 存放库的源代码
+    ├── CMakeLists.txt
+    ├── include/
+    │   └── math_functions.h
+    └── math_functions.cpp
+</code></pre></div></td></tr></table></div>
+<h3 id="cmakeliststxt_1">编写 <code>CMakeLists.txt</code> 文件<a class="headerlink" href="#cmakeliststxt_1" title="Permanent link">&para;</a></h3>
+<p>根目录的 <code>CMakeLists.txt</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c"># 根目录 CMakeLists.txt</span>
+<span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.10</span><span class="p">)</span>
+
+<span class="nb">project</span><span class="p">(</span><span class="s">CalculatorApp</span><span class="w"> </span><span class="s">VERSION</span><span class="w"> </span><span class="s">1.0</span><span class="p">)</span>
+
+<span class="c"># 添加 lib 子目录，CMake 会进入该目录并处理其 CMakeLists.txt</span>
+<span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">lib</span><span class="p">)</span>
+
+<span class="c"># 添加 src 子目录，CMake 会进入该目录并处理其 CMakeLists.txt</span>
+<span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">src</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p><code>lib/CMakeLists.txt</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c"># lib/CMakeLists.txt</span>
+
+<span class="c"># 添加一个静态库目标，名为 &#39;math_lib&#39;</span>
+<span class="c"># 它的源文件是 &#39;math_functions.cpp&#39;</span>
+<span class="nb">add_library</span><span class="p">(</span><span class="s">math_lib</span><span class="w"> </span><span class="s">STATIC</span><span class="w"> </span><span class="s">math_functions.cpp</span><span class="p">)</span>
+
+<span class="c"># 指定头文件的搜索路径</span>
+<span class="c"># 这里告诉 CMake，&#39;math_lib&#39; 的头文件在 &#39;include&#39; 目录下</span>
+<span class="nb">target_include_directories</span><span class="p">(</span><span class="s">math_lib</span><span class="w"> </span><span class="s">PUBLIC</span><span class="w"> </span><span class="s">include</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p><code>src/CMakeLists.txt</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c"># 添加一个可执行文件目标，名为 &#39;calculator&#39;</span>
+<span class="c"># 它的源文件是 &#39;main.cpp&#39;</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">calculator</span><span class="w"> </span><span class="s">main.cpp</span><span class="p">)</span>
+
+<span class="c"># 将 &#39;calculator&#39; 目标链接到 &#39;math_lib&#39;</span>
+<span class="c"># 这样 &#39;calculator&#39; 就可以使用 &#39;math_lib&#39; 中的函数了</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">calculator</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">math_lib</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_9">编写源代码<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p><code>lib/include/math_functions.h</code>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#ifndef MATH_FUNCTIONS_H</span>
+<span class="cp">#define MATH_FUNCTIONS_H</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+
+<span class="cp">#endif</span>
+</code></pre></div></td></tr></table></div>
+<p><code>lib/math_functions.cpp</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;math_functions.h&quot;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p><code>src/main.cpp</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;math_functions.h&quot;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;The sum of 5 and 7 is: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_10">构建和运行<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>mkdir<span class="w"> </span>build
+<span class="nb">cd</span><span class="w"> </span>build
+
+cmake<span class="w"> </span>..
+
+cmake<span class="w"> </span>--build<span class="w"> </span>.
+
+./src/calculator
+</code></pre></div></td></tr></table></div>
+<p>输出</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>The<span class="w"> </span>sum<span class="w"> </span>of<span class="w"> </span><span class="m">5</span><span class="w"> </span>and<span class="w"> </span><span class="m">7</span><span class="w"> </span>is:<span class="w"> </span><span class="m">12</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_11">总结<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>通过这个例子，我们展示了 CMake 中最常用的三个核心命令：</p>
+<ul>
+<li><strong><code>add_subdirectory()</code></strong>：将大型项目分解成更小的、可管理的单元。</li>
+<li><strong><code>add_library()</code> / <code>add_executable()</code></strong>：定义构建目标。</li>
+<li><strong><code>target_include_directories()</code> / <code>target_link_libraries()</code></strong>：管理目标的依赖关系（头文件和库）。</li>
+</ul>
+<p>这些命令构成了大多数 CMake 项目的基础，熟练掌握它们将大大简化你的项目管理工作。</p>
+<h2 id="cmake_3">CMake 参数<a class="headerlink" href="#cmake_3" title="Permanent link">&para;</a></h2>
+<h3 id="_12">指定生成版本<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>build
+
+<span class="c1"># 生成 Debug 版本的 Makefile</span>
+cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Debug
+</code></pre></div></td></tr></table></div>
+<p>这里的 <code>-D</code> 选项用来定义一个 CMake 变量。<code>CMAKE_BUILD_TYPE</code> 是一个内置变量，可以设置以下几个常见的值：</p>
+<ul>
+<li><code>Debug</code>：生成带调试信息的代码（等同于 <code>g++ -g</code>），通常不会开启代码优化，适合 GDB 调试。</li>
+<li><code>Release</code>：生成优化过的代码（等同于 <code>g++ -O3</code>），不包含调试信息，适合最终发布给用户的版本。</li>
+<li><code>RelWithDebInfo</code>：生成优化过的代码，但保留调试信息，用于需要调试 Release 版本性能问题。</li>
+<li><code>MinSizeRel</code>：生成为减少代码体积而优化的代码。</li>
+</ul>
+<h3 id="_13">指定编译器<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>使用 <code>-DCMAKE_CXX_COMPILER</code> 变量来指定 C++ 编译器</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 使用 g++</span>
+cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_CXX_COMPILER<span class="o">=</span>g++
+
+<span class="c1"># 使用 clang++</span>
+cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_CXX_COMPILER<span class="o">=</span>clang++
+</code></pre></div></td></tr></table></div>
+<h2 id="cmake_4">CMake 如何打包并发布程序<a class="headerlink" href="#cmake_4" title="Permanent link">&para;</a></h2>
 <h3 id="windows">Windows<a class="headerlink" href="#windows" title="Permanent link">&para;</a></h3>
 <h3 id="linux">Linux<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h3>
-<h2 id="_1">参考资料<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p><a href="https://www.bookstack.cn/books/CMake-Cookbook">CMake菜谱（CMake Cookbook中文版）</a></p>
-<p><a href="https://cmake.org/cmake/help/latest/">CMake 官方文档</a></p>
+<h2 id="_14">参考资料<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<p>[1] <a href="https://www.bookstack.cn/books/CMake-Cookbook">CMake菜谱（CMake Cookbook中文版）</a></p>
+<p>[2] <a href="https://cmake.org/cmake/help/latest/">CMake 官方文档</a></p>
 
 
 
