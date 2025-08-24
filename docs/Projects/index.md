@@ -90,6 +90,44 @@
 
 
 
+## 可选项目
+
+[1] [研究生为了摸鱼，做了个导师识别系统？](https://www.bilibili.com/video/BV1qEtpz2EFP?spm_id_from=333.1245.0.0)
+
+[2] [【开源】你独自一个人做了个什么东西？AI驱动的Galgame？](https://www.bilibili.com/video/BV1v48tzYEfi?spm_id_from=333.1245.0.0)
+
+[3] [【C/C++项目】跳跃小游戏！思路讲解+代码实现，C语言游戏功能案例，一个视频学会如何做出角色跳跃！](https://www.bilibili.com/video/BV1nje8zXEMz?spm_id_from=333.1245.0.0)
+
+[4] [【C语言/C++】植物大战僵尸！零基础如何做独立游戏？用C语言做出第一个属于自己的游戏](https://www.bilibili.com/video/BV1BM8JzCErF?spm_id_from=333.1245.0.0)
+
+[5] [【C语言/C++】万能抢票器！演唱会，火车票，秒抢，试试就知道有多厉害！！！！](https://www.bilibili.com/video/BV1GURqYMEeW?spm_id_from=333.1245.0.0)
+
+[6] [【QT项目实战】qt桌面小宠物！想要拥有一个自己开发的桌面小宠物吗？程序员手把手教你怎么做！](https://www.bilibili.com/video/BV1g24y1N7zJ?spm_id_from=333.1245.0.0)
+
+[7] [【C语言/C++】自制桌面宠物！软萌可撩，简单有趣又好玩，让桌面瞬间重获新生！](https://www.bilibili.com/video/BV1LUTjzgEjP?spm_id_from=333.1245.0.0)
+
+[8] [一人团队开发了个游戏](https://www.bilibili.com/video/BV1fa7HzQEjZ?spm_id_from=333.1245.0.0)
+
+[9] [纯Qt5复刻QQ聊天项目分享（覆盖数据库，TCP网络编程，文件IO）](https://www.bilibili.com/video/BV1sut4zuECU?spm_id_from=333.1245.0.0)
+
+[10] [C++ 全栈聊天项目(40) 多线程文件传输](https://www.bilibili.com/video/BV13xXWYZE7C?spm_id_from=333.1245.0.0)
+
+[11] [c++手撕transformer 1](https://www.bilibili.com/video/BV1as7azMEW1?spm_id_from=333.1245.0.0)
+
+[12] [Google TL系统设计 - 支付系统](https://www.bilibili.com/video/BV1i43GzkEYW?spm_id_from=333.1245.0.0)
+
+[13] [C++ 全栈聊天项目(54) 断点续传实现细节](https://www.bilibili.com/video/BV1bTbAzjEEY?spm_id_from=333.1245.0.0)
+
+[14] 
+
+[15] 
+
+
+
+
+
+
+
 ## 参考资料
 
 [1] 小彭老师推荐：[参考资料与项目推荐](https://parallel101.github.io/cppguidebook/recommend/)
