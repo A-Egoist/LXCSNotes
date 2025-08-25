@@ -252,6 +252,171 @@ T* release() {
 
 
 
+
+
+## 测试代码
+
+`test_MyUniquePtr.cpp`
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+#include "MyUniquePtr002.h"
+
+struct MyObject {
+    int value;
+    static int creation_count;
+    static int deletion_count;
+
+    MyObject(int val) : value(val) {
+        creation_count++;
+        std::cout << "MyObject(" << value << ") created. Total: " << creation_count << std::endl;
+    }
+
+    ~MyObject() {
+        deletion_count++;
+        std::cout << "MyObject(" << value << ") destroyed. Total: " << deletion_count << std::endl;
+    }
+};
+int MyObject::creation_count = 0;
+int MyObject::deletion_count = 0;
+
+void print_status(const unique_ptr<MyObject>& ptr, const std::string& name) {
+    std::cout << "--- Status of " << name << " ---" << std::endl;
+    std::cout << name << " is " << (ptr ? "not null" : "null") << std::endl;
+    if (ptr) {
+        std::cout << "Value: " << (*ptr).value << std::endl;
+        std::cout << "Pointer address: " << ptr.get() << std::endl;
+    }
+    std::cout << "----------------------" << std::endl << std::endl;
+}
+
+int main() {
+    std::cout << "--- Test unique_ptr ---" << std::endl << std::endl;
+
+    // 1. 基本构造和析构
+    std::cout << "Step 1: Basic construction and destruction." << std::endl;
+    {
+        unique_ptr<MyObject> p1(new MyObject(10));
+        print_status(p1, "p1");
+    } // p1 离开作用域，MyObject(10) 被自动销毁
+    
+    std::cout << "MyObject::deletion_count: " << MyObject::deletion_count << std::endl << std::endl;
+
+    // 2. 移动构造
+    std::cout << "Step 2: Move construction." << std::endl;
+    unique_ptr<MyObject> p2(new MyObject(20));
+    unique_ptr<MyObject> p3 = std::move(p2);
+    print_status(p2, "p2");
+    print_status(p3, "p3");
+    
+    // 检查 p2 是否为空，p3 是否接管所有权
+    if (!p2 && p3 && p3->value == 20) {
+        std::cout << "Move construction successful." << std::endl;
+    } else {
+        std::cout << "Move construction failed." << std::endl;
+    }
+    std::cout << std::endl;
+
+    // 3. 移动赋值
+    std::cout << "Step 3: Move assignment." << std::endl;
+    unique_ptr<MyObject> p4(new MyObject(30));
+    unique_ptr<MyObject> p5(new MyObject(40));
+    print_status(p4, "p4 before move");
+    print_status(p5, "p5 before move");
+    p4 = std::move(p5); // MyObject(30) 应该被销毁
+    print_status(p4, "p4 after move");
+    print_status(p5, "p5 after move");
+    
+    if (p4 && !p5 && p4->value == 40) {
+        std::cout << "Move assignment successful." << std::endl;
+    } else {
+        std::cout << "Move assignment failed." << std::endl;
+    }
+    std::cout << std::endl;
+
+    // 4. release()
+    std::cout << "Step 4: release() method." << std::endl;
+    unique_ptr<MyObject> p6(new MyObject(50));
+    MyObject* raw_ptr = p6.release();
+    print_status(p6, "p6 after release");
+    std::cout << "Raw pointer address: " << raw_ptr << std::endl;
+    if (!p6 && raw_ptr->value == 50) {
+        std::cout << "release() successful." << std::endl;
+    } else {
+        std::cout << "release() failed." << std::endl;
+    }
+    delete raw_ptr; // 必须手动释放
+    std::cout << std::endl;
+
+    // 5. reset()
+    std::cout << "Step 5: reset() method." << std::endl;
+    unique_ptr<MyObject> p7(new MyObject(60));
+    print_status(p7, "p7 before reset");
+    p7.reset(new MyObject(70)); // MyObject(60) 应该被销毁
+    print_status(p7, "p7 after reset");
+    p7.reset(); // MyObject(70) 应该被销毁
+    print_status(p7, "p7 after final reset");
+    
+    if (!p7) {
+        std::cout << "reset() successful." << std::endl;
+    } else {
+        std::cout << "reset() failed." << std::endl;
+    }
+    std::cout << std::endl;
+
+    // 6. swap()
+    std::cout << "Step 6: swap() method." << std::endl;
+    unique_ptr<MyObject> p8(new MyObject(80));
+    unique_ptr<MyObject> p9(new MyObject(90));
+    std::cout << "Before swap:" << std::endl;
+    print_status(p8, "p8");
+    print_status(p9, "p9");
+    // p8.swap(p9);
+    swap(p8, p9);
+    std::cout << "After swap:" << std::endl;
+    print_status(p8, "p8");
+    print_status(p9, "p9");
+    
+    if (p8->value == 90 && p9->value == 80) {
+        std::cout << "swap() successful." << std::endl;
+    } else {
+        std::cout << "swap() failed." << std::endl;
+    }
+    std::cout << std::endl;
+
+    // 7. 运算符重载 (==, !=, bool)
+    std::cout << "Step 7: Operator overloads." << std::endl;
+    unique_ptr<MyObject> p10(new MyObject(100));
+    unique_ptr<MyObject> p11(p10.release());
+    unique_ptr<MyObject> p12; // 默认构造为 nullptr
+    
+    std::cout << "p10 == p11: " << std::boolalpha << (p10 == p11) << std::endl; // false
+    std::cout << "p10 != p11: " << std::boolalpha << (p10 != p11) << std::endl; // true
+    std::cout << "p10 == nullptr: " << std::boolalpha << (p10 == nullptr) << std::endl; // true
+    std::cout << "p11 != nullptr: " << std::boolalpha << (p11 != nullptr) << std::endl; // true
+    std::cout << "p12 == nullptr: " << std::boolalpha << (p12 == nullptr) << std::endl; // true
+    std::cout << "if (p11) is " << std::boolalpha << (bool)p11 << std::endl; // true
+    std::cout << "if (p12) is " << std::boolalpha << (bool)p12 << std::endl; // false
+
+    // 8. 验证禁用拷贝
+    std::cout << "Step 8: Verify copy semantics are deleted." << std::endl;
+    // unique_ptr<MyObject> p_copy = p11; // 这一行会产生编译错误，如果你的实现正确
+    // unique_ptr<MyObject> p_assign;
+    // p_assign = p11; // 这一行也会产生编译错误
+    
+    std::cout << "Total created: " << MyObject::creation_count << std::endl;
+    std::cout << "Total destroyed: " << MyObject::deletion_count << std::endl;
+
+    return 0;
+}
+```
+
+
+
 ## 参考资料
 
 [1] [字节C++三面：手撕 unique_ptr，源码分享~【码农Mark】](https://www.bilibili.com/video/BV11cG5zwEBU)
+
+[2] [【C++11】自己动手实现unique_ptr智能指针，都有哪些难点？](https://www.bilibili.com/video/BV1Hw411y7g5)

@@ -30,6 +30,20 @@ mkdocs gh-deploy
 
 
 
+## MarkDown 技巧
+
+### 高亮
+
+1.   使用 `==高亮内容==` 高亮，效果：==高亮内容==。但遗憾的是，只有部分软件支持。
+2.   使用 HTML5标签 `<mark>高亮内容</mark>` 高亮，效果：<mark>高亮内容</mark>。此外，可以添加参数 `style="background-color: #FFF000"` 来指定高亮的颜色，效果：<mark style="background-color: #FFF000">高亮内容</mark>。
+3.   使用 `<div>` 或 `<span>` 标签来指定背景高亮的颜色，比如 `<div style="background-color: #FFFF00">...</div>` 或 `<span style="background-color: #FFFF00">...</span>`。
+
+### 换行
+
+使用 `</br>` 标签换行。
+
+
+
 ## 目标规划
 
 ### 就业 or 读博 or 考公 or 事业编
