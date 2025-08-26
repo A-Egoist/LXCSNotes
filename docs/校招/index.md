@@ -53,7 +53,9 @@
     -   [ ] Redis
 *   项目
     *   建议：团队后端项目 + 个人技术开发项目
-    *   
+*   加分项
+    *   OpenGL
+
 
 >   来源：[能找到工作的C++简历，到底长什么样？学了什么？](https://www.bilibili.com/video/BV1WQNzzUEv6?spm_id_from=333.1245.0.0)
 

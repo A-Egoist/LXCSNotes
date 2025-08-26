@@ -9,6 +9,15 @@
 
 
 
+shared_ptr 难度等级：
+
+1.   单线程 shared_ptr
+2.   互斥锁 shared_ptr
+3.   默认内存序原子变量 shared_ptr
+4.   考虑内存序优化原子变量 shared_ptr
+
+
+
 ## 接口需求
 
 成员变量
