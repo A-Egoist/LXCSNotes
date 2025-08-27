@@ -88,6 +88,10 @@
 
 
 
+## 七、基于 Boost 库的搜索引擎
+
+[【C++综合项目】——基于Boost库的搜索引擎（手把手讲解，小白一看就会！！）](https://xas-sunny.blog.csdn.net/article/details/140881214)
+
 
 
 ## 可选项目

@@ -781,6 +781,82 @@ class 还可用于**定义模板参数**，但是关键字 struct 不能同于�
 
 
 
+### 成员访问控制
+
+### 继承方式
+
+`private`、`protected` 和 `public` 这三个关键字在继承中扮演着双重角色：
+
+1.  **成员访问控制**：定义类成员对**类外部**的可见性。
+2.  **继承方式**：定义基类的成员在派生类中的**访问权限**。
+
+
+
+`public` 继承
+
+`protected` 继承
+
+`private` 继承
+
+```cpp
+class Base {
+public:
+    int public_mem;
+protected:
+    int protected_mem;
+private:
+    int private_mem;
+};
+
+// public 继承
+class PublicDerived : public Base {
+public:
+    void test() {
+        public_mem = 1;      // OK, public_mem is public
+        protected_mem = 1;   // OK, protected_mem is protected
+        // private_mem = 1;  // ERROR, private_mem is private
+    }
+};
+
+void testPublic() {
+    PublicDerived d;
+    d.public_mem = 1;      // OK, public_mem is public
+    // d.protected_mem = 1; // ERROR, protected_mem is protected
+}
+
+// protected 继承
+class ProtectedDerived : protected Base {
+public:
+    void test() {
+        public_mem = 1;      // OK, public_mem becomes protected
+        protected_mem = 1;   // OK, protected_mem remains protected
+    }
+};
+
+void testProtected() {
+    ProtectedDerived d;
+    // d.public_mem = 1;    // ERROR, public_mem becomes protected
+}
+
+// private 继承
+class PrivateDerived : private Base {
+public:
+    void test() {
+        public_mem = 1;      // OK, public_mem becomes private
+        protected_mem = 1;   // OK, protected_mem becomes private
+    }
+};
+
+void testPrivate() {
+    PrivateDerived d;
+    // d.public_mem = 1;    // ERROR, public_mem becomes private
+}
+```
+
+
+
+
+
 #### 内联函数的限制
 
 *   函数体不能太大
@@ -801,6 +877,114 @@ class 还可用于**定义模板参数**，但是关键字 struct 不能同于�
 ### `extern`
 
 
+
+### `friend`
+
+#### 1. `friend` 关键字的作用
+
+-   在 C++ 中，**类的成员有访问权限控制**：
+    -   `public`：对所有代码可见
+    -   `protected`：仅对子类和友元可见
+    -   `private`：仅类本身成员可见
+-   有时候我们希望**某个函数或类能够直接访问另一个类的私有成员**，而不必通过公开接口。
+     这时候就可以用 **`friend`** 关键字来声明**友元关系**。
+
+**简单理解**：
+ 👉 `friend` 让一个外部函数或者类 **跳过访问限制**，直接访问你的类的私有/保护成员。
+
+#### 2. 友元函数（Friend Function）
+
+-   **定义**：在类中用 `friend` 声明的函数，就成为该类的“友元函数”。
+-   **作用**：友元函数可以访问该类的 `private` 和 `protected` 成员。
+
+示例：
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Box {
+private:
+    int length;
+
+public:
+    Box(int l) : length(l) {}
+
+    // 声明友元函数
+    friend void printLength(Box b);
+};
+
+// 友元函数的实现（不是类的成员函数）
+void printLength(Box b) {
+    cout << "Box length: " << b.length << endl; // 直接访问私有成员
+}
+
+int main() {
+    Box b(10);
+    printLength(b); // 输出：Box length: 10
+    return 0;
+}
+```
+
+👉 `printLength` 不是 `Box` 的成员函数，但由于被声明为 `friend`，所以可以访问 `Box::length`。
+
+#### 3. 友元类（Friend Class）
+
+-   **定义**：如果一个类被声明为另一个类的友元类，那么该类的所有成员函数都可以访问对方类的 `private` 和 `protected` 成员。
+-   **作用**：友元类通常用在**紧密关联**的类之间，例如容器类与迭代器类。
+
+示例：
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Engine; // 提前声明
+
+class Car {
+private:
+    int horsepower;
+
+public:
+    Car(int hp) : horsepower(hp) {}
+
+    // 声明 Engine 是 Car 的友元类
+    friend class Engine;
+};
+
+class Engine {
+public:
+    void showCarPower(Car& c) {
+        // Engine 类可以直接访问 Car 的私有成员
+        cout << "Car horsepower: " << c.horsepower << endl;
+    }
+};
+
+int main() {
+    Car car(300);
+    Engine engine;
+    engine.showCarPower(car); // 输出：Car horsepower: 300
+    return 0;
+}
+```
+
+#### 4. 友元的特点与注意事项
+
+1.  **友元关系是单向的，不对称**
+    -   如果 `A` 是 `B` 的友元，`B` 不一定是 `A` 的友元。
+2.  **友元关系不会被继承**
+    -   父类的友元不自动成为子类的友元。
+3.  **友元破坏了封装性**
+    -   使用时要谨慎，通常只在需要高效访问或类强耦合的场景下使用。
+
+#### 总结：
+
+-   `friend` 关键字允许指定的函数或类访问当前类的私有和保护成员。
+-   **友元函数**：外部函数通过 `friend` 声明获得访问权限。
+-   **友元类**：另一个类整体获得访问权限。
+-   友元声明可以放在 `public`, `protected`, 或 `private` 区域，它们的功能完全一样，没有任何区别。因为<mark>友元关系是一种**单向的、非对称的**关系</mark>，它独立于类的访问控制机制。
+    -   **访问控制（`public`, `protected`, `private`）** 是用来控制**外部代码**如何访问类的成员的。
+    -   **友元（`friend`）** 是用来授予**特定外部代码**访问私有成员的特殊权限。
 
 
 
