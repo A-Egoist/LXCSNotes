@@ -7091,10 +7091,53 @@ atomic 默认使用的是 memory_order_seq_cst，也就是最严格的内存序�
 <h3 id="_35">如何在一个派生类中定义一个父类的指针？<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
 <h3 id="_36">如何在类的内部返回一个指向自己的智能指针？<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h3>
 <h3 id="_37">智能指针的线程安全性<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h3>
+<p><code>shared_ptr</code> 是线程安全的吗？</p>
+<p>首先，<code>shared_ptr</code> 是用于解决所有权(ownership)的，其本身并不负责线程安全。</p>
 <ul>
-<li><code>shared_ptr</code> 的引用计数是线程安全的</li>
-<li>但对象本身的访问需要额外的同步机制</li>
+<li><code>shared_ptr</code> 的引用计数是线程安全的。具体来说，对同一个 <code>shared_ptr</code> 对象的多个线程同时进行引用计数增减是安全的。因为 <code>shared_ptr</code> 内部的引用计数器和弱引用计数器的增减操作采用了原子操作。</li>
+<li>
+<p>但对象本身的访问需要额外的同步机制。</p>
+<ul>
+<li>
+<p><strong>对同一个 <code>shared_ptr</code> 对象的多个线程同时进行读写是不安全的。</strong> 例如，一个线程在对一个 <code>shared_ptr</code> 对象赋值，而另一个线程同时在读取它，这会导致数据竞争（Data Race），行为是未定义的。</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ptr1</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
+<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ptr2</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">(</span><span class="mi">20</span><span class="p">));</span>
+
+<span class="c1">// 线程A</span>
+<span class="n">ptr1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ptr2</span><span class="p">;</span><span class="w"> </span><span class="c1">// 写操作</span>
+
+<span class="c1">// 线程B</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">ptr1</span><span class="p">;</span><span class="w"> </span><span class="c1">// 读操作，可能在线程A赋值前后发生，导致不确定性</span>
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p><strong>通过多个 <code>shared_ptr</code> 访问同一个原始数据，对数据的操作不是线程安全的。</strong> <code>shared_ptr</code> 只是一个智能指针，它管理的是对象的生命周期。它不提供对<strong>所指向的数据</strong>的线程安全保证。如果你通过多个 <code>shared_ptr</code> 访问同一个数据，并且至少有一个线程要修改这个数据，你需要自己提供同步机制（比如使用互斥锁 <code>std::mutex</code>）。</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">auto</span><span class="w"> </span><span class="n">data_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+
+<span class="c1">// 线程A</span>
+<span class="o">*</span><span class="n">data_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w"> </span><span class="c1">// 写操作</span>
+
+<span class="c1">// 线程B</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">data_ptr</span><span class="p">;</span><span class="w"> </span><span class="c1">// 读操作，没有同步，导致不确定性</span>
+</code></pre></div></td></tr></table></div>
+</li>
 </ul>
+</li>
+</ul>
+<p>C++ 20 中新增了 <code>std::atomic&lt;std::shared_ptr&lt;T&gt;&gt;</code> 和 <code>std::atomic&lt;std::weak_ptr&lt;T&gt;&gt;</code> 来解决线程安全的问题。</p>
 <h2 id="c_3">C++ 关键字<a class="headerlink" href="#c_3" title="Permanent link">&para;</a></h2>
 <h3 id="const-vs-constexpr"><code>const</code> v.s. <code>constexpr</code><a class="headerlink" href="#const-vs-constexpr" title="Permanent link">&para;</a></h3>
 <h3 id="inline"><code>inline</code><a class="headerlink" href="#inline" title="Permanent link">&para;</a></h3>
