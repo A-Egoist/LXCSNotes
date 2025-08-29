@@ -769,8 +769,40 @@ C++中 串行、并行、并发、同步、异步的区别
 
 ### 智能指针的线程安全性
 
-*   `shared_ptr` 的引用计数是线程安全的
-*   但对象本身的访问需要额外的同步机制
+`shared_ptr` 是线程安全的吗？
+
+首先，`shared_ptr` 是用于解决所有权(ownership)的，其本身并不负责线程安全。
+
+*   `shared_ptr` 的引用计数是线程安全的。具体来说，对同一个 `shared_ptr` 对象的多个线程同时进行引用计数增减是安全的。因为 `shared_ptr` 内部的引用计数器和弱引用计数器的增减操作采用了原子操作。
+*   但对象本身的访问需要额外的同步机制。
+
+    *   **对同一个 `shared_ptr` 对象的多个线程同时进行读写是不安全的。** 例如，一个线程在对一个 `shared_ptr` 对象赋值，而另一个线程同时在读取它，这会导致数据竞争（Data Race），行为是未定义的。
+
+        ```cpp
+        std::shared_ptr<int> ptr1(new int(10));
+        std::shared_ptr<int> ptr2(new int(20));
+        
+        // 线程A
+        ptr1 = ptr2; // 写操作
+        
+        // 线程B
+        auto val = *ptr1; // 读操作，可能在线程A赋值前后发生，导致不确定性
+        ```
+
+    *   **通过多个 `shared_ptr` 访问同一个原始数据，对数据的操作不是线程安全的。** `shared_ptr` 只是一个智能指针，它管理的是对象的生命周期。它不提供对**所指向的数据**的线程安全保证。如果你通过多个 `shared_ptr` 访问同一个数据，并且至少有一个线程要修改这个数据，你需要自己提供同步机制（比如使用互斥锁 `std::mutex`）。
+
+        ```cpp
+        auto data_ptr = std::make_shared<int>(10);
+        
+        // 线程A
+        *data_ptr = 20; // 写操作
+        
+        // 线程B
+        int val = *data_ptr; // 读操作，没有同步，导致不确定性
+        ```
+
+
+C++ 20 中新增了 `std::atomic<std::shared_ptr<T>>` 和 `std::atomic<std::weak_ptr<T>>` 来解决线程安全的问题。
 
 
 
