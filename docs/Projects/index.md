@@ -66,17 +66,23 @@
 
 ## 三、自己动手实现 unique_ptr
 
+详见：[自己动手实现unique_ptr智能指针](./自己动手实现unique_ptr智能指针.md)
+
 ### 项目说明
 
 
 
 ## 四、自己动手实现 shared_ptr
 
+详见：[自己动手实现shared_ptr智能指针](./自己动手实现shared_ptr智能指针.md)
+
 ### 项目说明
 
 
 
 ## 五、自己动手实现 weak_ptr
+
+详见：[自己动手实现weak_ptr智能指针](./自己动手实现weak_ptr智能指针.md)
 
 ### 项目说明
 
@@ -91,6 +97,20 @@
 ## 七、基于 Boost 库的搜索引擎
 
 [【C++综合项目】——基于Boost库的搜索引擎（手把手讲解，小白一看就会！！）](https://xas-sunny.blog.csdn.net/article/details/140881214)
+
+
+
+## 八、手撕线程池
+
+[华为海思C++一面：手撕线程池~源码分享](https://www.bilibili.com/video/BV1Rbwhe3Euh)
+
+
+
+
+
+## 九、手撕 LRU Cache
+
+[字节、米哈游、百度面经：手撕LRUCache](https://www.bilibili.com/video/BV1Hx4y1s7He)
 
 
 

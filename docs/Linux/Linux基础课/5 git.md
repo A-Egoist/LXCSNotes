@@ -183,6 +183,8 @@ graph TD
 
      将 `id_ed25519.pub` 复制到 GitHub $\to$ Settings $\to$ SSH and GPG keys $\to$ New SSH key。
 
+
+
 ## 参考资料
 
 * [十分钟学会正确的github工作流，和开源作者们使用同一套流程](https://www.bilibili.com/video/BV19e4y1q7JJ/)
@@ -191,3 +193,4 @@ graph TD
 
 * [一文弄懂 Gitflow、Github flow、Gitlab flow 的工作流](https://cloud.tencent.com/developer/article/1646937)
 * [PyCharm中使用Git/GitHub详细步骤（图文详解）](https://blog.csdn.net/Q0717168/article/details/108719275)
+* [Git：图解 merge 和 rebase 的区别](https://zhuanlan.zhihu.com/p/686538265)
