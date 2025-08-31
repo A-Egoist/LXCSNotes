@@ -459,6 +459,39 @@ y总：[AcWing 785. 快速排序](https://www.acwing.com/activity/content/code/c
 
 
 
+[215. 数组中的第K个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/)
+
+基于快排的思路，注意 return 的是 `q[l]` 而不是 `q[k]` 因为 k 是一个变化的值，表示查找的是当前区间中第 k 大的值，在不同区间中，这个值会变化。
+
+```cpp
+#include <iostream>
+
+int quick_sort(int q[], int l, int r, int k) {
+    if (l >= r) return q[l];
+
+    int i = l - 1, j = r + 1, x = q[l + r >> 1];
+    while (i < j) {
+        do i ++; while (i <= r && q[i] > x);
+        do j --; while (j >= l && q[j] < x);
+        if (i < j) std::swap(q[i], q[j]);
+    }
+    if (j - l + 1 >= k) return quick_sort(q, l, j, k);
+    else return quick_sort(q, j + 1, r, k - (j - l + 1));
+}
+
+int main() {
+    int n, k;
+    std::cin >> n >> k;
+    int a[10];
+    for (int i = 0; i < n; ++ i) std::cin >> a[i];
+    std::cout << quick_sort(a, 0, n - 1, k) << std::endl;
+
+    return 0;
+}
+```
+
+
+
 
 
 ### 双指针
@@ -1071,6 +1104,37 @@ public:
 
 
 
+### 树
+
+[236. 二叉树的最近公共祖先](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/)
+
+```cpp
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if (root == nullptr) return nullptr;  // 当前子树为空, 返回 nullptr
+        if (root == p || root == q) return root;  // 如果 p 或 q 有一个为当前子树的根，则返回 root
+        TreeNode* left = lowestCommonAncestor(root->left, p, q);  // 从左子树中找 p 和 q 的最近公共祖先
+        TreeNode* right = lowestCommonAncestor(root->right, p, q);  // 从右子树中找 p 和 q 的最近公共祖先
+        if (left != nullptr && right != nullptr) return root;  // 如果左子树和右子树同时找到了(第二个 if 的返回), 则说明 p 和 q 分别在当前子树的左子树和右子树, 则其最近公共祖先为当前子树
+        if (left != nullptr) return left;  // 如果只在左子树找到, 说明 p 和 q 都在左子树, 则其最近公共祖先为 left
+        if (right != nullptr) return right;  // 如果只在右子树找到, 说明 p 和 q 都在右子树, 则其最近公共祖先为 right
+        return nullptr;  //如果都没有找到, 则表明当前子树并不存在 p 或者 q, 返回 nullptr
+    }
+};
+```
+
+
+
 
 
 ## 搜索与图论
@@ -1239,6 +1303,39 @@ public:
 
 
 ## 动态规划
+
+[152. 乘积最大子数组](https://leetcode.cn/problems/maximum-product-subarray/)
+
+>   题目分析：因为要求连续的最大乘积，当 nums[i] 均大于等于 0 时，可以简单的想到用 dp[i] 表示以第 i 个元素结尾的连续子数组的乘积最大，所以 dp[i] = max(dp[i - 1] * nums[i], nums[i])，但是当 nums[i] 存在负数时就要想到，如果一个连续的子数组中存在偶数个负数，其乘积也为正数，所以可以考虑用两个 dp 数组来存状态。
+>
+>   所以用 `dp_max[i]` 表示以第 `i` 个元素结尾的连续子数组的乘积最大，`dp_min[i]` 表示以第 `i` 个元素结尾的连续子数组的乘积最小(负数)，则状态转移方程可以表示为 `dp_max[i] = max(dp_max[i - 1] * nums[i], dp_min[i - 1] * nums[i], nums[i])`; `dp_min[i] = min(dp_max[i - 1] * nums[i], dp_min[i - 1] * nums[i], nums[i])`; 
+>
+>   状态表示：dp_max[]
+>
+>   状态转移方程：
+
+```cpp
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int nums_size = nums.size();
+        vector<int> dp_max(nums_size, 0);
+        vector<int> dp_min(nums_size, 0);
+        dp_max[0] = nums[0];
+        dp_min[0] = nums[0];
+        int ans = nums[0];
+        for (int i = 1; i < nums_size; ++ i) {
+            dp_max[i] = max(max(dp_max[i - 1] * nums[i], dp_min[i - 1] * nums[i]), nums[i]);
+            dp_min[i] = min(min(dp_max[i - 1] * nums[i], dp_min[i - 1] * nums[i]), nums[i]);
+            if (dp_max[i] > ans)
+                ans = dp_max[i];
+        }
+        return ans;
+    }
+};
+```
+
+
 
 [322. 零钱兑换](https://leetcode.cn/problems/coin-change/)
 
