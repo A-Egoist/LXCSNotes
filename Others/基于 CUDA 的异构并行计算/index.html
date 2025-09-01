@@ -3194,6 +3194,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../%E6%A0%A1%E6%8B%9B/%E7%9C%9F%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    笔试选择题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../%E6%A0%A1%E6%8B%9B/%E7%9C%9F%E9%A2%98/B%E7%AB%99/" class="md-nav__link">
         
   
@@ -3432,7 +3455,7 @@
   
   
   <span class="md-ellipsis">
-    小米-南京
+    小米-南京-软件开发工程师-C/C++方向
     
   </span>
   
@@ -4299,7 +4322,7 @@
 <h1 id="cuda">基于 CUDA 的异构并行计算<a class="headerlink" href="#cuda" title="Permanent link">&para;</a></h1>
 <p>CUDA (Compute Unified Device Architecture，统一计算设备架构) 是 NVIDIA 提出的并行计算架构，结合了 CPU 和 GPU 的优点，主要用来处理密集型及并行计算。CPU 和 GPU 是两个独立的处理器，通过单个计算节点中的 PCI-Express 总线相连，GPU 用来提高计算密集型应用程序中并行程序段的执行速度，CPU 则负责管理设备端的资源。</p>
 <h2 id="1">1 并行计算<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<p>在 <a href="#1.4 如何编写并行程序">1.4</a> 中介绍了应用程序的两种并行性：任务并行和数据并行，CUDA 编程非常适合解决==数据并行==的问题。</p>
+<p>在 1.4中介绍了应用程序的两种并行性：任务并行和数据并行，CUDA 编程非常适合解决==数据并行==的问题。</p>
 <p>数据并行程序设计的第一步就是把数据依据线程划分：</p>
 <ul>
 <li>块划分：每个线程作用于一部分数据，通常这些数据具有相同的大小。</li>
@@ -4307,7 +4330,7 @@
 </ul>
 <p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062343926.png" style="zoom:80%;" /></p>
 <h2 id="2">2 异构计算<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p>异构计算，首先必须了解什么是异构，不同的计算机架构就是异构，在 <a href="#2.3 并行硬件">2.3</a> 中介绍计算机架构，就是为了引出异构的概念，按照指令集划分或者按照内存结构划分。</p>
+<p>异构计算，首先必须了解什么是异构，不同的计算机架构就是异构，在 2.3 中介绍计算机架构，就是为了引出异构的概念，按照指令集划分或者按照内存结构划分。</p>
 <p>一个典型的异构架构：</p>
 <p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2024/202410062343234.png" style="zoom: 67%;" /></p>
 <ul>
