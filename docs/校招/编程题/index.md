@@ -459,6 +459,8 @@ y总：[AcWing 785. 快速排序](https://www.acwing.com/activity/content/code/c
 
 
 
+#### 第 K 大元素
+
 [215. 数组中的第K个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/)
 
 基于快排的思路，注意 return 的是 `q[l]` 而不是 `q[k]` 因为 k 是一个变化的值，表示查找的是当前区间中第 k 大的值，在不同区间中，这个值会变化。
@@ -489,6 +491,45 @@ int main() {
     return 0;
 }
 ```
+
+
+
+
+
+#### 冒泡排序
+
+```cpp
+#include <iostream>
+#include <vector>
+
+void bubble_sort(std::vector<int>& arr) {
+    for (int i = 0; i < arr.size() - 1; ++ i) {
+        bool swapped = true;
+        for (int j = 1; j < arr.size() - i; ++ j) {
+            if (arr[j - 1] > arr[j]) {
+                std::swap(arr[j - 1], arr[j]);
+                swapped = false;
+            }
+        }
+        if (swapped) break;  // 提前结束
+    }
+}
+
+int main() {
+    std::vector<int> arr = {4, 2, 6, 1, 6, 4, 6, 0};
+    for (int i = 0; i < arr.size(); ++ i) std::cout << arr[i] << ' ';
+    std::cout << '\n';
+
+    bubble_sort(arr);
+
+    for (int i = 0; i < arr.size(); ++ i) std::cout << arr[i] << ' ';
+    std::cout << '\n';
+
+    return 0;
+}
+```
+
+
 
 
 
@@ -1297,6 +1338,10 @@ public:
     }
 };
 ```
+
+
+
+### 最短路
 
 
 
