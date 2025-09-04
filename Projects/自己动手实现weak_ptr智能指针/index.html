@@ -1975,12 +1975,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E5%AE%9A%E4%BD%8D%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2/" class="md-nav__link">
+      <a href="../%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    定位内存泄露
+    内存泄露
     
   </span>
   
@@ -4753,10 +4753,10 @@
 <p>问题：当两个对象互相持有对方的 shared_ptr 时，引用计数永远不会归零。</p>
 <p>如下代码所示，有两个类 <code>A</code> 和 <code>B</code>，创建两个实例并让他们相互引用，当 <code>a</code> 和 <code>b</code> 离开作用域时，它们的引用计数会减 1，但不会变为 0：</p>
 <ul>
-<li><code>a</code> 离开作用域，<code>a</code> 的引用计数从 2 变为 1，因为 <code>b-&gt;a_ptr</code> 仍然指向它；</li>
-<li><code>b</code> 离开作用域，<code>b</code> 的引用计数从 2 变为 1，因为 <code>a-&gt;b_ptr</code> 仍然指向它。</li>
+<li><code>a</code> 离开作用域，<code>a</code> 的引用计数从 2 变为 1，此时指向 A 类型对象的强引用计数不为 0，不会析构 A 类型的对象，则 A 类型对象中的 <code>b_ptr</code> 仍然指向 B 类型的对象；</li>
+<li><code>b</code> 离开作用域，<code>b</code> 的引用计数从 2 变为 1，此时指向 B 类型对象的强引用计数不为 0，不会析构 B 类型的对象，则 B 类型对象中的 <code>a_ptr</code> 仍然指向 A 类型的独享。</li>
+<li>最终 A 类型的对象和 B 类型的对象都没有被析构，从而导致<strong>内存泄露</strong>。</li>
 </ul>
-<p>由于 <code>a</code> 和 <code>b</code> 的引用计数永远不会变为 0，它们所管理的内存将永远不会被释放，这就会导致<strong>内存泄露</strong>。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -6430,7 +6430,7 @@ Node destroyed.
 <p>使用 Google Test 测试手搓 <code>shared_ptr</code> 和 <code>weak_ptr</code> 的效果。</p>
 <h2 id="_9">参考资料<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p>[1] <a href="https://www.bilibili.com/video/BV1BBKHztEvE">某量化C++实习二面：手撕weak_ptr，文档源码分享~【码农Mark】</a></p>
-<p>[2] </p>
+<p>[2] <a href="https://www.bilibili.com/video/BV1Hw411y7g5?spm_id_from=333.1245.0.0">【C++11】自己动手实现unique_ptr智能指针，都有哪些难点？</a></p>
 
 
 
