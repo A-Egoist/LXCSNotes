@@ -37,24 +37,36 @@
 
 ## 校招 C/C++ Linux 技术栈
 
-*   第一部分：C++基础
-    *   语法、对象、内存、STL原理、新特性
-*   数据结构与算法
-*   操作系统和计算机网络
-    *   TCP/IP 五层模型，HTTP/HTTPS，TCP/UDP，IP等常见协议；
-    *   socket 网络编程；
-    *   操作系统中的进程控制、内存管理；
-    *   C++ 是技术语言，对四大件依赖非常严重，四大件不是加分项，而是基本要求。
-*   技术栈、工程能力
-    -   [ ] 前后端协作、[Linux](../Linux/Linux基础课/1 Linux 常用命令.md)、[Docker](../Linux/Linux基础课/8 docker.md)、[编译工具](../Projects/CMake.md)、[Git](../Linux/Linux基础课/5 git.md)、
-    -   [ ] VS 断点调试：[【程序员Rock】C++调试入门：10分钟掌握核心调试技术](https://www.bilibili.com/video/BV1zkgUz5Et2?spm_id_from=333.1245.0.0)
+-   [ ] C++基础
+    -   [x] 基本语法、对象
+    -   [x] 内存管理
+    -   [x] STL原理
+    -   [x] 新特性
+    -   [ ] 多线程
+-   [x] 数据结构与算法
+-   [ ] 操作系统和计算机网络
+    -   [ ] TCP/IP 五层模型，HTTP/HTTPS，TCP/UDP，IP等常见协议；
+    -   [ ] 操作系统中的进程控制、内存管理；
+    -   [x] C++ 是技术语言，对四大件依赖非常严重，四大件不是加分项，而是基本要求。
+-   [ ] 技术栈、工程能力
+    -   [x] 前后端协作、[Linux](../Linux/Linux基础课/1 Linux 常用命令.md)、[Docker](../Linux/Linux基础课/8 docker.md)、[编译工具](../Projects/CMake.md)、[Git](../Linux/Linux基础课/5 git.md)、
+    -   [x] VS 断点调试：[【程序员Rock】C++调试入门：10分钟掌握核心调试技术](https://www.bilibili.com/video/BV1zkgUz5Et2?spm_id_from=333.1245.0.0)
     -   [x] [gdb 调试](../Linux/GDB.md)
-    -   [ ] MySQL 数据库，如索引、事务、三大范式、日志、MVCC 等原理
-    -   [ ] Redis
-*   项目
+-   [ ] 数据库
+    -   [ ] MySQL，如索引、事务、三大范式、日志、MVCC 等原理
+
+-   [ ] 网络编程
+    -   [ ] socket
+    -   [ ] I/O 多路复用
+
+-   [ ] 中间件
+    -   [ ] redis
+
+-   [ ] 项目
     *   建议：团队后端项目 + 个人技术开发项目
-*   加分项
+-   [ ] 加分项
     *   OpenGL
+    *   
 
 
 >   来源：[能找到工作的C++简历，到底长什么样？学了什么？](https://www.bilibili.com/video/BV1WQNzzUEv6?spm_id_from=333.1245.0.0)
@@ -80,3 +92,7 @@
 [1] [你投出去的C++简历为什么没有任何反馈-C++简历坑点分析](https://www.bilibili.com/video/BV1BdMgzPEqa?spm_id_from=333.1245.0.0)
 
 [2] [【如果当初我在学计算机之前就知道这些该多好，各种大厂就能任我挑选，想进大厂一定要这样准备】](https://www.bilibili.com/video/BV19T3XzmEa4/?share_source=copy_web&vd_source=b5ed364998fc1b958c57abd6dbda38e3)
+
+[3] [26届秋招全流程分享，一站式扫盲秋招信息差，看完就离offer不远了~](https://www.bilibili.com/video/BV173Y4ziEMR?spm_id_from=333.1245.0.0)
+
+[4] 
