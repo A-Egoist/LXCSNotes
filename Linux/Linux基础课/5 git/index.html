@@ -4639,64 +4639,66 @@ git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </
 </code></pre></div></td></tr></table></div>
 <h2 id="git">git常用命令<a class="headerlink" href="#git" title="Permanent link">&para;</a></h2>
 <p><strong>全局设置</strong></p>
-<p><code>git config --global user.name xxx</code>: 设置全局用户名，信息记录在<code>~/.gitconfig</code>文件中
-<code>git config --global user.email xxx@xxx.com</code>: 设置全局邮箱地址，信息记录在<code>~/.gitconfig</code>文件中
+<p><code>git config --global user.name xxx</code>: 设置全局用户名，信息记录在<code>~/.gitconfig</code>文件中</br>
+<code>git config --global user.email xxx@xxx.com</code>: 设置全局邮箱地址，信息记录在<code>~/.gitconfig</code>文件中</br>
 <code>git init</code>: 将当前目录配置成git仓库，信息记录在隐藏的.git文件夹中</p>
 <p><strong>常用命令</strong></p>
-<p><code>git add XX</code> : 将XX文件添加到暂存区
-<code>git add .</code>: 将所有待加入暂存区的文件放入暂存区
-<code>git commit -m "给自己看的备注信息"</code>: 将暂存区的内容提交到当前分支
-<code>git status</code>: 查看仓库状态
-<code>git log</code>: 查看当前分支的所有版本
-<code>git push -u (第一次需要-u以后不需要)</code>: 将当前分支推送到远程仓库
-<code>git clone git@git.acwing.com:xxx/XXX.git</code>: 将远程仓库XXX下载到当前目录下
+<p><code>git add XX</code> : 将XX文件添加到暂存区</br>
+<code>git add .</code>: 将所有待加入暂存区的文件放入暂存区</br>
+<code>git commit -m "给自己看的备注信息"</code>: 将暂存区的内容提交到当前分支</br>
+<code>git status</code>: 查看仓库状态</br>
+<code>git log</code>: 查看当前分支的所有版本</br>
+<code>git push -u (第一次需要-u以后不需要)</code>: 将当前分支推送到远程仓库</br>
+<code>git clone git@git.acwing.com:xxx/XXX.git</code>: 将远程仓库XXX下载到当前目录下</br>
 <code>git branch</code>: 查看所有分支和当前所处分支</p>
 <p><strong>查看命令</strong></p>
-<p><code>git diff XX</code>: 查看XX文件相对于暂存区修改了哪些内容
-<code>git status</code>: 查看仓库状态
-<code>git log</code>: 查看当前分支的所有版本
-<code>git log --pretty=oneline</code>: 用一行来显示
-<code>git reflog</code>: 查看HEAD指针的移动历史（包括被回滚的版本）
-<code>git branch</code>: 查看所有分支和当前所处分支
+<p><code>git diff XX</code>: 查看XX文件相对于暂存区修改了哪些内容</br>
+<code>git status</code>: 查看仓库状态</br>
+<code>git log</code>: 查看当前分支的所有版本</br>
+<code>git log --pretty=oneline</code>: 用一行来显示</br>
+<code>git reflog</code>: 查看HEAD指针的移动历史（包括被回滚的版本）</br>
+<code>git branch</code>: 查看所有分支和当前所处分支</br>
 <code>git pull</code>: 将远程仓库的当前分支与本地仓库的当前分支合并</p>
 <p><strong>删除命令</strong></p>
-<p><code>git rm --cached XX</code>: 将文件从仓库索引目录中删掉，==不希望管理这个文件==
-<code>git restore --staged xx</code>: ==将xx从暂存区里移除==
+<p><code>git rm --cached XX</code>: 将文件从仓库索引目录中删掉，==不希望管理这个文件==</br>
+<code>git restore --staged xx</code>: ==将xx从暂存区里移除==</br>
 <code>git checkout — XX</code>或<code>`git restore XX</code>: ==将XX文件尚未加入暂存区的修改全部撤销==</p>
 <p><strong>代码回滚</strong></p>
-<p><code>git reset --hard HEAD^</code> 或<code>git reset --hard HEAD~</code>: 将代码库回滚到上一个版本
-*   <code>git reset --hard HEAD^^</code>: 往上回滚两次，以此类推
-*   <code>git reset --hard HEAD~100</code>: 往上回滚100个版本
-*   <code>git reset --hard 版本号</code>: 回滚到某一特定版本</p>
+<p><code>git reset --hard HEAD^</code> 或<code>git reset --hard HEAD~</code>: 将代码库回滚到上一个版本</p>
+<ul>
+<li><code>git reset --hard HEAD^^</code>: 往上回滚两次，以此类推</li>
+<li><code>git reset --hard HEAD~100</code>: 往上回滚100个版本</li>
+<li><code>git reset --hard 版本号</code>: 回滚到某一特定版本</li>
+</ul>
 <p><strong>远程仓库</strong></p>
-<p><code>git remote add origin git@git.acwing.com:xxx/XXX.git</code>: 将本地仓库关联到远程仓库
-<code>git push -u</code> (第一次需要-u以后不需要) : 将当前分支推送到远程仓库
-<code>git push origin branch_name</code>: 将本地的某个分支推送到远程仓库
-<code>git clone git@git.acwing.com:xxx/XXX.git</code>: 将远程仓库XXX下载到当前目录下
-<code>git push --set-upstream origin branch_name</code>: 设置本地的<code>branch_name</code>分支对应远程仓库的<code>branch_name</code>分支
-<code>git push -d origin branch_name</code>: 删除远程仓库的<code>branch_name</code>分支
-<code>git checkout -t origin/branch_name</code>: 将远程的<code>branch_name</code>分支拉取到本地
-<code>git pull</code> : 将远程仓库的当前分支与本地仓库的当前分支合并
-<code>git pull origin branch_name</code>: 将远程仓库的<code>branch_name</code>分支与本地仓库的当前分支合并
-<code>git branch --set-upstream-to=origin/branch_name1 branch_name2</code>: 将远程的<code>branch_name1</code>分支与本地的<code>branch_name2</code>分支对应</p>
+<p><code>git remote add origin git@git.acwing.com:xxx/XXX.git</code>: 将本地仓库关联到远程仓库</br>
+<code>git push -u</code> (第一次需要-u以后不需要) : 将当前分支推送到远程仓库</br>
+<code>git push origin branch_name</code>: 将本地的某个分支推送到远程仓库</br>
+<code>git clone git@git.acwing.com:xxx/XXX.git</code>: 将远程仓库XXX下载到当前目录下</br>
+<code>git push --set-upstream origin branch_name</code>: 设置本地的<code>branch_name</code>分支对应远程仓库的<code>branch_name</code>分支</br>
+<code>git push -d origin branch_name</code>: 删除远程仓库的<code>branch_name</code>分支</br>
+<code>git checkout -t origin/branch_name</code>: 将远程的<code>branch_name</code>分支拉取到本地</br>
+<code>git pull</code> : 将远程仓库的当前分支与本地仓库的当前分支合并</br>
+<code>git pull origin branch_name</code>: 将远程仓库的<code>branch_name</code>分支与本地仓库的当前分支合并</br>
+<code>git branch --set-upstream-to=origin/branch_name1 branch_name2</code>: 将远程的<code>branch_name1</code>分支与本地的<code>branch_name2</code>分支对应</br></p>
 <p><strong>分支命令</strong></p>
-<p><code>git branch</code>: 查看所有分支和当前所处分支
-<code>git branch branch_name</code>: 创建新分支
-<code>git checkout -b branch_name</code>: 创建并切换到<code>branch_name</code>这个分支
-<code>git checkout branch_name</code>: 切换到<code>branch_name</code>这个分支
-<code>git merge branch_name</code>: 将分支<code>branch_name</code>合并到当前分支上
-<code>git branch -d branch_name</code>: 删除本地仓库的<code>branch_name</code>分支
-<code>git push --set-upstream origin branch_name</code>: 设置本地的<code>branch_name</code>分支对应远程仓库的<code>branch_name</code>分支
-<code>git push -d origin branch_name</code>: 删除远程仓库的<code>branch_name</code>分支
-<code>git checkout -t origin/branch_name</code>: 将远程的<code>branch_name</code>分支拉取到本地
-<code>git pull</code>: 将远程仓库的当前分支与本地仓库的当前分支合并
-<code>git pull origin branch_name</code>: 将远程仓库的<code>branch_name</code>分支与本地仓库的当前分支合并
+<p><code>git branch</code>: 查看所有分支和当前所处分支</br>
+<code>git branch branch_name</code>: 创建新分支</br>
+<code>git checkout -b branch_name</code>: 创建并切换到<code>branch_name</code>这个分支</br>
+<code>git checkout branch_name</code>: 切换到<code>branch_name</code>这个分支</br>
+<code>git merge branch_name</code>: 将分支<code>branch_name</code>合并到当前分支上</br>
+<code>git branch -d branch_name</code>: 删除本地仓库的<code>branch_name</code>分支</br>
+<code>git push --set-upstream origin branch_name</code>: 设置本地的<code>branch_name</code>分支对应远程仓库的<code>branch_name</code>分支</br>
+<code>git push -d origin branch_name</code>: 删除远程仓库的<code>branch_name</code>分支</br>
+<code>git checkout -t origin/branch_name</code>: 将远程的<code>branch_name</code>分支拉取到本地</br>
+<code>git pull</code>: 将远程仓库的当前分支与本地仓库的当前分支合并</br>
+<code>git pull origin branch_name</code>: 将远程仓库的<code>branch_name</code>分支与本地仓库的当前分支合并</br>
 <code>git branch --set-upstream-to=origin/branch_name1 branch_name2</code>: 将远程的<code>branch_name1</code>分支与本地的<code>branch_name2</code>分支对应</p>
 <p><strong>stash暂存</strong></p>
-<p><code>git stash</code>: 将工作区和暂存区中尚未提交的修改存入栈中
-<code>git stash apply</code>: 将栈顶存储的修改恢复到当前分支，但不删除栈顶元素
-<code>git stash drop</code>: 删除栈顶存储的修改
-<code>git stash pop</code>: 将栈顶存储的修改恢复到当前分支，同时删除栈顶元素
+<p><code>git stash</code>: 将工作区和暂存区中尚未提交的修改存入栈中</br>
+<code>git stash apply</code>: 将栈顶存储的修改恢复到当前分支，但不删除栈顶元素</br>
+<code>git stash drop</code>: 删除栈顶存储的修改</br>
+<code>git stash pop</code>: 将栈顶存储的修改恢复到当前分支，同时删除栈顶元素</br>
 <code>git stash list</code>: 查看栈中所有元素</p>
 <h2 id="_1">其他常见问题<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <h3 id="1-githttpssh">1. 将本地git仓库绑定的HTTP连接切换为ssh连接<a class="headerlink" href="#1-githttpssh" title="Permanent link">&para;</a></h3>

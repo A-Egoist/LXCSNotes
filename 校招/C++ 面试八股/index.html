@@ -4394,13 +4394,13 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_80" class="md-nav__link">
+  <a href="#io_1" class="md-nav__link">
     <span class="md-ellipsis">
-      常见的多路复用机制
+      常见的 I/O 多路复用机制
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="常见的多路复用机制">
+    <nav class="md-nav" aria-label="常见的 I/O 多路复用机制">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4444,13 +4444,22 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#send" class="md-nav__link">
+    <span class="md-ellipsis">
+      send()
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_81" class="md-nav__link">
+  <a href="#_80" class="md-nav__link">
     <span class="md-ellipsis">
       零散知识点
     </span>
@@ -4459,7 +4468,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_82" class="md-nav__link">
+  <a href="#_81" class="md-nav__link">
     <span class="md-ellipsis">
       参考资料
     </span>
@@ -7406,13 +7415,13 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_80" class="md-nav__link">
+  <a href="#io_1" class="md-nav__link">
     <span class="md-ellipsis">
-      常见的多路复用机制
+      常见的 I/O 多路复用机制
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="常见的多路复用机制">
+    <nav class="md-nav" aria-label="常见的 I/O 多路复用机制">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -7456,13 +7465,22 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#send" class="md-nav__link">
+    <span class="md-ellipsis">
+      send()
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_81" class="md-nav__link">
+  <a href="#_80" class="md-nav__link">
     <span class="md-ellipsis">
       零散知识点
     </span>
@@ -7471,7 +7489,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_82" class="md-nav__link">
+  <a href="#_81" class="md-nav__link">
     <span class="md-ellipsis">
       参考资料
     </span>
@@ -10066,7 +10084,7 @@ Derive:<span class="w"> </span><span class="m">5</span>
 </ul>
 </li>
 </ul>
-<h3 id="_80">常见的多路复用机制<a class="headerlink" href="#_80" title="Permanent link">&para;</a></h3>
+<h3 id="io_1">常见的 I/O 多路复用机制<a class="headerlink" href="#io_1" title="Permanent link">&para;</a></h3>
 <h4 id="select"><code>select</code><a class="headerlink" href="#select" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>跨平台</strong>：支持所有主流操作系统（Linux/Windows/macOS）。</li>
@@ -10096,19 +10114,43 @@ Derive:<span class="w"> </span><span class="m">5</span>
 <p><strong>核心函数</strong></p>
 <ul>
 <li><code>epoll_create()</code>：创建 epoll 实例。</li>
-<li><code>epoll_ctl()</code>：添加/修改/删除监听的 FD。</li>
-<li><code>epoll_wait()</code>：等待就绪事件。</li>
+<li>
+<p><code>epoll_ctl()</code>：添加/修改/删除监听的 FD。</p>
+<ul>
+<li><code>EPOLL_CTL_ADD</code> (添加)：将一个新的文件描述符(fd)添加到 <code>epoll</code> 实例的监听列表中。</li>
+<li>
+<p><code>EPOLL_CTL_MOD</code> (修改)：修改一个已经存在于 <code>epoll</code> 监听列表中的 fd 的事件类型。</p>
+<ul>
+<li><code>EPOLLIN</code>：监听可读事件</li>
+<li><code>EPOLLOUT</code>：监听可写事件</li>
+</ul>
+</li>
+<li>
+<p><code>EPOLL_CTL_DEL</code> (删除)：将一个 fd 从 <code>epoll</code> 的监听列表中移除。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>epoll_wait()</code>：等待就绪事件。</p>
+</li>
 </ul>
 <p><strong>触发模式</strong></p>
 <ul>
-<li>水平触发：只要 FD 可读/可写，epoll_wait() 会持续通知（默认模式，类似 poll）。</li>
-<li>边沿触发：仅在 FD 状态变化时通知一次（需一次性处理完数据，否则可能丢失事件）。</li>
+<li><code>EPOLLLT</code> (水平触发)：只要 FD 可读/可写，epoll_wait() 会持续通知（默认模式，类似 poll）。</li>
+<li><code>EPOLLET</code> (边沿触发)：仅在 FD 状态变化时通知一次（需一次性处理完数据，否则可能丢失事件）。</li>
+<li><code>EPOLLONESHOT</code> (一次性触发)：当你为一个文件描述符注册 <code>EPOLLONESHOT</code> 后，<code>epoll</code> 就会在事件被触发后<strong>自动停止</strong>监听该文件描述符上的任何事件。如果你想继续监听，必须<strong>显式地</strong>再次调用 <code>epoll_ctl</code>，重新注册你感兴趣的事件。</li>
 </ul>
 <p><strong>优点</strong></p>
 <ul>
 <li>高性能：支持百万级并发（如 Nginx、Redis）。</li>
 <li>低开销：无需每次调用传递所有 FD。</li>
 </ul>
+<p><strong>为什么使用 <code>EPOLLET</code>？</strong></p>
+<p>为了提高效率。在高并发场景下，<code>EPOLLLT</code> 的多次唤醒会增加内核和用户空间之间的上下文切换开销。<code>EPOLLET</code> 模式要求你“一次性读完”，这减少了 <code>epoll_wait</code> 的调用次数，从而提高了服务器的吞吐量。</p>
+<p><strong>为什么使用 <code>EPOLLONESHOT</code>？</strong></p>
+<p>为了解决<strong>多线程环境下的竞态条件</strong>。</p>
+<p>假设你有多个线程同时处理 <code>epoll</code> 返回的事件，并且你没有使用 <code>EPOLLONESHOT</code>。一个文件描述符上触发了 <code>EPOLLIN</code> 事件，两个线程都收到了通知并尝试处理它。如果没有加锁，这会导致严重的线程安全问题。</p>
+<p>而有了 <code>EPOLLONESHOT</code>，当一个线程处理一个事件时，<code>epoll</code> 会自动停止监听该文件描述符。这确保了在任何一个时刻，<strong>只有一个线程</strong>能够处理这个文件描述符上的事件。当该线程完成处理后，它会再次调用 <code>epoll_ctl</code>，将文件描述符重新加入到 <code>epoll</code> 的监听列表中，从而避免了竞态条件。</p>
 <h3 id="recv">recv()<a class="headerlink" href="#recv" title="Permanent link">&para;</a></h3>
 <p><code>recv()</code> 函数用于接收数据，它的返回值有三种情况：</p>
 <ol>
@@ -10116,7 +10158,8 @@ Derive:<span class="w"> </span><span class="m">5</span>
 <li><strong>返回值 = 0</strong>：这是一种特殊情况。它不代表接收了 0 字节的数据，而是表示<strong>连接已经被对端正常关闭</strong>（通过 <code>close()</code> 或 <code>shutdown()</code>）。当对端发送了 <code>FIN</code> 包（连接终止包）后，<code>recv()</code> 会返回 0。这是判断连接是否断开的最常用和最可靠的方式。</li>
 <li><strong>返回值 = -1</strong>：表示<strong>发生错误</strong>。你需要检查全局变量 <code>errno</code>（在 Windows 上是 <code>WSAGetLastError()</code>）来确定具体的错误类型。常见的错误包括连接被重置 (<code>ECONNRESET</code>)，或者操作被中断 (<code>EINTR</code>)。</li>
 </ol>
-<h2 id="_81">零散知识点<a class="headerlink" href="#_81" title="Permanent link">&para;</a></h2>
+<h3 id="send">send()<a class="headerlink" href="#send" title="Permanent link">&para;</a></h3>
+<h2 id="_80">零散知识点<a class="headerlink" href="#_80" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
 <p>C++ 中函数调用可以嵌套，但函数定义不能嵌套。</p>
@@ -10179,7 +10222,7 @@ Derive:<span class="w"> </span><span class="m">5</span>
 <p>可以用 <code>#elif</code> 和 <code>#else</code> 指令扩展条件编译结构来测试多种条件</p>
 </li>
 </ul>
-<h2 id="_82">参考资料<a class="headerlink" href="#_82" title="Permanent link">&para;</a></h2>
+<h2 id="_81">参考资料<a class="headerlink" href="#_81" title="Permanent link">&para;</a></h2>
 <p>[1] <a href="https://blog.csdn.net/qq_29426201/article/details/147271710">百度一面面经（C++）</a></p>
 <p>[2] <a href="https://www.nowcoder.com/discuss/353155780922777600">百度C++开发岗三面面经(已offer)</a></p>
 <p>[3] <a href="https://zhuanlan.zhihu.com/p/1935627993805463760">百度提前批，三面被推迟一周，喜提秋招第一凉</a></p>
