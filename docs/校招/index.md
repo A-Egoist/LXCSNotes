@@ -43,9 +43,10 @@
     -   [x] STL原理
     -   [x] 新特性
     -   [ ] 多线程
+    -   [ ] 文件编程
 -   [x] 数据结构与算法
 -   [ ] 操作系统和计算机网络
-    -   [ ] TCP/IP 五层模型，HTTP/HTTPS，TCP/UDP，IP等常见协议；
+    -   [x] TCP/IP 五层模型，HTTP/HTTPS，TCP/UDP，IP等常见协议；
     -   [ ] 操作系统中的进程控制、内存管理；
     -   [x] C++ 是技术语言，对四大件依赖非常严重，四大件不是加分项，而是基本要求。
 -   [ ] 技术栈、工程能力
@@ -58,7 +59,11 @@
 -   [ ] 网络编程
     -   [ ] socket
     -   [ ] I/O 多路复用
-
+        -   [ ] epoll
+    -   [ ] rpc框架
+        -   [ ] thrift
+    -   [ ] 
+    
 -   [ ] 中间件
     -   [ ] redis
 
@@ -87,6 +92,18 @@
 
 
 
+## 央国企攻略
+
+[应届毕业生 如何稳近央国企？](https://www.bilibili.com/video/BV1hUYXzKEpM?spm_id_from=333.1245.0.0)
+
+[手把手教普通人保送进国企（邪修版）进来看！](https://www.bilibili.com/video/BV1DbtFz6EyA?spm_id_from=333.1245.0.0)
+
+
+
+
+
+
+
 ## 参考资料
 
 [1] [你投出去的C++简历为什么没有任何反馈-C++简历坑点分析](https://www.bilibili.com/video/BV1BdMgzPEqa?spm_id_from=333.1245.0.0)
@@ -95,4 +112,5 @@
 
 [3] [26届秋招全流程分享，一站式扫盲秋招信息差，看完就离offer不远了~](https://www.bilibili.com/video/BV173Y4ziEMR?spm_id_from=333.1245.0.0)
 
-[4] 
+[4] [C++秋招抱佛脚-60天拿下保底Offer](https://www.bilibili.com/video/BV13nYPzwER2?spm_id_from=333.1245.0.0)
+![image-20250911151649991](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202509111517159.png)
