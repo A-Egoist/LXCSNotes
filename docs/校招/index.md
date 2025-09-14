@@ -33,8 +33,6 @@
 
 
 
-
-
 ## 校招 C/C++ Linux 技术栈
 
 -   [ ] C++基础
@@ -74,7 +72,11 @@
     *   
 
 
->   来源：[能找到工作的C++简历，到底长什么样？学了什么？](https://www.bilibili.com/video/BV1WQNzzUEv6?spm_id_from=333.1245.0.0)
+>   参考：
+>
+>   [能找到工作的C++简历，到底长什么样？学了什么？](https://www.bilibili.com/video/BV1WQNzzUEv6?spm_id_from=333.1245.0.0)
+>
+>   [面试中计算机基础到底考什么，应该怎么学](https://www.bilibili.com/video/BV1oS9qYkEm9?spm_id_from=333.1245.0.0)
 
 ---
 
@@ -98,9 +100,19 @@
 
 [手把手教普通人保送进国企（邪修版）进来看！](https://www.bilibili.com/video/BV1DbtFz6EyA?spm_id_from=333.1245.0.0)
 
+[央国企面试必问十题](https://www.bilibili.com/video/BV1cbtYzDEqu?spm_id_from=333.1245.0.0)
+
+[怎么才能找到适合自己的央国企?](https://www.bilibili.com/video/BV1Zfa4zzESZ?spm_id_from=333.1245.0.0)
+
+[26国家能源集团秋招，个人认为进步最快的方法！国能秋招笔试国家能源秋招考试国家能源招聘笔试国家能源笔试真题国家能源企](https://www.bilibili.com/video/BV1RmaNzqEs1?spm_id_from=333.1245.0.0)
 
 
 
+
+
+## 考公考编
+
+[国企、公务员、事业编到底怎么进？想上岸躺平？那你一定要了解这些……](https://www.bilibili.com/video/BV19XazzwE3W?spm_id_from=333.1245.0.0)
 
 
 
@@ -114,3 +126,22 @@
 
 [4] [C++秋招抱佛脚-60天拿下保底Offer](https://www.bilibili.com/video/BV13nYPzwER2?spm_id_from=333.1245.0.0)
 ![image-20250911151649991](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202509111517159.png)
+
+[5] 
+
+[6] 
+
+[7] 
+
+[8] 
+
+[9] 
+
+[10] 
+
+[11] 
+
+[12] 
+
+[13] 
+

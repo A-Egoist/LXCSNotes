@@ -44,6 +44,14 @@
 
 [快手timeline+面经（C++）](https://www.nowcoder.com/feed/main/detail/08b27fef973045d68c21aaa8923ba6e1?sourceSSR=search)
 
+[面试官：讲一下你项目中遇到的难点](https://www.bilibili.com/video/BV1C2otYeEgL?spm_id_from=333.1245.0.0)
+
+[面试只问三道题](https://www.bilibili.com/video/BV1SBbkztETJ?spm_id_from=333.1245.0.0)
+
+[面试中计算机基础到底考什么，应该怎么学](https://www.bilibili.com/video/BV1oS9qYkEm9?spm_id_from=333.1245.0.0)
+
+[【不想被骗了】有这些特征的公司在家躺着也不去！](https://www.bilibili.com/video/BV1AHQNYRE4P?spm_id_from=333.1245.0.0)
+
 
 
 ## 参考资料
