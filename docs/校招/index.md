@@ -1,5 +1,7 @@
 # 大纲
 
+
+
 ## 时间线
 
 [26届秋招求职时间线](https://www.bilibili.com/video/BV1AaKWz3ER5?spm_id_from=333.1245.0.0)
@@ -31,6 +33,8 @@
 *   [面试常见手撕算法题](./面试常见手撕算法题.md)
 *   其他
 
+[秋招面试来了，如何表现出潜力，冲offer冲sp？](https://www.bilibili.com/video/BV1gGp3zWEhu?spm_id_from=333.1245.0.0)
+
 
 
 ## 校招 C/C++ Linux 技术栈
@@ -41,7 +45,7 @@
     -   [x] STL原理
     -   [x] 新特性
     -   [ ] 多线程
-    -   [ ] 文件编程
+    -   [ ] 文件编程：[C++ 文件和流](https://www.runoob.com/cplusplus/cpp-files-streams.html)
 -   [x] 数据结构与算法
 -   [ ] 操作系统和计算机网络
     -   [x] TCP/IP 五层模型，HTTP/HTTPS，TCP/UDP，IP等常见协议；
@@ -59,7 +63,7 @@
     -   [ ] I/O 多路复用
         -   [ ] epoll
     -   [ ] rpc框架
-        -   [ ] thrift
+        -   [ ] thrift：[RPC框架之——thrift的深入理解（一）](https://juejin.cn/post/7204349756621504572)
     -   [ ] 
     
 -   [ ] 中间件
@@ -88,6 +92,8 @@
 
 
 
+
+
 [请大数据把这条视频推给所有找工作的计算机学生！一个从BOSS直聘反推学习路线的“逆向求职法”](https://www.bilibili.com/video/BV1g2TczxEEi?spm_id_from=333.1245.0.0)
 
 [校招互联网大厂C++学习路线和项目推荐](https://www.bilibili.com/video/BV1attpz6Eid?spm_id_from=333.1245.0.0)
@@ -105,6 +111,8 @@
 [怎么才能找到适合自己的央国企?](https://www.bilibili.com/video/BV1Zfa4zzESZ?spm_id_from=333.1245.0.0)
 
 [26国家能源集团秋招，个人认为进步最快的方法！国能秋招笔试国家能源秋招考试国家能源招聘笔试国家能源笔试真题国家能源企](https://www.bilibili.com/video/BV1RmaNzqEs1?spm_id_from=333.1245.0.0)
+
+[现在是进央国企的最后时刻](https://www.bilibili.com/video/BV1jspqz3EH5?spm_id_from=333.1245.0.0)
 
 
 
