@@ -35,6 +35,8 @@
 
 [秋招面试来了，如何表现出潜力，冲offer冲sp？](https://www.bilibili.com/video/BV1gGp3zWEhu?spm_id_from=333.1245.0.0)
 
+[【无领导小组讨论】一句话教你通过你的二面 无领导小组讨论面试不难](https://www.bilibili.com/video/BV1YT4y1c7Fs?spm_id_from=333.1245.0.0)
+
 
 
 ## 校招 C/C++ Linux 技术栈
