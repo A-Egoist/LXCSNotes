@@ -126,6 +126,27 @@
 
 
 
+## 十一、手撕TinyWebServer
+
+-   [ ] 手撕阻塞队列
+-   [ ] 手撕日志类
+-   [ ] 实现socket连接
+-   [ ] 手撕线程池
+-   [ ] 手撕定时器
+-   [ ] 手撕连接池
+
+
+
+## 十二、手撕 list 容器
+
+
+
+## 十三、了解 map、unordered_map、set、unordered_set 容器
+
+
+
+
+
 ## 可选项目
 
 [1] [研究生为了摸鱼，做了个导师识别系统？](https://www.bilibili.com/video/BV1qEtpz2EFP?spm_id_from=333.1245.0.0)

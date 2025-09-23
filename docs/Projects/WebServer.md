@@ -4,7 +4,22 @@
 
 本项目是基于 TinyWebServer 实现的一个 C++ WebServer 项目，目的是用一个更实际的项目来提升自己的 Coding 能力。
 
+1.   [什么是 WebServer](https://developer.mozilla.org/zh-CN/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_web_server)：
+
+![通过 HTTP 的客户/服务器连接的基本表示方法](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202506151046879.svg)
+
+2.   我的 WebServer 架构图：
+
 ![image-20250914184731070](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202509141851957.png)
+
+3.   如何实现一个高并发的 WebServer？
+     *   I/O 多路复用技术：[IO多路复用——深入浅出理解select、poll、epoll的实现](https://zhuanlan.zhihu.com/p/367591714)
+     *   什么是 socket？
+     *   线程池（多线程并发）
+     *   Reactor 模型：[高性能网络编程之 Reactor 网络模型（彻底搞懂）](https://blog.csdn.net/ldw201510803006/article/details/124365838)
+     *   Proactor 模型：
+     *   数据库连接池
+     *   定时器 (Timer)
 
 
 
@@ -1890,4 +1905,32 @@ curl -v --header "Connection: keep-alive" http://127.0.0.1:8080
 已完成 WebServer 的基础功能，包括：
 
 *   处理 GET 和 POST 请求，返回对应的静态内容；
+
+
+
+
+
+## 参考资料
+
+[1] [从零开始实现C++ TinyWebServer 全过程记录](https://blog.csdn.net/weixin_51322383/article/details/130464403)，JehanRio's [TinyWebServer](https://github.com/JehanRio/TinyWebServer)
+
+[2] [从零开始自制实现C++ High-Performance WebServer 全流程记录](https://love6.blog.csdn.net/article/details/123754194)
+
+[3] [万字详解由C++14实现的Webserver](https://zhuanlan.zhihu.com/p/721880618)
+
+[4] [【C++17】小彭老师陪你从零手搓HTTP服务器](https://www.bilibili.com/video/BV1Mz421i7Fm)
+
+[5] [烂大街的WebServer分享一下](https://www.nowcoder.com/share/jump/1750039736048)
+
+[6] [TinyWebServer](https://geekdaxue.co/read/qingyubailou@gygiq6/tihx6bwirgug3b9d)
+
+[7] [用C++实现的高性能WEB服务器](https://blog.csdn.net/weixin_47243756/article/details/129494126)
+
+[8] markparticle's [WebServer](https://github.com/markparticle/WebServer)
+
+[9] [Tinywebserver——服务器常问面试题！](https://zhuanlan.zhihu.com/p/368154495)
+
+[10] [一个简单的从零开始的Linux网络服务器项目过程](https://zhuanlan.zhihu.com/c_1774157245946933248)，HuangCheng72's [WebServer](https://github.com/HuangCheng72/WebServer)
+
+[11] [基于Epoll的边缘触发（ET）模式下的回声服务器](https://www.yuque.com/lianlianfengchen-cvvh2/qkmqzb/foc1ba268rg4370x)https://developer.mozilla.org/zh-CN/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_web_server)
 

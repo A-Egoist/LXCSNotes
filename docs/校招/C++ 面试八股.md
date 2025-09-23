@@ -817,6 +817,18 @@ C++中 串行、并行、并发、同步、异步的区别
 
 
 
+### 孤儿进程
+
+[字节、小红书、阿里C++二面：什么是孤儿进程和僵尸进程，会带来什么问题，怎么解决？以Redis为例阐述【码农Mark】](https://www.bilibili.com/video/BV1KnXLYFEyQ/?spm_id_from=333.1387.search.video_card.click&vd_source=f4cc25a44af6631d6f4db023b3bb88e4)
+
+
+
+### 僵尸进程
+
+[字节、小红书、阿里C++二面：什么是孤儿进程和僵尸进程，会带来什么问题，怎么解决？以Redis为例阐述【码农Mark】](https://www.bilibili.com/video/BV1KnXLYFEyQ/?spm_id_from=333.1387.search.video_card.click&vd_source=f4cc25a44af6631d6f4db023b3bb88e4)
+
+
+
 ## 并行编程
 
 详见：[并行编程](../CPP/并行编程.md)
@@ -1042,6 +1054,12 @@ std::shared_ptr<int> b = std::make_shared<int>();
 
 
 ## C++ 关键字
+
+### `explicit`
+
+[【C++】explicit关键字详解（explicit关键字是什么? 为什么需要explicit关键字? 如何使用explicit 关键字）](https://blog.csdn.net/weixin_45031801/article/details/137796214)
+
+
 
 ### `sizeof()`
 
@@ -1360,6 +1378,10 @@ void anotherPrint() {
 
 
 ### `volatile`
+
+它的作用是**告知编译器，它所修饰的变量的值可能会在编译器未知的外部因素影响下发生改变**。编译器不应该对这个变量进行优化。
+
+`volatile` 是一个相对底层和特殊的关键字，主要用于告诉编译器不要进行优化，它的作用是保证**可见性**，而不是**原子性**或**线程安全**。在现代 C++ 多线程编程中，`std::atomic` 几乎完全取代了 `volatile` 在并发场景中的应用。
 
 
 
@@ -2610,17 +2632,23 @@ MySQL 索引主要通过 B+树数据结构实现的。
 
 ## 网络编程
 
-### Not Modified 状态码
+### 常见 HTML 状态码
 
-304
+[HTTP 状态码](https://www.runoob.com/http/http-status-codes.html)
+
+| 状态码 | 说明         | 备注 |
+| ------ | ------------ | ---- |
+| 200    |              |      |
+| 302    |              |      |
+| 304    | Not Modified |      |
+|        |              |      |
+| 404    |              |      |
 
 
 
-### OSI 七层模型
+### OSI七层模型 v.s. TCP/IP 四层模型
 
-
-
-### TCP/IP 四层模型
+[一文彻底搞懂OSI七层模型和TCP/IP四层模型](https://blog.csdn.net/weixin_44772566/article/details/136717134)
 
 
 

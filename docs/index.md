@@ -40,8 +40,6 @@ mkdocs gh-deploy
 4.   [Markdown 前景色、背景色](https://www.imooc.com/wiki/markdownlesson/markdowncolor.html)
 5.   使用 `<font>...</font>` 标签修改字体颜色：
      ```html
-     #### 使用 `<font>` 的标签的修改文字前景色
-     
      <font color="red">红色</font>
      <font color="green">绿色</font>
      <font color="blue">蓝色</font>
@@ -49,9 +47,8 @@ mkdocs gh-deploy
      <font color="rgb(200, 100, 100)">使用 rgb 颜色值</font>
      
      <font color="#FF00BB">使用十六进制颜色值</font>
-     
      ```
-
+     
      
 
 ### 换行

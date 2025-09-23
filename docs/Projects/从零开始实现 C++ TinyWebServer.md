@@ -79,16 +79,12 @@
           *   计时线程并不知道到底会有多少个线程将来要订阅它的通知，所以它还要**具备良好的可扩展性，能支持大量的线程订阅其信息**。
           *   计时线程作为**发布者通知到订阅者**，一个计时周期已经到了
 
-12.   
-
 
 
 
 ## 其他笔记
 
-1.   什么是 explicit 关键字，有什么作用：[【C++】explicit关键字详解（explicit关键字是什么? 为什么需要explicit关键字? 如何使用explicit 关键字）](https://blog.csdn.net/weixin_45031801/article/details/137796214)
-
-2.   手动提交 POST 请求：
+1.   手动提交 POST 请求：
 
      ```bash
      curl -v -X POST 127.0.0.1:8080 -d "username=admin&password=123456"
@@ -96,20 +92,20 @@
 
      [curl 的用法指南](https://www.ruanyifeng.com/blog/2019/09/curl-reference.html)
 
-3.   HTML 状态码：[HTTP 状态码](https://www.runoob.com/http/http-status-codes.html)
+2.   HTML 状态码：
      200, 302, 404
      在用户登录成功之后需要返回 `/welcome.html` 的时候，可以使用 HTTP 的重定向机制。即先发送 302 重定向响应，然后处理重定向后的 GET 请求。
 
-4.   杀死tmux的会话
+3.   杀死tmux的会话
 
      ```bash
      # 使用session编号
      tmux kill-session -t 0
      ```
 
-5.   闭包捕获 `[this, client_fd]`，什么是闭包捕获
+4.   闭包捕获 `[this, client_fd]`，什么是闭包捕获
 
-6.   零拷贝技术 (Zero-copy)
+5.   零拷贝技术 (Zero-copy)
 
 
 
@@ -117,17 +113,7 @@
 
 ### C++ 知识点
 
-#### 1、`explicit` 关键字
-
 #### 2、Containers library
-
-#### 3、多线程和锁
-
-#### 4、`constexpr` 和 `const` 关键字
-
-#### 5、`struct` 和 `class` 的区别
-
-#### 6、`class` 相关的知识点
 
 #### 7、匿名函数
 
@@ -217,152 +203,13 @@ asyncOperation([](int result) {
 
 
 
-#### 9、`size_t`、`sizeof()`、`typedef`
 
-#### 10、模板函数和模板类
-
-#### 11、虚函数
-
-##### C++ 虚函数详解
-
-虚函数是C++实现**运行时多态**的核心机制，它允许派生类重写基类的函数实现，并通过基类指针或引用调用派生类的实现。
-
-**定义方式**
-
-在基类中使用 `virtual` 关键字声明函数：
-```cpp
-class Base {
-public:
-    virtual void func() {
-        std::cout << "Base implementation\n";
-    }
-};
-```
-
-**重写规则**
-
-派生类重写虚函数时：
-- 函数签名必须完全相同（函数名、参数列表、返回类型）
-- 可选的 `override` 关键字（C++11起）增强安全性
-- 可选的 `virtual` 关键字（推荐省略）
-
-```cpp
-class Derived : public Base {
-public:
-    void func() override {  // 正确重写
-        std::cout << "Derived implementation\n";
-    }
-};
-```
-
-**虚函数的工作原理**（虚函数表）
-
-C++通过**虚函数表（vtable）** 实现多态：
-1. 每个包含虚函数的类都有一个虚函数表
-2. 表中存储指向该类虚函数的指针
-3. 每个对象包含一个指向vtable的指针（vptr）
-4. 调用虚函数时，通过vptr找到vtable，再调用对应的函数
-
-```plaintext
-+----------------+      +-----------------+
-|    Base对象    |      | Base vtable     |
-| +----------+  |      | +-------------+ |
-| | vptr     |----->| | &Base::func | |
-| +----------+  |      | +-------------+ |
-+----------------+      +-----------------+
-
-+-----------------+     +------------------+
-|   Derived对象   |     | Derived vtable   |
-| +------------+ |     | +--------------+ |
-| | vptr       |---->| | &Derived::func| |
-| +------------+ |     | +--------------+ |
-+-----------------+     +------------------+
-```
-
-**虚函数的关键特性**
-
-1. 运行时多态
-
-```cpp
-Base* obj = new Derived();
-obj->func();  // 调用Derived::func()
-```
-
-2. 虚析构函数
-
-当基类指针指向派生类对象时，必须将基类析构函数声明为虚函数：
-```cpp
-class Base {
-public:
-    virtual ~Base() {}  // 虚析构函数
-};
-
-class Derived : public Base {
-public:
-    ~Derived() override {}  // 派生类析构函数
-};
-
-Base* obj = new Derived();
-delete obj;  // 正确调用Derived和Base的析构函数
-```
-
-3. 纯虚函数与抽象类
-
-纯虚函数强制派生类实现特定接口：
-```cpp
-class Shape {  // 抽象类
-public:
-    virtual double area() const = 0;  // 纯虚函数
-};
-
-class Circle : public Shape {
-public:
-    double area() const override {
-        return 3.14 * radius * radius;
-    }
-private:
-    double radius;
-};
-```
-
-##### 虚函数使用场景
-
-1. **多态行为**：不同派生类对同一消息的不同响应
-2. **框架设计**：定义通用接口，具体实现由派生类完成
-3. **回调机制**：通过基类指针调用不同实现
-4. **插件系统**：动态加载不同实现
-
-##### 虚函数性能考虑
-
-- 虚函数调用比普通函数调用稍慢（多一次指针间接访问）
-- 每个对象增加一个指针大小的存储开销（vptr）
-- 虚函数表本身占用少量内存
-- 在性能关键代码中需谨慎使用
-
-##### 虚函数最佳实践
-
-1. **为多态基类声明虚析构函数**
-2. **使用 `override` 关键字明确重写意图**
-3. **考虑将不需要重写的函数声明为 `final`**
-4. **避免在构造函数和析构函数中调用虚函数**
-5. **合理使用纯虚函数定义接口契约**
-6. **在性能敏感场景评估虚函数开销**
-
-虚函数是C++面向对象编程的基石，正确理解和使用虚函数对于设计灵活、可扩展的软件架构至关重要。
-
-
-
-#### 12、RAII (Resource Acquisition Is Initialization) 是什么？
-
-#### 13、左值引用和右值引用
 
 #### 14、函数重载和运算符重载
 
 重载：函数名相同，参数列表不同。
 
 
-
-#### 15、`std::map`
 
 #### 16、浅拷贝与深拷贝
 
@@ -511,35 +358,11 @@ public:
 
 
 
-#### 19、`std::pair` 的用法和优势
-
-#### 20、`std::shared_ptr`
-
-
-
 ### 数据结构
 
 #### 1、小根堆
 
 #### 2、循环数组
-
-
-
-### 网络编程
-
-#### 1、一次完整的 HTTP 请求过程：
-
-DNS域名解析 $\to$ TCP 的 3 次握手 $\to$ 建立 TCP 连接，发送 HTTP 请求 $\to$ 服务器响应 HTTP 请求，返回 HTML 代码给浏览器 $\to$ 浏览器解析 HTML 代码并请求其中的资源 (CSS、JS、图片等) $\to$ 浏览器渲染页面呈现给用户
-
-DNS 域名解析：[DNS域名详细解析过程(最全面，看这一篇就够)](https://blog.csdn.net/bangshao1989/article/details/121913780)
-
-TCP 三次握手四次挥手：[简单理解TCP三次握手四次挥手（看一遍你就懂）](https://blog.csdn.net/m0_56649557/article/details/119492899)
-
-
-
-#### 2、`epoll`
-
-
 
 
 
