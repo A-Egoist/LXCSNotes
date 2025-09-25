@@ -591,6 +591,68 @@ public:
 
 
 
+[42. 接雨水](https://leetcode.cn/problems/trapping-rain-water/) --> 双指针 或者 单调栈
+
+双指针：
+
+```cpp
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        vector<int> left_max;
+        for (int i = 0; i < height.size(); ++ i) {
+            if (left_max.size() == 0) left_max.push_back(0);
+            else left_max.push_back(left_max.back() > height[i - 1] ? left_max.back() : height[i - 1]);
+        }
+
+        vector<int> right_max;
+        for (int i = height.size() - 1; i >= 0; -- i) {
+            if (right_max.size() == 0) right_max.push_back(0);
+            else right_max.push_back(right_max.back() > height[i + 1] ? right_max.back() : height[i + 1]);
+        }
+        std::reverse(right_max.begin(), right_max.end());
+
+        int ans = 0;
+        for (int i = 0; i < height.size(); ++ i) {
+            if (height[i] >= std::min(left_max[i], right_max[i])) continue;
+            ans += std::min(left_max[i], right_max[i]) - height[i];
+        }
+        return ans;
+    }
+};
+```
+
+单调栈：
+```cpp
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        // 单调栈
+        stack<int> sta;
+        int ans = 0;
+        for (int i = 0; i < height.size(); ++ i) {
+            if (sta.empty() || height[i] <= height[sta.top()]) {
+                sta.push(i);
+                continue;
+            }
+            while (!sta.empty() && height[i] > height[sta.top()]) {
+                int index = sta.top();
+                sta.pop();
+                if (!sta.empty()) {
+                    ans += (min(height[i], height[sta.top()]) - height[index]) * (i - sta.top() - 1);
+                }
+            }
+            sta.push(i);
+        }
+        return ans;
+    }
+};
+```
+
+
+
+
+
 
 
 ### 其他题目
@@ -1342,6 +1404,64 @@ public:
 
 
 ### 最短路
+
+**单源最短路**
+
+正权边：Dijkstra 算法、堆优化 Dijkstra 算法
+
+[849. Dijkstra求最短路 I](https://www.acwing.com/problem/content/851/)
+
+```cpp
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+const int N = 550;
+int Map[N][N];
+int dist[N];
+bool is_shortest[N];
+
+int dijkstra(int n) {
+    memset(dist, 0x3f, sizeof(dist));
+    dist[1] = 0;
+    for (int i = 0; i < n; ++ i) {
+        int t = -1;
+        for (int j = 1; j <= n; ++ j) {
+            if (!is_shortest[j] && (t == -1 || dist[t] > dist[j])) t = j;
+        }
+        is_shortest[t] = true;
+        for (int j = 1; j <= n; ++ j) {
+            dist[j] = std::min(dist[j], dist[t] + Map[t][j]);
+        }
+    }
+    if (dist[n] == 0x3f3f3f3f) return -1;
+    return dist[n];
+}
+
+int main() {
+    int n, m;
+    std::cin >> n >> m;
+    memset(Map, 0x3f, sizeof(Map));
+    for (int i = 0; i < m; ++ i) {
+        int a, b, c;
+        std::cin >> a >> b >> c;
+        Map[a][b] = std::min(Map[a][b], c);
+    }
+    int res = dijkstra(n);
+    std::cout << res << std::endl;
+    
+    return 0;
+}
+```
+
+
+
+
+
+
+
+**多源最短路**
+
+Floyd 算法
 
 
 

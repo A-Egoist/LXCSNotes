@@ -54,7 +54,7 @@
     -   [ ] 操作系统中的进程控制、内存管理；
     -   [x] C++ 是技术语言，对四大件依赖非常严重，四大件不是加分项，而是基本要求。
 -   [ ] 技术栈、工程能力
-    -   [x] 前后端协作、[Linux](../Linux/Linux基础课/1 Linux 常用命令.md)、[Docker](../Linux/Linux基础课/8 docker.md)、[编译工具](../Projects/CMake.md)、[Git](../Linux/Linux基础课/5 git.md)、
+    -   [x] 前后端协作、[Linux](../Linux/Linux基础课/1 Linux 常用命令.md)、[Docker](../Linux/Linux基础课/8 docker.md)、[编译工具](../Projects/常用工具/CMake.md)、[Git](../Linux/Linux基础课/5 git.md)、
     -   [x] VS 断点调试：[【程序员Rock】C++调试入门：10分钟掌握核心调试技术](https://www.bilibili.com/video/BV1zkgUz5Et2?spm_id_from=333.1245.0.0)
     -   [x] [gdb 调试](../Linux/GDB.md)
 -   [ ] 数据库
