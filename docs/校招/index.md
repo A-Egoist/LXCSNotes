@@ -61,9 +61,10 @@
     -   [ ] MySQL，如索引、事务、三大范式、日志、MVCC 等原理
 
 -   [ ] 网络编程
-    -   [ ] socket
+    -   [x] socket
     -   [ ] I/O 多路复用
-        -   [ ] epoll
+        -   [x] select
+        -   [x] epoll
     -   [ ] rpc框架
         -   [ ] thrift：[RPC框架之——thrift的深入理解（一）](https://juejin.cn/post/7204349756621504572)
     -   [ ] 
