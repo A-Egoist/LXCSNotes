@@ -110,12 +110,14 @@ C++ Primer
 
 
 
-技术要求：
+技术栈：
 
--   [x] c++
--   [ ] java
+-   [x] C/CPP
+-   [ ] JAVA
 -   [x] python
--   [ ] go
+-   [ ] JavaScript
+-   [ ] Go
+-   [ ] Rust
 -   [x] docker
 -   [x] Linux
 -   [x] cmake
