@@ -439,7 +439,401 @@ public class Main {
 
 
 
-### 多行字符串
+## 面向对象编程
+
+### classpath
+
+在Java中，我们经常听到`classpath`这个东西。网上有很多关于“如何设置classpath”的文章，但大部分设置都不靠谱。
+
+到底什么是`classpath`？
+
+`classpath`是JVM用到的一个环境变量，它用来指示JVM如何搜索`class`。
+
+更好的做法是，不要设置`classpath`！默认的当前目录`.`对于绝大多数情况都够用了。
+
+假设我们有一个编译后的`Hello.class`，它的包名是`com.example`，当前目录是`C:\work`，那么，目录结构必须如下：
+
+```
+C:\work
+└─ com
+   └─ example
+      └─ Hello.class
+```
+
+运行这个`Hello.class`必须在当前目录下使用如下命令：
+
+```plain
+C:\work> java -cp . com.example.Hello
+```
+
+JVM根据classpath设置的`.`在当前目录下查找`com.example.Hello`，即实际搜索文件必须位于`com/example/Hello.class`。如果指定的`.class`文件不存在，或者目录结构和包名对不上，均会报错。
+
+### jar包
+
+如果有很多`.class`文件，散落在各层目录中，肯定不便于管理。如果能把目录打一个包，变成一个文件，就方便多了。
+
+jar包就是用来干这个事的，它可以把`package`组织的目录层级，以及各个目录下的所有文件（包括`.class`文件和其他文件）都打成一个jar文件，这样一来，无论是备份，还是发给客户，就简单多了。
+
+jar包实际上就是一个zip格式的压缩文件，而jar包相当于目录。如果我们要执行一个jar包的`class`，就可以把jar包放到`classpath`中：
+
+```plain
+java -cp ./hello.jar abc.xyz.Hello
+```
+
+这样JVM会自动在`hello.jar`文件里去搜索某个类。
+
+那么问题来了：如何创建jar包？
+
+因为jar包就是zip包，所以，直接在资源管理器中，找到正确的目录，点击右键，在弹出的快捷菜单中选择“发送到”，“压缩(zipped)文件夹”，就制作了一个zip文件。然后，把后缀从`.zip`改为`.jar`，一个jar包就创建成功。
+
+假设编译输出的目录结构是这样：
+
+```
+package_sample
+└─ bin
+   ├─ hong
+   │  └─ Person.class
+   │  ming
+   │  └─ Person.class
+   └─ mr
+      └─ jun
+         └─ Arrays.class
+```
+
+这里需要特别注意的是，jar包里的第一层目录，不能是`bin`，而应该是`hong`、`ming`、`mr`。
+
+
+
+### 字符编码
+
+在早期的计算机系统中，为了给字符编码，美国国家标准学会（American National Standard Institute：ANSI）制定了一套英文字母、数字和常用符号的编码，它占用一个字节，编码范围从`0`到`127`，最高位始终为`0`，称为`ASCII`编码。例如，字符`'A'`的编码是`0x41`，字符`'1'`的编码是`0x31`。
+
+如果要把汉字也纳入计算机编码，很显然一个字节是不够的。`GB2312`标准使用两个字节表示一个汉字，其中第一个字节的最高位始终为`1`，以便和`ASCII`编码区分开。例如，汉字`'中'`的`GB2312`编码是`0xd6d0`。
+
+类似的，日文有`Shift_JIS`编码，韩文有`EUC-KR`编码，这些编码因为标准不统一，同时使用，就会产生冲突。
+
+为了统一全球所有语言的编码，全球统一码联盟发布了`Unicode`编码，它把世界上主要语言都纳入同一个编码，这样，中文、日文、韩文和其他语言就不会冲突。
+
+`Unicode`编码需要两个或者更多字节表示，我们可以比较中英文字符在`ASCII`、`GB2312`和`Unicode`的编码：
+
+英文字符`'A'`的`ASCII`编码和`Unicode`编码：
+
+```
+         ┌────┐
+ASCII:   │ 41 │
+         └────┘
+         ┌────┬────┐
+Unicode: │ 00 │ 41 │
+         └────┴────┘
+```
+
+英文字符的`Unicode`编码就是简单地在前面添加一个`00`字节。
+
+中文字符`'中'`的`GB2312`编码和`Unicode`编码：
+
+```
+         ┌────┬────┐
+GB2312:  │ d6 │ d0 │
+         └────┴────┘
+         ┌────┬────┐
+Unicode: │ 4e │ 2d │
+         └────┴────┘
+```
+
+那我们经常使用的`UTF-8`又是什么编码呢？因为英文字符的`Unicode`编码高字节总是`00`，包含大量英文的文本会浪费空间，所以，出现了`UTF-8`编码，它是一种变长编码，用来把固定长度的`Unicode`编码变成1～4字节的变长编码。通过`UTF-8`编码，英文字符`'A'`的`UTF-8`编码变为`0x41`，正好和`ASCII`码一致，而中文`'中'`的`UTF-8`编码为3字节`0xe4b8ad`。
+
+`UTF-8`编码的另一个好处是容错能力强。如果传输过程中某些字符出错，不会影响后续字符，因为`UTF-8`编码依靠高字节位来确定一个字符究竟是几个字节，它经常用来作为传输编码。
+
+在Java中，`char`类型实际上就是两个字节的`Unicode`编码。如果我们要手动把字符串转换成其他编码，可以这样做：
+
+```java
+byte[] b1 = "Hello".getBytes(); // 按系统默认编码转换，不推荐
+byte[] b2 = "Hello".getBytes("UTF-8"); // 按UTF-8编码转换
+byte[] b2 = "Hello".getBytes("GBK"); // 按GBK编码转换
+byte[] b3 = "Hello".getBytes(StandardCharsets.UTF_8); // 按UTF-8编码转换
+```
+
+注意：转换编码后，就不再是`char`类型，而是`byte`类型表示的数组。
+
+如果要把已知编码的`byte[]`转换为`String`，可以这样做：
+
+```java
+byte[] b = ...
+String s1 = new String(b, "GBK"); // 按GBK转换
+String s2 = new String(b, StandardCharsets.UTF_8); // 按UTF-8转换
+```
+
+始终牢记：Java的`String`和`char`在内存中总是以Unicode编码表示。
+
+:bulb: ​Java使用Unicode编码表示`String`和`char`；
+
+:bulb: 转换编码就是将`String`和`byte[]`转换，需要指定编码；
+
+:bulb: 转换为`byte[]`时，始终优先考虑`UTF-8`编码。
+
+
+
+### Auto Boxing
+
+因为`int`和`Integer`可以互相转换：
+
+```java
+int i = 100;
+Integer n = Integer.valueOf(i);
+int x = n.intValue();
+```
+
+所以，Java编译器可以帮助我们自动在`int`和`Integer`之间转型：
+
+```java
+Integer n = 100; // 编译器自动使用Integer.valueOf(int)
+int x = n; // 编译器自动使用Integer.intValue()
+```
+
+这种直接把`int`变为`Integer`的赋值写法，称为自动装箱（Auto Boxing），反过来，把`Integer`变为`int`的赋值写法，称为自动拆箱（Auto Unboxing）。
+
+装箱和拆箱会影响代码的执行效率，因为编译后的`class`代码是严格区分基本类型和引用类型的。并且，自动拆箱执行时可能会报`NullPointerException`：
+
+```java
+// NullPointerException
+public class Main {
+    public static void main(String[] args) {
+        Integer n = null;
+        int i = n;
+    }
+}
+```
+
+
+
+### JavaBean
+
+在Java中，有很多`class`的定义都符合这样的规范：
+
+-   若干`private`实例字段；
+-   通过`public`方法来读写实例字段。
+
+例如：
+
+```java
+public class Person {
+    private String name;
+    private int age;
+
+    public String getName() { return this.name; }
+    public void setName(String name) { this.name = name; }
+
+    public int getAge() { return this.age; }
+    public void setAge(int age) { this.age = age; }
+}
+```
+
+如果读写方法符合以下这种命名规范：
+
+```java
+// 读方法:
+public Type getXyz()
+// 写方法:
+public void setXyz(Type value)
+```
+
+那么这种`class`被称为`JavaBean`。
+
+JavaBean主要用来传递数据，即把一组数据组合成一个JavaBean便于传输。此外，JavaBean可以方便地被IDE工具分析，生成读写属性的代码，主要用在图形界面的可视化设计中。
+
+
+
+### 枚举类
+
+为了让编译器能自动检查某个值在枚举的集合内，并且，不同用途的枚举需要不同的类型来标记，不能混用，我们可以使用`enum`来定义枚举类：
+
+```java
+// enum
+public class Main {
+    public static void main(String[] args) {
+        Weekday day = Weekday.SUN;
+        if (day == Weekday.SAT || day == Weekday.SUN) {
+            System.out.println("Work at home!");
+        } else {
+            System.out.println("Work at office!");
+        }
+    }
+}
+
+enum Weekday {
+    SUN, MON, TUE, WED, THU, FRI, SAT;
+}
+```
+
+注意到定义枚举类是通过关键字`enum`实现的，我们只需依次列出枚举的常量名。
+
+和`int`定义的常量相比，使用`enum`定义枚举有如下好处：
+
+首先，`enum`常量本身带有类型信息，即`Weekday.SUN`类型是`Weekday`，编译器会自动检查出类型错误。例如，下面的语句不可能编译通过：
+
+```java
+int day = 1;
+if (day == Weekday.SUN) { // Compile error: bad operand types for binary operator '=='
+}
+```
+
+其次，不可能引用到非枚举的值，因为无法通过编译。
+
+最后，不同类型的枚举不能互相比较或者赋值，因为类型不符。例如，不能给一个`Weekday`枚举类型的变量赋值为`Color`枚举类型的值：
+
+```java
+Weekday x = Weekday.SUN; // ok!
+Weekday y = Color.RED; // Compile error: incompatible types
+```
+
+这就使得编译器可以在编译期自动检查出所有可能的潜在错误。
+
+
+
+### 记录类
+
+
+
+### BigInteger
+
+
+
+### BigDecimal
+
+
+
+### 常用工具类
+
+
+
+## 异常处理
+
+
+
+![image-20251005231941005](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510052319714.png)
+
+### 捕获异常
+
+捕获异常使用`try...catch`语句，把可能发生异常的代码放到`try {...}`中，然后使用`catch`捕获对应的`Exception`及其子类。
+
+所有异常都可以调用`printStackTrace()`方法打印异常栈，这是一个简单有用的快速打印异常的方法。
+
+Java使用异常来表示错误，并通过`try ... catch`捕获异常；
+
+Java的异常是`class`，并且从`Throwable`继承；
+
+`Error`是无需捕获的严重错误，`Exception`是应该捕获的可处理的错误；
+
+`RuntimeException`无需强制捕获，非`RuntimeException`（Checked Exception）需强制捕获，或者用`throws`声明；
+
+不推荐捕获了异常但不进行任何处理。
+
+
+
+### finally语句
+
+无论是否有异常发生，如果我们都希望执行一些语句，Java的`try ... catch`机制提供了`finally`语句，`finally`语句块保证有无错误都会执行：
+
+```java
+public static void main(String[] args) {
+    try {
+        process1();
+        process2();
+        process3();
+    } catch (UnsupportedEncodingException e) {
+        System.out.println("Bad encoding");
+    } catch (IOException e) {
+        System.out.println("IO error");
+    } finally {
+        System.out.println("END");
+    }
+}
+```
+
+注意`finally`有几个特点：
+
+1.  `finally`语句不是必须的，可写可不写；
+2.  `finally`总是最后执行。
+
+如果没有发生异常，就正常执行`try { ... }`语句块，然后执行`finally`。如果发生了异常，就中断执行`try { ... }`语句块，然后跳转执行匹配的`catch`语句块，最后执行`finally`。
+
+可见，`finally`是用来保证一些代码必须执行的。
+
+某些情况下，可以没有`catch`，只使用`try ... finally`结构。例如：
+
+```java
+void process(String file) throws IOException {
+    try {
+        ...
+    } finally {
+        System.out.println("END");
+    }
+}
+```
+
+因为方法声明了可能抛出的异常，所以可以不写`catch`。
+
+
+
+### 抛出异常
+
+
+
+### 自定义异常
+
+
+
+### 断言
+
+
+
+### JDK Logging
+
+### Commons Logging
+
+Commons Logging是使用最广泛的日志模块；
+
+Commons Logging的API非常简单；
+
+Commons Logging可以自动检测并使用其他日志模块。
+
+### Log4j
+
+前面介绍了Commons Logging，可以作为“日志接口”来使用。而真正的“日志实现”可以使用Log4j。
+
+在开发阶段，始终使用Commons Logging接口来写入日志，并且开发阶段无需引入Log4j。如果需要把日志写入文件，只需要把正确的配置文件和Log4j相关的jar包放入`classpath`，就可以自动把日志切换成使用Log4j写入，无需修改任何代码。
+
+
+
+## 反射
+
+### 反射的作用
+
+1、保存任意对象数据
+
+2、利用反射动态的创建对象和运行方法
+
+
+
+## 动态代理
+
+### 为什么需要代理？
+
+代理可以无侵入式的给对象增加其他的功能
+
+
+
+
+
+
+
+
+
+## 集合
+
+>   类似于 `std::vector`，也支持泛型编程
+
+### ArrayList
 
 
 
