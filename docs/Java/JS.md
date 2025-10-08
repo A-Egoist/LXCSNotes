@@ -275,7 +275,91 @@ DOM 操作核心思想：将网页中所有的元素当做对象来处理。（�
 
 ## JS事件监听
 
+事件：HTML 事件是发生在 HTML 元素上的“事情”。比如：
 
+*   按钮被点击
+*   鼠标移动到元素上
+*   按下键盘按键
+
+事件监听：JavaScript 可以在事件触发时，就立即调用一个函数做出响应，也称为<mark>事件绑定</mark>或<mark>注册事件</mark>。
+
+语法：`事件源.addEventListener('事件类型', 事件触发执行的函数);`
+
+事件监听三要素：
+
+*   事件源：哪个 DOM 元素触发了事件，要获取 DOM 元素
+*   事件类型：用什么方式触发，比如：鼠标单词 click
+*   事件触发执行的函数：要做什么事
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS事件</title>
+</head>
+<body>
+    <input type="button" id="btn1" value="点我一下试试">
+    <input type="button" id="btn2" value="点我一下试试">
+
+    <script>
+        // 事件监听
+        document.querySelector('#btn1').addEventListener('click', () => {
+            alert("试试就试试");
+        });
+    </script>
+</body>
+</html>
+```
+
+![image-20251007163223616](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510071632225.png)
+
+:bulb: 现在的写法可以多次绑定同一事件。
+
+:bulb: ​但是早期的写法多次绑定同一事件时，后面的会覆盖前面的。
+
+
+
+用 JS 实现鼠标移入移出的动态效果，实现聚焦的功能。
+
+
+
+**JS 中的常见事件**：
+
+*   鼠标事件：click, mouseenter, mouseleave
+*   键盘事件：keydown, keyup
+*   焦点事件：focus, blur
+*   表单事件：input, submit
+
+
+
+**引入 JS 文件**：
+
+`utils.js`
+
+```js
+export function printLog(msg) {
+    console.log(msg);
+}
+```
+
+`eventDemo.js`
+
+```js
+import { printLog } from "./utils.js";
+
+// 鼠标点击事件
+document.querySelector('#b2').addEventListener('click', () => {
+    printLog("我被点击了...");
+})
+```
+
+:bulb: ​模块化的 JS，需要在 HTML 中的 `<script></script>` 中指明：
+
+```html
+<script src="./js/eventDemo.js" type="module"></script>
+```
 
 
 
