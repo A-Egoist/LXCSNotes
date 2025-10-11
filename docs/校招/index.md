@@ -119,6 +119,20 @@
 
 
 
+## Blog
+
+[1] [谁偷走了你的大厂梦？个人警示录](https://www.nowcoder.com/discuss/800368788938969088)
+
+[2] [软件技术领域就业大纲（1）——公司分类](https://www.nowcoder.com/discuss/491388792067178496?sourceSSR=search)
+
+[3]
+
+[4]
+
+
+
+
+
 
 
 ## 考公考编

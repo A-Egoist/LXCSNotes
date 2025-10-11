@@ -22,6 +22,8 @@
 >   [廖雪峰JAVA教程](https://liaoxuefeng.com/books/java/introduction/index.html)
 >
 >   [小林coding | Java面试学习](https://xiaolincoding.com/interview/)
+>
+>   [江苏传智播客教育科技股份有限公司北京市昌平信息咨询分公司-Java课研](https://heuqqdmbyk.feishu.cn/wiki/QPxOw66KlikKhKk1TOlcqxHXnDd)
 
 
 
