@@ -1413,6 +1413,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../Java/JDBC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JDBC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../Java/JS/" class="md-nav__link">
         
   
@@ -1488,6 +1511,98 @@
   
   <span class="md-ellipsis">
     Maven
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Java/MyBatis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MyBatis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Java/MySQL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MySQL
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Java/SpringBoot%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SpringBoot 项目配置文件
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Java/Tlias%E6%99%BA%E8%83%BD%E5%AD%A6%E4%B9%A0%E8%BE%85%E5%8A%A9%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tlias 智能学习辅助系统
     
   </span>
   
@@ -9646,11 +9761,11 @@ atomic 默认使用的是 <code>memory_order_seq_cst</code>，也就是最严格
 <p>把所有目标文件合并成一个可执行程序，如果在所有目标文件中都没有找到实现，此时链接器就会报错（未定义的引用）。</p>
 </blockquote>
 <ol>
-<li>函数没有使用</br>
+<li>函数没有使用<br>
      编译和链接都没有问题</li>
-<li>函数使用了</br>
-     编译没问题，链接会报错</br>
-     如果该函数声明为 <strong>inline</strong>，编译期就会报错</br>
+<li>函数使用了<br>
+     编译没问题，链接会报错<br>
+     如果该函数声明为 <strong>inline</strong>，编译期就会报错<br>
      如果该函数是<strong>模板函数</strong>（需要在头文件声明和定义），编译器需要在编译期进行模板实例化（根据模板参数生成具体代码），编译期就会报错。</li>
 </ol>
 <h3 id="_17">如何解决头文件循环包含的问题？<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
@@ -9888,11 +10003,11 @@ atomic 默认使用的是 <code>memory_order_seq_cst</code>，也就是最严格
 <p>内存不够用的本质是<strong>堆区或整个虚拟地址空间的资源被耗尽或过度承诺</strong>。堆分配失败通常是程序自身设计缺陷（如内存泄漏）或资源管理不当的结果。</p>
 <h3 id="_24">堆与线程的关系<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
 <ul>
-<li>堆是进程级资源</br>
-    由进程向操作系统申请（如 <code>brk</code>/<code>mmap</code>），存放动态分配的内存（<code>malloc</code> / <code>new</code>）。</br>
+<li>堆是进程级资源<br>
+    由进程向操作系统申请（如 <code>brk</code>/<code>mmap</code>），存放动态分配的内存（<code>malloc</code> / <code>new</code>）。<br>
     所有线程都在同一个进程中运行，因此它们访问的是<strong>同一块堆</strong>。</li>
-<li>线程共享堆的意义</br>
-    多个线程可以访问同一份动态分配的数据，实现数据共享。</br>
+<li>线程共享堆的意义<br>
+    多个线程可以访问同一份动态分配的数据，实现数据共享。<br>
     这也是为什么多线程访问堆上的数据时，需要<strong>同步机制</strong>（<code>mutex</code>、<code>spinlock</code> 等）来避免数据竞争。</li>
 </ul>
 <h3 id="_25">栈与线程的关系<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
@@ -10028,11 +10143,11 @@ atomic 默认使用的是 <code>memory_order_seq_cst</code>，也就是最严格
 <p>下面是智能指针解决了裸指针的哪些痛点：</p>
 <ol>
 <li>
-<p>内存泄漏（Memory Leaks）。如果你使用 <code>new</code> 分配了内存，那么你必须在所有可能的执行路径上都确保调用 <code>delete</code> 来释放它。如果忘记释放内存，就会导致<strong>内存泄漏</strong>。</br>
+<p>内存泄漏（Memory Leaks）。如果你使用 <code>new</code> 分配了内存，那么你必须在所有可能的执行路径上都确保调用 <code>delete</code> 来释放它。如果忘记释放内存，就会导致<strong>内存泄漏</strong>。<br>
      智能指针利用了 C++ 的 <strong>RAII（Resource Acquisition Is Initialization）机制</strong>，当智能指针对象超出作用域时，它的析构函数会<strong>自动</strong>被调用，而在析构函数中，它会安全地调用 <code>delete</code> 来释放所管理的内存。</p>
 </li>
 <li>
-<p>野指针和悬空指针（Dangling Pointers）。当一个指针所指向的内存被释放后，这个指针本身并不会自动变为 <code>nullptr</code>。它就变成了<strong>悬空指针</strong>，再次访问它会导致未定义行为。</br></p>
+<p>野指针和悬空指针（Dangling Pointers）。当一个指针所指向的内存被释放后，这个指针本身并不会自动变为 <code>nullptr</code>。它就变成了<strong>悬空指针</strong>，再次访问它会导致未定义行为。<br></p>
 <p><strong>智能指针的解决方案：</strong></p>
 <ol>
 <li><code>std::unique_ptr</code> 保证<strong>独占所有权</strong>，避免了多个指针共享同一块内存的问题。当它超出作用域时，内存被释放，其他任何拷贝或移动后的指针都会失效。</li>
@@ -10040,7 +10155,7 @@ atomic 默认使用的是 <code>memory_order_seq_cst</code>，也就是最严格
 </ol>
 </li>
 <li>
-<p>多所有权场景的复杂性。当一块内存需要被多个地方共享时，裸指针无法明确地表达所有权关系。你很难判断什么时候应该 <code>delete</code> 内存，以及哪个 <code>delete</code> 是“合法”的。这在多线程环境下尤其危险。</br>
+<p>多所有权场景的复杂性。当一块内存需要被多个地方共享时，裸指针无法明确地表达所有权关系。你很难判断什么时候应该 <code>delete</code> 内存，以及哪个 <code>delete</code> 是“合法”的。这在多线程环境下尤其危险。<br>
      <code>std::shared_ptr</code> 通过<strong>引用计数</strong>完美地解决了这个问题。每次拷贝 <code>shared_ptr</code>，引用计数加一；每次 <code>shared_ptr</code> 离开作用域，引用计数减一。只有当引用计数归零时，内存才会被释放。这让多所有权场景下的内存管理变得清晰、安全且自动。</p>
 </li>
 </ol>
@@ -10146,13 +10261,13 @@ atomic 默认使用的是 <code>memory_order_seq_cst</code>，也就是最严格
 </li>
 <li>
 <p><strong>异常安全性</strong></p>
-<p><code>std::make_shared</code> 在某些复杂表达式中提供了更好的<strong>异常安全性</strong>。</br></p>
+<p><code>std::make_shared</code> 在某些复杂表达式中提供了更好的<strong>异常安全性</strong>。<br></p>
 <p>考虑以下场景：
  <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// 可能存在异常安全问题</span>
 <span class="n">f</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">T</span><span class="p">()),</span><span class="w"> </span><span class="n">g</span><span class="p">());</span>
 </code></pre></div></td></tr></table></div></p>
-<p>在这个表达式中，<code>new T()</code>、<code>shared_ptr</code> 构造函数和 <code>g()</code> 的调用顺序是不确定的。如果 <code>new T()</code> 分配了内存，但 <code>g()</code> 在 <code>shared_ptr</code> 构造函数调用前抛出异常，那么 <code>new</code> 分配的内存将<strong>永远不会被释放</strong>，导致内存泄漏。</br>
+<p>在这个表达式中，<code>new T()</code>、<code>shared_ptr</code> 构造函数和 <code>g()</code> 的调用顺序是不确定的。如果 <code>new T()</code> 分配了内存，但 <code>g()</code> 在 <code>shared_ptr</code> 构造函数调用前抛出异常，那么 <code>new</code> 分配的内存将<strong>永远不会被释放</strong>，导致内存泄漏。<br>
  而 <code>std::make_shared</code> 将整个创建过程封装在一个原子操作中，避免了这个问题。<code>std::make_shared</code> 要么完全成功，要么在失败时不会留下任何内存泄漏。</p>
 </li>
 </ol>
@@ -11561,13 +11676,13 @@ Derive:<span class="w"> </span><span class="m">5</span>
 <p>多态通过虚函数实现。通过虚函数，派生类可以重写基类的方法，当通过基类<strong>指针</strong>或<strong>引用</strong>调用时，会根据对象的实际类型调用对应的函数实现。</p>
 <p>而这更深层次的原理，是通过虚函数表（vtable）和虚函数表指针（vptr）机制实现的。虚表是一个函数指针数组，包含了该类所有虚函数的地址，而虚表指针存储在对象实例中，指向属于该对象的虚表。</p>
 <p>1）虚函数：在基类中使用 <code>virtual</code> 关键字声明虚函数之后，子类可以重写这个函数 (override)。</p>
-<p>2）虚函数表 (vtable)：</br>
-<strong>生成时机</strong>：每一个包含虚函数的<mark>类</mark>在<strong>编译时</strong>都会生成虚函数表 (vtable)，它存储该类所有虚函数的地址，对于每个类，编译器会创建唯一的 vtable。这个表是<strong>类级别</strong>的，和具体对象无关，所以在编译完成后就确定了。</br>
-<strong>存储位置</strong>：<code>vtable</code> 存储在<mark>代码段 (<code>.rodata</code> 或常量区)</mark>。</br>
+<p>2）虚函数表 (vtable)：<br>
+<strong>生成时机</strong>：每一个包含虚函数的<mark>类</mark>在<strong>编译时</strong>都会生成虚函数表 (vtable)，它存储该类所有虚函数的地址，对于每个类，编译器会创建唯一的 vtable。这个表是<strong>类级别</strong>的，和具体对象无关，所以在编译完成后就确定了。<br>
+<strong>存储位置</strong>：<code>vtable</code> 存储在<mark>代码段 (<code>.rodata</code> 或常量区)</mark>。<br>
 <strong>生命周期</strong>：程序加载到内存时建立，一直存在到程序结束 (不可修改)。</p>
-<p>3）虚函数表指针 (vptr)：</br>
-<strong>生成时机</strong>：每个包含虚函数的类的<mark>对象</mark>都会有一个隐藏成员 <code>vptr</code>，指向该类对应的虚函数表。这个 <code>vptr</code> 是在<strong>构造函数执行时</strong>由<strong>编译器</strong>自动插入代码进行初始化的，在基类构造阶段，<code>vptr</code> 会先指向基类的 <code>vtable</code>，在派生类构造阶段，<code>vptr</code> 会被更新为指向派生类的 <code>vtable</code>。在析构时，执行到基类析构函数时，<code>vptr</code> 会再次被更新为指向基类的 <code>vtable</code> (这也是为什么在基类析构函数中调用虚函数时会表现成"基类版本")。</br>
-<strong>存储位置</strong>：<mark>对象内存中 (通常在对象的起始位置)</mark>，栈上/堆上/全局(静态)区取决于对象分配方式。</br>
+<p>3）虚函数表指针 (vptr)：<br>
+<strong>生成时机</strong>：每个包含虚函数的类的<mark>对象</mark>都会有一个隐藏成员 <code>vptr</code>，指向该类对应的虚函数表。这个 <code>vptr</code> 是在<strong>构造函数执行时</strong>由<strong>编译器</strong>自动插入代码进行初始化的，在基类构造阶段，<code>vptr</code> 会先指向基类的 <code>vtable</code>，在派生类构造阶段，<code>vptr</code> 会被更新为指向派生类的 <code>vtable</code>。在析构时，执行到基类析构函数时，<code>vptr</code> 会再次被更新为指向基类的 <code>vtable</code> (这也是为什么在基类析构函数中调用虚函数时会表现成"基类版本")。<br>
+<strong>存储位置</strong>：<mark>对象内存中 (通常在对象的起始位置)</mark>，栈上/堆上/全局(静态)区取决于对象分配方式。<br>
 <strong>生命周期</strong>：随对象创建和销毁而存在。</p>
 <p>4）多态的调用机制：当通过基类指针或引用调用虚函数时，程序会通过该指针或引用找到对应的对象，然后通过 vptr 从 vtable 中找到对应的虚函数函数地址，最终调用适当的函数实现，这样程序能够在<strong>运行时决定</strong>调用哪一个函数实现。</p>
 <p>5）实例：</p>
@@ -12003,7 +12118,7 @@ Derive:<span class="w"> </span><span class="m">5</span>
 <p>一、服务器端（Server）流程</p>
 <ol>
 <li>
-<p>创建 socket</br>
+<p>创建 socket<br>
      调用 <code>socket()</code> 函数创建一个 socket 描述符，指定协议族和传输协议</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">server_fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span><span class="w"> </span><span class="n">SOCK_STREAM</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
@@ -12011,7 +12126,7 @@ Derive:<span class="w"> </span><span class="m">5</span>
 </code></pre></div></td></tr></table></div>
 </li>
 <li>
-<p>绑定地址和端口（bind）</br>
+<p>绑定地址和端口（bind）<br>
      将 socket 与服务器的 IP 地址和端口号绑定，使客户端能通过该地址访问服务器。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -12027,13 +12142,13 @@ Derive:<span class="w"> </span><span class="m">5</span>
 </code></pre></div></td></tr></table></div>
 </li>
 <li>
-<p>监听连接（listen）</br>
+<p>监听连接（listen）<br>
      将 socket 设为监听状态，等待客户端连接，并指定最大等待队列长度。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">listen</span><span class="p">(</span><span class="n">server_fd</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span><span class="w"> </span><span class="c1">// 最多允许 5 个客户端在队列中等待连接</span>
 </code></pre></div></td></tr></table></div>
 </li>
 <li>
-<p>接受连接（accept）</br>
+<p>接受连接（accept）<br>
      阻塞等待客户端连接，成功后返回一个<strong>新的 socket 描述符</strong>（用于与该客户端通信）。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -12049,13 +12164,13 @@ Derive:<span class="w"> </span><span class="m">5</span>
 <p>客户端负责<strong>主动发起连接</strong>，步骤如下：</p>
 <ol>
 <li>
-<p>创建 socket</br>
+<p>创建 socket<br>
      与服务器端类似，创建一个 TCP 类型的 socket。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">client_fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span><span class="w"> </span><span class="n">SOCK_STREAM</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </li>
 <li>
-<p>连接服务器（connect）</br>
+<p>连接服务器（connect）<br>
      向服务器的 IP 地址和端口发起连接请求，触发 TCP “三次握手”。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -12438,13 +12553,13 @@ Derive:<span class="w"> </span><span class="m">5</span>
 <p>只支持<strong>水平触发（Level Triggered, LT）</strong>。只要文件描述符就绪，<code>select</code> 就会一直报告它，直到处理完。</p>
 <p><strong>5、适用范围</strong></p>
 <p><strong>跨平台</strong>：支持所有主流操作系统（Linux/Windows/macOS）。</p>
-<p></br></p>
+<p><br></p>
 <h4 id="poll"><code>poll</code><a class="headerlink" href="#poll" title="Permanent link">&para;</a></h4>
 <ul>
 <li>改进 <code>select</code> 的 FD 数量限制，使用<strong>链表</strong>存储 FD（理论无上限）。</li>
 <li>仍需要<strong>遍历所有 FD</strong> 检查就绪状态（O(n) 时间复杂度）。</li>
 </ul>
-<p></br></p>
+<p><br></p>
 <h4 id="epoll"><code>epoll</code><a class="headerlink" href="#epoll" title="Permanent link">&para;</a></h4>
 <p><strong>1、工作原理</strong></p>
 <p>采用<strong>事件通知</strong>的方式。维护一个文件描述符列表。当调用 <code>epoll_ctl()</code> 注册文件描述符时，内核会为每个描述符注册一个<strong>回调函数</strong>。当某个描述符就绪时，内核会主动通知 <code>epoll</code>，并将其添加到<strong>就绪列表</strong>中。当调用 <code>epoll_wait()</code> 时，它会直接返回这个就绪列表，无需进行额外的遍历。</p>
