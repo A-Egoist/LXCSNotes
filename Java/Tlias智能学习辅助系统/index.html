@@ -1925,6 +1925,87 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="二、员工管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      准备工作
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      分页查询
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="分页查询">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      原始方式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pagehelper" class="md-nav__link">
+    <span class="md-ellipsis">
+      PageHelper分页插件
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      条件分页查询
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="条件分页查询">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      优化1：封装请求参数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      优化2：动态SQL
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -5859,6 +5940,87 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="二、员工管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      准备工作
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      分页查询
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="分页查询">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      原始方式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pagehelper" class="md-nav__link">
+    <span class="md-ellipsis">
+      PageHelper分页插件
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      条件分页查询
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="条件分页查询">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      优化1：封装请求参数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      优化2：动态SQL
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -6092,7 +6254,7 @@
 <li>使用 SpringBoot 的 Java 后端按照三层架构的方式实现，具体来说将后端部分分为：<ul>
 <li>Controller：接收请求、响应请求</li>
 <li>Service：业务逻辑处理</li>
-<li>Dao：数据访问。使用 MyBatis 实现，所以这一部分可以改为 Mapper。</li>
+<li>Dao (Mapper)：数据访问。使用 MyBatis 实现，所以这一部分可以改为 Mapper。</li>
 </ul>
 </li>
 <li>和前端进行数据交互的数据均封装为 JSON 格式，使用 <code>@RequestBody</code> 注解以在数据传输前自动地将 Java 对象转换为 JSON 格式</li>
@@ -6101,6 +6263,206 @@
 <li>日志使用 <code>Slf4j</code> （底层还是 <code>Logback</code>）</li>
 </ol>
 <h2 id="_4">二、员工管理<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>那接下来，我们要来完成的是员工列表的查询功能实现。 具体的需求如下：</p>
+<p><img alt="img" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510141104933.png" /></p>
+<p>在查询员工列表数据时，既需要查询 员工的基本信息，还需要查询员工所属的部门名称，所以这里呢，会涉及到多表查询的操作。</p>
+<p>而且，在查询员工列表数据时，既要考虑搜索栏中的查询条件，还要考虑对查询的结果进行分页处理。</p>
+<p>那么接下来，我们在实现这个功能时，将会分为三个部分来逐一实现：</p>
+<ul>
+<li>准备工作</li>
+<li>分页查询</li>
+<li>条件分页查询</li>
+</ul>
+<h3 id="_5">准备工作<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ol>
+<li>创建员工管理相关表结构：数据库表 emp、emp_expr</li>
+<li>准备实体类 Emp、EmpExpr</li>
+<li>准备三层架构的基本代码结构：EmpController、EmpService/EmpServiceImpl、EmpMapper</li>
+</ol>
+<h3 id="_6">分页查询<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20251014120908364" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510141209244.png" /></p>
+<h4 id="_7">原始方式<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20251014121757402" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510141217492.png" /></p>
+<p><img alt="image-20251014134516068" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510141345134.png" /></p>
+<h4 id="pagehelper">PageHelper分页插件<a class="headerlink" href="#pagehelper" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20251014170842669" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510141708586.png" /></p>
+<p><img alt="image-20251014170942525" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510141709422.png" /></p>
+<p>在 <code>pom.xml</code> 文件中引入依赖：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">&lt;!--分页插件PageHelper--&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>com.github.pagehelper<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>pagehelper-spring-boot-starter<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>1.4.7<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p>在 <code>EmpMapper.java</code> 中定义接口的查询方法（无需考虑分页）</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * 查询所有的员工及其对应的部门名称</span>
+<span class="cm"> */</span>
+<span class="nd">@Select</span><span class="p">(</span><span class="s">&quot;select e.*, d.name deptName from emp as e left join dept as d on e.dept_id = d.id&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Emp</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">list</span><span class="p">();</span>
+</code></pre></div></td></tr></table></div>
+<p>在 <code>EmpServiceImpl.java</code> 中实现分页查询</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">PageResult</span><span class="w"> </span><span class="nf">page</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">page</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">pageSize</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//1. 设置分页参数</span>
+<span class="w">    </span><span class="n">PageHelper</span><span class="p">.</span><span class="na">startPage</span><span class="p">(</span><span class="n">page</span><span class="p">,</span><span class="n">pageSize</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">//2. 执行查询</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Emp</span><span class="o">&gt;</span><span class="w"> </span><span class="n">empList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">empMapper</span><span class="p">.</span><span class="na">list</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Page</span><span class="o">&lt;</span><span class="n">Emp</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Page</span><span class="o">&lt;</span><span class="n">Emp</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="n">empList</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">//3. 封装结果</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PageResult</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">getTotal</span><span class="p">(),</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">getResult</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p><img alt="image-20251014180337180" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510141803391.png" /></p>
+<p><img alt="💡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4a1.svg" title=":bulb:" /> <code>PageHelper</code> 将原来的两次 SQL 操作替换为一次 SQL 操作。</p>
+<p><img alt="image-20251014180720214" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510141807281.png" /></p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:" /> PageHelper 实现分页查询时，SQL 语句的结尾不能加分号</p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:" /> PageHelper 只会对紧跟在其后的第一条 SQL 语句进行分页处理​</p>
+<h3 id="_8">条件分页查询<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p><img alt="img" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510141914612.png" /></p>
+<p>通过员工管理的页面原型我们可以看到，员工列表页面的查询，不仅仅需要考虑分页，还需要考虑查询条件。 分页查询我们已经实现了，接下来，我们需要考虑在分页查询的基础上，再加上查询条件。</p>
+<p>我们看到页面原型及需求中描述，搜索栏的搜索条件有三个，分别是：</p>
+<ul>
+<li>姓名：模糊匹配</li>
+<li>性别：精确匹配</li>
+<li>入职日期：范围匹配</li>
+</ul>
+<p><img alt="image-20251014202203197" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510142022634.png" /></p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:" /> ​在预编译的 SQL 中，不能够把 <code>#{}</code> 放到单引号中，比如：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@Select</span><span class="p">(</span><span class="s">&quot;SELECT e.*, d.name deptName FROM emp e LEFT JOIN dept d ON e.dept_id = d.id WHERE e.name like &#39;%#{name}%&#39; AND e.gender = #{gender} AND e.entry_date BETWEEN #{begin} AND #{end} ORDER BY e.update_time DESC LIMIT #{start}, #{pageSize}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Emp</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">conditionalQuery</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">pageSize</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">gender</span><span class="p">,</span><span class="w"> </span><span class="n">LocalDate</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">LocalDate</span><span class="w"> </span><span class="n">end</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p>应该使用 <code>CONCAT()</code> 来解决：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@Select</span><span class="p">(</span><span class="s">&quot;SELECT e.*, d.name deptName FROM emp e LEFT JOIN dept d ON e.dept_id = d.id WHERE e.name like CONCAT(&#39;%&#39;, #{name}, &#39;%&#39;) AND e.gender = #{gender} AND e.entry_date BETWEEN #{begin} AND #{end} ORDER BY e.update_time DESC LIMIT #{start}, #{pageSize}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Emp</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">conditionalQuery</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">pageSize</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">gender</span><span class="p">,</span><span class="w"> </span><span class="n">LocalDate</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">LocalDate</span><span class="w"> </span><span class="n">end</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p><img alt="image-20251014214802580" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510142148421.png" /></p>
+<h4 id="1_1">优化1：封装请求参数<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h4>
+<p>在上述分页条件查询中，请求参数比较多，有6个，如下所示：</p>
+<ul>
+<li>请求参数：/emps?name=张&amp;gender=1&amp;begin=2007-09-01&amp;end=2022-09-01&amp;page=1&amp;pageSize=10</li>
+</ul>
+<p>那我们在 Controller 层方法中，接收请求参数的时候，直接在 Controller 方法中声明这样6个参数即可，这样做，功能可以实现，但是不方便维护和管理。</p>
+<p>所以，可以将所有的参数封装为一个实体类，来管理这几个参数，不过要保证前段传递的请求参数和实体类的属性名是一样的。</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">top.amonologue.pojo</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Data</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.format.annotation.DateTimeFormat</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.time.LocalDate</span><span class="p">;</span>
+
+<span class="nd">@Data</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">EmpQueryParam</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">  </span><span class="c1">// 当前页码</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">pageSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w">  </span><span class="c1">// 每页记录数</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">  </span><span class="c1">// 员工姓名</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">gender</span><span class="p">;</span><span class="w">  </span><span class="c1">// 员工性别</span>
+<span class="w">    </span><span class="nd">@DateTimeFormat</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;yyyy-MM-dd&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">LocalDate</span><span class="w"> </span><span class="n">begin</span><span class="p">;</span><span class="w">  </span><span class="c1">// 入职日期</span>
+<span class="w">    </span><span class="nd">@DateTimeFormat</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;yyyy-MM-dd&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">LocalDate</span><span class="w"> </span><span class="n">end</span><span class="p">;</span><span class="w">  </span><span class="c1">// 离职日期</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>然后将涉及到的 Controller、Service 和 Mapper 的参数替换为这个实体类。</p>
+<h4 id="2sql">优化2：动态SQL<a class="headerlink" href="#2sql" title="Permanent link">&para;</a></h4>
+<p>通过注解的方式实现的 Mapper 不利于动态的 SQL 实现。我们可以通过 MyBatis 中的动态 SQL 来实现不同的 SQL 语句。</p>
+<p><strong>所谓动态SQL，指的就是随着用户的输入或外部的条件的变化而变化的SQL语句。</strong></p>
+<p>具体的 <code>EmpMapper.xml</code> 文件的内容：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="cp">&lt;!DOCTYPE mapper</span>
+<span class="cp">        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span>
+<span class="cp">        &quot;https://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</span>
+<span class="nt">&lt;mapper</span><span class="w"> </span><span class="na">namespace=</span><span class="s">&quot;top.amonologue.mapper.EmpMapper&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;select</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;conditionalQuery&quot;</span><span class="w"> </span><span class="na">resultType=</span><span class="s">&quot;top.amonologue.pojo.EmpQueryParam&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span>SELECT<span class="w"> </span>e.*,<span class="w"> </span>d.name<span class="w"> </span>deptName<span class="w"> </span>FROM<span class="w"> </span>emp<span class="w"> </span>e<span class="w"> </span>LEFT<span class="w"> </span>JOIN<span class="w"> </span>dept<span class="w"> </span>d<span class="w"> </span>ON<span class="w"> </span>e.dept_id<span class="w"> </span>=<span class="w"> </span>d.id
+<span class="w">        </span><span class="nt">&lt;where&gt;</span>
+<span class="w">            </span><span class="nt">&lt;if</span><span class="w"> </span><span class="na">test=</span><span class="s">&quot;name != null and name != &#39;&#39;&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span>e.name<span class="w"> </span>like<span class="w"> </span>CONCAT(&#39;%&#39;,<span class="w"> </span>#{name},<span class="w"> </span>&#39;%&#39;)
+<span class="w">            </span><span class="nt">&lt;/if&gt;</span>
+<span class="w">            </span><span class="nt">&lt;if</span><span class="w"> </span><span class="na">test=</span><span class="s">&quot;gender != null&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span>AND<span class="w"> </span>e.gender<span class="w"> </span>=<span class="w"> </span>#{gender}
+<span class="w">            </span><span class="nt">&lt;/if&gt;</span>
+<span class="w">            </span><span class="nt">&lt;if</span><span class="w"> </span><span class="na">test=</span><span class="s">&quot;begin != null and end != null&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span>AND<span class="w"> </span>e.entry_date<span class="w"> </span>BETWEEN<span class="w"> </span>#{begin}<span class="w"> </span>AND<span class="w"> </span>#{end}
+<span class="w">            </span><span class="nt">&lt;/if&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/where&gt;</span>
+<span class="w">        </span>ORDER<span class="w"> </span>BY<span class="w"> </span>e.update_time<span class="w"> </span>DESC<span class="w"> </span>LIMIT<span class="w"> </span>#{start},<span class="w"> </span>#{pageSize}
+<span class="w">    </span><span class="nt">&lt;/select&gt;</span>
+<span class="nt">&lt;/mapper&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:" /> 在不额外设置的情况下，MyBatis 的 Mapper 类要和对应的 XML 文件<mark>同包同名</mark>.</p>
+<p>在这里呢，我们用到了两个动态SQL的标签：<code>&lt;if&gt;</code>  <code>&lt;where&gt;</code>。 这两个标签的具体作用如下：</p>
+<ul>
+<li>
+<p><code>&lt;if&gt;</code>：判断条件是否成立，如果条件为true，则拼接SQL。</p>
+</li>
+<li>
+<p><code>&lt;where&gt;</code>：根据查询条件，来生成where关键字，并会自动去除条件前面多余的and或or。</p>
+</li>
+</ul>
+<p><img alt="image-20251014231032852" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510142310779.png" /></p>
 
 
 
