@@ -363,8 +363,6 @@ document.querySelector('#b2').addEventListener('click', () => {
 
 
 
-
-
 ## 参考资料
 
 [1] [MDN](https://developer.mozilla.org/zh-CN/)
