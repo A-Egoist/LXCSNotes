@@ -521,3 +521,17 @@ select * from emp e , (select dept_id, max(salary) max_sal from emp group by dep
 
 ## 事务
 
+![image-20251015223113683](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510152231573.png)
+
+![image-20251015223211521](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510152232594.png)
+
+![image-20251015223608557](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510152236401.png)
+
+:bulb: 只要见到在一个业务场景中需要操作多次数据库表中的数据，就会涉及到事务操作。
+
+
+
+### 事务的四大特性
+
+![image-20251015225643960](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510152256901.png)
+
