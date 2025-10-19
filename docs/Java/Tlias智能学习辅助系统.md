@@ -1199,19 +1199,108 @@ JWT令牌最典型的应用场景就是登录认证：
 
 
 
+**案例**
+
+JWT 令牌的生成和校验的基本操作我们已经学习完了，接下来我们就需要在案例当中通过 JWT 令牌技术来跟踪会话。具体的思路我们前面已经分析过了，主要就是两步操作：
+
+1.  生成令牌
+    1.  在登录成功之后来生成一个 JWT 令牌，并且把这个令牌直接返回给前端
+2.  校验令牌
+    1.  拦截前端请求，从请求中获取到令牌，对令牌进行解析校验
+
+那我们首先来完成：登录成功之后生成 JWT 令牌，并且把令牌返回给前端。
+
+:bulb: JWT 令牌存储在浏览器的本地存储空间 `localstorage` 中了。 `localstorage` 是浏览器的本地存储，在移动端也是支持的。
+
 
 
 #### 过滤器 Filter
 
+通过浏览器的开发者工具，我们可以看到在后续的请求当中，都会在请求头中携带JWT令牌到服务端，而服务端需要统一拦截所有的请求，从而判断是否携带的有合法的JWT令牌。
 
+那怎么样来统一拦截到所有的请求校验令牌的有效性呢？这里我们会学习两种解决方案：
+
+1.  Filter过滤器
+2.  Interceptor拦截器
+
+我们首先来学习过滤器Filter。
+
+
+
+**快速入门**
+
+![image-20251019101849911](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191018915.png)
+
+![image-20251019102114148](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191021807.png)
+
+![image-20251019103359376](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191034195.png)
+
+
+
+**登录校验 Filter**
+
+![image-20251019105438677](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191054565.png)
+
+
+
+**令牌校验流程**
+
+我们要完成登录校验，主要是利用Filter过滤器实现，而Filter过滤器的流程步骤：
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191056385.png" alt="img" style="zoom: 67%;" />
+
+基于上面的业务流程，我们分析出具体的操作步骤：
+
+1.  获取请求url
+2.  判断请求url中是否包含login，如果包含，说明是登录操作，放行
+3.  获取请求头中的令牌（token）
+4.  判断令牌是否存在，如果不存在，响应 401
+5.  解析token，如果解析失败，响应 401
+6.  放行
+
+
+
+**详解(执行流程、拦截路径、过滤器链)**
+
+![image-20251019110912074](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191109928.png)
+
+![image-20251019111111237](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191111072.png)
+
+:warning: 在目录拦截部分，`/emps/*` 中的 `/*` 可以有也可以没有。也就是说 `/emps/*` 可以拦截请求路径 `/emps` 及其子路径。
+
+![image-20251019111416969](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191114885.png)
+
+![image-20251019111523793](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191115658.png)
 
 
 
 #### 拦截器 Interceptor
 
+![image-20251019111815253](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191118260.png)
 
 
 
+**快速入门**
+
+![image-20251019112143719](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191121775.png)
+
+![image-20251019112807153](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191128136.png)
+
+
+
+**令牌校验 Interceptor**
+
+![image-20251019112855369](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191128204.png)
+
+
+
+**详解(拦截路径、执行流程)**
+
+![image-20251019124832793](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191248673.png)
+
+![image-20251019125322016](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191253949.png)
+
+![image-20251019125344521](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191253288.png)
 
 
 
