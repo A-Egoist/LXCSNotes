@@ -7754,8 +7754,63 @@ setx<span class="w"> </span>OSS_ACCESS_KEY_SECRET<span class="w"> </span><span c
 <p><img alt="image-20251018222804622" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510182228569.png" /></p>
 <p><img alt="image-20251018222836953" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510182228732.png" /></p>
 <p><img alt="image-20251018223912542" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510182239433.png" /></p>
+<p><strong>案例</strong></p>
+<p>JWT 令牌的生成和校验的基本操作我们已经学习完了，接下来我们就需要在案例当中通过 JWT 令牌技术来跟踪会话。具体的思路我们前面已经分析过了，主要就是两步操作：</p>
+<ol>
+<li>生成令牌<ol>
+<li>在登录成功之后来生成一个 JWT 令牌，并且把这个令牌直接返回给前端</li>
+</ol>
+</li>
+<li>校验令牌<ol>
+<li>拦截前端请求，从请求中获取到令牌，对令牌进行解析校验</li>
+</ol>
+</li>
+</ol>
+<p>那我们首先来完成：登录成功之后生成 JWT 令牌，并且把令牌返回给前端。</p>
+<p><img alt="💡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4a1.svg" title=":bulb:" /> JWT 令牌存储在浏览器的本地存储空间 <code>localstorage</code> 中了。 <code>localstorage</code> 是浏览器的本地存储，在移动端也是支持的。</p>
 <h4 id="filter">过滤器 Filter<a class="headerlink" href="#filter" title="Permanent link">&para;</a></h4>
+<p>通过浏览器的开发者工具，我们可以看到在后续的请求当中，都会在请求头中携带JWT令牌到服务端，而服务端需要统一拦截所有的请求，从而判断是否携带的有合法的JWT令牌。</p>
+<p>那怎么样来统一拦截到所有的请求校验令牌的有效性呢？这里我们会学习两种解决方案：</p>
+<ol>
+<li>Filter过滤器</li>
+<li>Interceptor拦截器</li>
+</ol>
+<p>我们首先来学习过滤器Filter。</p>
+<p><strong>快速入门</strong></p>
+<p><img alt="image-20251019101849911" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191018915.png" /></p>
+<p><img alt="image-20251019102114148" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191021807.png" /></p>
+<p><img alt="image-20251019103359376" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191034195.png" /></p>
+<p><strong>登录校验 Filter</strong></p>
+<p><img alt="image-20251019105438677" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191054565.png" /></p>
+<p><strong>令牌校验流程</strong></p>
+<p>我们要完成登录校验，主要是利用Filter过滤器实现，而Filter过滤器的流程步骤：</p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191056385.png" alt="img" style="zoom: 67%;" /></p>
+<p>基于上面的业务流程，我们分析出具体的操作步骤：</p>
+<ol>
+<li>获取请求url</li>
+<li>判断请求url中是否包含login，如果包含，说明是登录操作，放行</li>
+<li>获取请求头中的令牌（token）</li>
+<li>判断令牌是否存在，如果不存在，响应 401</li>
+<li>解析token，如果解析失败，响应 401</li>
+<li>放行</li>
+</ol>
+<p><strong>详解(执行流程、拦截路径、过滤器链)</strong></p>
+<p><img alt="image-20251019110912074" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191109928.png" /></p>
+<p><img alt="image-20251019111111237" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191111072.png" /></p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:" /> 在目录拦截部分，<code>/emps/*</code> 中的 <code>/*</code> 可以有也可以没有。也就是说 <code>/emps/*</code> 可以拦截请求路径 <code>/emps</code> 及其子路径。</p>
+<p><img alt="image-20251019111416969" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191114885.png" /></p>
+<p><img alt="image-20251019111523793" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191115658.png" /></p>
 <h4 id="interceptor">拦截器 Interceptor<a class="headerlink" href="#interceptor" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20251019111815253" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191118260.png" /></p>
+<p><strong>快速入门</strong></p>
+<p><img alt="image-20251019112143719" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191121775.png" /></p>
+<p><img alt="image-20251019112807153" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191128136.png" /></p>
+<p><strong>令牌校验 Interceptor</strong></p>
+<p><img alt="image-20251019112855369" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191128204.png" /></p>
+<p><strong>详解(拦截路径、执行流程)</strong></p>
+<p><img alt="image-20251019124832793" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191248673.png" /></p>
+<p><img alt="image-20251019125322016" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191253949.png" /></p>
+<p><img alt="image-20251019125344521" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510191253288.png" /></p>
 
 
 
