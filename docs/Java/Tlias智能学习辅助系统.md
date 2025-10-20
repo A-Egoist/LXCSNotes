@@ -1304,9 +1304,39 @@ JWT 令牌的生成和校验的基本操作我们已经学习完了，接下来�
 
 
 
+## 六、Spring AOP
+
+![image-20251020102414388](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510201024207.png)
+
+![image-20251020102331947](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510201023818.png)
 
 
 
+### AOP 基础
+
+![image-20251020102638074](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510201027275.png)
+
+![image-20251020103939429](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510201039805.png)
+
+:bulb: ​侵入式和非侵入式
+
+![image-20251020104521172](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510201045194.png)
+
+
+
+
+
+### AOP 进阶
+
+
+
+
+
+
+
+
+
+### AOP 案例
 
 
 

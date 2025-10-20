@@ -190,6 +190,12 @@ UE
 
 
 
+## 行业知识
+
+[1] [断缴？灵活就业？试用期没有？学校不教你的“五险一金”，一次讲清！](https://www.bilibili.com/video/BV1pQDwYCEp7?spm_id_from=333.1245.0.0)
+
+
+
 
 
 ## 参考资料
