@@ -1324,11 +1324,41 @@ JWT 令牌的生成和校验的基本操作我们已经学习完了，接下来�
 
 
 
+![image-20251021084110122](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510210841089.png)
+
+:bulb: 切入点是连接点，但是连接点不一定是切入点
+
+![image-20251021084543771](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510210845734.png)
+
 
 
 ### AOP 进阶
 
+#### 通知类型
 
+![image-20251024180141434](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510241801514.png)
+
+![image-20251024180643981](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510241806791.png)
+
+![image-20251024180716456](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510241807505.png)
+
+
+
+#### 通知顺序
+
+![image-20251024181145513](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510241811362.png)
+
+
+
+#### 切入点表达式
+
+
+
+
+
+
+
+#### 连接点
 
 
 
