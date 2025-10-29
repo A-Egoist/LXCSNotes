@@ -1352,15 +1352,21 @@ JWT 令牌的生成和校验的基本操作我们已经学习完了，接下来�
 
 #### 切入点表达式
 
+![image-20251029140153899](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291402450.png)
 
+![image-20251029140436869](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291404067.png)
 
+![image-20251029140532039](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291405455.png)
 
+![image-20251029140622801](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291406859.png)
+
+优先使用 `execution` 表达式
 
 
 
 #### 连接点
 
-
+![image-20251029142135688](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291421549.png)
 
 
 
@@ -1368,15 +1374,19 @@ JWT 令牌的生成和校验的基本操作我们已经学习完了，接下来�
 
 ### AOP 案例
 
+![image-20251029142911901](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291429799.png)
+
+![image-20251029145007054](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291450852.png)
 
 
 
 
 
+:warning: ThreadLocal
 
+![image-20251029145637898](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291456627.png)
 
-
-
+![image-20251029150109265](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291501135.png)
 
 
 
