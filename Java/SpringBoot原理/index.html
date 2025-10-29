@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../SpringBoot%E5%8E%9F%E7%90%86/">
+        <link rel="prev" href="../MySQL/">
       
       
-        <link rel="next" href="../Tlias%E6%99%BA%E8%83%BD%E5%AD%A6%E4%B9%A0%E8%BE%85%E5%8A%A9%E7%B3%BB%E7%BB%9F/">
+        <link rel="next" href="../SpringBoot%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>SpringBoot 项目配置文件 - LXCSNotes</title>
+        <title>SpringBoot 原理 - LXCSNotes</title>
       
     
     
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              SpringBoot 项目配置文件
+              SpringBoot 原理
             
           </span>
         </div>
@@ -1599,29 +1599,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../SpringBoot%E5%8E%9F%E7%90%86/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    SpringBoot 原理
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -1634,7 +1611,171 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    SpringBoot 原理
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    SpringBoot 原理
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      配置优先级
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bean" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bean 管理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bean 管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bean_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bean 的作用域
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bean_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      第三方 Bean
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#springboot_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      SpringBoot 原理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SpringBoot 原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      起步依赖
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      自动配置
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="自动配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      实现方案
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      源码跟踪
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#starter" class="md-nav__link">
+    <span class="md-ellipsis">
+      自定义 starter
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SpringBoot%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" class="md-nav__link">
         
   
   
@@ -1645,7 +1786,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -5317,6 +5457,122 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      配置优先级
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bean" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bean 管理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bean 管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bean_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bean 的作用域
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bean_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      第三方 Bean
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#springboot_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      SpringBoot 原理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SpringBoot 原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      起步依赖
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      自动配置
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="自动配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      实现方案
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      源码跟踪
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#starter" class="md-nav__link">
+    <span class="md-ellipsis">
+      自定义 starter
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -5334,13 +5590,42 @@
   
 
 
-<h1 id="springboot">SpringBoot 项目配置文件<a class="headerlink" href="#springboot" title="Permanent link">&para;</a></h1>
-<p><img alt="image-20251011223412063" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510112234614.png" /></p>
-<p><img alt="image-20251011223713883" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510112237742.png" /></p>
-<p><img alt="image-20251011224002894" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510112240823.png" /></p>
-<p><img alt="image-20251011224028690" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510112240499.png" /></p>
-<p><img alt="💡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4a1.svg" title=":bulb:" /> ​配置文件的格式选择：<code>yml</code> &gt; <code>properties</code>，其中在 <code>yaml</code> 和 <code>yml</code> 两者中，后者在项目中更常用。</p>
-<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:" /> <code>yml</code> 配置文件中以 0 开头的值表示八进制，如果想表示其本身含义，需要使用 <code>''</code>​ 引起来。</p>
+<h1 id="springboot">SpringBoot 原理<a class="headerlink" href="#springboot" title="Permanent link">&para;</a></h1>
+<h2 id="_1">配置优先级<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><img alt="image-20251029155957954" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291559766.png" /></p>
+<p>SpringBoot 支持三种格式的配置文件：<code>.properties</code>、<code>.yml</code>、<code>.yaml</code></p>
+<p><img alt="💡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4a1.svg" title=":bulb:" /> 其中优先级为：<code>.properties</code> &gt; <code>.yml</code> &gt; <code>.yaml</code></p>
+<p><img alt="💡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4a1.svg" title=":bulb:" /> 但是推荐使用 <code>.yml</code> 格式的配置文件</p>
+<p><img alt="image-20251029160436500" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291604348.png" /></p>
+<p><img alt="💡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4a1.svg" title=":bulb:" /> 总的优先级：<code>命令行参数</code> &gt; <code>Java系统属性</code> &gt; <code>.properties</code> &gt; <code>.yml</code> &gt; <code>.yaml</code></p>
+<p><img alt="image-20251029160841585" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291608434.png" /></p>
+<p><img alt="💡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4a1.svg" title=":bulb:" /> ​单个 <code>-</code> 开始的参数表示 <code>Java系统属性</code>，两个 <code>--</code> 开始的参数表示 <code>命令行参数</code>。</p>
+<h2 id="bean">Bean 管理<a class="headerlink" href="#bean" title="Permanent link">&para;</a></h2>
+<h3 id="bean_1">Bean 的作用域<a class="headerlink" href="#bean_1" title="Permanent link">&para;</a></h3>
+<p>Bean 的默认作用域 <code>singleton</code>：默认单例的 Bean 是在项目启动时创建的，创建完毕后会将该 Bean 存入 IOC 容器中。</p>
+<p><code>@Lazy</code> 注解：延迟初始化，将单例对象的初始化延迟到第一次使用的时候，再来创建这个 bean，即懒汉模式。</p>
+<p><code>@Scope("prototype")</code> 注解：非单例的，多例的</p>
+<p><img alt="image-20251029175758697" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291757472.png" /></p>
+<p><img alt="image-20251029180139100" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291801942.png" /></p>
+<p><img alt="image-20251029180312338" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291803025.png" /></p>
+<p><img alt="💡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4a1.svg" title=":bulb:" /> ​Bean 的默认名字是类名首字母小写。</p>
+<h3 id="bean_2">第三方 Bean<a class="headerlink" href="#bean_2" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20251029182621366" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291826289.png" /></p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:" /> 通过 <code>@Bean</code> 注解的 Bean 的名称默认就是方法名。</p>
+<p><img alt="💡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4a1.svg" title=":bulb:" /> ​推荐使用一个单独的配置类来管理第三方 Bean</p>
+<p><img alt="image-20251029182810877" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291828769.png" /></p>
+<h2 id="springboot_1">SpringBoot 原理<a class="headerlink" href="#springboot_1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">起步依赖<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>起步依赖的原理：Maven 的依赖传递</p>
+<h3 id="_3">自动配置<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20251029185629423" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291856253.png" /></p>
+<h4 id="_4">实现方案<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<p><strong>自动配置实现方案一</strong>：<code>@Component</code> + <code>@ComponentScan</code></p>
+<p>组件扫描，通过 <code>@ComponentScan</code> 设置扫描的包</p>
+<p><img alt="image-20251029190635911" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291906939.png" /></p>
+<p><strong>自动配置实现方案二</strong>：</p>
+<h4 id="_5">源码跟踪<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<h4 id="starter">自定义 starter<a class="headerlink" href="#starter" title="Permanent link">&para;</a></h4>
 
 
 
