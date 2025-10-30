@@ -5624,7 +5624,25 @@
 <p>组件扫描，通过 <code>@ComponentScan</code> 设置扫描的包</p>
 <p><img alt="image-20251029190635911" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510291906939.png" /></p>
 <p><strong>自动配置实现方案二</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// @Import(TokenParser.class)  // 普通类</span>
+<span class="c1">// @Import(HeaderConfig.class)  // 配置类</span>
+<span class="c1">// @Import(MyImportSelector.class)  // ImportSelector 接口实现类 - 批量导入</span>
+
+<span class="c1">// @EnableHeaderConfig  // 导入第三方库提供的注解，第三方库在这个注解内部实现了 @Import 注解</span>
+</code></pre></div></td></tr></table></div>
+<p><img alt="image-20251030220025746" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510302203307.png" /></p>
 <h4 id="_5">源码跟踪<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20251030222159525" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510302222462.png" /></p>
+<p><img alt="image-20251030222555450" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510302225603.png" /></p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:" /></p>
+<blockquote>
+<p>Bean、IOC 容器、自动注入</p>
+</blockquote>
+<p><code>@Conditional</code> 注解的作用</p>
 <h4 id="starter">自定义 starter<a class="headerlink" href="#starter" title="Permanent link">&para;</a></h4>
 
 
