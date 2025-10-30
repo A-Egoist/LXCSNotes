@@ -78,11 +78,35 @@ Bean 的默认作用域 `singleton`：默认单例的 Bean 是在项目启动时
 
 **自动配置实现方案二**：
 
+```java
+// @Import(TokenParser.class)  // 普通类
+// @Import(HeaderConfig.class)  // 配置类
+// @Import(MyImportSelector.class)  // ImportSelector 接口实现类 - 批量导入
 
+// @EnableHeaderConfig  // 导入第三方库提供的注解，第三方库在这个注解内部实现了 @Import 注解
+```
+
+![image-20251030220025746](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510302203307.png)
 
 
 
 #### 源码跟踪
+
+![image-20251030222159525](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510302222462.png)
+
+![image-20251030222555450](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510302225603.png)
+
+
+
+:warning:
+
+>   Bean、IOC 容器、自动注入
+
+
+
+`@Conditional` 注解的作用
+
+
 
 
 
