@@ -37,3 +37,28 @@ SpringBoot 项目配置文件：[SpringBoot项目配置文件](./SpringBoot项�
 **Tlias 智能学习辅助系统**
 
 Tlias 案例：[Tlias智能学习辅助系统](./Tlias智能学习辅助系统.md)
+
+
+
+### Web 后端开发总结
+
+![image-20251101113428194](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202511011134247.png)
+
+![image-20251101113719469](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202511011137421.png)
+
+:bulb: SSM 就是指 SpringMVC、Spring framework、MyBatis​
+
+
+
+## Web 前端实战
+
+Vue 工程化：[Vue工程化.md](./Vue工程化.md)
+
+ElementPlus：[ElementPlus.md](./ElementPlus.md)
+
+
+
+## Web 项目部署
+
+
+

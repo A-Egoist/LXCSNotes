@@ -106,37 +106,20 @@ Bean 的默认作用域 `singleton`：默认单例的 Bean 是在项目启动时
 
 `@Conditional` 注解的作用
 
+![image-20251031151108361](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510311511269.png)
 
+![image-20251031151316015](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510311513354.png)
+
+![image-20251031151514276](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510311515115.png)
 
 
 
 #### 自定义 starter
 
+![image-20251031184542560](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510311845525.png)
 
+![image-20251031205237981](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510312052764.png)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+https://www.bilibili.com/video/BV1yGydYEE3H/?p=147
 
 
