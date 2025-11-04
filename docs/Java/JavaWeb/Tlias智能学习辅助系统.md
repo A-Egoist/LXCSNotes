@@ -1392,13 +1392,31 @@ JWT 令牌的生成和校验的基本操作我们已经学习完了，接下来�
 
 
 
+## 七、前端实现
 
 
 
+### 打包部署
+
+1、打包
 
 
 
+2、部署(Nginx)
 
+![image-20251104181155526](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202511041812616.png)
+
+![image-20251104181321824](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202511041813755.png)
+
+![image-20251104181840682](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202511041818605.png)
+
+查看进程端口占用：
+
+```bash
+netstat -ano |findStr 80
+```
+
+![image-20251104181954976](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202511041819780.png)
 
 
 

@@ -18,15 +18,17 @@ Ajax/Axios 基础：[Ajax](./Ajax.md)
 
 Maven 基础：[Maven](./Maven.md)
 
-Web 基础知识：[Web基础知识](./Web基础知识.md)
+Web 基础知识 + SpringBoot 基础：[Web基础知识](./Web基础知识.md)
+
+SpringBoot 原理：[SpringBoot原理](./SpringBoot原理.md)
+
+SpringBoot 项目配置文件：[SpringBoot项目配置文件](./SpringBoot项目配置文件.md)
 
 MySQL：[MySQL](./MySQL.md)
 
 JDBC：[JDBC](./JDBC.md)
 
 MyBatis：[MyBatis](./MyBatis.md)
-
-SpringBoot 项目配置文件：[SpringBoot项目配置文件](./SpringBoot项目配置文件.md)
 
 ![image-20251011224542139](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510112245515.png)
 
@@ -40,25 +42,45 @@ Tlias 案例：[Tlias智能学习辅助系统](./Tlias智能学习辅助系统.m
 
 
 
-### Web 后端开发总结
+**Web 后端开发总结**
 
 ![image-20251101113428194](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202511011134247.png)
 
 ![image-20251101113719469](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202511011137421.png)
 
-:bulb: SSM 就是指 SpringMVC、Spring framework、MyBatis​
+:bulb: **SSM** 就是指 **SpringMVC**、**Spring framework**、**MyBatis​**
 
 
 
 ## Web 前端实战
 
-Vue 工程化：[Vue工程化.md](./Vue工程化.md)
+Vue3：[Vue3](./Vue3.md)
 
-ElementPlus：[ElementPlus.md](./ElementPlus.md)
+ElementPlus：[ElementPlus](./ElementPlus.md)
 
 
 
 ## Web 项目部署
+
+![image-20251104182055633](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202511041820510.png)
+
+### Linux
+
+#### 前端项目部署
+
+
+
+
+
+#### 后端项目部署
+
+
+
+
+
+### Docker
+
+
 
 
 
