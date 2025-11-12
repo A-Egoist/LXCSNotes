@@ -9,7 +9,7 @@
 -   [ ] [黑马程序员Java项目实战《苍穹外卖》，最适合新手的SpringBoot+SSM的企业级Java项目实战](https://www.bilibili.com/video/BV1TP411v7v6?spm_id_from=333.1245.0.0)
 -   [ ] [不同阶段如何准备项目? 项目烂大街怎么办? 三招教你给烂大街项目换皮](https://www.bilibili.com/video/BV1MpqnYuEoy/?spm_id_from=333.337.search-card.all.click&vd_source=f4cc25a44af6631d6f4db023b3bb88e4)
 -   [ ] [✨超炫酷透明主题的个人博客v2.0（vue3➕springboot）](https://www.bilibili.com/video/BV1618kz2Es3/?spm_id_from=333.788.recommend_more_video.4&vd_source=f4cc25a44af6631d6f4db023b3bb88e4)
--   [ ] 
+-   [ ] [项目烂大街要不要换个项目](https://www.bilibili.com/video/BV11Y2wBhEz1/?share_source=copy_web&vd_source=b5ed364998fc1b958c57abd6dbda38e3)
 
 
 
@@ -50,6 +50,14 @@
 -   [x] 黑马 Tlias 项目
 -   [ ] 苍穹外卖
 -   [ ] 秒杀系统
+
+
+
+## 其他技术栈
+
+-   [ ] [不同阶段如何准备项目? 项目烂大街怎么办? 三招教你给烂大街项目换皮](https://www.bilibili.com/video/BV1MpqnYuEoy/?share_source=copy_web&vd_source=b5ed364998fc1b958c57abd6dbda38e3)
+-   [ ] [Java入职必知必会-48 工作中gradle的基本使用](https://www.bilibili.com/video/BV1BiWhzaEfw?spm_id_from=333.1245.0.0)
+-   [ ] 
 
 
 
