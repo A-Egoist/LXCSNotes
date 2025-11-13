@@ -30,3 +30,11 @@ mkdocs build
 mkdocs gh-deploy
 ```
 
+
+
+## 仓库结构
+
+博客的所有源文件都放在 `/docs` 目录下，`/site` 目录下是编译好的网页。
+
+在 `/docs` 目录下，有三个目录属于页面设置相关：`/assets`、`/javascripts`、`stylesheets`。
+

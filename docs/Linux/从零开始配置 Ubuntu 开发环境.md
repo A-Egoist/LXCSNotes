@@ -2,8 +2,6 @@
 
 在 WSL2 的 Ubuntu 系统中配置 C/C++ 和 Python 开发环境，请按以下步骤操作：
 
----
-
 ### 1. 更新系统包
 ```bash
 sudo apt update && sudo apt upgrade -y
@@ -20,7 +18,8 @@ sudo apt install gdb valgrind -y
 ```
 
 ### 3. 安装 Python 开发环境 (TODO)
-#### 基础 Python 环境
+**基础 Python 环境**
+
 ```bash
 # 安装 Python 3 和 pip
 sudo apt install python3 python3-pip python3-venv -y
@@ -29,7 +28,8 @@ sudo apt install python3 python3-pip python3-venv -y
 python3 -m pip install --upgrade pip
 ```
 
-#### 配置虚拟环境（推荐）
+**配置虚拟环境（推荐）**
+
 ```bash
 # 创建项目目录
 mkdir my_project && cd my_project
@@ -69,8 +69,6 @@ sudo apt install git -y
 alias venv='source .venv/bin/activate'
 ```
 
----
-
 ### 6. 验证安装 (TODO)
 #### C 程序测试
 ```bash
@@ -88,12 +86,6 @@ g++ test.cpp -o test && ./test
 ```bash
 python3 -c 'print("Hello WSL!")'
 ```
-
-
-
----
-
-通过以上步骤，你已获得完整的 C/C++/Python 开发环境。建议使用 VS Code + WSL 扩展获得最佳开发体验，并优先在 Linux 文件系统内操作避免性能问题。
 
 
 
@@ -207,35 +199,38 @@ echo "neofetch" >> ~/.bashrc
      warning: completion was already initialized before completion module. Will call compinit again. See https://github.com/zimfw/zimfw/wiki/Troubleshooting#completion-is-not-working
      ```
 
-     参考 github 中的解决方法。
-
-     即，将 `/etc/zsh/zshrc` 中的如下内容注释掉：
+     参考 github 中的解决方法，将 `/etc/zsh/zshrc` 中的如下内容注释掉。
+     即，将：
+     
      ```txt
-     将
      if (( ${${(@f)"$(</etc/os-release)"}[(I)ID*=*ubuntu]} )) &&
         [[ -z "$skip_global_compinit" ]]; then
        autoload -U compinit
        compinit
      fi
-     修改为
+     ```
+     
+     修改为：
+     
+     ```txt
      if (( ${${(@f)"$(</etc/os-release)"}[(I)ID*=*ubuntu]} )) &&
         [[ -z "$skip_global_compinit" ]]; then
      #   autoload -U compinit
      #   compinit
      fi
      ```
-
+     
      如果提示权限不足，使用 `chmod` 修改权限：
      ```bash
      sudo chmod 0777 /etc/zsh/zshrc
      ```
-
+     
      之后记得修改会原来的权限：
      ```bash
      sudo chmod 0644 /etc/zsh/zshrc
      ```
 
-3.   
+
 
 ### tmux 改建
 

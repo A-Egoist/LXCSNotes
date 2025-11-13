@@ -1,3 +1,5 @@
+# Ubuntu 开机发送 IP 到指定邮箱
+
 1.   编写 Python 脚本, 用于获取本机 IP 并发送到指定邮箱
 
      ```python
@@ -93,28 +95,28 @@
           [Install]
           WantedBy=multi-user.target
           ```
-     
+
           其中, `ExecStart` 指定脚本的绝对路径
-     
+
      3.   给服务和脚本设置权限
-     
+
           ```bash
           sudo chmod 777 /home/username/SendHostIP/send_host_ip_to_qq_mail.sh
           sudo chmod 777 /etc/systemd/system/SendHostIP.service
           ```
-     
+
      4.   重新加载服务的配置文件, 并将服务设置为开机自启动
-     
+
           ```bash
           sudo systemctl daemon-reload
           sudo systemctl enable SendHostIP.service
           ```
-     
+
      5.   然后重启主机, 查看服务状态
-     
+
           ```bash
           sudo systemctl status SendHostIP.service
           ```
-     
+
           
 

@@ -1,4 +1,4 @@
-# PyTorch 张量和模型的保存与加载
+# PyTorch 中张量和模型的保存与加载
 
 PyTorch 中 Tensor 和模型可以保存为 `.pt`, `.pth`, `.pkl` 格式的文件，三者在格式上没有区别
 

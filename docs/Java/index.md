@@ -1,4 +1,4 @@
-# Java 学习建议
+# 学习路线
 
 ## TODO
 
@@ -19,8 +19,6 @@
 2.   Java 基础
 3.   黑马 Tlias 项目(JavaWeb 前端基础 + JavaWeb 后端基础)：[JavaWeb](./JavaWeb/index.md)
 4.   苍穹外码(TODO)
-
-
 
 
 
@@ -57,7 +55,6 @@
 
 -   [ ] [不同阶段如何准备项目? 项目烂大街怎么办? 三招教你给烂大街项目换皮](https://www.bilibili.com/video/BV1MpqnYuEoy/?share_source=copy_web&vd_source=b5ed364998fc1b958c57abd6dbda38e3)
 -   [ ] [Java入职必知必会-48 工作中gradle的基本使用](https://www.bilibili.com/video/BV1BiWhzaEfw?spm_id_from=333.1245.0.0)
--   [ ] 
 
 
 

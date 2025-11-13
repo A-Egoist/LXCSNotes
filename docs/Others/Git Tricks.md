@@ -1,4 +1,4 @@
-# Tricks
+# Git Tricks
 
 
 

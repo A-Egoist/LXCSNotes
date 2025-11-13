@@ -1,4 +1,4 @@
-# LaTeX Note
+# LaTeX Notes
 
 ## LaTeX 的基本概念
 
