@@ -572,7 +572,7 @@ INSERT INTO emp_expr(emp_id, begin, end, company, job) VALUES(37, '2012-07-01', 
 
 ### 事务管理
 
-MySQL 的事务管理原理详见：[MySQL](./MySQL.md)
+MySQL 的事务管理原理详见：[MySQL](../MySQL.md)
 
 ![image-20251015223850897](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510152238527.png)
 

@@ -16,7 +16,7 @@ Ajax/Axios 基础：[Ajax](./Ajax.md)
 
 ## Web后端基础
 
-Maven 基础：[Maven](./Maven.md)
+Maven 基础：[Maven](../Maven.md)
 
 Web 基础知识 + SpringBoot 基础：[Web基础知识](./Web基础知识.md)
 
@@ -24,7 +24,7 @@ SpringBoot 原理：[SpringBoot原理](./SpringBoot原理.md)
 
 SpringBoot 项目配置文件：[SpringBoot项目配置文件](./SpringBoot项目配置文件.md)
 
-MySQL：[MySQL](./MySQL.md)
+MySQL：[MySQL](../MySQL.md)
 
 JDBC：[JDBC](./JDBC.md)
 

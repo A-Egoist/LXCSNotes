@@ -15,10 +15,13 @@
 
 ## 个人学习路线
 
-1.   C/C++ 基础
-2.   Java 基础
-3.   黑马 Tlias 项目(JavaWeb 前端基础 + JavaWeb 后端基础)：[JavaWeb](./JavaWeb/index.md)
-4.   苍穹外码：[苍穹外卖](./苍穹外卖/index.md)
+1.   Java 基础（[教程](https://www.bilibili.com/video/BV1gb42177hm)，[笔记](./Java基础.md)）
+2.   Java Web 框架
+     -   [x] 黑马 Tlias 项目(JavaWeb 前端基础 + JavaWeb 后端基础)（[教程](https://www.bilibili.com/video/BV1yGydYEE3H)，[笔记](./JavaWeb/index.md)）
+3.   单体项目开发
+     -   [ ] 黑马苍穹外卖（[教程](https://www.bilibili.com/video/BV1TP411v7v6)，[笔记](./苍穹外卖/index.md)）
+4.   企业级项目实战
+5.   
 
 
 
@@ -65,3 +68,5 @@
 [2] [给C++就业方向的应届毕业生的一些分析与建议，帮助大家少浪费时间，多花时间在有意义的事情上](https://www.bilibili.com/video/BV1PY4y1e7VB?spm_id_from=333.1245.0.0)：<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202511041832278.png" alt="image-20250814101032944" style="zoom: 40%;" />
 
 [3] [写给后来人想去银行国企java的路线规划](https://www.nowcoder.com/discuss/353159589929623552)
+
+[4] [2026黑马程序员Java学习路线图](https://www.bilibili.com/opus/494817843530680807)
