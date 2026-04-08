@@ -12,6 +12,13 @@
 
 [MySQL安装文档](https://heuqqdmbyk.feishu.cn/wiki/ZRSFwACsRiBD2NkV7bmcrJhInme)
 
+MySQL 相关命令
+
+```cmd
+net start mysql  // 启动 mysql 服务
+net stop mysql  // 停止 mysql 服务
+```
+
 ![image-20251011111841255](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510111118178.png)
 
 ![image-20251011111859746](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510111119579.png)
