@@ -2,19 +2,19 @@
 
 ## 课程导学
 
-![image-20260403180310594](./assets/202604031803641.png)
+![image-20260403180310594](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604031803641.png)
 
-![image-20260403180502431](./assets/202604031805340.png)
+![image-20260403180502431](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604031805340.png)
 
-![image-20260403180811793](./assets/202604031808712.png)
+![image-20260403180811793](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604031808712.png)
 
 
 
 ## 项目效果展示
 
-![image-20260403182208293](./assets/202604031822039.png)
+![image-20260403182208293](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604031822039.png)
 
-![image-20260403182302465](./assets/202604031823415.png)
+![image-20260403182302465](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604031823415.png)
 
 ## 项目概述和环境搭建
 
@@ -22,15 +22,15 @@
 
 #### 软件开发流程
 
-![image-20260403182850608](./assets/202604031828544.png)
+![image-20260403182850608](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604031828544.png)
 
 #### 角色分工
 
-![image-20260403192021091](./assets/202604031920348.png)
+![image-20260403192021091](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604031920348.png)
 
 #### 软件环境
 
-![image-20260403192134062](./assets/202604031921746.png)
+![image-20260403192134062](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604031921746.png)
 
 ### 苍穹外卖项目介绍
 
@@ -38,51 +38,51 @@
 
 即需求分析
 
-![image-20260403194210367](./assets/202604031942584.png)
+![image-20260403194210367](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604031942584.png)
 
-![image-20260403200425608](./assets/202604032004593.png)
+![image-20260403200425608](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604032004593.png)
 
 #### 产品原型
 
 开发具体的功能之前需要仔细理解产品原型。
 
-![image-20260403205945837](./assets/202604032059813.png)
+![image-20260403205945837](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604032059813.png)
 
 #### 技术选型
 
 >   一般是由架构师来做
 
-![image-20260403214736531](./assets/202604032147682.png)
+![image-20260403214736531](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604032147682.png)
 
 ### 开发环境搭建
 
 #### 前端环境搭建
 
-![image-20260408120753671](./assets/202604081208117.png)
+![image-20260408120753671](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081208117.png)
 
-![image-20260408131311569](./assets/202604081313362.png)
+![image-20260408131311569](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081313362.png)
 
-![image-20260408131324829](./assets/202604081313300.png)
+![image-20260408131324829](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081313300.png)
 
 :bulb: ​Nginx 启动路径不能包含中文
 
 #### 后端环境搭建
 
-![image-20260408161641785](./assets/202604081616823.png)
+![image-20260408161641785](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081616823.png)
 
-![image-20260408161742055](./assets/202604081617179.png)
+![image-20260408161742055](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081617179.png)
 
-![image-20260408161836874](./assets/202604081618838.png)
+![image-20260408161836874](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081618838.png)
 
-![image-20260408162131127](./assets/202604081621315.png)
+![image-20260408162131127](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081621315.png)
 
 :bulb: ​POJO (Plain Old Java Object)、DTO (Data Transfer Object)、VO (View Object)，Entity、DTO、VO 都属于 POJO。
 
 简单来说，DTO 表示前端传递给后端的数据，VO 表示后端传递给前端的数据。
 
-![image-20260408162431044](./assets/202604081624198.png)
+![image-20260408162431044](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081624198.png)
 
-![image-20260408164038941](./assets/202604081640942.png)
+![image-20260408164038941](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081640942.png)
 
 使用 Git 进行版本控制：
 
@@ -90,7 +90,7 @@
 2.   使用 `git init` 命令初始化 `sky-take-out` 仓库
 3.   在 GitHub 创建远程仓库，将本地文件推送到远程仓库
 
-![image-20260408171123509](./assets/202604081711523.png)
+![image-20260408171123509](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081711523.png)
 
 数据库设计文档详见：[文档](./数据库设计文档.md)
 
@@ -103,64 +103,63 @@
 
 2.   在 `DataGrip` 软件中新建 Project，然后在控制台执行 `sky.sql` 文件中的 SQL 语句
 
-![image-20260408173240679](./assets/202604081732948.png)
+![image-20260408173240679](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081732948.png)
 
 1.   执行 `nginx-1.20.2` 中的 `nginx.exe` 以启动前端程序
 2.   通过 `http://localhost/` 进入前端登录界面
 3.   编译后端工程 `sky-take-out`，如果出现错误的话，需要检查自己的 JDK 版本。如果是 JDK21 的话，需要将 `lombok` 的版本设置为 `1.18.30` 以上。此外，还可能需要将 `apache-maven-3.9.11` 的 xml 文件中添加一行 `<mirrorOf>central</mirrorOf>`
 4.   需要修改 `application-dev.yml` 文件中数据库的账号和密码
 
-![image-20260408181152523](./assets/202604081811487.png)
+![image-20260408181152523](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081811487.png)
 
-![image-20260408181324482](./assets/202604081813754.png)
+![image-20260408181324482](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081813754.png)
 
-![image-20260408181701523](./assets/202604081817463.png)
+![image-20260408181701523](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081817463.png)
 
-![image-20260408181921500](./assets/202604081819572.png)
+![image-20260408181921500](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081819572.png)
 
-![image-20260408182053808](./assets/202604081820719.png)
+![image-20260408182053808](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081820719.png)
 
-![image-20260408182215866](./assets/202604081822772.png)
+![image-20260408182215866](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081822772.png)
 
 #### 完善登录功能
 
 存在的问题：员工表中的密码是明文存储，安全性太低
 
-![image-20260408191941767](./assets/202604081919777.png)
+![image-20260408191941767](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081919777.png)
 
-![image-20260408192054538](./assets/202604081920418.png)
+![image-20260408192054538](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081920418.png)
 
 ### 导入接口文档
 
 #### 前后端分离开发流程
 
-![image-20260408193546984](./assets/202604081935141.png)
+![image-20260408193546984](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081935141.png)
 
 #### 操作步骤
 
 将课程资料中的项目接口导入到 `Apifox`，以 `YApi` 的格式。
 
-![image-20260408194038484](./assets/202604081940374.png)
+![image-20260408194038484](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081940374.png)
 
-![image-20260408194244896](./assets/202604081942058.png)
+![image-20260408194244896](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081942058.png)
 
 ### Swagger
 
 #### 介绍
 
-![image-20260408194445675](./assets/202604081944533.png)
+![image-20260408194445675](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081944533.png)
 
 #### 使用方式
 
-![image-20260408195535241](./assets/202604081955235.png)
+![image-20260408195535241](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081955235.png)
 
-![image-20260408195623433](./assets/202604081956492.png)
+![image-20260408195623433](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081956492.png)
 
-![image-20260408195723094](./assets/202604081957040.png)
+![image-20260408195723094](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081957040.png)
 
 Apifox 和 Swagger 虽然都能够用于接口测试，但是两者在开发阶段的作用时期不同。Apifox 主要用于设计阶段，而 Swagger 主要用于开发阶段。在完整的开发周期中，两者都会同时使用到。
 
 #### 常用注解
 
-![image-20260408200012862](./assets/202604082000834.png)
-
+![image-20260408200012862](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604082000834.png)
