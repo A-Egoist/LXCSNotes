@@ -23,6 +23,13 @@ net stop mysql  // 停止 mysql 服务
 
 ![image-20251011111859746](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510111119579.png)
 
+### IDEA 中连接数据库
+
+1.   新建 MySQL 数据源
+     <img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604091844430.png" alt="image-20260409184357266" style="zoom:50%;" />
+2.   填写连接，如果还没有创建 Datebase，该项可以不指定
+     ![image-20260409184530963](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604091845316.png)
+
 
 
 ### 数据模型
