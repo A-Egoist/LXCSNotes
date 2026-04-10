@@ -759,5 +759,746 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
 
 查看 employee 表记录
 
-<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604092259339.png" alt="image-20221111214354053" style="zoom:50%;" /> 
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604092259339.png" alt="image-20221111214354053" style="zoom:50%;" />
+
+ 
+
+>   个人笔记：
+>
+>   在 Tlias 项目中，后端被分为了 Controller 层、Service 层、Dao 层，但是在苍穹外卖项目中，使用了 MyBatis 来代替 Dao 层的实现类，将其替换为了 Mapper 接口。
+>
+>   Mapper 的作用是将 Java 方法和 SQL 语句相互映射，通常使用 `@Mapper` 注解，而不是 `@Repository` 注解。
+
+
+
+## 2. 员工分页查询
+
+### 2.1 需求分析和设计
+
+#### 2.1.1 产品原型
+
+系统中的员工很多的时候，如果在一个页面中全部展示出来会显得比较乱，不便于查看，所以一般的系统中都会以分页的方式来展示列表数据。而在我们的分页查询页面中, 除了分页条件以外，还有一个查询条件 "员工姓名"。
+
+**查询员工原型：**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101113037.png" alt="image-20221111215309289" style="zoom:67%;" /> 
+
+**业务规则**：
+
+- 根据页码展示员工信息
+- 每页展示 10 条数据
+- 分页查询时可以根据需要，输入员工姓名进行查询
+
+
+
+#### 2.1.2 接口设计
+
+>   文档位置：资料-->项目接口文档-->苍穹外卖-管理端接口.html
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101115785.png" alt="image-20221111220031113" style="zoom:50%;" /><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101115443.png" alt="image-20221111220041965" style="zoom:50%;" />
+
+**注意事项：**
+
+- 请求参数类型为 Query，**不是 json 格式提交**，在路径后直接拼接。/admin/employee/page?name=zhangsan
+- 返回数据中 records 数组中使用 Employee 实体类对属性进行封装。
+- 单表查询操作
+
+
+
+### 2.2 代码开发
+
+#### 2.2.1 设计 DTO 类
+
+根据请求参数进行封装，在 sky-pojo 模块中
+
+```java
+package com.sky.dto;
+
+import lombok.Data;
+
+import java.io.Serializable;
+
+@Data
+public class EmployeePageQueryDTO implements Serializable {
+
+    //员工姓名
+    private String name;
+
+    //页码
+    private int page;
+
+    //每页显示记录数
+    private int pageSize;
+
+}
+```
+
+
+
+#### 2.2.2 封装 PageResult
+
+后面所有的分页查询，统一都封装为 PageResult 对象。
+
+在 sky-common 模块
+
+```java
+package com.sky.result;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.util.List;
+
+/**
+ * 封装分页查询结果
+ */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class PageResult implements Serializable {
+
+    private long total; //总记录数
+
+    private List records; //当前页数据集合
+
+}
+```
+
+员工信息分页查询后端返回的对象类型为: Result<PageResult>
+
+```java
+package com.sky.result;
+
+import lombok.Data;
+
+import java.io.Serializable;
+
+/**
+ * 后端统一返回结果
+ * @param <T>
+ */
+@Data
+public class Result<T> implements Serializable {
+
+    private Integer code; //编码：1成功，0和其它数字为失败
+    private String msg; //错误信息
+    private T data; //数据
+
+    public static <T> Result<T> success() {
+        Result<T> result = new Result<T>();
+        result.code = 1;
+        return result;
+    }
+
+    public static <T> Result<T> success(T object) {
+        Result<T> result = new Result<T>();
+        result.data = object;
+        result.code = 1;
+        return result;
+    }
+
+    public static <T> Result<T> error(String msg) {
+        Result result = new Result();
+        result.msg = msg;
+        result.code = 0;
+        return result;
+    }
+
+}
+```
+
+
+
+#### 2.2.3 Controller 层
+
+在 sky-server 模块中，com.sky.controller.admin.EmployeeController 中添加分页查询方法。
+
+```java
+	/**
+     * 员工分页查询
+     * @param employeePageQueryDTO
+     * @return
+     */
+    @GetMapping("/page")
+    @ApiOperation(value = "员工分页查询")
+    public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO) {
+        log.info("员工分页查询，参数为：{}", employeePageQueryDTO);
+        PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
+        return Result.success(pageResult);
+    }
+```
+
+
+
+#### 2.2.4 Service 层接口
+
+在 EmployeeService 接口中声明 pageQuery 方法：
+
+```java
+	/**
+     * 分页查询
+     * @param employeePageQueryDTO
+     * @return
+     */
+    PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+```
+
+
+
+#### 2.2.5 Service 层实现类
+
+在 EmployeeServiceImpl 中实现 pageQuery 方法：
+
+```java
+	/**
+     * 分页查询
+     *
+     * @param employeePageQueryDTO
+     * @return
+     */
+    public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
+        // select * from employee limit 0,10
+        //开始分页查询
+        PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
+
+        Page<Employee> page = employeeMapper.pageQuery(employeePageQueryDTO);//后续定义
+
+        long total = page.getTotal();
+        List<Employee> records = page.getResult();
+
+        return new PageResult(total, records);
+    }
+```
+
+**注意：**此处使用 mybatis 的分页插件 PageHelper 来简化分页代码的开发。底层基于 mybatis 的拦截器实现。
+
+故在 pom.xml 文中添加依赖(初始工程已添加)
+
+```xml
+<dependency>
+   <groupId>com.github.pagehelper</groupId>
+   <artifactId>pagehelper-spring-boot-starter</artifactId>
+   <version>${pagehelper}</version>
+</dependency>
+```
+
+
+
+#### 2.2.6 Mapper 层
+
+在 EmployeeMapper 中声明 pageQuery 方法：
+
+```java
+	/**
+     * 分页查询
+     * @param employeePageQueryDTO
+     * @return
+     */
+    Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+```
+
+在 src/main/resources/mapper/EmployeeMapper.xml 中编写 SQL：
+
+```sql
+	<select id="pageQuery" resultType="com.sky.entity.Employee">
+        select * from employee
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%',#{name},'%')
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+```
+
+
+
+### 2.3 功能测试
+
+可以通过接口文档进行测试，也可以进行前后端联调测试。
+
+接下来使用两种方式分别测试：
+
+
+
+#### 2.3.1 接口文档测试
+
+**重启服务：**访问 http://localhost:8080/doc.html，进入员工分页查询
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101257582.png" alt="image-20221112101848657" style="zoom:67%;" /> 
+
+**响应结果：**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101257678.png" alt="image-20221112101946022" style="zoom:50%;" /> 
+
+
+
+#### 2.3.2 前后端联调测试
+
+**点击员工管理**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101257497.png" alt="image-20221112102441810" style="zoom:50%;" />  
+
+
+
+**输入员工姓名为 zhangsan**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101257848.png" alt="image-20221112102540938" style="zoom:50%;" /> 
+
+不难发现，**最后操作时间格式**不清晰，在**代码完善**中解决。
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101257557.png" alt="image-20221112102745437" style="zoom:50%;" /> 
+
+
+
+### 2.4 代码完善
+
+**问题描述：**操作时间字段显示有问题。
+
+<img src="D:/Projects/1、黑马程序员Java项目《苍穹外卖》企业级开发实战/讲义/day02/assets/image-20221112103235539.png" alt="image-20221112103235539" style="zoom:50%;" /> 
+
+
+
+**解决方式：**
+
+**1).  方式一**
+
+在属性上加上注解，对日期进行格式化
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101315727.png" alt="image-20221112103501581" style="zoom:67%;" /> 
+
+但这种方式，需要在每个时间属性上都要加上该注解，使用较麻烦，不能全局处理。
+
+
+
+**2).  方式二（推荐 )**
+
+在 WebMvcConfiguration 中扩展 SpringMVC 的消息转换器，统一对日期类型进行格式处理
+
+```java
+	/**
+     * 扩展Spring MVC框架的消息转化器
+     * @param converters
+     */
+    protected void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        log.info("扩展消息转换器...");
+        //创建一个消息转换器对象
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        //需要为消息转换器设置一个对象转换器，对象转换器可以将Java对象序列化为json数据
+        converter.setObjectMapper(new JacksonObjectMapper());
+        //将自己的消息转化器加入容器中
+        converters.add(0,converter);
+    }
+```
+
+添加后，再次测试
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101315368.png" alt="image-20221112104305608" style="zoom:67%;" /> 
+
+时间格式定义，sky-common 模块中
+
+```java
+package com.sky.json;
+
+public class JacksonObjectMapper extends ObjectMapper {
+
+	//.......
+    public static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm";
+    //.......
+
+    }
+}
+```
+
+
+
+## 3. 启用禁用员工账号
+
+### 3.1 需求分析与设计
+
+#### 3.1.1 产品原型
+
+在员工管理列表页面，可以对某个员工账号进行启用或者禁用操作。账号禁用的员工不能登录系统，启用后的员工可以正常登录。如果某个员工账号状态为正常，则按钮显示为 "禁用"，如果员工账号状态为已禁用，则按钮显示为"启用"。
+
+**启禁用员工原型：**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101536970.png" alt="image-20221112112359233" style="zoom:67%;" /> 
+
+**业务规则：**
+
+- 可以对状态为 “启用” 的员工账号进行 “禁用” 操作
+- 可以对状态为 “禁用” 的员工账号进行 “启用” 操作
+- 状态为 “禁用” 的员工账号不能登录系统
+
+
+
+#### 3.1.2 接口设计
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101537088.png" alt="image-20221112112728333" style="zoom:50%;" /><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101537542.png" alt="image-20221112112739680" style="zoom:50%;" />
+
+
+
+1). 路径参数携带状态值。
+
+2). 同时，把 id 传递过去，明确对哪个用户进行操作。
+
+3). 返回数据 code 状态是必须，其它是非必须。
+
+
+
+### 3.2 代码开发
+
+#### 3.2.1 Controller 层
+
+在 sky-server 模块中，根据接口设计中的请求参数形式对应的在 EmployeeController 中创建启用禁用员工账号的方法：
+
+```java
+	/**
+     * 启用禁用员工账号
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation(value = "启用禁用员工账号")
+    public Result enableOrDisable(@PathVariable Integer status, Long id) {
+        log.info("启用禁用员工账号：{}, {}", status, id);
+
+        employeeService.enableOrDisable(status, id);
+
+        return Result.success();
+    }
+```
+
+
+
+#### 3.2.2 Service 层接口
+
+在 EmployeeService 接口中声明启用禁用员工账号的业务方法：
+
+```java
+	/**
+     * 启用禁用员工账号
+     * @param status
+     * @param id
+     */
+    void enableOrDisable(Integer status, Long id);
+```
+
+
+
+#### 3.2.3 Service 层实现类
+
+在 EmployeeServiceImpl 中实现启用禁用员工账号的业务方法：
+
+```java
+	/**
+     * 启用禁用员工账号
+     * @param status
+     * @param id
+     */
+    public void enableOrDisable(Integer status, Long id) {
+        // update employee set status = ? where id = ?
+
+        // 传统构造方法
+        // Employee employee = new Employee();
+        // employee.setStatus(status);
+        // employee.setId(id);
+
+        // 使用 builder 构造
+        Employee employee = Employee.builder().status(status).id(id).build();
+
+        employeeMapper.update(employee);
+    }
+```
+
+
+
+#### 3.2.4 Mapper 层
+
+在 EmployeeMapper 接口中声明 update 方法：
+
+```java
+	/**
+     * 根据主键动态修改属性
+     * @param employee
+     */
+    void update(Employee employee);
+```
+
+在 EmployeeMapper.xml 中编写 SQL：
+
+```sql
+	<update id="update" parameterType="com.sky.entity.Employee">
+        update employee
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="username != null">username = #{username},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="idNumber != null">id_number = #{idNumber},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
+            <if test="status != null">status = #{status},</if>
+        </set>
+        where id = #{id}
+    </update>
+```
+
+
+
+### 3.3 功能测试
+
+#### 3.3.1 接口文档测试
+
+**测试前，**查询 employee 表中员工账号状态
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101611587.png" alt="image-20221112143142457" style="zoom:67%;" /> 
+
+**开始测试**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101612232.png" alt="image-20221112143316357" style="zoom:50%;" /> 
+
+**测试完毕后**，再次查询员工账号状态
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101612178.png" alt="image-20221112143428676" style="zoom: 67%;" /> 
+
+
+
+#### 3.3.2 前后端联调测试
+
+**测试前：**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101612990.png" alt="image-20221112143552246" style="zoom: 33%;" /> 
+
+**点击启用:**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101612500.png" alt="image-20221112143655318" style="zoom:33%;" /> 
+
+
+
+## 4. 编辑员工
+
+### 4.1 需求分析与设计
+
+#### 4.1.1 产品原型
+
+在员工管理列表页面点击 "编辑" 按钮，跳转到编辑页面，在编辑页面回显员工信息并进行修改，最后点击 "保存" 按钮完成编辑操作。
+
+**员工列表原型：**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101706230.png" alt="image-20221112144731759" style="zoom: 67%;" /> 
+
+**修改页面原型**：
+
+注：点击修改时，数据应该正常回显到修改页面。
+
+![image-20221112144842825](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101718330.png) 
+
+
+
+#### 4.1.2 接口设计
+
+根据上述原型图分析，编辑员工功能涉及到两个接口：
+
+- 根据 id 查询员工信息
+- 编辑员工信息
+
+**1). 根据 id 查询员工信息**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101705592.png" alt="image-20221112145607939" style="zoom:50%;" /> <img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101705522.png" alt="image-20221112145619775" style="zoom:50%;" />
+
+
+
+**2). 编辑员工信息**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101706955.png" alt="image-20221112145643769" style="zoom:50%;" /> <img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101706263.png" alt="image-20221112145659035" style="zoom:50%;" />
+
+**注:因为是修改功能，请求方式可设置为 PUT。**
+
+
+
+### 4.2 代码开发
+
+#### 4.2.1 回显员工信息功能
+
+**1). Controller 层**
+
+在 EmployeeController 中创建 getById 方法：
+
+```java
+	/**
+     * 根据 id 查询员工信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询员工信息")
+    public Result<Employee> getById(@PathVariable Long id){
+        Employee employee = employeeService.getById(id);
+        return Result.success(employee);
+    }
+```
+
+
+
+**2). Service 层接口**
+
+在 EmployeeService 接口中声明 getById 方法：
+
+```java
+    /**
+     * 根据 id 查询员工信息
+     * @param id
+     * @return
+     */
+    Employee getById(Long id);
+```
+
+
+
+**3). Service 层实现类**
+
+在 EmployeeServiceImpl 中实现 getById 方法：
+
+```java
+ 	/**
+     * 根据id查询员工信息
+     *
+     * @param id
+     * @return
+     */
+    public Employee getById(Long id) {
+        Employee employee = employeeMapper.getById(id);
+        employee.setPassword("******");
+        return employee;
+    }
+```
+
+
+
+**4). Mapper 层**
+
+在 EmployeeMapper 接口中声明 getById 方法：
+
+```java
+	/**
+     * 根据 id 查询员工信息
+     * @param id
+     * @return
+     */
+    @Select("select * from employee where id = #{id}")
+    Employee getById(Long id);
+```
+
+
+
+#### 4.2.2 修改员工信息功能
+
+**1). Controller 层**
+
+在 EmployeeController 中创建 update 方法：
+
+```java
+	/**
+     * 编辑员工信息
+     * @param employeeDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation("编辑员工信息")
+    public Result update(@RequestBody EmployeeDTO employeeDTO){
+        log.info("编辑员工信息：{}", employeeDTO);
+        employeeService.update(employeeDTO);
+        return Result.success();
+    }
+```
+
+
+
+**2). Service 层接口**
+
+在 EmployeeService 接口中声明 update 方法：
+
+```java
+    /**
+     * 编辑员工信息
+     * @param employeeDTO
+     */
+    void update(EmployeeDTO employeeDTO);
+```
+
+
+
+**3). Service 层实现类**
+
+在 EmployeeServiceImpl 中实现 update 方法：
+
+```java
+ 	/**
+     * 编辑员工信息
+     *
+     * @param employeeDTO
+     */
+    public void update(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO, employee);
+
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+
+        employeeMapper.update(employee);
+    }
+```
+
+在实现**启用禁用员工账号**功能时，已实现 employeeMapper.update(employee)，在此不需写 Mapper 层代码。
+
+
+
+### 4.3 功能测试
+
+#### 4.3.1 接口文档测试
+
+分别测试**根据 id 查询员工信息**和**编辑员工信息**两个接口
+
+**1). 根据 id 查询员工信息**
+
+查询 employee 表中的数据，以 id=4 的记录为例
+
+![image-20221112154253995](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101754819.png)
+
+开始测试
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101754585.png" alt="image-20221112154411245" style="zoom:50%;" /> 
+
+获取到了 id=4 的相关员工信息
+
+**2). 编辑员工信息**
+
+修改 id=4 的员工信息，**name** 由 **zhangsan** 改为**张三丰**，**username** 由**张三**改为 **zhangsanfeng**。
+
+ <img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101754765.png" alt="image-20221112155001414" style="zoom:50%;" /> 
+
+查看 employee 表数据
+
+![image-20221112155029547](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101754092.png)
+
+
+
+#### 4.3.2 前后端联调测试
+
+进入到员工列表查询
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101754558.png" alt="image-20221112155206712" style="zoom:50%;" /> 
+
+对员工姓名为杰克的员工数据修改，点击修改，数据已回显
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101754374.png" alt="image-20221112155430652" style="zoom:50%;" /> 
+
+修改后，点击保存
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101754003.png" alt="image-20221112155559298" style="zoom:50%;" /> 
 

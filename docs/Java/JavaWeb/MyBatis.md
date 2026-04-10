@@ -89,3 +89,14 @@ MyBatis 官网：https://mybatis.org/mybatis-3/zh_CN/index.html
 
 ![image-20251011222849370](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202510112228314.png)
 
+## MyBatisX 插件
+
+MybatisX 是一款基于 IDEA 的快速开发 Mybatis 的插件，为效率而生。
+
+MybatisX 的安装：
+
+![image-20260410120214674](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101202655.png)
+
+可以通过 MybatisX 快速定位：
+
+![ebe848f4-1b0a-4244-83b1-269d3d2a65d8](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101202485.png)
