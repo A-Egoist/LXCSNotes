@@ -1502,3 +1502,610 @@ public class JacksonObjectMapper extends ObjectMapper {
 
 <img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101754003.png" alt="image-20221112155559298" style="zoom:50%;" /> 
 
+
+
+## 5. 导入分类模块功能代码
+
+### 5.1 需求分析与设计
+
+#### 5.1.1 产品原型
+
+后台系统中可以管理分类信息，分类包括两种类型，分别是 **菜品分类** 和 **套餐分类** 。
+
+先来分析**菜品分类**相关功能。
+
+**新增菜品分类：**当我们在后台系统中添加菜品时需要选择一个菜品分类，在移动端也会按照菜品分类来展示对应的菜品。
+
+**菜品分类分页查询：**系统中的分类很多的时候，如果在一个页面中全部展示出来会显得比较乱，不便于查看，所以一般的系统中都会以分页的方式来展示列表数据。
+
+**根据id删除菜品分类：**在分类管理列表页面，可以对某个分类进行删除操作。需要注意的是当分类关联了菜品或者套餐时，此分类不允许删除。
+
+**修改菜品分类：**在分类管理列表页面点击修改按钮，弹出修改窗口，在修改窗口回显分类信息并进行修改，最后点击确定按钮完成修改操作。
+
+**启用禁用菜品分类：**在分类管理列表页面，可以对某个分类进行启用或者禁用操作。
+
+**分类类型查询：**当点击分类类型下拉框时，从数据库中查询所有的菜品分类数据进行展示。
+
+
+
+**分类管理原型：**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101840035.png" alt="image-20221112160907419" style="zoom:50%;" /> 
+
+**业务规则：**
+
+- 分类名称必须是唯一的
+- 分类按照类型可以分为菜品分类和套餐分类
+- 新添加的分类状态默认为“禁用”
+
+
+
+#### 5.1.2 接口设计
+
+根据上述原型图分析，菜品分类模块共涉及6个接口。
+
+- 新增分类
+- 分类分页查询
+- 根据 id 删除分类
+- 修改分类
+- 启用禁用分类
+- 根据类型查询分类
+
+接下来，详细地分析每个接口。
+
+>   文档位置：资料-->项目接口文档-->苍穹外卖-管理端接口.html
+
+**1). 新增分类**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101842292.png" alt="image-20221112163011291" style="zoom: 67%;" /> <img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101842844.png" alt="image-20221112163044547" style="zoom:67%;" />
+
+**2). 分类分页查询**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101842061.png" alt="image-20221112163209383" style="zoom:50%;" /><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101842749.png" alt="image-20221112163233212" style="zoom:50%;" />
+
+**3). 根据 id 删除分类**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101842131.png" alt="image-20221112163323554" style="zoom:50%;" /> 
+
+**4). 修改分类**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101842348.png" alt="image-20221112163424457" style="zoom:50%;" /> <img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101842077.png" alt="image-20221112163445296" style="zoom:50%;" />
+
+**5). 启用禁用分类**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101842751.png" alt="image-20221112163557247" style="zoom:50%;" /> <img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101842438.png" alt="image-20221112163622896" style="zoom:50%;" />
+
+**6). 根据类型查询分类**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101842653.png" alt="image-20221112163806318" style="zoom:50%;" /> <img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101842053.png" alt="image-20221112163839168" style="zoom:50%;" />
+
+#### 5.1.3 表设计
+
+**category 表结构：**
+
+| **字段名**  | **数据类型** | **说明**      | **备注**              |
+| ----------- | ------------ | ------------- | --------------------- |
+| id          | bigint       | 主键          | 自增                  |
+| name        | varchar(32)  | 分类名称      | 唯一                  |
+| type        | int          | 分类类型      | 1 菜品分类 2 套餐分类 |
+| sort        | int          | 排序字段      | 用于分类数据的排序    |
+| status      | int          | 状态          | 1 启用 0 禁用         |
+| create_time | datetime     | 创建时间      |                       |
+| update_time | datetime     | 最后修改时间  |                       |
+| create_user | bigint       | 创建人 id     |                       |
+| update_user | bigint       | 最后修改人 id |                       |
+
+
+
+### 5.2 代码导入
+
+导入资料中的分类管理模块功能代码即可
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101845521.png" alt="image-20221112164259732" style="zoom:50%;" /> 
+
+可按照 mapper-->service-->controller 依次导入，这样代码不会显示相应的报错。
+
+进入到 sky-server 模块中
+
+#### 5.2.1 Mapper 层
+
+**DishMapper.java**
+
+```java
+package com.sky.mapper;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+@Mapper
+public interface DishMapper {
+
+    /**
+     * 根据分类 id 查询菜品数量
+     * @param categoryId
+     * @return
+     */
+    @Select("select count(id) from dish where category_id = #{categoryId}")
+    Integer countByCategoryId(Long categoryId);
+}
+```
+
+**SetmealMapper.java**
+
+```java
+package com.sky.mapper;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+@Mapper
+public interface SetmealMapper {
+
+    /**
+     * 根据分类 id 查询套餐的数量
+     * @param categoryId
+     * @return
+     */
+    @Select("select count(id) from setmeal where category_id = #{categoryId}")
+    Integer countByCategoryId(Long categoryId);
+}
+```
+
+**CategoryMapper.java**
+
+```java
+package com.sky.mapper;
+
+import com.github.pagehelper.Page;
+import com.sky.dto.CategoryPageQueryDTO;
+import com.sky.entity.Category;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+
+@Mapper
+public interface CategoryMapper {
+
+    /**
+     * 插入数据
+     * @param category
+     */
+    @Insert("insert into category (type, name, sort, status, create_time, update_time, create_user, update_user) " +
+            "values (#{type}, #{name}, #{sort}, #{status}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})")
+    void insert(Category category);
+
+    /**
+     * 分页查询
+     * @param categoryPageQueryDTO
+     * @return
+     */
+    Page<Category> pageQuery(CategoryPageQueryDTO categoryPageQueryDTO);
+
+    /**
+     * 根据 id 删除分类
+     * @param id
+     */
+    @Delete("delete from category where id = #{id}")
+    void deleteById(Long id);
+
+    /**
+     * 根据 id 修改分类
+     * @param category
+     */
+    void update(Category category);
+
+    /**
+     * 根据类型查询分类
+     * @param type
+     * @return
+     */
+    List<Category> list(Integer type);
+}
+```
+
+**CategoryMapper.xml**，进入到 resources/mapper 目录下
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sky.mapper.CategoryMapper">
+    <update id="update" parameterType="com.sky.entity.Category">
+        update category
+        <set>
+            <if test="type != null">type = #{type},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateUser != null">update_user = #{updateUser}</if>
+        </set>
+        where id = #{id}
+    </update>
+    <select id="pageQuery" resultType="com.sky.entity.Category">
+        select * from category
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+        </where>
+        order by sort asc, create_time desc
+    </select>
+    <select id="list" resultType="com.sky.entity.Category">
+        select * from category where status = 1
+        <if test="type != null">
+            and type = #{type}
+        </if>
+        order by sort asc, create_time desc
+    </select>
+</mapper>
+```
+
+
+
+#### 5.2.2 Service 层
+
+**CategoryService.java**
+
+```java
+package com.sky.service;
+
+import com.sky.dto.CategoryDTO;
+import com.sky.dto.CategoryPageQueryDTO;
+import com.sky.entity.Category;
+import com.sky.result.PageResult;
+
+import java.util.List;
+
+public interface CategoryService {
+
+    /**
+     * 新增分类
+     * @param categoryDTO
+     */
+    void save(CategoryDTO categoryDTO);
+
+    /**
+     * 分类分页查询
+     * @param categoryPageQueryDTO
+     * @return
+     */
+    PageResult pageQuery(CategoryPageQueryDTO categoryPageQueryDTO);
+
+    /**
+     * 删除分类
+     * @param id
+     */
+    void deleteById(Long id);
+
+    /**
+     * 修改分类
+     * @param categoryDTO
+     */
+    void update(CategoryDTO categoryDTO);
+
+    /**
+     * 启用禁用分类
+     * @param status
+     * @param id
+     */
+    void enableOrDisable(Integer status, Long id);
+
+    /**
+     * 根据类型查询分类
+     * @param type
+     * @return
+     */
+    List<Category> list(Integer type);
+}
+```
+
+**CategoryServiceImpl.java**
+
+```java
+package com.sky.service.impl;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.sky.constant.MessageConstant;
+import com.sky.constant.StatusConstant;
+import com.sky.context.BaseContext;
+import com.sky.dto.CategoryDTO;
+import com.sky.dto.CategoryPageQueryDTO;
+import com.sky.entity.Category;
+import com.sky.exception.DeletionNotAllowedException;
+import com.sky.mapper.CategoryMapper;
+import com.sky.mapper.DishMapper;
+import com.sky.mapper.SetmealMapper;
+import com.sky.result.PageResult;
+import com.sky.service.CategoryService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Service
+@Slf4j
+public class CategoryServiceImpl implements CategoryService {
+
+    @Autowired
+    private CategoryMapper categoryMapper;
+    @Autowired
+    private DishMapper dishMapper;
+    @Autowired
+    private SetmealMapper setmealMapper;
+
+    /**
+     * 新增分类
+     * @param categoryDTO
+     */
+    @Override
+    public void save(CategoryDTO categoryDTO) {
+        Category category = new Category();
+        // 属性拷贝
+        BeanUtils.copyProperties(categoryDTO, category);
+
+        // 分类默认设置为禁用状态 0
+        category.setStatus(StatusConstant.DISABLE);
+
+        // 设置创建时间、修改时间、创建人、修改人
+        category.setCreateTime(LocalDateTime.now());
+        category.setUpdateTime(LocalDateTime.now());
+        category.setCreateUser(BaseContext.getCurrentId());
+        category.setUpdateUser(BaseContext.getCurrentId());
+
+        categoryMapper.insert(category);
+    }
+
+    /**
+     * 分类分页查询
+     * @param categoryPageQueryDTO
+     * @return
+     */
+    @Override
+    public PageResult pageQuery(CategoryPageQueryDTO categoryPageQueryDTO) {
+        PageHelper.startPage(categoryPageQueryDTO.getPage(), categoryPageQueryDTO.getPageSize());
+        Page<Category> page = categoryMapper.pageQuery(categoryPageQueryDTO);
+        return new PageResult(page.getTotal(), page.getResult());
+    }
+
+    /**
+     * 根据 id 删除分类
+     * @param id
+     */
+    @Override
+    public void deleteById(Long id) {
+        // 查询当前分类是否关联了菜品，如果关联了，就抛出业务异常
+        Integer count = dishMapper.countByCategoryId(id);
+        if (count > 0) {
+            throw new DeletionNotAllowedException(MessageConstant.CATEGORY_BE_RELATED_BY_DISH);
+        }
+
+        // 查询当前分类是否关联了套餐，如果关联了，就爆出业务异常
+        count = setmealMapper.countByCategoryId(id);
+        if (count > 0) {
+            throw new DeletionNotAllowedException(MessageConstant.CATEGORY_BE_RELATED_BY_SETMEAL);
+        }
+
+        // 删除分类数据
+        categoryMapper.deleteById(id);
+    }
+
+    /**
+     * 修改分类
+     * @param categoryDTO
+     */
+    @Override
+    public void update(CategoryDTO categoryDTO) {
+        Category category = new Category();
+        BeanUtils.copyProperties(categoryDTO, category);
+
+        // 设置修改时间和修改人
+        category.setUpdateTime(LocalDateTime.now());
+        category.setUpdateUser(BaseContext.getCurrentId());
+
+        categoryMapper.update(category);
+    }
+
+    /**
+     * 启用禁用分类
+     * @param status
+     * @param id
+     */
+    @Override
+    public void enableOrDisable(Integer status, Long id) {
+        Category category = Category.builder()
+                .status(status)
+                .id(id)
+                .updateTime(LocalDateTime.now())
+                .updateUser(BaseContext.getCurrentId())
+                .build();
+        categoryMapper.update(category);
+    }
+
+    /**
+     * 根据类型查询分类
+     * @param type
+     * @return
+     */
+    @Override
+    public List<Category> list(Integer type) {
+        return categoryMapper.list(type);
+    }
+}
+```
+
+
+
+#### 5.2.3 Controller 层
+
+**CategoryController.java**
+
+```java
+package com.sky.controller.admin;
+
+import com.sky.dto.CategoryDTO;
+import com.sky.dto.CategoryPageQueryDTO;
+import com.sky.entity.Category;
+import com.sky.result.PageResult;
+import com.sky.result.Result;
+import com.sky.service.CategoryService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+/**
+ * 分类管理
+ */
+@RestController
+@RequestMapping("/admin/category")
+@Api(tags = "分类相关接口")
+@Slf4j
+public class CategoryController {
+
+    @Autowired
+    private CategoryService categoryService;
+
+    /**
+     * 新增分类
+     * @param categoryDTO
+     * @return
+     */
+    @PostMapping
+    @ApiOperation(value = "新增分类")
+    public Result<String> save(@RequestBody CategoryDTO categoryDTO) {
+        log.info("新增分类：{}", categoryDTO);
+        categoryService.save(categoryDTO);
+        return Result.success();
+    }
+
+    /**
+     * 分类分页查询
+     * @param categoryPageQueryDTO
+     * @return
+     */
+    @GetMapping("/page")
+    @ApiOperation(value = "分类分页查询")
+    public Result<PageResult> page(CategoryPageQueryDTO categoryPageQueryDTO) {
+        log.info("分页查询：{}", categoryPageQueryDTO);
+        PageResult pageResult = categoryService.pageQuery(categoryPageQueryDTO);
+        return Result.success(pageResult);
+    }
+
+    /**
+     * 删除分类
+     * @param id
+     * @return
+     */
+    @DeleteMapping
+    @ApiOperation(value = "删除分类")
+    public Result<String> deleteById(Long id) {
+        log.info("删除分类：{}", id);
+        categoryService.deleteById(id);
+        return Result.success();
+    }
+
+    /**
+     * 修改分类
+     * @param categoryDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation(value = "修改分类")
+    public Result<String> update(@RequestBody CategoryDTO categoryDTO) {
+        categoryService.update(categoryDTO);
+        return Result.success();
+    }
+
+    /**
+     * 启用禁用分类
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation(value = "启用禁用分类")
+    public Result<String> enableOrDisable(@PathVariable("status") Integer status, Long id) {
+        categoryService.enableOrDisable(status, id);
+        return Result.success();
+    }
+
+    /**
+     * 根据类型查询分类
+     * @param type
+     * @return
+     */
+    @GetMapping("/list")
+    @ApiOperation(value = "根据类型查询分类")
+    public Result<List<Category>> list(Integer type) {
+        List<Category> list = categoryService.list(type);
+        return Result.success(list);
+    }
+}
+```
+
+全部导入完毕后，进行编译
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101942056.png" alt="image-20221112170742400" style="zoom:50%;" />
+
+ 
+
+### 5.3 功能测试
+
+重启服务，访问 http://localhost:80，进入分类管理
+
+**分页查询：**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101943304.png" alt="image-20221112171252992" style="zoom:50%;" /> 
+
+**分类类型：**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101943037.png" alt="image-20221112171402210" style="zoom:50%;" /> 
+
+**启用禁用：**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101943788.png" alt="image-20221112171604991" style="zoom:50%;" /> 
+
+点击禁用
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101943631.png" alt="image-20221112171700774" style="zoom:50%;" /> 
+
+**修改：**
+
+回显
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101943357.png" alt="image-20221112172117834" style="zoom:50%;" />  
+
+修改后
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101943343.png" alt="image-20221112172150709" style="zoom:50%;" />
+
+**新增：**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101943137.png" alt="image-20221112172356093" style="zoom:50%;" /> 
+
+点击确定，查询列表
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101943542.png" alt="image-20221112172439370" style="zoom:50%;" /> 
+
+**删除：**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101943206.png" alt="image-20221112172525216" style="zoom:50%;" /> 
+
+删除后，查询分类列表
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604101943949.png" alt="image-20221112172611754" style="zoom:50%;" /> 
+
+删除成功
