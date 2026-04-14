@@ -950,23 +950,670 @@ sky-server/src/main/resources/application-dev.yml
 
 
 
+## 3. 菜品分页查询
+
+### 3.1 需求分析和设计
+
+#### 3.1.1 产品原型
+
+系统中的菜品数据很多的时候，如果在一个页面中全部展示出来会显得比较乱，不便于查看，所以一般的系统中都会以分页的方式来展示列表数据。
+
+**菜品分页原型：**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604141103346.png" alt="image-20221121201552489" style="zoom: 67%;" /> 
+
+在菜品列表展示时，除了菜品的基本信息(名称、售价、售卖状态、最后操作时间)外，还有两个字段略微特殊，第一个是图片字段 ，我们从数据库查询出来的仅仅是图片的名字，图片要想在表格中回显展示出来，就需要下载这个图片。第二个是菜品分类，这里展示的是分类名称，而不是分类 ID，此时我们就需要根据菜品的分类 ID，去分类表中查询分类信息，然后在页面展示。
+
+**业务规则：**
+
+- 根据页码展示菜品信息
+- 每页展示 10 条数据
+- 分页查询时可以根据需要输入菜品名称、菜品分类、菜品状态进行查询
 
 
 
+#### 3.1.2 接口设计
+
+根据上述原型图，设计出相应的接口。
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604141104146.png" alt="image-20221121202019258" style="zoom:50%;" /> <img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604141104519.png" alt="image-20221121202033284" style="zoom:50%;" />
 
 
 
+### 3.2 代码开发
+
+#### 3.2.1 设计 DTO 类
+
+**根据菜品分页查询接口定义设计对应的 DTO：**
+
+在 sky-pojo 模块中，已定义
+
+```java
+package com.sky.dto;
+
+import lombok.Data;
+import java.io.Serializable;
+
+@Data
+public class DishPageQueryDTO implements Serializable {
+
+    private int page;
+    private int pageSize;
+    private String name;
+    private Integer categoryId;  // 分类 id
+    private Integer status;  // 状态 0 表示禁用 1 表示启用
+}
+```
 
 
 
+#### 3.2.2 设计 VO 类
+
+**根据菜品分页查询接口定义设计对应的 VO：**
+
+在 sky-pojo 模块中，已定义
+
+```java
+package com.sky.vo;
+
+import com.sky.entity.DishFlavor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class DishVO implements Serializable {
+
+    private Long id;
+    // 菜品名称
+    private String name;
+    // 菜品分类 id
+    private Long categoryId;
+    // 菜品价格
+    private BigDecimal price;
+    // 图片
+    private String image;
+    // 描述信息
+    private String description;
+    // 0 停售 1 起售
+    private Integer status;
+    // 更新时间
+    private LocalDateTime updateTime;
+    // 分类名称
+    private String categoryName;
+    // 菜品关联的口味
+    private List<DishFlavor> flavors = new ArrayList<>();
+}
+```
 
 
 
+#### 3.2.3 Controller 层
+
+**根据接口定义创建 DishController 的 page 分页查询方法：**
+
+```java
+	/**
+     * 菜品分页查询
+     */
+    @GetMapping("/page")
+    @ApiOperation("菜品分页查询")
+    public Result<PageResult> page(DishPageQueryDTO dishPageQueryDTO) {
+        log.info("菜品分页查询:{}", dishPageQueryDTO);
+        PageResult pageResult = dishService.pageQuery(dishPageQueryDTO);  // 后绪步骤定义
+        return Result.success(pageResult);
+    }
+```
 
 
 
+#### 3.2.4 Service 层接口
+
+**在 DishService 中扩展分页查询方法：**
+
+```java
+	/**
+     * 菜品分页查询
+     */
+    PageResult pageQuery(DishPageQueryDTO dishPageQueryDTO);
+```
 
 
 
+#### 3.2.5 Service 层实现类
+
+**在 DishServiceImpl 中实现分页查询方法：**
+
+```java
+	/**
+     * 菜品分页查询
+     */
+    public PageResult pageQuery(DishPageQueryDTO dishPageQueryDTO) {
+        PageHelper.startPage(dishPageQueryDTO.getPage(), dishPageQueryDTO.getPageSize());
+        Page<DishVO> page = dishMapper.pageQuery(dishPageQueryDTO);  // 后绪步骤实现
+        return new PageResult(page.getTotal(), page.getResult());
+    }
+```
+
+
+
+#### 3.2.6 Mapper 层
+
+**在 DishMapper 接口中声明 pageQuery 方法：**
+
+```java
+	/**
+     * 菜品分页查询
+     */
+    Page<DishVO> pageQuery(DishPageQueryDTO dishPageQueryDTO);
+```
+
+**在 DishMapper.xml 中编写 SQL：**
+
+```xml
+<select id="pageQuery" resultType="com.sky.vo.DishVO">
+    select d.*, c.name as category_name from dish d left outer join category c on d.category_id = c.id
+    <where>
+        <if test="name != null">and d.name like concat('%', #{name}, '%')</if>
+        <if test="categoryId != null">and d.category_id = #{categoryId}</if>
+        <if test="status != null">and d.status = #{status}</if>
+    </where>
+    order by d.create_time desc
+</select>
+```
+
+
+
+### 3.3 功能测试
+
+#### 3.3.1 接口文档测试
+
+**启动服务：**访问 http://localhost:8080/doc.html，进入菜品分页查询接口
+
+**注意：**使用 admin 用户登录重新获取 token，防止 token 失效。
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604141108092.png" alt="image-20221121210252403" style="zoom:50%;" />  
+
+**点击发送：**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604141108390.png" alt="image-20221121210333489" style="zoom: 67%;" /> 
+
+
+
+#### 3.3.2 前后端联调测试
+
+启动 nginx，访问 http://localhost
+
+**点击菜品管理**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604141108270.png" alt="image-20221121210500188" style="zoom:50%;" /> 
+
+数据成功查出。
+
+
+
+## 4. 删除菜品
+
+### 4.1 需求分析和设计
+
+#### 4.1.1 产品原型
+
+在菜品列表页面，每个菜品后面对应的操作分别为**修改**、**删除**、**停售**，可通过删除功能完成对菜品及相关的数据进行删除。
+
+**删除菜品原型：**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604141110067.png" alt="image-20221121211236356" style="zoom:67%;" /> 
+
+
+
+**业务规则：**
+
+- 可以一次删除一个菜品，也可以批量删除菜品
+- 起售中的菜品不能删除
+- 被套餐关联的菜品不能删除
+- 删除菜品后，关联的口味数据也需要删除掉
+
+
+
+#### 4.1.2 接口设计
+
+根据上述原型图，设计出相应的接口。
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604141124587.png" alt="image-20221121211801121" style="zoom:50%;" /> <img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604141124665.png" alt="image-20221121211814429" style="zoom:50%;" />
+
+**注意：**删除一个菜品和批量删除菜品共用一个接口，故 ids 可包含多个菜品 id，之间用逗号分隔。
+
+
+
+#### 4.1.3 表设计
+
+在进行删除菜品操作时，会涉及到以下三张表。
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604141124166.png" alt="image-20221121212436851" style="zoom:50%;" /> 
+
+**注意事项：**
+
+- 在 dish 表中删除菜品基本数据时，同时，也要把关联在 dish_flavor 表中的数据一块删除。
+- setmeal_dish 表为菜品和套餐关联的中间表。
+- 若删除的菜品数据关联着某个套餐，此时，删除失败。
+- 若要删除套餐关联的菜品数据，先解除两者关联，再对菜品进行删除。
+
+
+
+### 4.2 代码开发
+
+#### 4.1.2 Controller 层
+
+**根据删除菜品的接口定义在 DishController 中创建方法：**
+
+```java
+	/**
+     * 菜品批量删除
+     */
+    @DeleteMapping
+    @ApiOperation("菜品批量删除")
+    public Result delete(@RequestParam List<Long> ids) {
+        log.info("菜品批量删除：{}", ids);
+        dishService.deleteBatch(ids);
+        return Result.success();
+    }
+```
+
+
+
+#### 4.2.2 Service 层接口
+
+**在 DishService 接口中声明 deleteBatch 方法：**
+
+```java
+	/**
+     * 菜品批量删除
+     */
+    void deleteBatch(List<Long> ids);
+```
+
+
+
+#### 4.2.3 Service 层实现类
+
+**在 DishServiceImpl 中实现 deleteBatch 方法：**
+
+```java
+    @Autowired
+    private SetmealDishMapper setmealDishMapper;
+	/**
+     * 菜品批量删除
+     */
+    @Transactional  // 事务
+    public void deleteBatch(List<Long> ids) {
+        // 判断当前菜品是否能够删除——是否存在起售中的菜品？？
+        for (Long id : ids) {
+            Dish dish = dishMapper.getById(id);
+            if (dish.getStatus() == StatusConstant.ENABLE) {
+                // 当前菜品处于起售中，不能删除
+                throw new DeletionNotAllowedException(MessageConstant.DISH_ON_SALE);
+            }
+        }
+
+        // 判断当前菜品是否能够删除——是否被套餐关联了？？
+        List<Long> setmealIds = setmealDishMapper.getSetmealIdsByDishIds(ids);
+        if (setmealIds != null && setmealIds.size() > 0) {
+            // 当前菜品被套餐关联了，不能删除
+            throw new DeletionNotAllowedException(MessageConstant.DISH_BE_RELATED_BY_SETMEAL);
+        }
+
+        for (Long id : ids) {
+            // 删除菜品表中的菜品数据
+            dishMapper.deleteById(id);
+            // 删除菜品关联的口味数据
+            dishFlavorMapper.deleteByDishId(id);
+        }
+    }
+```
+
+
+
+#### 4.2.4 Mapper 层
+
+**在 DishMapper 中声明 getById 方法，并配置 SQL：**
+
+```java
+	/**
+     * 根据主键查询菜品
+     */
+    @Select("select * from dish where id = #{id}")
+    Dish getById(Long id);
+```
+
+**创建 SetmealDishMapper，声明 getSetmealIdsByDishIds 方法，并在 xml 文件中编写 SQL：**
+
+```java
+package com.sky.mapper;
+
+import com.sky.entity.SetmealDish;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Mapper;
+import java.util.List;
+
+@Mapper
+public interface SetmealDishMapper {
+    /**
+     * 根据菜品id查询对应的套餐id
+     */
+    // select setmeal_id from setmeal_dish where dish_id in (1,2,3,4)
+    List<Long> getSetmealIdsByDishIds(List<Long> dishIds);
+}
+```
+
+SetmealDishMapper.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sky.mapper.SetmealDishMapper">
+    <select id="getSetmealIdsByDishIds" resultType="java.lang.Long">
+        select setmeal_id from setmeal_dish where dish_id in
+        <foreach collection="dishIds" item="dishId" separator="," open="(" close=")">
+            #{dishId}
+        </foreach>
+    </select>
+</mapper>
+```
+
+**在 DishMapper.java 中声明 deleteById 方法并配置 SQL：**
+
+```java
+	/**
+     * 根据主键删除菜品数据
+     */
+    @Delete("delete from dish where id = #{id}")
+    void deleteById(Long id);
+```
+
+**在 DishFlavorMapper 中声明 deleteByDishId 方法并配置 SQL：**
+
+```java
+    /**
+     * 根据菜品id删除对应的口味数据
+     */
+    @Delete("delete from dish_flavor where dish_id = #{dishId}")
+    void deleteByDishId(Long dishId);
+```
+
+
+
+### 4.3 功能测试
+
+既可以通过 Swagger 接口文档进行测试，也可以通过前后端联调测试，接下来，我们直接使用**前后端联调测试**。
+
+进入到菜品列表查询页面
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604141644537.png" alt="image-20221122125332084" style="zoom:50%;" /> 
+
+对测试菜品进行删除操作
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604141644852.png" alt="image-20221122125625014" style="zoom:50%;" /> 
+
+同时，进到 dish 表和 dish_flavor 两个表查看**测试菜品**的相关数据都已被成功删除。
+
+
+
+再次，删除状态为启售的菜品
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604141645565.png" alt="image-20221122125841464" style="zoom:50%;" /> 
+
+点击批量删除
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604141645360.png" alt="image-20221122130016566" style="zoom:50%;" /> 
+
+删除失败，因为起售中的菜品不能删除。
+
+
+
+## 5. 修改菜品
+
+### 5.1 需求分析和设计
+
+#### 5.1.1 产品原型
+
+在菜品管理列表页面点击修改按钮，跳转到修改菜品页面，在修改页面回显菜品相关信息并进行修改，最后点击保存按钮完成修改操作。
+
+**修改菜品原型：**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604141914420.png" alt="image-20221122130837173" style="zoom:50%;" /> 
+
+
+
+#### 5.1.2 接口设计
+
+通过对上述原型图进行分析，该页面共涉及 4 个接口。
+
+**接口：**
+
+- 根据 id 查询菜品
+- 根据类型查询分类(已实现)
+- 文件上传(已实现)
+- 修改菜品
+
+我们只需要实现**根据 id 查询菜品**和**修改菜品**两个接口，接下来，我们来重点分析这两个接口。
+
+**1). 根据 id 查询菜品**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604142007936.png" alt="image-20221122131733147" style="zoom:50%;" /><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604142007296.png" alt="image-20221122131743509" style="zoom:50%;" />
+
+**2). 修改菜品**
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604142007524.png" alt="image-20221122131837393" style="zoom:50%;" /> <img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604142007766.png" alt="image-20221122131847583" style="zoom:50%;" />
+
+
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604142007809.png" alt="image-20221122131914533" style="zoom:50%;" /> 
+
+**注:因为是修改功能，请求方式可设置为 PUT。**
+
+
+
+### 5.2 代码开发
+
+#### 5.2.1 根据 id 查询菜品实现
+
+**1). Controller 层**
+
+**根据 id 查询菜品的接口定义在 DishController 中创建方法：**
+
+```java
+    /**
+     * 根据 id 查询菜品
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("根据 id 查询菜品")
+    public Result<DishVO> getById(@PathVariable Long id) {
+        log.info("根据id查询菜品：{}", id);
+        DishVO dishVO = dishService.getByIdWithFlavor(id);//后绪步骤实现
+        return Result.success(dishVO);
+    }
+```
+
+
+
+**2). Service 层接口**
+
+**在 DishService 接口中声明 getByIdWithFlavor 方法：**
+
+```java
+	/**
+     * 根据id查询菜品和对应的口味数据
+     */
+    DishVO getByIdWithFlavor(Long id);
+```
+
+
+
+**3). Service 层实现类**
+
+**在 DishServiceImpl 中实现 getByIdWithFlavor 方法：**
+
+```java
+	/**
+     * 根据 id 查询菜品和对应的口味数据
+     */
+    public DishVO getByIdWithFlavor(Long id) {
+        // 根据 id 查询菜品数据
+        Dish dish = dishMapper.getById(id);
+
+        // 根据菜品 id 查询口味数据
+        List<DishFlavor> dishFlavors = dishFlavorMapper.getByDishId(id);  // 后绪步骤实现
+
+        // 将查询到的数据封装到 VO
+        DishVO dishVO = new DishVO();
+        BeanUtils.copyProperties(dish, dishVO);
+        dishVO.setFlavors(dishFlavors);
+
+        return dishVO;
+    }
+```
+
+
+
+**4). Mapper 层**
+
+**在 DishFlavorMapper 中声明 getByDishId 方法，并配置 SQL：**
+
+```java
+    /**
+     * 根据菜品 id 查询对应的口味数据
+     */
+    @Select("select * from dish_flavor where dish_id = #{dishId}")
+    List<DishFlavor> getByDishId(Long dishId);
+```
+
+
+
+#### 5.2.1 修改菜品实现
+
+**1). Controller 层**
+
+**根据修改菜品的接口定义在 DishController 中创建方法：**
+
+```java
+	/**
+     * 修改菜品
+     */
+    @PutMapping
+    @ApiOperation("修改菜品")
+    public Result update(@RequestBody DishDTO dishDTO) {
+        log.info("修改菜品：{}", dishDTO);
+        dishService.updateWithFlavor(dishDTO);
+        return Result.success();
+    }
+```
+
+
+
+**2). Service 层接口**
+
+**在 DishService 接口中声明 updateWithFlavor 方法：**
+
+```java
+	/**
+     * 根据id修改菜品基本信息和对应的口味信息
+     */
+    void updateWithFlavor(DishDTO dishDTO);
+```
+
+
+
+**3). Service 层实现类**
+
+**在 DishServiceImpl 中实现 updateWithFlavor 方法：**
+
+```java
+	/**
+     * 根据id修改菜品基本信息和对应的口味信息
+     */
+    public void updateWithFlavor(DishDTO dishDTO) {
+        Dish dish = new Dish();
+        BeanUtils.copyProperties(dishDTO, dish);
+
+        // 修改菜品表基本信息
+        dishMapper.update(dish);
+
+        // 删除原有的口味数据
+        dishFlavorMapper.deleteByDishId(dishDTO.getId());
+
+        // 重新插入口味数据
+        List<DishFlavor> flavors = dishDTO.getFlavors();
+        if (flavors != null && flavors.size() > 0) {
+            flavors.forEach(dishFlavor -> {
+                dishFlavor.setDishId(dishDTO.getId());
+            });
+            // 向口味表插入n条数据
+            dishFlavorMapper.insertBatch(flavors);
+        }
+    }
+```
+
+
+
+**4). Mapper 层**
+
+**在 DishMapper 中，声明 update 方法：**
+
+```java
+	/**
+     * 根据 id 动态修改菜品数据
+     */
+    @AutoFill(value = OperationType.UPDATE)
+    void update(Dish dish);
+```
+
+**并在 DishMapper.xml 文件中编写 SQL:**
+
+```xml
+<update id="update">
+        update dish
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="image != null">image = #{image},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
+        </set>
+        where id = #{id}
+</update>
+```
+
+
+
+### 5.3 功能测试
+
+本次测试直接通过**前后端联调测试** ，可使用 Debug 方式启动项目，观察运行中步骤。
+
+进入菜品列表查询页面，对第一个菜品的价格进行修改
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604142021317.png" alt="image-20221122141233080" style="zoom:50%;" /> 
+
+点击修改，回显成功
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604142021355.png" alt="image-20221122141348677" style="zoom:50%;" /> 
+
+菜品价格修改后，点击保存
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604142021026.png" alt="image-20221122141456498" style="zoom:50%;" /> 
+
+修改成功
 
 

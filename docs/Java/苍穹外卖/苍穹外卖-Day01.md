@@ -18,23 +18,23 @@
 
 ## 项目概述和环境搭建
 
-### 软件开发整体介绍
+### 1. 软件开发整体介绍
 
-#### 软件开发流程
+#### 1.1 软件开发流程
 
 ![image-20260403182850608](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604031828544.png)
 
-#### 角色分工
+#### 1.2 角色分工
 
 ![image-20260403192021091](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604031920348.png)
 
-#### 软件环境
+#### 1.3 软件环境
 
 ![image-20260403192134062](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604031921746.png)
 
-### 苍穹外卖项目介绍
+### 2. 苍穹外卖项目介绍
 
-#### 项目介绍
+#### 2.1 项目介绍
 
 即需求分析
 
@@ -42,21 +42,21 @@
 
 ![image-20260403200425608](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604032004593.png)
 
-#### 产品原型
+#### 2.2 产品原型
 
 开发具体的功能之前需要仔细理解产品原型。
 
 ![image-20260403205945837](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604032059813.png)
 
-#### 技术选型
+#### 2.3 技术选型
 
 >   一般是由架构师来做
 
 ![image-20260403214736531](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604032147682.png)
 
-### 开发环境搭建
+### 3. 开发环境搭建
 
-#### 前端环境搭建
+#### 3.1 前端环境搭建
 
 ![image-20260408120753671](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081208117.png)
 
@@ -66,7 +66,7 @@
 
 :bulb: ​Nginx 启动路径不能包含中文
 
-#### 后端环境搭建
+#### 3.2 后端环境搭建
 
 ![image-20260408161641785](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081616823.png)
 
@@ -122,7 +122,7 @@
 
 ![image-20260408182215866](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081822772.png)
 
-#### 完善登录功能
+#### 3.3 完善登录功能
 
 存在的问题：员工表中的密码是明文存储，安全性太低
 
@@ -130,13 +130,13 @@
 
 ![image-20260408192054538](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081920418.png)
 
-### 导入接口文档
+### 4. 导入接口文档
 
-#### 前后端分离开发流程
+#### 4.1 前后端分离开发流程
 
 ![image-20260408193546984](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081935141.png)
 
-#### 操作步骤
+#### 4.2 操作步骤
 
 将课程资料中的项目接口导入到 `Apifox`，以 `YApi` 的格式。
 
@@ -144,13 +144,13 @@
 
 ![image-20260408194244896](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081942058.png)
 
-### Swagger
+### 5. Swagger
 
-#### 介绍
+#### 5.1 介绍
 
 ![image-20260408194445675](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081944533.png)
 
-#### 使用方式
+#### 5.2 使用方式
 
 ![image-20260408195535241](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604081955235.png)
 
@@ -160,6 +160,6 @@
 
 Apifox 和 Swagger 虽然都能够用于接口测试，但是两者在开发阶段的作用时期不同。Apifox 主要用于设计阶段，而 Swagger 主要用于开发阶段。在完整的开发周期中，两者都会同时使用到。
 
-#### 常用注解
+#### 5.3 常用注解
 
 ![image-20260408200012862](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2025/202604082000834.png)
