@@ -2042,6 +2042,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#restful-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      RESTful API 风格
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       后端接收前端参数的格式
@@ -2141,6 +2150,29 @@
   
   <span class="md-ellipsis">
     苍穹外卖-Day03
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96-Day04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    苍穹外卖-Day04
     
   </span>
   
@@ -5837,6 +5869,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#restful-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      RESTful API 风格
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       后端接收前端参数的格式
@@ -5941,6 +5982,40 @@
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
+<h3 id="restful-api">RESTful API 风格<a class="headerlink" href="#restful-api" title="Permanent link">&para;</a></h3>
+<p><strong>RESTful API 风格</strong>，行业统一标准：</p>
+<ul>
+<li><strong>GET</strong>：查询（查数据）</li>
+<li><strong>POST</strong>：新增（增数据）</li>
+<li><strong>PUT</strong>：修改（改数据）</li>
+<li><strong>DELETE</strong>：删除（删数据）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>前端 HTTP 请求类型</th>
+<th>后端 Controller 必须写的注解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GET</strong></td>
+<td><strong>@GetMapping</strong></td>
+</tr>
+<tr>
+<td><strong>POST</strong></td>
+<td><strong>@PostMapping</strong></td>
+</tr>
+<tr>
+<td><strong>PUT</strong></td>
+<td><strong>@PutMapping</strong></td>
+</tr>
+<tr>
+<td><strong>DELETE</strong></td>
+<td><strong>@DeleteMapping</strong></td>
+</tr>
+</tbody>
+</table>
 <h3 id="_2">后端接收前端参数的格式<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>在苍穹外卖项目中，后端中的 Controller 需要接收来自前端的请求。</p>
 <p>前端的常见 HTTP 请求为：</p>
