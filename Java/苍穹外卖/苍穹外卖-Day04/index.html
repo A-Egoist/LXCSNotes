@@ -2267,7 +2267,7 @@
         <li class="md-nav__item">
   <a href="#5" class="md-nav__link">
     <span class="md-ellipsis">
-      5. 起售停售套餐
+      5. 启售或停售套餐
     </span>
   </a>
   
@@ -6078,7 +6078,7 @@
         <li class="md-nav__item">
   <a href="#5" class="md-nav__link">
     <span class="md-ellipsis">
-      5. 起售停售套餐
+      5. 启售或停售套餐
     </span>
   </a>
   
@@ -6920,7 +6920,93 @@
 <span class="w">        </span><span class="nt">&lt;/foreach&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/insert&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="5">5. 起售停售套餐<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<h2 id="5">5. 启售或停售套餐<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>业务规则：</p>
+<ul>
+<li>可以对状态为启售的套餐进行停售操作，可以对状态为停售的套餐进行起售操作</li>
+<li>启售的套餐可以展示在用户端，停售的套餐不能展示在用户端</li>
+<li>启售套餐时，如果套餐内包含停售的菜品，则不能启售</li>
+</ul>
+<p><code>SetmealController.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 套餐启售或停售</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&quot;/status/{status}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Result</span><span class="w"> </span><span class="nf">EnableOrDisable</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;套餐启售或停售：{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+<span class="w">        </span><span class="n">setmealService</span><span class="p">.</span><span class="na">EnableOrDisable</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Result</span><span class="p">.</span><span class="na">success</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealService.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 套餐启售或停售</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">EnableOrDisable</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealServiceImpl.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 套餐启售或停售</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">EnableOrDisable</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 启售套餐</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">StatusConstant</span><span class="p">.</span><span class="na">ENABLE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 先判断套餐中的菜品是否存在停售的菜品</span>
+<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Dish</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dishes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dishMapper</span><span class="p">.</span><span class="na">getDishBySetmealId</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="w">            </span><span class="n">dishes</span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">dish</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// 如果存在停售的菜品，抛出启售失败异常</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dish</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">StatusConstant</span><span class="p">.</span><span class="na">DISABLE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SetmealEnableFailedException</span><span class="p">(</span><span class="n">MessageConstant</span><span class="p">.</span><span class="na">SETMEAL_ENABLE_FAILED</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">});</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// 停售套餐、启售套餐（套餐中没有停售菜品）</span>
+<span class="w">        </span><span class="n">Setmeal</span><span class="w"> </span><span class="n">setmeal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Setmeal</span><span class="p">.</span><span class="na">builder</span><span class="p">().</span><span class="na">id</span><span class="p">(</span><span class="n">id</span><span class="p">).</span><span class="na">status</span><span class="p">(</span><span class="n">status</span><span class="p">).</span><span class="na">build</span><span class="p">();</span>
+<span class="w">        </span><span class="n">setmealMapper</span><span class="p">.</span><span class="na">update</span><span class="p">(</span><span class="n">setmeal</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p><code>DishMapper.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 根据套餐 id 查询菜品</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Select</span><span class="p">(</span><span class="s">&quot;select d.* from dish d left join setmeal_dish sd on d.id = sd.dish_id where sd.setmeal_id = #{setmealId}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Dish</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getDishBySetmealId</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">setmealId</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
 
 
 
