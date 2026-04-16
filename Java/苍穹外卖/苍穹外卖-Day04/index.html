@@ -2238,6 +2238,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="4. 修改套餐">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#id" class="md-nav__link">
+    <span class="md-ellipsis">
+      根据套餐 id 查询套餐信息
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      套餐数据保存
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -6025,6 +6049,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="4. 修改套餐">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#id" class="md-nav__link">
+    <span class="md-ellipsis">
+      根据套餐 id 查询套餐信息
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      套餐数据保存
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -6071,7 +6119,7 @@
 <li>设计接口</li>
 <li>梳理表之间的关系（分类表、菜品表、套餐表、口味表、套餐菜品关系表）</li>
 <li>根据接口设计进行代码实现</li>
-<li>分别通过swagger接口文档和前后端联调进行功能测试</li>
+<li>分别通过 swagger 接口文档和前后端联调进行功能测试</li>
 </ol>
 <h2 id="1">1. 新增套餐<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <h3 id="11">1.1 需求分析和设计<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
@@ -6413,8 +6461,465 @@
 <span class="w">    </span><span class="nt">&lt;/insert&gt;</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="2">2. 套餐分页查询<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>这个功能和菜品管理类似，按照相同的方式实现就行。</p>
+<p>Controller 接收参数使用 <code>SetmealPageQueryDTO</code>，Mapper 的返回结果使用 <code>Page&lt;SetmealVO&gt;</code> 泛型。</p>
+<p><code>SetmealController.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 套餐分页查询</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/page&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@ApiOperation</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;套餐分页查询&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Result</span><span class="o">&lt;</span><span class="n">PageResult</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">page</span><span class="p">(</span><span class="n">SetmealPageQueryDTO</span><span class="w"> </span><span class="n">setmealPageQueryDTO</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;套餐分页查询：{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">setmealPageQueryDTO</span><span class="p">);</span>
+<span class="w">        </span><span class="n">PageResult</span><span class="w"> </span><span class="n">pageResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">setmealService</span><span class="p">.</span><span class="na">pageQuery</span><span class="p">(</span><span class="n">setmealPageQueryDTO</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Result</span><span class="p">.</span><span class="na">success</span><span class="p">(</span><span class="n">pageResult</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealService.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 套餐分页查询</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">PageResult</span><span class="w"> </span><span class="nf">pageQuery</span><span class="p">(</span><span class="n">SetmealPageQueryDTO</span><span class="w"> </span><span class="n">setmealPageQueryDTO</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealServiceImpl.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 套餐分页查询</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">PageResult</span><span class="w"> </span><span class="nf">pageQuery</span><span class="p">(</span><span class="n">SetmealPageQueryDTO</span><span class="w"> </span><span class="n">setmealPageQueryDTO</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">PageHelper</span><span class="p">.</span><span class="na">startPage</span><span class="p">(</span><span class="n">setmealPageQueryDTO</span><span class="p">.</span><span class="na">getPage</span><span class="p">(),</span><span class="w"> </span><span class="n">setmealPageQueryDTO</span><span class="p">.</span><span class="na">getPageSize</span><span class="p">());</span>
+<span class="w">        </span><span class="n">Page</span><span class="o">&lt;</span><span class="n">SetmealVO</span><span class="o">&gt;</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">setmealMapper</span><span class="p">.</span><span class="na">pageQuery</span><span class="p">(</span><span class="n">setmealPageQueryDTO</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PageResult</span><span class="p">(</span><span class="n">page</span><span class="p">.</span><span class="na">getTotal</span><span class="p">(),</span><span class="w"> </span><span class="n">page</span><span class="p">.</span><span class="na">getResult</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealMapper.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 套餐分页查询</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">Page</span><span class="o">&lt;</span><span class="n">SetmealVO</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">pageQuery</span><span class="p">(</span><span class="n">SetmealPageQueryDTO</span><span class="w"> </span><span class="n">setmealPageQueryDTO</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealMapper.xml</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nt">&lt;select</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;pageQuery&quot;</span><span class="w"> </span><span class="na">resultType=</span><span class="s">&quot;com.sky.vo.SetmealVO&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span>select<span class="w"> </span>s.*,<span class="w"> </span>c.name<span class="w"> </span>as<span class="w"> </span>category_name<span class="w"> </span>from<span class="w"> </span>setmeal<span class="w"> </span>s<span class="w"> </span>left<span class="w"> </span>outer<span class="w"> </span>join<span class="w"> </span>category<span class="w"> </span>c<span class="w"> </span>on<span class="w"> </span>s.category_id<span class="w"> </span>=<span class="w"> </span>c.id
+<span class="w">        </span><span class="nt">&lt;where&gt;</span>
+<span class="w">            </span><span class="nt">&lt;if</span><span class="w"> </span><span class="na">test=</span><span class="s">&quot;name != null&quot;</span><span class="nt">&gt;</span>and<span class="w"> </span>s.name<span class="w"> </span>like<span class="w"> </span>concat(&#39;%&#39;,<span class="w"> </span>#{name},<span class="w"> </span>&#39;%&#39;)<span class="nt">&lt;/if&gt;</span>
+<span class="w">            </span><span class="nt">&lt;if</span><span class="w"> </span><span class="na">test=</span><span class="s">&quot;categoryId != null&quot;</span><span class="nt">&gt;</span>and<span class="w"> </span>s.category_id<span class="w"> </span>=<span class="w"> </span>#{categoryId}<span class="nt">&lt;/if&gt;</span>
+<span class="w">            </span><span class="nt">&lt;if</span><span class="w"> </span><span class="na">test=</span><span class="s">&quot;status != null&quot;</span><span class="nt">&gt;</span>and<span class="w"> </span>s.status<span class="w"> </span>=<span class="w"> </span>#{status}<span class="nt">&lt;/if&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/where&gt;</span>
+<span class="w">        </span>order<span class="w"> </span>by<span class="w"> </span>s.create_time<span class="w"> </span>desc
+<span class="w">    </span><span class="nt">&lt;/select&gt;</span>
+</code></pre></div></td></tr></table></div>
 <h2 id="3">3. 删除套餐<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>实际上是实现批量删除套餐，将删除单个套餐视为批量删除套餐的特殊形式。</p>
+<p>所以需要明确哪些情况下不能够删除套餐：启售的套餐不能够删除。</p>
+<p><code>SetmealController.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 批量删除套餐</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@DeleteMapping</span>
+<span class="w">    </span><span class="nd">@ApiOperation</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;批量删除套餐&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Result</span><span class="w"> </span><span class="nf">deleteBatch</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ids</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;批量删除套餐：{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ids</span><span class="p">);</span>
+<span class="w">        </span><span class="n">setmealService</span><span class="p">.</span><span class="na">deleteBatch</span><span class="p">(</span><span class="n">ids</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Result</span><span class="p">.</span><span class="na">success</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p><img alt="❓" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2753.svg" title=":question:" /> 为什么可以使用 <code>(@RequestParam List&lt;Long&gt; ids)</code> 来接收 String 类型且用 <code>,</code> 分隔的 ids？实现原理是什么？在常规的方式应该是使用 <code>(String ids)</code> 来接收 Query 参数，然后再手动分隔得到 <code>List&lt;Long&gt; ids</code>。</p>
+<p>这是因为 <code>Spring MVC</code> 内置了 Converter（转换器），可以实现这种自动转换。</p>
+<p><code>SetmealService.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 批量删除套餐</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteBatch</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ids</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealServiceImpl.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 批量删除套餐</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Transactional</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteBatch</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ids</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 先检查所有需要删除的套餐中，是否存在启售的套餐，如果存在，则都不能删除</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ids</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Setmeal</span><span class="w"> </span><span class="n">setmeal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">setmealMapper</span><span class="p">.</span><span class="na">getById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">setmeal</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">StatusConstant</span><span class="p">.</span><span class="na">ENABLE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DeletionNotAllowedException</span><span class="p">(</span><span class="n">MessageConstant</span><span class="p">.</span><span class="na">SETMEAL_ON_SALE</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// 批量删除 setmeal 表中的套餐数据</span>
+<span class="w">        </span><span class="n">setmealMapper</span><span class="p">.</span><span class="na">deleteByIds</span><span class="p">(</span><span class="n">ids</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// 批量删除 setmeal_dish 表中的套餐菜品关系数据</span>
+<span class="w">        </span><span class="n">setmealDishMapper</span><span class="p">.</span><span class="na">deleteByIds</span><span class="p">(</span><span class="n">ids</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealMapper.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 根据 id 查询套餐</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Select</span><span class="p">(</span><span class="s">&quot;select * from setmeal where id = #{id}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">Setmeal</span><span class="w"> </span><span class="nf">getById</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 根据 id 批量删除套餐</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteByIds</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ids</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealMapper.xml</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="o">&lt;</span><span class="n">delete</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s">&quot;deleteByIds&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="n">delete</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">setmeal</span><span class="w"> </span><span class="n">where</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="n">in</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">foreach</span><span class="w"> </span><span class="n">collection</span><span class="o">=</span><span class="s">&quot;ids&quot;</span><span class="w"> </span><span class="n">item</span><span class="o">=</span><span class="s">&quot;id&quot;</span><span class="w"> </span><span class="n">separator</span><span class="o">=</span><span class="s">&quot;,&quot;</span><span class="w"> </span><span class="n">open</span><span class="o">=</span><span class="s">&quot;(&quot;</span><span class="w"> </span><span class="n">close</span><span class="o">=</span><span class="s">&quot;)&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="err">#</span><span class="p">{</span><span class="n">id</span><span class="p">}</span>
+<span class="w">        </span><span class="o">&lt;/</span><span class="n">foreach</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">delete</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealDishMapper.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 根据 id 批量删除套餐菜品关系数据</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteByIds</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">setmealIds</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealDishMapper.xml</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="o">&lt;</span><span class="n">delete</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s">&quot;deleteByIds&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="n">delete</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">setmeal_dish</span><span class="w"> </span><span class="n">where</span><span class="w"> </span><span class="n">setmeal_id</span><span class="w"> </span><span class="n">in</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">foreach</span><span class="w"> </span><span class="n">collection</span><span class="o">=</span><span class="s">&quot;setmealIds&quot;</span><span class="w"> </span><span class="n">item</span><span class="o">=</span><span class="s">&quot;setmealId&quot;</span><span class="w"> </span><span class="n">separator</span><span class="o">=</span><span class="s">&quot;,&quot;</span><span class="w"> </span><span class="n">open</span><span class="o">=</span><span class="s">&quot;(&quot;</span><span class="w"> </span><span class="n">close</span><span class="o">=</span><span class="s">&quot;)&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="err">#</span><span class="p">{</span><span class="n">setmealId</span><span class="p">}</span>
+<span class="w">        </span><span class="o">&lt;/</span><span class="n">foreach</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">delete</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
 <h2 id="4">4. 修改套餐<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>修改套餐要实现两个功能：</p>
+<ol>
+<li>套餐信息的回显，即根据套餐 id 查询套餐信息</li>
+<li>修改后套餐数据的保存</li>
+</ol>
+<h3 id="id">根据套餐  id 查询套餐信息<a class="headerlink" href="#id" title="Permanent link">&para;</a></h3>
+<p><code>SetmealController.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 根据 id 查询套餐</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/{id}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@ApiOperation</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;根据 id 查询套餐&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Result</span><span class="o">&lt;</span><span class="n">SetmealVO</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">queryById</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;根据 id 查询套餐：{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">);</span>
+<span class="w">        </span><span class="n">SetmealVO</span><span class="w"> </span><span class="n">setmealVO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">setmealService</span><span class="p">.</span><span class="na">queryByIdWithDish</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Result</span><span class="p">.</span><span class="na">success</span><span class="p">(</span><span class="n">setmealVO</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealService.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 根据 id 查询套餐和菜品</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">SetmealVO</span><span class="w"> </span><span class="nf">queryByIdWithDish</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealServiceImpl.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 根据 id 查询套餐和菜品</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">SetmealVO</span><span class="w"> </span><span class="nf">queryByIdWithDish</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 根据套餐 id 查询套餐数据</span>
+<span class="w">        </span><span class="n">Setmeal</span><span class="w"> </span><span class="n">setmeal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">setmealMapper</span><span class="p">.</span><span class="na">getById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// 根据套餐 id 查询套餐菜品关系数据</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SetmealDish</span><span class="o">&gt;</span><span class="w"> </span><span class="n">setmealDishes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">setmealDishMapper</span><span class="p">.</span><span class="na">getSetmealDishesById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// 将数据封装到 VO</span>
+<span class="w">        </span><span class="n">SetmealVO</span><span class="w"> </span><span class="n">setmealVO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SetmealVO</span><span class="p">();</span>
+<span class="w">        </span><span class="n">BeanUtils</span><span class="p">.</span><span class="na">copyProperties</span><span class="p">(</span><span class="n">setmeal</span><span class="p">,</span><span class="w"> </span><span class="n">setmealVO</span><span class="p">);</span>
+<span class="w">        </span><span class="n">setmealVO</span><span class="p">.</span><span class="na">setSetmealDishes</span><span class="p">(</span><span class="n">setmealDishes</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">setmealVO</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealMapper.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 根据套餐 id 查询套餐数据</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Select</span><span class="p">(</span><span class="s">&quot;select * from setmeal where id = #{id}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">Setmeal</span><span class="w"> </span><span class="nf">getById</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealDishMapper.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 根据套餐 id 查询套餐菜品关系数据</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Select</span><span class="p">(</span><span class="s">&quot;select * from setmeal_dish where setmeal_id = #{setmealId}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SetmealDish</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getSetmealDishesById</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">setmealId</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_6">套餐数据保存<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>套餐数据的修改分为三步：</p>
+<ol>
+<li>修改套餐的基本数据，需要修改 <code>setmeal</code> 表</li>
+<li>删除与套餐与菜品的关系数据，需要修改 <code>setmeal_dish</code> 表</li>
+<li>重新插入套餐与菜品的关系数据，需要修改 <code>setmeal_dish</code> 表</li>
+</ol>
+<p><code>SetmealController.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 修改套餐</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@PutMapping</span>
+<span class="w">    </span><span class="nd">@ApiOperation</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;修改套餐&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Result</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">SetmealDTO</span><span class="w"> </span><span class="n">setmealDTO</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;修改套餐：{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">setmealDTO</span><span class="p">);</span>
+<span class="w">        </span><span class="n">setmealService</span><span class="p">.</span><span class="na">update</span><span class="p">(</span><span class="n">setmealDTO</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Result</span><span class="p">.</span><span class="na">success</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealService.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 修改套餐</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">SetmealDTO</span><span class="w"> </span><span class="n">setmealDTO</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealServiceImpl.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 修改套餐</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Transactional</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">SetmealDTO</span><span class="w"> </span><span class="n">setmealDTO</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 修改套餐基本数据</span>
+<span class="w">        </span><span class="n">Setmeal</span><span class="w"> </span><span class="n">setmeal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Setmeal</span><span class="p">();</span>
+<span class="w">        </span><span class="n">BeanUtils</span><span class="p">.</span><span class="na">copyProperties</span><span class="p">(</span><span class="n">setmealDTO</span><span class="p">,</span><span class="w"> </span><span class="n">setmeal</span><span class="p">);</span>
+<span class="w">        </span><span class="n">setmealMapper</span><span class="p">.</span><span class="na">update</span><span class="p">(</span><span class="n">setmeal</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">Long</span><span class="w"> </span><span class="n">setmealId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">setmealDTO</span><span class="p">.</span><span class="na">getId</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// 修改套餐和菜品的关系数据，先删除旧的套餐和菜品的关系数据，然后新增套餐和菜品的关系数据</span>
+<span class="w">        </span><span class="n">setmealDishMapper</span><span class="p">.</span><span class="na">deleteById</span><span class="p">(</span><span class="n">setmealId</span><span class="p">);</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SetmealDish</span><span class="o">&gt;</span><span class="w"> </span><span class="n">setmealDishes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">setmealDTO</span><span class="p">.</span><span class="na">getSetmealDishes</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">setmealDishes</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">setmealDishes</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">setmealDishes</span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">setmealDish</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">setmealDish</span><span class="p">.</span><span class="na">setSetmealId</span><span class="p">(</span><span class="n">setmealId</span><span class="p">);</span>
+<span class="w">            </span><span class="p">});</span>
+<span class="w">            </span><span class="c1">// 向 setmeal_dish 表中插入 n 条套餐和菜品的关系数据</span>
+<span class="w">            </span><span class="n">setmealDishMapper</span><span class="p">.</span><span class="na">insertBatch</span><span class="p">(</span><span class="n">setmealDishes</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealMapper.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 更新套餐数据</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@AutoFill</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OperationType</span><span class="p">.</span><span class="na">UPDATE</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">Setmeal</span><span class="w"> </span><span class="n">setmeal</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealMapper.xml</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nt">&lt;update</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;update&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span>update<span class="w"> </span>setmeal
+<span class="w">        </span><span class="nt">&lt;set&gt;</span>
+<span class="w">            </span><span class="nt">&lt;if</span><span class="w"> </span><span class="na">test=</span><span class="s">&quot;categoryId != null&quot;</span><span class="nt">&gt;</span>category_id<span class="w"> </span>=<span class="w"> </span>#{categoryId},<span class="nt">&lt;/if&gt;</span>
+<span class="w">            </span><span class="nt">&lt;if</span><span class="w"> </span><span class="na">test=</span><span class="s">&quot;name != null&quot;</span><span class="nt">&gt;</span>name<span class="w"> </span>=<span class="w"> </span>#{name},<span class="nt">&lt;/if&gt;</span>
+<span class="w">            </span><span class="nt">&lt;if</span><span class="w"> </span><span class="na">test=</span><span class="s">&quot;price != null&quot;</span><span class="nt">&gt;</span>price<span class="w"> </span>=<span class="w"> </span>#{price},<span class="nt">&lt;/if&gt;</span>
+<span class="w">            </span><span class="nt">&lt;if</span><span class="w"> </span><span class="na">test=</span><span class="s">&quot;status != null&quot;</span><span class="nt">&gt;</span>status<span class="w"> </span>=<span class="w"> </span>#{status},<span class="nt">&lt;/if&gt;</span>
+<span class="w">            </span><span class="nt">&lt;if</span><span class="w"> </span><span class="na">test=</span><span class="s">&quot;description != null&quot;</span><span class="nt">&gt;</span>description<span class="w"> </span>=<span class="w"> </span>#{description},<span class="nt">&lt;/if&gt;</span>
+<span class="w">            </span><span class="nt">&lt;if</span><span class="w"> </span><span class="na">test=</span><span class="s">&quot;image != null&quot;</span><span class="nt">&gt;</span>image<span class="w"> </span>=<span class="w"> </span>#{image},<span class="nt">&lt;/if&gt;</span>
+<span class="w">            </span><span class="nt">&lt;if</span><span class="w"> </span><span class="na">test=</span><span class="s">&quot;updateTime != null&quot;</span><span class="nt">&gt;</span>update_time<span class="w"> </span>=<span class="w"> </span>#{updateTime},<span class="nt">&lt;/if&gt;</span>
+<span class="w">            </span><span class="nt">&lt;if</span><span class="w"> </span><span class="na">test=</span><span class="s">&quot;updateUser != null&quot;</span><span class="nt">&gt;</span>update_user<span class="w"> </span>=<span class="w"> </span>#{updateUser},<span class="nt">&lt;/if&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/set&gt;</span>
+<span class="w">        </span>where<span class="w"> </span>id<span class="w"> </span>=<span class="w"> </span>#{id}
+<span class="w">    </span><span class="nt">&lt;/update&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealDishMapper.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 根据 id 删除套餐菜品关系数据</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Delete</span><span class="p">(</span><span class="s">&quot;delete from setmeal_dish where setmeal_id = #{setmealId}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteById</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">setmealId</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 批量插入套餐菜品数据</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">insertBatch</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">SetmealDish</span><span class="o">&gt;</span><span class="w"> </span><span class="n">setmealDishes</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p><code>SetmealDishMapper.xml</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nt">&lt;insert</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;insertBatch&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span>insert<span class="w"> </span>into<span class="w"> </span>setmeal_dish<span class="w"> </span>(setmeal_id,<span class="w"> </span>dish_id,<span class="w"> </span>name,<span class="w"> </span>price,<span class="w"> </span>copies)<span class="w"> </span>values
+<span class="w">        </span><span class="nt">&lt;foreach</span><span class="w"> </span><span class="na">collection=</span><span class="s">&quot;setmealDishes&quot;</span><span class="w"> </span><span class="na">item=</span><span class="s">&quot;setmealDish&quot;</span><span class="w"> </span><span class="na">separator=</span><span class="s">&quot;,&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span>(#{setmealDish.setmealId},<span class="w"> </span>#{setmealDish.dishId},<span class="w"> </span>#{setmealDish.name},<span class="w"> </span>#{setmealDish.price},<span class="w"> </span>#{setmealDish.copies})
+<span class="w">        </span><span class="nt">&lt;/foreach&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/insert&gt;</span>
+</code></pre></div></td></tr></table></div>
 <h2 id="5">5. 起售停售套餐<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
 
 
