@@ -6996,6 +6996,11 @@
 <span class="w">        </span><span class="n">setmealMapper</span><span class="p">.</span><span class="na">update</span><span class="p">(</span><span class="n">setmeal</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:" /> 需要分情况讨论：</p>
+<ul>
+<li>如果套餐在启售状态，则可以直接修改为停售状态。</li>
+<li>如果套餐在停售状态，在修改为启售状态之前，需要判断套餐内的所有菜品均为启售状态。</li>
+</ul>
 <p><code>DishMapper.java</code></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
