@@ -3443,6 +3443,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#wsl2-codex" class="md-nav__link">
+    <span class="md-ellipsis">
+      在 WSL2 中安装 Codex
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#claude-code" class="md-nav__link">
     <span class="md-ellipsis">
       Claude Code 安装
@@ -5890,6 +5899,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#wsl2-codex" class="md-nav__link">
+    <span class="md-ellipsis">
+      在 WSL2 中安装 Codex
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#claude-code" class="md-nav__link">
     <span class="md-ellipsis">
       Claude Code 安装
@@ -5962,6 +5980,49 @@
 <p>安装 CC-Switch：<a href="https://github.com/farion1231/cc-switch/releases/tag/v3.13.0">https://github.com/farion1231/cc-switch/releases/tag/v3.13.0</a></p>
 <p>在 CC-Switch 中配置 PackyCode，详见：<a href="https://docs.packyapi.com/docs/ccswitch/3-codex.html">https://docs.packyapi.com/docs/ccswitch/3-codex.html</a></p>
 <p><img alt="image-20260419195342821" src="C:\Users\Amonologue\AppData\Roaming\Typora\typora-user-images\image-20260419195342821.png" /></p>
+<h3 id="wsl2-codex">在 WSL2 中安装 Codex<a class="headerlink" href="#wsl2-codex" title="Permanent link">&para;</a></h3>
+<p>步骤1：</p>
+<p>在 VS Code 扩展中安装 Codex 插件：</p>
+<p>步骤2：</p>
+<p>在 WSL2 中安装 CC-Switch CLI</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 下载</span>
+curl<span class="w"> </span>-LO<span class="w"> </span>https://github.com/saladday/cc-switch-cli/releases/latest/download/cc-switch-cli-linux-x64-musl.tar.gz
+
+<span class="c1"># 解压</span>
+tar<span class="w"> </span>-xzf<span class="w"> </span>cc-switch-cli-linux-x64-musl.tar.gz
+
+<span class="c1"># 添加执行权限</span>
+chmod<span class="w"> </span>+x<span class="w"> </span>cc-switch
+
+<span class="c1"># 移动到 PATH</span>
+sudo<span class="w"> </span>mv<span class="w"> </span>cc-switch<span class="w"> </span>/usr/local/bin/
+</code></pre></div></td></tr></table></div>
+<p>在 CC-Switch CLI 中配置 Codex</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 启动 CC-Switch CLI</span>
+cc-switch
+</code></pre></div></td></tr></table></div>
+<p>按下 <code>]</code> 切换到 Codex，选择 <code>Providers</code> ，回车选中，并按下 <code>a</code> 键，进入供应商添加页面</p>
+<p><img alt="image-20260421164505581" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604211645185.png" /></p>
+<p>在上方模板中选择 <code>PackyCode</code></p>
+<p><img alt="image-20260421164550108" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604211645619.png" /></p>
+<p>在 <code>Api Key</code> 处填写你的 Apikey 回车，并按下 <code>Ctrl+S</code> 进行保存，<code>Api Key</code> 分组选择可用于 Codex 分组</p>
+<p><img alt="image-20260421164612531" src="C:\Users\Amonologue\AppData\Roaming\Typora\typora-user-images\image-20260421164612531.png" /></p>
+<p>确保此时选中的是刚才配置的 Provider，然后在左侧菜单中退出 CC Switch CLI</p>
+<p>步骤3：</p>
+<p>之后就可以通过在终端输入如下命令，然后在 Windows10 的 VS Code 中使用 Codex 了</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>code<span class="w"> </span>.
+</code></pre></div></td></tr></table></div>
 <h3 id="claude-code">Claude Code 安装<a class="headerlink" href="#claude-code" title="Permanent link">&para;</a></h3>
 <p>目标：将 Claude Code 安装到 Windows 10 的 WSL2 Ubuntu 系统中</p>
 <p>步骤1：</p>
