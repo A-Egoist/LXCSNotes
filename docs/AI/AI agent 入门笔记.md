@@ -30,6 +30,63 @@ Cursor 官方文档：https://cursor.com/cn/docs
 
 
 
+### 在 WSL2 中安装 Codex
+
+步骤1：
+
+在 VS Code 扩展中安装 Codex 插件：
+
+步骤2：
+
+在 WSL2 中安装 CC-Switch CLI
+
+```bash
+# 下载
+curl -LO https://github.com/saladday/cc-switch-cli/releases/latest/download/cc-switch-cli-linux-x64-musl.tar.gz
+
+# 解压
+tar -xzf cc-switch-cli-linux-x64-musl.tar.gz
+
+# 添加执行权限
+chmod +x cc-switch
+
+# 移动到 PATH
+sudo mv cc-switch /usr/local/bin/
+```
+
+在 CC-Switch CLI 中配置 Codex
+
+```bash
+# 启动 CC-Switch CLI
+cc-switch
+```
+
+按下 `]` 切换到 Codex，选择 `Providers` ，回车选中，并按下 `a` 键，进入供应商添加页面
+
+![image-20260421164505581](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604211645185.png)
+
+在上方模板中选择 `PackyCode`
+
+![image-20260421164550108](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604211645619.png)
+
+在 `Api Key` 处填写你的 Apikey 回车，并按下 `Ctrl+S` 进行保存，`Api Key` 分组选择可用于 Codex 分组
+
+![image-20260421164612531](C:\Users\Amonologue\AppData\Roaming\Typora\typora-user-images\image-20260421164612531.png)
+
+确保此时选中的是刚才配置的 Provider，然后在左侧菜单中退出 CC Switch CLI
+
+步骤3：
+
+之后就可以通过在终端输入如下命令，然后在 Windows10 的 VS Code 中使用 Codex 了
+
+```bash
+code .
+```
+
+
+
+
+
 ### Claude Code 安装
 
 目标：将 Claude Code 安装到 Windows 10 的 WSL2 Ubuntu 系统中
