@@ -8,6 +8,10 @@ Cursor 官方文档：https://cursor.com/cn/docs
 
 中转站：https://www.packyapi.com/console
 
+中转站使用文档：https://docs.packyapi.com/docs/register/
+
+Codex 菜鸟教程：https://www.runoob.com/codex/codex-tutorial.html
+
 
 
 ## 安装和配置
@@ -26,7 +30,7 @@ Cursor 官方文档：https://cursor.com/cn/docs
 
 在 CC-Switch 中配置 PackyCode，详见：https://docs.packyapi.com/docs/ccswitch/3-codex.html
 
-![image-20260419195342821](C:\Users\Amonologue\AppData\Roaming\Typora\typora-user-images\image-20260419195342821.png)
+![image-20260419195342821](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604211712029.png)
 
 
 
@@ -71,7 +75,7 @@ cc-switch
 
 在 `Api Key` 处填写你的 Apikey 回车，并按下 `Ctrl+S` 进行保存，`Api Key` 分组选择可用于 Codex 分组
 
-![image-20260421164612531](C:\Users\Amonologue\AppData\Roaming\Typora\typora-user-images\image-20260421164612531.png)
+![image-20260421164612531](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604211704644.png)
 
 确保此时选中的是刚才配置的 Provider，然后在左侧菜单中退出 CC Switch CLI
 
