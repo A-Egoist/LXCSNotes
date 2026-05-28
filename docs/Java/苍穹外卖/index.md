@@ -1,5 +1,33 @@
 # 苍穹外卖
 
+
+
+## 启动项目
+
+### step1：启动 MySQL
+
+```cmd
+net start mysql
+```
+
+### step2：启动前端
+
+运行 `nginx-1.20.2/nginx.exe`
+
+### step3：启动 Redis
+
+```cmd
+.\redis-server.exe  .\redis.windows.conf
+```
+
+### step4：在 IDEA 中启动项目
+
+### step5：启动微信小程序
+
+
+
+
+
 ## 笔记
 
 [苍穹外卖中的技术总结](./技术总结.md)
