@@ -356,15 +356,15 @@ public class CacheDemoApplication {
 
 **说明：**key 的写法如下
 
-#user.id：#user 指的是方法形参的名称，id 指的是 user 的 id 属性 , 也就是使用 user 的 id 属性作为 key；
+`#user.id`：`#user` 指的是方法形参的名称，id 指的是 user 的 id 属性 , 也就是使用 user 的 id 属性作为 key；
 
-#result.id：#result 代表方法返回值，该表达式代表以返回对象的 id 属性作为 key；
+`#result.id`：`#result` 代表方法返回值，该表达式代表以返回对象的 id 属性作为 key；
 
-#p0.id：#p0 指的是方法中的第一个参数，id 指的是第一个参数的 id 属性,也就是使用第一个参数的 id 属性作为 key；
+`#p0.id`：`#p0` 指的是方法中的第一个参数，id 指的是第一个参数的 id 属性,也就是使用第一个参数的 id 属性作为 key；
 
-#a0.id：#a0 指的是方法中的第一个参数，id 指的是第一个参数的 id 属性，也就是使用第一个参数的 id 属性作为 key；
+`#a0.id`：`#a0` 指的是方法中的第一个参数，id 指的是第一个参数的 id 属性，也就是使用第一个参数的 id 属性作为 key；
 
-#root.args[0].idl：#root.args[0] 指的是方法中的第一个参数，id 指的是第一个参数的 id 属性，也就是使用第一个参数的 id 属性作为 key；
+`#root.args[0].idl`：`#root.args[0]` 指的是方法中的第一个参数，id 指的是第一个参数的 id 属性，也就是使用第一个参数的 id 属性作为 key；
 
 **启动服务，通过 swagger 接口文档测试，访问 UserController 的 save() 方法**
 
@@ -622,8 +622,6 @@ public class SkyApplication {
 
 
 
-
-
 ## 3. 添加购物车
 
 ### 3.1 需求分析和设计
@@ -743,9 +741,9 @@ public class ShoppingCartController {
 
 
 
-#### 3.2.3 Service层接口
+#### 3.2.3 Service 层接口
 
-**创建ShoppingCartService接口：**
+**创建 ShoppingCartService 接口：**
 
 ```java
 package com.sky.service;
@@ -763,9 +761,9 @@ public interface ShoppingCartService {
 
 
 
-#### 3.2.4 Service层实现类
+#### 3.2.4 Service 层实现类
 
-**创建ShoppingCartServiceImpl实现类，并实现add方法：**
+**创建 ShoppingCartServiceImpl 实现类，并实现 add 方法：**
 
 ```java
 package com.sky.service.impl;
@@ -845,9 +843,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 
 
-#### 3.2.5 Mapper层
+#### 3.2.5 Mapper 层
 
-**创建ShoppingCartMapper接口:**
+**创建 ShoppingCartMapper 接口:**
 
 ```java
 package com.sky.mapper;
@@ -879,7 +877,7 @@ public interface ShoppingCartMapper {
 }
 ```
 
-**创建ShoppingCartMapper.xml：**
+**创建 ShoppingCartMapper.xml：**
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -913,3 +911,192 @@ public interface ShoppingCartMapper {
 因为现在没有实现查看购物车功能，所以只能在表中进行查看。
 
 在前后联调时，后台可通断点方式启动，查看运行的每一步。
+
+
+
+## 4. 查看购物车
+
+### 4.1 需求分析和设计
+
+#### 4.1.1 产品原型
+
+当用户添加完菜品和套餐后，可进入到购物车中，查看购物中的菜品和套餐。
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202605292149273.png" alt="image-20221208190038058" style="zoom:50%;" /> 
+
+
+
+#### 4.1.2 接口设计
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202605292149490.png" alt="image-20221208190052467" style="zoom:50%;" /> <img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202605292149944.png" alt="image-20221208190102904" style="zoom:50%;" />
+
+
+
+### 4.2 代码开发
+
+#### 4.2.1 Controller层
+
+**在ShoppingCartController中创建查看购物车的方法：**
+
+```java
+    /**
+     * 查看购物车
+     */
+    @GetMapping("/list")
+    @ApiOperation(value = "查看购物车")
+    public Result<List<ShoppingCart>> list() {
+        log.info("查看购物车");
+        List<ShoppingCart> list = shoppingCartService.showShoppingCart();
+        return Result.success(list);
+    }
+```
+
+
+
+#### 4.2.2 Service层接口
+
+**在ShoppingCartService接口中声明查看购物车的方法：**
+
+```java
+    /**
+     * 查看购物车
+     */
+    List<ShoppingCart> showShoppingCart();
+```
+
+
+
+#### 4.2.3 Service层实现类
+
+**在ShoppingCartServiceImpl中实现查看购物车的方法：**
+
+```java
+    /**
+     * 查看购物车
+     */
+    public List<ShoppingCart> showShoppingCart() {
+        Long userId = BaseContext.getCurrentId();
+        ShoppingCart shoppingCart = ShoppingCart.builder().userId(userId).build();
+        List<ShoppingCart> list = shoppingCartMapper.list(shoppingCart);
+        return list;
+    }
+```
+
+
+
+### 4.3 功能测试
+
+当进入小程序时，就会发起查看购物车的请求
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202605292159052.png" alt="image-20221210213347557" style="zoom:50%;" /> 
+
+点击购物车图标
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202605292159316.png" alt="image-20221210213438878" style="zoom:50%;" /> 
+
+测试成功。
+
+
+
+## 5. 清空购物车
+
+### 5.1 需求分析和设计
+
+#### 5.1.1 产品原型
+
+当点击清空按钮时，会把购物车中的数据全部清空。
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202605292201698.png" alt="image-20221210213703715" style="zoom:50%;" /> 
+
+
+
+#### 5.1.2 接口设计
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202605292201893.png" alt="image-20221208191606894" style="zoom:50%;" /> 
+
+
+
+### 5.2 代码开发
+
+#### 5.2.1 Controller层
+
+**在ShoppingCartController中创建清空购物车的方法：**
+
+```java
+    /**
+     * 清空购物车
+     */
+    @DeleteMapping("/clean")
+    @ApiOperation(value = "清空购物车")
+    public Result clean() {
+        shoppingCartService.cleanShoppingCart();
+        return Result.success();
+    }
+```
+
+
+
+#### 5.2.2 Service层接口
+
+**在ShoppingCartService接口中声明清空购物车的方法：**
+
+```java
+    /**
+     * 清空购物车
+     */
+    void cleanShoppingCart();
+```
+
+
+
+#### 5.2.3 Service层实现类
+
+**在ShoppingCartServiceImpl中实现清空购物车的方法：**
+
+```java
+    /**
+     * 清空购物车
+     */
+    public void cleanShoppingCart() {
+        Long userId = BaseContext.getCurrentId();
+        shoppingCartMapper.deleteByUserId(userId);
+    }
+```
+
+
+
+#### 5.2.4 Mapper层
+
+**在ShoppingCartMapper接口中创建删除购物车数据的方法：**
+
+```java
+    /**
+     * 根据 userId 删除数据
+     */
+    @Delete("delete from shopping_cart where user_id = #{userId}")
+    void deleteByUserId(Long userId);
+```
+
+
+
+### 5.3 功能测试
+
+进入到购物车页面
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202605292208661.png" alt="image-20221210214710863" style="zoom:50%;" /> 
+
+点击清空
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202605292209080.png" alt="image-20221210214914092" style="zoom:50%;" /> 
+
+查看数据库中的数据
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202605292209004.png" alt="image-20221210214950261" style="zoom:80%;" /> 
+
+说明当前用户的购物车数据已全部删除。
+
+
+
+### 5.4 TODO
+
+-   [ ] 减少购物车中的商品，当商品数量减为0时，从购物车中删除
