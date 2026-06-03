@@ -22,7 +22,9 @@ net start mysql
 
 ### step4：在 IDEA 中启动项目
 
-### step5：启动微信小程序
+### step5：启动 DataGrip
+
+### step6：启动微信开发者工具
 
 
 
