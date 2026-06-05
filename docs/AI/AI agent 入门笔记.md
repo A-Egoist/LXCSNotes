@@ -16,15 +16,33 @@ Codex 菜鸟教程：https://www.runoob.com/codex/codex-tutorial.html
 
 ## 安装和配置
 
-### Codex 安装
+### 在 Windows 中安装 Codex
 
-步骤1：
+#### 通过插件的方式使用
+
+**步骤1：**
 
 在 VS Code 扩展中安装 Codex 插件：
 
 ![image-20260419174740196](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604191747571.png)
 
-步骤2：
+**步骤2：**
+
+安装 CC-Switch：https://github.com/farion1231/cc-switch/releases/tag/v3.13.0
+
+在 CC-Switch 中配置 PackyCode，详见：https://docs.packyapi.com/docs/ccswitch/3-codex.html
+
+![image-20260419195342821](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604211712029.png)
+
+#### 通过 APP 的方式使用
+
+**步骤1：**
+
+在 Codex 官网安装 APP
+
+
+
+**步骤2：**
 
 安装 CC-Switch：https://github.com/farion1231/cc-switch/releases/tag/v3.13.0
 
@@ -34,13 +52,53 @@ Codex 菜鸟教程：https://www.runoob.com/codex/codex-tutorial.html
 
 
 
-### 在 WSL2 中安装 Codex
+#### 通过 Codex CLI 的方式使用
 
 步骤1：
 
-在 VS Code 扩展中安装 Codex 插件：
+配置 Nodejs 环境
+
+验证 Nodejs 环境
+
+```cmd
+npm list -g --depth-0
+```
+
+
 
 步骤2：
+
+安装 Codex CLI
+
+```cmd
+npm i -g @openai/codex@latest
+```
+
+
+
+步骤3：
+
+测试安装
+
+```cmd
+codex
+```
+
+
+
+
+
+
+
+### 在 WSL2 中安装 Codex
+
+#### 通过插件的方式使用
+
+**步骤1：**
+
+在 VS Code 扩展中安装 Codex 插件：
+
+**步骤2：**
 
 在 WSL2 中安装 CC-Switch CLI
 
@@ -79,7 +137,7 @@ cc-switch
 
 确保此时选中的是刚才配置的 Provider，然后在左侧菜单中退出 CC Switch CLI
 
-步骤3：
+**步骤3：**
 
 之后就可以通过在终端输入如下命令，然后在 Windows10 的 VS Code 中使用 Codex 了
 
@@ -88,6 +146,38 @@ code .
 ```
 
 
+
+#### 通过 CLI 的方式使用
+
+步骤1：
+
+配置 Nodejs 环境
+
+```bash
+# 更新软件源索引
+sudo apt update
+# 安装需要的包
+sudo apt install -y nodejs npm
+```
+
+检查版本
+
+```bash
+node -v
+npm -v
+```
+
+步骤2：
+
+安装 Codex CLI
+
+```bash
+sudo npm i -g @openai/codex@latest
+```
+
+步骤3：
+
+在 cc-switch 中配置 Codex
 
 
 
@@ -223,15 +313,11 @@ claude_codex
 
 
 
-
-
-
-
-
-
 ## 参考资料
 
 [1] [【AI编程工具】用国产替代模型入坑Claude Code吧】](https://www.bilibili.com/video/BV1FYvZBSEd9/)
 
 [2] [【科研论文党王炸组合overleaf+Copilot】](https://www.bilibili.com/video/BV1RQALePEuu)
+
+[3] [PackyAPI 使用文档](https://docs.packyapi.com/docs/)
 

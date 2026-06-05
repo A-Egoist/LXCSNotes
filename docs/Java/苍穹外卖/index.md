@@ -50,13 +50,13 @@ net start mysql
 
 <img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202604211727851.png" alt="image-20260421172648033" style="zoom:67%;" />
 
-苍穹外码-Day05：
+[苍穹外码-Day05](./苍穹外卖-Day05.md)：
 
-苍穹外码-Day06：
+[苍穹外码-Day06](./苍穹外卖-Day06.md)：
 
-苍穹外码-Day07：
+[苍穹外码-Day07](./苍穹外卖-Day07.md)：
 
-苍穹外码-Day08：
+[苍穹外码-Day08](./苍穹外卖-Day08.md)：
 
 苍穹外码-Day09：
 
