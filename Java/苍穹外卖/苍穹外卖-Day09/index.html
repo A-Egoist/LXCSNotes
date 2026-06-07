@@ -2977,6 +2977,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="3. 优化用户下单功能">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_60" class="md-nav__link">
+    <span class="md-ellipsis">
+      环境准备
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_61" class="md-nav__link">
+    <span class="md-ellipsis">
+      代码实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -7402,6 +7426,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="3. 优化用户下单功能">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_60" class="md-nav__link">
+    <span class="md-ellipsis">
+      环境准备
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_61" class="md-nav__link">
+    <span class="md-ellipsis">
+      代码实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -8753,6 +8801,158 @@
 <p><img alt="image-20260607003314897" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202606070033007.png" /></p>
 <h2 id="3">3. 优化用户下单功能<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <p>实现功能：校验收货地址是否超出配送范围</p>
+<h3 id="_60">环境准备<a class="headerlink" href="#_60" title="Permanent link">&para;</a></h3>
+<p>1、登录百度地图开放平台，进入控制台，创建应用，获取 AK</p>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202606071016933.png" alt="image-20260607101622772" style="zoom:50%;" /></p>
+<h3 id="_61">代码实现<a class="headerlink" href="#_61" title="Permanent link">&para;</a></h3>
+<p><code>application.yml</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>sky:
+  shop:
+    address: ${sky.shop.address}
+  baidu:
+    ak: ${sky.baidu.ak}
+</code></pre></div></td></tr></table></div>
+<p><code>OrderServiceImpl.java</code></p>
+<p>首先注入数据：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;${sky.shop.address}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">shopAddress</span><span class="p">;</span>
+<span class="w">    </span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;${sky.baidu.ak}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">baiduAK</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+<p>然后添加一个校验方法：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 检查用户的收获地址是否超出配送范围</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">checkOutOfRange</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">address</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Map</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="p">();</span>
+<span class="w">        </span><span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;address&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">shopAddress</span><span class="p">);</span>
+<span class="w">        </span><span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;output&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;json&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;ak&quot;</span><span class="p">,</span><span class="w">  </span><span class="n">baiduAK</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// 获取店铺的经纬度坐标</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">shopCoordinate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HttpClientUtil</span><span class="p">.</span><span class="na">doGet</span><span class="p">(</span><span class="s">&quot;https://api.map.baidu.com/geocoding/v3&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">map</span><span class="p">);</span>
+<span class="w">        </span><span class="n">JSONObject</span><span class="w"> </span><span class="n">jsonObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JSONObject</span><span class="p">.</span><span class="na">parseObject</span><span class="p">(</span><span class="n">shopCoordinate</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;status&quot;</span><span class="p">).</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;0&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OrderBusinessException</span><span class="p">(</span><span class="s">&quot;店铺地址解析失败&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// 数据解析</span>
+<span class="w">        </span><span class="n">JSONObject</span><span class="w"> </span><span class="n">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getJSONObject</span><span class="p">(</span><span class="s">&quot;result&quot;</span><span class="p">).</span><span class="na">getJSONObject</span><span class="p">(</span><span class="s">&quot;location&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">location</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;lat&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">lng</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">location</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;lng&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// 店铺经纬度坐标</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">shopLngLat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lng</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// 获取用户的经纬度坐标</span>
+<span class="w">        </span><span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;address&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">address</span><span class="p">);</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">userCoordinate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HttpClientUtil</span><span class="p">.</span><span class="na">doGet</span><span class="p">(</span><span class="s">&quot;https://api.map.baidu.com/geocoding/v3&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">map</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">jsonObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JSONObject</span><span class="p">.</span><span class="na">parseObject</span><span class="p">(</span><span class="n">userCoordinate</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;status&quot;</span><span class="p">).</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;0&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OrderBusinessException</span><span class="p">(</span><span class="s">&quot;收货地址解析失败&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// 数据解析</span>
+<span class="w">        </span><span class="n">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getJSONObject</span><span class="p">(</span><span class="s">&quot;result&quot;</span><span class="p">).</span><span class="na">getJSONObject</span><span class="p">(</span><span class="s">&quot;location&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">lat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">location</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;lat&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">lng</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">location</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;lng&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// 用户收货地址经纬度坐标</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">userLngLat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lng</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;origin&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">shopLngLat</span><span class="p">);</span>
+<span class="w">        </span><span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;destination&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">userLngLat</span><span class="p">);</span>
+<span class="w">        </span><span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;steps_info&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;0&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// 路线规划</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HttpClientUtil</span><span class="p">.</span><span class="na">doGet</span><span class="p">(</span><span class="s">&quot;https://api.map.baidu.com/directionlite/v1/driving&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">map</span><span class="p">);</span>
+<span class="w">        </span><span class="n">jsonObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JSONObject</span><span class="p">.</span><span class="na">parseObject</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;status&quot;</span><span class="p">).</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;0&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OrderBusinessException</span><span class="p">(</span><span class="s">&quot;配送路线规划失败&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// 数据解析</span>
+<span class="w">        </span><span class="n">JSONObject</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getJSONObject</span><span class="p">(</span><span class="s">&quot;result&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">JSONArray</span><span class="w"> </span><span class="n">jsonArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">JSONArray</span><span class="p">)</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;routes&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Integer</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span><span class="w"> </span><span class="p">((</span><span class="n">JSONObject</span><span class="p">)</span><span class="w"> </span><span class="n">jsonArray</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)).</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;distance&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// 如果配送距离超过 5000 米</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">distance</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OrderBusinessException</span><span class="p">(</span><span class="s">&quot;超出配送范围&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>最后在用户下单方法中添加如下代码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">        </span><span class="c1">// 检查用户的收货地址是否超出配送范围</span>
+<span class="w">        </span><span class="n">checkOutOfRange</span><span class="p">(</span><span class="n">addressBook</span><span class="p">.</span><span class="na">getCityName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">addressBook</span><span class="p">.</span><span class="na">getDistrictName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">addressBook</span><span class="p">.</span><span class="na">getDetail</span><span class="p">());</span>
+</code></pre></div></td></tr></table></div>
+<p><img alt="image-20260607104651822" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202606071047415.png" /></p>
 
 
 

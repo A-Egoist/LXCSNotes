@@ -2655,10 +2655,61 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#54-todo" class="md-nav__link">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
     <span class="md-ellipsis">
-      5.4 TODO
+      6. 删除购物车中一个商品
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 删除购物车中一个商品">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      产品原型
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      接口设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据模型
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      代码开发
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      功能测试
     </span>
   </a>
   
@@ -6862,10 +6913,61 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#54-todo" class="md-nav__link">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
     <span class="md-ellipsis">
-      5.4 TODO
+      6. 删除购物车中一个商品
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 删除购物车中一个商品">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      产品原型
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      接口设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据模型
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      代码开发
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      功能测试
     </span>
   </a>
   
@@ -8159,10 +8261,111 @@
 <p>查看数据库中的数据</p>
 <p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202605292209004.png" alt="image-20221210214950261" style="zoom:80%;" /> </p>
 <p>说明当前用户的购物车数据已全部删除。</p>
-<h3 id="54-todo">5.4 TODO<a class="headerlink" href="#54-todo" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 减少购物车中的商品，当商品数量减为0时，从购物车中删除</li>
-</ul>
+<h2 id="6">6. 删除购物车中一个商品<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<h3 id="_2">产品原型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202606071206878.png" alt="image-20220613153609795" style="zoom:67%;" /></p>
+<h3 id="_3">接口设计<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202606071206544.png" alt="image-20220610152629105" style="zoom: 67%;" /></p>
+<h3 id="_4">数据模型<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>shopping_cart表：</p>
+<p><img alt="image-20220610151810308" src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202606071207741.png" /></p>
+<h3 id="_5">代码开发<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><code>ShoppingCartController.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 删除购物车中一个商品</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&quot;/sub&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@ApiOperation</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;删除购物车中一个商品&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Result</span><span class="w"> </span><span class="nf">sub</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">ShoppingCartDTO</span><span class="w"> </span><span class="n">shoppingCartDTO</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;删除购物车中一个商品：{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">shoppingCartDTO</span><span class="p">);</span>
+<span class="w">        </span><span class="n">shoppingCartService</span><span class="p">.</span><span class="na">subShoppingCart</span><span class="p">(</span><span class="n">shoppingCartDTO</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Result</span><span class="p">.</span><span class="na">success</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p><code>ShoppingCartService.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 删除购物车中一个商品</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">subShoppingCart</span><span class="p">(</span><span class="n">ShoppingCartDTO</span><span class="w"> </span><span class="n">shoppingCartDTO</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p><code>ShoppingCartServiceImpl.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 删除购物车中一个商品</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">subShoppingCart</span><span class="p">(</span><span class="n">ShoppingCartDTO</span><span class="w"> </span><span class="n">shoppingCartDTO</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 构建购物车对象</span>
+<span class="w">        </span><span class="n">ShoppingCart</span><span class="w"> </span><span class="n">shoppingCart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ShoppingCart</span><span class="p">();</span>
+<span class="w">        </span><span class="n">BeanUtils</span><span class="p">.</span><span class="na">copyProperties</span><span class="p">(</span><span class="n">shoppingCartDTO</span><span class="p">,</span><span class="w"> </span><span class="n">shoppingCart</span><span class="p">);</span>
+<span class="w">        </span><span class="n">shoppingCart</span><span class="p">.</span><span class="na">setUserId</span><span class="p">(</span><span class="n">BaseContext</span><span class="p">.</span><span class="na">getCurrentId</span><span class="p">());</span>
+
+<span class="w">        </span><span class="c1">// 查询当前登录用户的购物车数据</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ShoppingCart</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shoppingCartMapper</span><span class="p">.</span><span class="na">list</span><span class="p">(</span><span class="n">shoppingCart</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">list</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">ShoppingCart</span><span class="w"> </span><span class="n">cart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// 只读</span>
+<span class="w">            </span><span class="n">shoppingCart</span><span class="p">.</span><span class="na">setId</span><span class="p">(</span><span class="n">cart</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span>
+
+<span class="w">            </span><span class="n">Integer</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cart</span><span class="p">.</span><span class="na">getNumber</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">number</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// 如果商品在购物车中的数量为 1，则直接删除该条记录</span>
+<span class="w">                </span><span class="n">shoppingCartMapper</span><span class="p">.</span><span class="na">deleteById</span><span class="p">(</span><span class="n">shoppingCart</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// 如果商品在购物车中的数量大于 1，则数量减 1</span>
+<span class="w">                </span><span class="n">shoppingCart</span><span class="p">.</span><span class="na">setNumber</span><span class="p">(</span><span class="n">number</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">                </span><span class="n">shoppingCartMapper</span><span class="p">.</span><span class="na">updateNumberById</span><span class="p">(</span><span class="n">shoppingCart</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p><code>ShoppingCartMapper.java</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 根据 id 删除购物车数据</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Delete</span><span class="p">(</span><span class="s">&quot;delete from shopping_cart where id = #{id}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteById</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_6">功能测试<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202606071213700.png" alt="image-20260607121344425" style="zoom: 50%;" /><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202606071214548.png" alt="image-20260607121401962" style="zoom:50%;" /><img src="C:\Users\Amonologue\AppData\Roaming\Typora\typora-user-images\image-20260607121420728.png" alt="image-20260607121420728" style="zoom:50%;" /></p>
 
 
 
