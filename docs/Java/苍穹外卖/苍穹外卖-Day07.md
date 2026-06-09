@@ -1097,6 +1097,89 @@ public interface ShoppingCartMapper {
 
 
 
-### 5.4 TODO
+## 6. 删除购物车中一个商品
 
--   [ ] 减少购物车中的商品，当商品数量减为0时，从购物车中删除
+### 产品原型
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202606071206878.png" alt="image-20220613153609795" style="zoom:67%;" />
+
+### 接口设计
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202606071206544.png" alt="image-20220610152629105" style="zoom: 67%;" />
+
+### 数据模型
+
+shopping_cart表：
+
+![image-20220610151810308](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202606071207741.png)
+
+### 代码开发
+
+`ShoppingCartController.java`
+
+```java
+    /**
+     * 删除购物车中一个商品
+     */
+    @PostMapping("/sub")
+    @ApiOperation(value = "删除购物车中一个商品")
+    public Result sub(@RequestBody ShoppingCartDTO shoppingCartDTO) {
+        log.info("删除购物车中一个商品：{}", shoppingCartDTO);
+        shoppingCartService.subShoppingCart(shoppingCartDTO);
+        return Result.success();
+    }
+```
+
+`ShoppingCartService.java`
+
+```java
+    /**
+     * 删除购物车中一个商品
+     */
+    void subShoppingCart(ShoppingCartDTO shoppingCartDTO);
+```
+
+`ShoppingCartServiceImpl.java`
+
+```java
+    /**
+     * 删除购物车中一个商品
+     */
+    public void subShoppingCart(ShoppingCartDTO shoppingCartDTO) {
+        // 构建购物车对象
+        ShoppingCart shoppingCart = new ShoppingCart();
+        BeanUtils.copyProperties(shoppingCartDTO, shoppingCart);
+        shoppingCart.setUserId(BaseContext.getCurrentId());
+
+        // 查询当前登录用户的购物车数据
+        List<ShoppingCart> list = shoppingCartMapper.list(shoppingCart);
+        if (list != null && !list.isEmpty()) {
+            ShoppingCart cart = list.get(0);  // 只读
+            shoppingCart.setId(cart.getId());
+
+            Integer number = cart.getNumber();
+            if (number == 1) {
+                // 如果商品在购物车中的数量为 1，则直接删除该条记录
+                shoppingCartMapper.deleteById(shoppingCart.getId());
+            } else {
+                // 如果商品在购物车中的数量大于 1，则数量减 1
+                shoppingCart.setNumber(number - 1);
+                shoppingCartMapper.updateNumberById(shoppingCart);
+            }
+        }
+    }
+```
+
+`ShoppingCartMapper.java`
+
+```java
+    /**
+     * 根据 id 删除购物车数据
+     */
+    @Delete("delete from shopping_cart where id = #{id}")
+    void deleteById(Long id);
+```
+
+### 功能测试
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202606071213700.png" alt="image-20260607121344425" style="zoom: 50%;" /><img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202606071214548.png" alt="image-20260607121401962" style="zoom:50%;" /><img src="C:\Users\Amonologue\AppData\Roaming\Typora\typora-user-images\image-20260607121420728.png" alt="image-20260607121420728" style="zoom:50%;" />

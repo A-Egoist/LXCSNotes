@@ -1116,3 +1116,106 @@ public class OrderController {
 
 实现功能：校验收货地址是否超出配送范围
 
+### 环境准备
+
+1、登录百度地图开放平台，进入控制台，创建应用，获取 AK
+
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202606071016933.png" alt="image-20260607101622772" style="zoom:50%;" />
+
+### 代码实现
+
+`application.yml`
+
+```yml
+sky:
+  shop:
+    address: ${sky.shop.address}
+  baidu:
+    ak: ${sky.baidu.ak}
+```
+
+`OrderServiceImpl.java`
+
+首先注入数据：
+
+```java
+    @Value("${sky.shop.address}")
+    private String shopAddress;
+    @Value("${sky.baidu.ak}")
+    private String baiduAK;
+```
+
+然后添加一个校验方法：
+
+```java
+    /**
+     * 检查用户的收获地址是否超出配送范围
+     */
+    private void checkOutOfRange(String address) {
+        Map map = new HashMap();
+        map.put("address", shopAddress);
+        map.put("output", "json");
+        map.put("ak",  baiduAK);
+
+        // 获取店铺的经纬度坐标
+        String shopCoordinate = HttpClientUtil.doGet("https://api.map.baidu.com/geocoding/v3", map);
+        JSONObject jsonObject = JSONObject.parseObject(shopCoordinate);
+        if (!jsonObject.getString("status").equals("0")) {
+            throw new OrderBusinessException("店铺地址解析失败");
+        }
+
+        // 数据解析
+        JSONObject location = jsonObject.getJSONObject("result").getJSONObject("location");
+        String lat = location.getString("lat");
+        String lng = location.getString("lng");
+        // 店铺经纬度坐标
+        String shopLngLat = lat + "," + lng;
+
+        // 获取用户的经纬度坐标
+        map.put("address", address);
+        String userCoordinate = HttpClientUtil.doGet("https://api.map.baidu.com/geocoding/v3", map);
+
+        jsonObject = JSONObject.parseObject(userCoordinate);
+        if (!jsonObject.getString("status").equals("0")) {
+            throw new OrderBusinessException("收货地址解析失败");
+        }
+
+        // 数据解析
+        location = jsonObject.getJSONObject("result").getJSONObject("location");
+        lat = location.getString("lat");
+        lng = location.getString("lng");
+        // 用户收货地址经纬度坐标
+        String userLngLat = lat + "," + lng;
+
+        map.put("origin", shopLngLat);
+        map.put("destination", userLngLat);
+        map.put("steps_info", "0");
+
+        // 路线规划
+        String json = HttpClientUtil.doGet("https://api.map.baidu.com/directionlite/v1/driving", map);
+        jsonObject = JSONObject.parseObject(json);
+        if (!jsonObject.getString("status").equals("0")) {
+            throw new OrderBusinessException("配送路线规划失败");
+        }
+
+        // 数据解析
+        JSONObject result = jsonObject.getJSONObject("result");
+        JSONArray jsonArray = (JSONArray) result.get("routes");
+        Integer distance = (Integer) ((JSONObject) jsonArray.get(0)).get("distance");
+
+        // 如果配送距离超过 5000 米
+        if (distance > 5000) {
+            throw new OrderBusinessException("超出配送范围");
+        }
+    }
+```
+
+最后在用户下单方法中添加如下代码：
+
+```java
+        // 检查用户的收货地址是否超出配送范围
+        checkOutOfRange(addressBook.getCityName() + addressBook.getDistrictName() + addressBook.getDetail());
+```
+
+![image-20260607104651822](https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202606071047415.png)
+
