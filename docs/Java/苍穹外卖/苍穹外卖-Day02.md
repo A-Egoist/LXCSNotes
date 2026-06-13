@@ -1066,7 +1066,7 @@ public class Result<T> implements Serializable {
 
 **问题描述：**操作时间字段显示有问题。
 
-<img src="D:/Projects/1、黑马程序员Java项目《苍穹外卖》企业级开发实战/讲义/day02/assets/image-20221112103235539.png" alt="image-20221112103235539" style="zoom:50%;" /> 
+<img src="https://amonologue-image-bed.oss-cn-chengdu.aliyuncs.com/2026/202606110910965.png" alt="image-20221112103235539" style="zoom:50%;" /> 
 
 
 
