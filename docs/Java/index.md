@@ -6,7 +6,7 @@
 -   [x] [黑马程序员Java零基础视频教程_上部(Java入门，含斯坦福大学练习题+力扣算法题和大厂java面试题）](https://www.bilibili.com/video/BV17F411T7Ao?spm_id_from=333.1245.0.0)
 -   [x] [黑马程序员Java零基础视频教程_下部(Java入门，含斯坦福大学练习题+力扣算法题和大厂java面试题）](https://www.bilibili.com/video/BV1yW4y1Y7Ms?spm_id_from=333.1245.0.0)
 -   [x] [全网首发AI+JavaWeb开发入门，Tlias教学管理系统项目实战全套视频教程，从需求分析、设计、前后端开发、测试、程序优化到项目部署一套搞定](https://www.bilibili.com/video/BV1yGydYEE3H/?spm_id_from=333.788.comment.all.click&vd_source=f4cc25a44af6631d6f4db023b3bb88e4)
--   [ ] [黑马程序员Java项目实战《苍穹外卖》，最适合新手的SpringBoot+SSM的企业级Java项目实战](https://www.bilibili.com/video/BV1TP411v7v6?spm_id_from=333.1245.0.0)
+-   [x] [黑马程序员Java项目实战《苍穹外卖》，最适合新手的SpringBoot+SSM的企业级Java项目实战](https://www.bilibili.com/video/BV1TP411v7v6?spm_id_from=333.1245.0.0)
 -   [ ] [不同阶段如何准备项目? 项目烂大街怎么办? 三招教你给烂大街项目换皮](https://www.bilibili.com/video/BV1MpqnYuEoy/?spm_id_from=333.337.search-card.all.click&vd_source=f4cc25a44af6631d6f4db023b3bb88e4)
 -   [ ] [✨超炫酷透明主题的个人博客v2.0（vue3➕springboot）](https://www.bilibili.com/video/BV1618kz2Es3/?spm_id_from=333.788.recommend_more_video.4&vd_source=f4cc25a44af6631d6f4db023b3bb88e4)
 -   [ ] [项目烂大街要不要换个项目](https://www.bilibili.com/video/BV11Y2wBhEz1/?share_source=copy_web&vd_source=b5ed364998fc1b958c57abd6dbda38e3)
@@ -19,13 +19,15 @@
 2.   Java Web 框架
      -   [x] 黑马 Tlias 项目(JavaWeb 前端基础 + JavaWeb 后端基础)（[教程](https://www.bilibili.com/video/BV1yGydYEE3H)，[笔记](./JavaWeb/index.md)）
 3.   单体项目开发
-     -   [ ] 黑马苍穹外卖（[教程](https://www.bilibili.com/video/BV1TP411v7v6)，[笔记](./苍穹外卖/index.md)）
+     -   [x] 黑马苍穹外卖（[教程](https://www.bilibili.com/video/BV1TP411v7v6)，[笔记](./苍穹外卖/index.md)）
 4.   企业级项目实战
 5.   
 
 
 
-## 基本路径
+## 技术栈
+
+### 基本路径
 
 -   [x] 首先要学习 `Java SE`，掌握 Java 语言本身、Java 核心开发技术以及 Java 标准库的使用
 -   [x] 如果继续学习 `Java EE`，那么 Spring 框架、数据库开发、分布式架构就是需要学习的
@@ -38,7 +40,7 @@
 
 
 
-## 进阶路径
+### 进阶路径
 
 *   [ ] jvm、框架源码
 *   [ ] 分布式系统
@@ -46,15 +48,15 @@
 
 
 
-## 项目实战
+### 项目实战
 
 -   [x] 黑马 Tlias 项目
--   [ ] 苍穹外卖
+-   [x] 苍穹外卖
 -   [ ] 秒杀系统
 
 
 
-## 其他技术栈
+### 其他技术栈
 
 -   [ ] [不同阶段如何准备项目? 项目烂大街怎么办? 三招教你给烂大街项目换皮](https://www.bilibili.com/video/BV1MpqnYuEoy/?share_source=copy_web&vd_source=b5ed364998fc1b958c57abd6dbda38e3)
 -   [ ] [Java入职必知必会-48 工作中gradle的基本使用](https://www.bilibili.com/video/BV1BiWhzaEfw?spm_id_from=333.1245.0.0)
