@@ -72,3 +72,15 @@
 [3] [写给后来人想去银行国企java的路线规划](https://www.nowcoder.com/discuss/353159589929623552)
 
 [4] [2026黑马程序员Java学习路线图](https://www.bilibili.com/opus/494817843530680807)
+
+[5] [【项目烂大街要不要换个项目】](https://www.bilibili.com/video/BV11Y2wBhEz1/?share_source=copy_web&vd_source=b5ed364998fc1b958c57abd6dbda38e3)
+
+[6] 
+
+[7] 
+
+[8] 
+
+[9] 
+
+[10] 
