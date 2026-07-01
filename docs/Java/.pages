@@ -3,5 +3,8 @@ arrange:
   - Java基础.md
   - Maven.md
   - MySQL.md
+  - Redis基础.md
+  - Redis实战.md
+  - Redis高级.md
   - JavaWeb
   - 苍穹外卖
